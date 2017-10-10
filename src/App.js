@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './css/App.css'
-import horse from './horse.mp3'
+import horse from './audio/horse.mp3'
 
 import Letter from './letter'
 
