@@ -4,6 +4,7 @@ import './css/App.css'
 // import horse from './audio/horse.mp3'
 import a from './audio/a.mp3'
 import e from './audio/e.mp3'
+import i from './audio/i.mp3'
 import hand from './images/righthandoutline.png'
 
 import Letter from './letter'
@@ -34,6 +35,7 @@ class App extends Component {
         <div className="jumbotron">
           {this.renderLetter('a', a)}
           {this.renderLetter('e', e)}
+          {this.renderLetter('i', i)}
         </div>
 <img src={hand} alt='hand'/>
 
