@@ -30,15 +30,15 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <div class="row">
+  <div className="a_box"> {this.renderLetter('a', a)}</div>
+  <div className="e_box"> {this.renderLetter('e', e)}</div>
+  <div className="i_box"> {this.renderLetter('i', i)}</div>
+  <div className="o_box"> {this.renderLetter('o', o)}</div> 
+  <div className="u_box"> {this.renderLetter('u', u)}</div> 
+</div>
         <audio type="audio/mpeg"
         ref={(audio) => { this.audioPlayer = audio; }}/>
-        
-         <div className="a_box"> {this.renderLetter('a', a)}</div>
-         <div className="e_box"> {this.renderLetter('e', e)}</div>      
-         <div className="i_box"> {this.renderLetter('i', i)}</div>  
-         <div className="o_box"> {this.renderLetter('o', o)}</div>  
-         <div className="u_box"> {this.renderLetter('u', u)}</div>  
-        
 <img src={hand} alt='hand'/>
 
       </div>
