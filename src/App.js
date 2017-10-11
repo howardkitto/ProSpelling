@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './css/App.css'
-import horse from './audio/horse.mp3'
+// import horse from './audio/horse.mp3'
+import a from './audio/a.mp3'
+import e from './audio/e.mp3'
+import hand from './images/righthandoutline.png'
 
 import Letter from './letter'
 
@@ -9,31 +12,30 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      letter: "h",
-      sound: horse
-    };
   }
 
-  playSound(text){
+  playSound(theSrc){
+    this.audioPlayer.src = theSrc
     this.audioPlayer.play()
   }
 
-  renderLetter(text){
+  renderLetter(text, audio){
     return(
       <Letter text={text}
-      playSound={()=>this.playSound(text)}/>
+      playSound={()=>this.playSound(audio)}/>
     )
   }
 
   render() {
     return (
       <div className="container">
-        <audio src={this.state.sound} type="audio/mpeg"
+        <audio type="audio/mpeg"
         ref={(audio) => { this.audioPlayer = audio; }}/>
         <div className="jumbotron">
-          {this.renderLetter(this.state.letter)}
+          {this.renderLetter('a', a)}
+          {this.renderLetter('e', e)}
         </div>
+<img src={hand} alt='hand'/>
 
       </div>
     );
