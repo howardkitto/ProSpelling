@@ -1,34 +1,41 @@
 .App {
   /* text-align: right; */
-  font-family: "Lucida Console", Monaco, monospace;
+  font-family: "Comic Sans MS";
 }
-
+.page-header {
+  text-align: center;
+  font-family: "Comic Sans MS";
+  font-size: 70px;
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
 .letterBox {
   text-align: center;
-  border-style: solid;
-  border-width: 3px;
+  /* border-style: solid; */
+  /* border-width: 3px; */
   /* display: block;  */
-  font-family: "Lucida Console", Monaco, monospace;
-    font-size: 70px;
+  font-family: "Comic Sans MS";
+    font-size: 100px;
+
   }
 
 .a_box {
   background-color:#9fc5e8;
-  width: 70px;
+  width: 100px;
 }
 .e_box {
   background-color:#a2c4c9;
-  width: 70px;  
+  width: 100px;  
 }
 .i_box {
   background-color: #ffe59a;
-  width: 70px;
+  width: 100px;
 }
 .o_box {
   background-color: #d9d2e9;
-  width: 70px;
+  width: 100px;
 }
 .u_box {
   background-color: #cfe2f3;
-  width: 70px;
+  width: 100px;
 }
