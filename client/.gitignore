@@ -8,7 +8,6 @@
 
 # production
 /build
-/Sound clips
 
 # misc
 .DS_Store
