@@ -18,10 +18,16 @@ class LessonOneContainer extends Component{
         this.audioPlayer.play()
       }
     
+    stopSound(){
+      this.audioPlayer.pause()
+    }
+    
       renderLetter(text, audio){
         return(
           <Letter text={text}
-          playSound={()=>this.playSound(audio)}/>
+          mouseEnter={()=>this.playSound(audio)}
+          mouseLeave={()=>this.stopSound()}
+          />
         )
       }
 
