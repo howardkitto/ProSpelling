@@ -39,3 +39,8 @@
   background-color: #cfe2f3;
   width: 100px;
 }
+
+.videoCanvas {
+  width: 320px;
+  height: 240px;
+}
