@@ -3,7 +3,7 @@ var app = express()
 
 // console.log('foo')
 
-app.use(express.static('client/build'));
+app.use(express.static('client/build')); 
 
 // app.get('/', function (req, res) {
 //   res.send('Hello World! ')
