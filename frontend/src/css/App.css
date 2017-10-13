@@ -40,7 +40,13 @@
   width: 100px;
 }
 
-.videoCanvas {
+.video {
   width: 320px;
   height: 240px;
+}
+
+.videoCanvas{
+  width: 320px;
+  height: 240px;
+  border: 1px solid black;
 }
