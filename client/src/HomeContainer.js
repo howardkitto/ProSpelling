@@ -8,7 +8,7 @@ render(){
     return(
         <div className="container">
         <h1>Home</h1>
-        <h2>This is going to be great!</h2>   
+        <h2>This is going to be great! v3</h2>   
         </div>
 
         )
