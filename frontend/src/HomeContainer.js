@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
-import rosie from './audio/Rosiecomp.mp4'
+import rosie from './audio/Rosie.mp4'
 
+var context
 
 class HomeContainer extends Component{
 
+  constructor(){
+    super()
+    this.state={
+      canvasReady : true
+    }
+  }
 
-
-
-updateCanvas(){
-  
-}  
 
 componentDidMount(){
-  let context = this.videoCanvas.getContext("2d")  
-  requestAnimationFrame(this.updateCanvas);
+  context = this.videoCanvas.getContext("2d")
+  this.sourceVideo.play()
+  this.updateCanvas(_=>{this.stopRoutingBug()})
+}
 
-}  
+updateCanvas(callback){
+   //wasted some time here - check te video element is still available
+    if(this.sourceVideo){context.drawImage(this.sourceVideo, 0, 0, 320, 180)}
+       
+    requestAnimationFrame(_=>{this.updateCanvas()})
+  }  
 
 render(){
 
@@ -27,14 +36,16 @@ render(){
            <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
            </div>
 
-      <video src={rosie} type="video/mp4" className="video" autoPlay loop muted
-              ref={(video) => { this.sourceVideo = video; }} />
+      <video  src={rosie} 
+              type="video/mp4"
+              className="video"
+              ref={(video) => { this.sourceVideo = video; }} 
+              loop muted hidden
+              />
 
       <canvas   className="videoCanvas"
                 ref={(canvas) => { this.videoCanvas = canvas; }} />
   </div>
-    
-      
 
         )
     }
