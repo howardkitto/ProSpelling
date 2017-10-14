@@ -5,14 +5,6 @@ var context
 
 class HomeContainer extends Component{
 
-  constructor(){
-    super()
-    this.state={
-      canvasReady : true
-    }
-  }
-
-
 componentDidMount(){
   context = this.videoCanvas.getContext("2d")
   this.sourceVideo.play()
@@ -21,9 +13,10 @@ componentDidMount(){
 
 updateCanvas(callback){
    //wasted some time here - check te video element is still available
-    if(this.sourceVideo){context.drawImage(this.sourceVideo, 0, 0, 320, 180)}
-       
+    if(this.sourceVideo){
+      context.drawImage(this.sourceVideo, 0, 0, 320, 180) 
     requestAnimationFrame(_=>{this.updateCanvas()})
+    }
   }  
 
 render(){
