@@ -10,31 +10,33 @@ class HomeContainer extends Component{
   constructor(){
     super()
       this.state = {
-        videoHeight:180,
-        videoWidth:320,
-        name:'howard'
+        name:''
       }
   }
 
-
 startVideo(){
   this.sourceVideo.play()
+  
   this.updateCanvas()
 }
 
 componentDidMount(){
   context = this.videoCanvas.getContext("2d") 
-  saveName('poppy')
 
+  // this.startVideo()
 
-  this.startVideo()
+  this.sourceVideo.play()
+  
+  this.updateCanvas()
 }
 
 updateCanvas(){
+    
    //wasted some time here - check the video element is still available
     if(this.sourceVideo){
-      context.drawImage(this.sourceVideo, 0, 0, this.state.videoWidth, this.state.videoHeight) 
+      context.drawImage(this.sourceVideo, 0, 0, this.sourceVideo.videoWidth, this.sourceVideo.videoHeight) 
     requestAnimationFrame(_=>{this.updateCanvas()})
+
     }
   }  
 
@@ -51,12 +53,11 @@ render(){
       <video  src={rosie} 
               type="video/mp4"
               className="video"
-              ref={(video) => { this.sourceVideo = video; }} 
+              ref={(video) => { this.sourceVideo = video; }}
+              
               loop muted autoPlay hidden playsInline
               />
       <canvas   className="videoCanvas"
-                height={this.state.videoHeight}
-                width={this.state.videoWidth}
                 ref={(canvas) => { this.videoCanvas = canvas; }} 
               />
   </div>
@@ -73,7 +74,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-          name : dispatch(saveName('Rosie'))
+          name : dispatch(saveName('Rosie the Cat'))
         }
 }
 
