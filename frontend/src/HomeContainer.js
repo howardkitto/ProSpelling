@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import rosie from './audio/Rosie.mp4'
+import {connect} from 'react-redux'
+import {saveName} from './redux/actionCreators'
 
 var context
 
@@ -9,7 +11,8 @@ class HomeContainer extends Component{
     super()
       this.state = {
         videoHeight:180,
-        videoWidth:320
+        videoWidth:320,
+        name:'howard'
       }
   }
 
@@ -21,6 +24,8 @@ startVideo(){
 
 componentDidMount(){
   context = this.videoCanvas.getContext("2d") 
+  saveName('poppy')
+
 
   this.startVideo()
 }
@@ -39,10 +44,9 @@ render(){
 
   <div className="container">
       <div className="jumbotron">
-        <h1 className="display-3">Hello, world!</h1>
+        <h1 className="display-3">Hello, {this.props.spellerName}</h1>
         <p className="lead">Video Version</p>
-        {/* <button   className="warning"
-                  onClick={_=>{this.startVideo()}}>Start Video </button> */}
+        
       </div>
       <video  src={rosie} 
               type="video/mp4"
@@ -60,4 +64,17 @@ render(){
     }
 }
 
-export default HomeContainer
+const mapStateToProps = state => {
+  return {
+    spellerName: state.name
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+          name : dispatch(saveName('Rosie'))
+        }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
