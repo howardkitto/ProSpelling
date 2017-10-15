@@ -15,6 +15,7 @@ const Letter = (props) => {
 export default Letter
 
 Letter.propTypes = {
+    text:PropTypes.string.isRequired,
     onMouseOver:PropTypes.func.isRequired,
     onMouseOut:PropTypes.func.isRequired,
     onClick:PropTypes.func.isRequired
