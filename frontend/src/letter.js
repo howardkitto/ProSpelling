@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Letter = (props) => {
     return(
@@ -12,3 +13,9 @@ const Letter = (props) => {
 }
 
 export default Letter
+
+Letter.propTypes = {
+    onMouseOver:PropTypes.func.isRequired,
+    onMouseOut:PropTypes.func.isRequired,
+    onClick:PropTypes.func.isRequired
+}

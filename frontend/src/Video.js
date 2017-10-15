@@ -19,9 +19,8 @@ class Video extends Component{
 
          //wasted some time here - check the video element is still available
           if(this.sourceVideo){
-            //  console.log(this.state.height) 
             context.drawImage(this.sourceVideo, 0, 0, this.sourceVideo.videoWidth, this.sourceVideo.videoHeight) 
-          requestAnimationFrame(_=>{this.updateCanvas()})
+            requestAnimationFrame(_=>{this.updateCanvas()})
       
           }
         }
@@ -41,9 +40,7 @@ class Video extends Component{
             />
             </div>)
         
-}
-
-
+    }
 }
 
 export default Video

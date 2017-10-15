@@ -14,9 +14,7 @@ render(){
         <Video  src={Jasmine1} 
                 height = {302}
                 width = {450}
-                muted = {false}
                 />
-
         </div>
 
         )
