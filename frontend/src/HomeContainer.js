@@ -13,15 +13,19 @@ render(){
   return(
 
     <div className="container">
-      <div className="jumbotron">
+      
         <h1 className="display-3">Hello, {this.props.spellerName}</h1>
-        <p className="lead">Video Version</p>    
-      </div>
-      <Video src={rosie}/>
+        <Video  src={rosie}
+              height = {180}
+              width = {302}
+              muted = {true}/>
+      
   </div>
         )
     }
 }
+
+
 
 const mapStateToProps = state => {
   return {

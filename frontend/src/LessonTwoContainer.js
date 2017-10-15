@@ -11,7 +11,11 @@ render(){
     return(
         <div>
         <h1>Lesson Two</h1>
-        <Video src={Jasmine1} />
+        <Video  src={Jasmine1} 
+                height = {302}
+                width = {450}
+                muted = {false}
+                />
 
         </div>
 
