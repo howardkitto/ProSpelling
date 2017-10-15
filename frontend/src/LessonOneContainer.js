@@ -8,7 +8,7 @@ import o from './audio/o.mp3'
 import u from './audio/u.mp3'
 import hand from './images/righthandoutline.png'
 
-import Letter from './letter'
+import Letter from './Letter'
 
 
 class LessonOneContainer extends Component{

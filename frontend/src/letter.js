@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Letter = (props) => {
+const LetterComponent = (props) => {
     return(
         <div className="letterBox"
             onMouseOver={(e)=>props.triggerSound(e)}
@@ -11,4 +11,4 @@ const Letter = (props) => {
     )
 }
 
-export default Letter
+export default LetterComponent
