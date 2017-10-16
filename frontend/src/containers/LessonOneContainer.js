@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
 
 import a from '../audio/a.mp3'
@@ -41,7 +42,9 @@ render(){
     return(
 <div>
         <div className="page-header">
-        <h1>Short Vowel Sounds</h1>      
+        <h1>Short Vowel Sounds</h1>
+        
+        {(this.props.spellerName)?<h2>Hello {this.props.spellerName}</h2>:null}
       </div>
             <div className="row">
       <div className="a_box"> {this.renderLetter('a', a)}</div>
@@ -63,4 +66,10 @@ render(){
 
 }
 
-export default LessonOneContainer
+const mapStateToProps = state => {
+  return {
+    spellerName: state.name
+  }
+}
+
+export default connect(mapStateToProps)(LessonOneContainer)
