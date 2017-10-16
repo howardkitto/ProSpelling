@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 
-import a from './audio/a.mp3'
-import e from './audio/e.mp3'
-import i from './audio/i.mp3'
-import o from './audio/o.mp3'
-import u from './audio/u.mp3'
-import hand from './images/righthandoutline.png'
+import a from '../audio/a.mp3'
+import e from '../audio/e.mp3'
+import i from '../audio/i.mp3'
+import o from '../audio/o.mp3'
+import u from '../audio/u.mp3'
+import hand from '../images/righthandoutline.png'
 
-import Letter from './Letter'
+import Letter from '../components/Letter'
 
 
 class LessonOneContainer extends Component{

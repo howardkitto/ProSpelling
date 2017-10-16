@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {saveName} from './redux/actionCreators'
+import {saveName} from '../redux/actionCreators'
 
 import Video from './Video'
-import rosie from './video/Rosie.mp4'
+import rosie from '../video/Rosie.mp4'
 
 class HomeContainer extends Component{
 

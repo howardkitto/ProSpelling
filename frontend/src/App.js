@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import HomeContainer from './HomeContainer'
-import LessonOneContainer from './LessonOneContainer'
-import LessonTwoContainer from './LessonTwoContainer'
+import HomeContainer from './containers/HomeContainer'
+import LessonOneContainer from './containers/LessonOneContainer'
+import LessonTwoContainer from './containers/LessonTwoContainer'
 
 import { Provider } from 'react-redux';
 import store from './redux/store'
