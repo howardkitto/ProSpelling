@@ -16,4 +16,6 @@ cd frontend && npm run build && cd .. && NODE_ENV=production node server
 
 export PATH=~/Library/Python/2.7/bin/:$PATH
 
-To run dev run npm start
+To run dev: 
+
+npm start
