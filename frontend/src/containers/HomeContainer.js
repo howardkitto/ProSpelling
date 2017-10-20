@@ -24,7 +24,9 @@ render(){
               height = {180}
               width = {302}
               muted = {true}/>
-      
+              {(this.props.spellerName)?
+        <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
+        <UserDetailsForm headerText = "What is your name?  "/>}
   </div>
         )
     }
