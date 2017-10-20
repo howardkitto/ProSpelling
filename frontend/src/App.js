@@ -46,7 +46,7 @@ class App extends Component {
               <Link className="nav-item nav-link active"to="/">Home</Link>
               <Link className="nav-item nav-link" to="/lessonone">Lesson One</Link>
               <Link className="nav-item nav-link" to="/lessontwo">Lesson Two</Link>
-              <h3>{this.state.message}</h3>
+              <p>{this.state.message}</p>
           </nav>
 
           <Route exact path="/" component={HomeContainer}/>

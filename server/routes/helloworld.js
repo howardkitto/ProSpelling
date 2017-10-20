@@ -10,8 +10,8 @@ router.route('/')
     res.setHeader('Content-Type', 'application/json');
 
     (process.env.NODE_ENV === 'production')?
-    res.send(JSON.stringify({ message: 'hello world prod' })):
-    res.send(JSON.stringify({ message: 'hello world dev' }));
+    res.send(JSON.stringify({ message: 'prod' })):
+    res.send(JSON.stringify({ message: 'dev' }));
 })
 
 
