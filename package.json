@@ -1,12 +1,14 @@
+//To test prod:
+//cd frontend && npm run build && cd .. && NODE_ENV=production node server
+
 {
   "name": "prospelling",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server.js",
-    "client": "node start-client.js"
+    "start": "concurrently \"npm run server\" \"cd frontend && npm start\"",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,8 @@
   },
   "homepage": "https://github.com/howardkitto/prospelling#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
