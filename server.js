@@ -1,14 +1,8 @@
-var express = require('express')
-var app = express()
+//cd frontend && npm run build && cd .. && NODE_ENV=production node server
 
-// console.log('foo')
+const app = require('./server/app.js')
 
-app.use(express.static('frontend/build')); 
 
-// app.get('/', function (req, res) {
-//   res.send('Hello World! ')
-// })
-
-app.listen(process.env.PORT || 8080, () => {
+app.app.listen(process.env.PORT || 8080, () => {
     console.log('Server is running on http://localhost:8080 or http://127.0.0.1:8080 ');
   });
