@@ -1,3 +1,6 @@
+//To test prod:
+//cd frontend && npm run build && cd .. && NODE_ENV=production node server
+
 {
   "name": "prospelling",
   "version": "1.0.0",
