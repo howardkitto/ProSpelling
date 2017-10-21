@@ -36,3 +36,11 @@
   background-color: #cfe2f3;
   width: 100px;
 }
+
+.listeningText {
+  color: red;
+}
+
+.answerTextBox{
+  width:500px
+}
