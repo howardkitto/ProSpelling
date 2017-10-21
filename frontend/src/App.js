@@ -32,7 +32,7 @@ class App extends Component {
       accept: "application/json"
     })
     .then((res)=>res.json())
-    .then((data)=>{this.setState({message:data.message})})
+    .then((data)=>{this.setState({environment:data.message})})
     .catch((error)=>{console.log(error)})
   }
 
@@ -46,7 +46,7 @@ class App extends Component {
               <Link className="nav-item nav-link active"to="/">Home</Link>
               <Link className="nav-item nav-link" to="/lessonone">Lesson One</Link>
               <Link className="nav-item nav-link" to="/lessontwo">Lesson Two</Link>
-              <p>{this.state.message}</p>
+              <p>{this.state.environment}</p>
           </nav>
 
           <Route exact path="/" component={HomeContainer}/>

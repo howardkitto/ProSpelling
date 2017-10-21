@@ -2,25 +2,26 @@
 
 Howard and Yvette are an awesome team!
 
-Make sure that elastic beastalk has this environment setting
+## To run this on your laptop
 
-`NODE_ENV = production`
+`npm run dev`
 
-To deploy run this:
+## To deploy: 
 
-`export PATH=~/Library/Python/2.7/bin/:$PATH`
-
-Then eb deploy
-
-Test Prod locally like this...
+1. Test Prod locally like this...
 
 `cd frontend && npm run build && cd .. && NODE_ENV=production node server`
 
-To deploy on AWS
+2. Git commity
+
+3. Make sure that elastic beastalk has this environment setting
+
+`NODE_ENV = production`
+
+4. To deploy run this:
 
 `export PATH=~/Library/Python/2.7/bin/:$PATH`
+
+5. Then 
+
 `eb deploy`
-
-To run dev: 
-
-`npm start`

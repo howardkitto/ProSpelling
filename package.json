@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd frontend && npm start\"",
+    "dev": "concurrently \"nodemon server\" \"cd frontend && npm start\"",
     "server": "node server.js"
   },
   "repository": {
