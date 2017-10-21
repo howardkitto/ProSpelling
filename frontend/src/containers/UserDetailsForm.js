@@ -31,7 +31,7 @@ class UserDetailsForm extends Component{
                     onChange={(e)=>{this.handleText(e)}}
             />
             <button type='submit'                         
-                    className='btn btn-danger'>Done
+                    className='btn btn-danger'>Name
             </button>
         </form>
     )}

@@ -20,23 +20,20 @@ render(){
         <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
         <UserDetailsForm headerText = "What is your name?  "/>}
         <Speech />
+        {this.props.answer}
         <Video  src={rosie}
               height = {180}
               width = {302}
               muted = {true}/>
-              {(this.props.spellerName)?
-        <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
-        <UserDetailsForm headerText = "What is your name?  "/>}
-  </div>
+    </div>
         )
     }
 }
 
-
-
 const mapStateToProps = state => {
   return {
-    spellerName: state.name
+    spellerName: state.name,
+    answer: state.answer
   }
 }
 
