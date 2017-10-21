@@ -1,0 +1,7 @@
+{
+    "dbUri":"mongodb://localhost/prospelling",
+    "options": {
+      "user":"proSpellingAppConnectionUser",
+      "pass":"9fc16393-20cb-4372-acd5-52d8b01be936"
+    }
+}
