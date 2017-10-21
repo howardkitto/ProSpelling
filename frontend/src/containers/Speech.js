@@ -40,7 +40,8 @@ setUpSpeechRecog(reset){
         }
     }
 
-    recognition.onstart = event =>this.setState({listening:true});
+    recognition.onstart = event =>this.setState({   listening:true,
+                                                    speechConfidence:1});
     recognition.onresult = event => {this.props.saveAnswer(event.results[0][0].transcript)
                                     this.confidenceStyle(event.results[0][0].confidence)}
     recognition.onspeechend = event =>this.setState({listening:false});
