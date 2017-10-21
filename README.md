@@ -12,7 +12,7 @@ Howard and Yvette are an awesome team!
 
 `cd frontend && npm run build && cd .. && NODE_ENV=production node server`
 
-2. Git commity
+2. Git commit
 
 3. Make sure that elastic beastalk has this environment setting
 
