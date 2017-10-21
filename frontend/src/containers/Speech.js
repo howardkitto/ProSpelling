@@ -32,6 +32,10 @@ setUpSpeechRecog(){
     recognition.onspeechend = event =>this.setState({listening:false});
 }
 
+switchToText(){
+    console.log('switch to text')
+}
+
 handleTypedAnswer(e){
     this.setState({typedAnswer:e.target.value})
 }
@@ -53,8 +57,13 @@ render(){
         (recognition) ?
         <div>
            {this.state.listening ? 
-           <h2>listening</h2>:
-           <button onClick={_=>this.setUpSpeechRecog()}>Restart</button>}
+           <h2>listening</h2>
+            :
+                <button className='btn btn-primary'
+                onClick={_=>this.setUpSpeechRecog()}>Restart</button>
+           }
+           <button className='btn btn-info'
+                onClick={_=>this.switchToText()}>Use Text</button>
         </div>:
         <div>
         <h1>You don't got Speech</h1>

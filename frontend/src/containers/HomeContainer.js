@@ -19,8 +19,9 @@ render(){
       {(this.props.spellerName)?
         <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
         <UserDetailsForm headerText = "What is your name?  "/>}
-        <Speech />
         {this.props.answer}
+        <Speech />
+        
         <Video  src={rosie}
               height = {180}
               width = {302}
