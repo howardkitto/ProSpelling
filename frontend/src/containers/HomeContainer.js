@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
+import {Container, Row, Col} from 'reactstrap'
+
 import Video from './Video'
 import rosie from '../video/Rosie.mp4'
 
@@ -15,17 +17,27 @@ render(){
 
   return(
 
-    <div className="container">
-      {(this.props.spellerName)?
-        <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
-        <UserDetailsForm headerText = "What is your name?  "/>}
-        <Speech />
+    <Container fluid>
+      <Row>
+        <Col>
+          {(this.props.spellerName)?
+            <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
+          <UserDetailsForm headerText = "What is your name?  "/>}   
+        </Col>
+        <Col>
+          <Video  src={rosie}
+                height = {180}
+                width = {302}
+                muted = {true}/>
+        </Col>
+        </Row>
+        <Row>
+        <Col>
+          <Speech />
+        </Col>
         
-        <Video  src={rosie}
-              height = {180}
-              width = {302}
-              muted = {true}/>
-    </div>
+      </Row>
+    </Container>
         )
     }
 }
