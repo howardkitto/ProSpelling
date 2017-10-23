@@ -8,9 +8,13 @@ Howard and Yvette are an awesome team!
 
 ## To deploy: 
 
-1. Test Prod locally like this...
+1. Get the code ready for Prod like this...
 
 `cd frontend && npm run build && cd .. && NODE_ENV=production node server`
+
+2. Then check it like this
+
+`http://localhost:8080`
 
 2. Git commit
 
