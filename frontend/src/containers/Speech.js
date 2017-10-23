@@ -83,12 +83,6 @@ componentDidMount(){
         this.setUpSpeechRecog()
         }
 }
-
-componentWillUnmount(){
-    if(recognition){
-        recognition.stop()
-    }
-}
     
 render(){
     switch(this.state.useSpeech){
