@@ -6,9 +6,13 @@ const app = require('./server/app.js');
 
 
 
-// var mongoose = require('mongoose');
-// mongoose.connect(process.env.DB_URI, { useMongoClient: true });
-// mongoose.Promise = global.Promise;
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+mongoose.connect(process.env.MONGO_HOST, {
+  useMongoClient: true,
+}).then(console.log('DB Connected'))
+.catch(error=>{console.log(error)})
 
 app.app.listen(process.env.PORT || 8080, () => {
     console.log('Server is running on http://localhost:8080 or http://127.0.0.1:8080 ');
