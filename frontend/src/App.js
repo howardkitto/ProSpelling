@@ -5,6 +5,7 @@ import Nav from './containers/Nav'
 import HomeContainer from './containers/HomeContainer'
 import LessonOneContainer from './containers/LessonOneContainer'
 import LessonTwoContainer from './containers/LessonTwoContainer'
+import EnvTest from './containers/EnvTest'
 
 import { Provider } from 'react-redux';
 import store from './redux/store'
@@ -20,32 +21,17 @@ import './css/App.css'
 
 class App extends Component {
 
-  constructor(){
-    super()
-    this.state={
-      message: ''
-    }
-  }
-
-  componentDidMount(){
-
-    fetch('helloworld', {
-      accept: "application/json"
-    })
-    .then((res)=>res.json())
-    .then((data)=>{this.setState({environment:data.message})})
-    .catch((error)=>{console.log(error)})
-  }
-
   render() {
+
     return (
       <Provider store={store}>
         <Router>
         <Container fluid>
-          <Nav/>
+          <Nav />
           <Route exact path="/" component={HomeContainer}/>
           <Route path="/lessonone" component={LessonOneContainer}/>
           <Route path="/lessontwo" component={LessonTwoContainer}/>
+          <Route path="/envTest" component={EnvTest}/>
         </Container>  
       </Router>
     </Provider>

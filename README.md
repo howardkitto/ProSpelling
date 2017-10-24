@@ -4,13 +4,19 @@ Howard and Yvette are an awesome team!
 
 ## To run this on your laptop
 
+1. First start MongoDB
+
+`mongod`
+
+2. Then start the server in dev mode
+
 `npm run dev`
 
 ## To deploy: 
 
 1. Get the code ready for Prod like this...
 
-`cd frontend && npm run build && cd .. && NODE_ENV=production node server`
+`cd frontend && npm run build && cd .. && node server`
 
 2. Then check it like this
 

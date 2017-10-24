@@ -44,3 +44,8 @@
 .answerTextBox{
   width:500px
 }
+
+.envCheck{
+  padding:8px;
+  color:lightgray;
+}

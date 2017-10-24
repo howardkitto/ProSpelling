@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan');
 const path = require('path');
 
-const helloWorld = require('./routes/helloworld')
+const envTest = require('./routes/envTest')
 
 const app = express()
 
@@ -13,6 +13,6 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
     console.log('dev mode')
   
  
-app.use('/helloworld', helloWorld)
+app.use('/envTest', envTest)
 
 module.exports = {app}

@@ -27,3 +27,4 @@ yarn-error.log*
 !.elasticbeanstalk/*.global.yml
 frontend/node_modules
 .ebextensions
+process.env
