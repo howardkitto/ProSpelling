@@ -14,3 +14,10 @@ export function saveAnswer(answer){
         answer: answer
     }
 }
+
+export function getNextWord(){
+    return{
+        type: 'GET_NEXT_WORD'
+    }
+
+}

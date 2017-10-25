@@ -7,6 +7,7 @@ import Video from './Video'
 import rosie from '../video/Rosie.mp4'
 
 import Speech from '../containers/Speech'
+import SpellWord from './SpellWord'
 
 import UserDetailsForm from './UserDetailsForm'
 
@@ -19,23 +20,27 @@ render(){
 
     <Container fluid>
       <Row>
+      <Col>
+        <SpellWord />
+        </Col>
         <Col>
           {(this.props.spellerName)?
-            <h1 className="display-3">Hello, {this.props.spellerName}</h1>:
+            <h3 className="display-3">Hello, {this.props.spellerName}</h3>:
           <UserDetailsForm headerText = "What is your name?  "/>}   
         </Col>
+        
+          
+        </Row> 
+        <Row>
+        <Col>
+          <Speech />
+        </Col> 
         <Col>
           <Video  src={rosie}
                 height = {180}
                 width = {302}
                 muted = {true}/>
         </Col>
-        </Row>
-        <Row>
-        <Col>
-          <Speech />
-        </Col>
-        
       </Row>
     </Container>
         )

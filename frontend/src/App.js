@@ -5,14 +5,17 @@ import Nav from './containers/Nav'
 import HomeContainer from './containers/HomeContainer'
 import LessonOneContainer from './containers/LessonOneContainer'
 import LessonTwoContainer from './containers/LessonTwoContainer'
-import EnvTest from './containers/EnvTest'
+import EnvTest from './containers/admin/EnvTest'
+import NoMatch from './containers/NoMatch'
+import Words from './containers/admin/Words'
 
 import { Provider } from 'react-redux';
 import store from './redux/store'
 
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Switch
   } from 'react-router-dom'
 
 import {Container} from 'reactstrap'
@@ -28,10 +31,14 @@ class App extends Component {
         <Router>
         <Container fluid>
           <Nav />
-          <Route exact path="/" component={HomeContainer}/>
-          <Route path="/lessonone" component={LessonOneContainer}/>
-          <Route path="/lessontwo" component={LessonTwoContainer}/>
-          <Route path="/envTest" component={EnvTest}/>
+            <Switch>
+              <Route exact path="/" component={HomeContainer}/>
+              <Route path="/lessonone" component={LessonOneContainer}/>
+              <Route path="/lessontwo" component={LessonTwoContainer}/>
+              <Route path="/admin/envtest" component={EnvTest}/>
+              <Route path="/admin/words" component={Words}/>
+              <Route component={NoMatch}/>
+            </Switch>
         </Container>  
       </Router>
     </Provider>

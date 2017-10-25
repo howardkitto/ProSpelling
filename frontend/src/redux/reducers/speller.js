@@ -15,6 +15,12 @@ function speller(state=[], action){
             }
             default:
             return state
+        case 'GOT_NEXT_WORD':
+        console.log('Speller Reducer running' + JSON.stringify(action))
+            return{
+                ...state,
+                word: action.nextWord
+            }
         }
 }
 

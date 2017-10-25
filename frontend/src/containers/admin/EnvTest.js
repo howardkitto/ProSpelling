@@ -11,7 +11,7 @@ class EnvTest extends Component{
 
   componentDidMount(){
         
-    fetch('envTest', {
+    fetch('../admin/envTest', {
       accept: "application/json"
       })
       .then((res)=>res.json())

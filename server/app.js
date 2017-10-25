@@ -3,7 +3,10 @@ const express = require('express')
 const morgan = require('morgan');
 const path = require('path');
 
-const envTest = require('./routes/envTest')
+const envTest = require('./routes/admin/envtest')
+const adminWords = require('./routes/admin/words')
+
+const getNextWord = require('./routes/assess/getNextWord')
 
 const app = express()
 
@@ -13,6 +16,8 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
     console.log('dev mode')
   
  
-app.use('/envTest', envTest)
+app.use('/admin/envtest', envTest)
+app.use('/admin/words', adminWords)
+app.use('/assess/getnextword', getNextWord)
 
 module.exports = {app}
