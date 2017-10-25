@@ -1,5 +1,5 @@
 const getNextWordApi = () =>{
-  console.log('getNextWordAPI')
+  // console.log('getNextWordAPI')
 
   return fetch('../assess/getnextword')
       .then(response => response.json()
