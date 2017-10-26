@@ -18,7 +18,7 @@ function speller(state=[], action){
         case 'GOT_NEXT_WORD':
             return{
                 ...state,
-                word: action.nextWord
+                nextWord: action.nextWord
             }
         }
 }
