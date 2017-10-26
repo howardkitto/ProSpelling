@@ -10,7 +10,7 @@ class LessonOneContainer extends Component{
 
 
     playSound(letter){
-        this.audioPlayer.src = this.playSound(`/audio/${letter}.mp3`)
+        this.audioPlayer.src = (`/audio/${letter}.mp3`)
         let playPromise = this.audioPlayer.play()
         //catch and surpress a bug in chrome
         if (playPromise !== undefined){
