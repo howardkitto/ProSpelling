@@ -35,7 +35,7 @@ render(){
           <Speech />
         </Col> 
         <Col>
-          <Video  src='/static/video/Rosie.mp4'
+          <Video  src='https://s3-us-west-2.amazonaws.com/prospelling/video/Rosie.mp4'
                 height = {180}
                 width = {302}
                 muted = {true}/>

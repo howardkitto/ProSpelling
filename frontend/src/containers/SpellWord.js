@@ -22,7 +22,7 @@ class SpellWord extends Component{
 
     componentWillReceiveProps(nextProps)
     {
-        if(nextProps.nextWord !== this.props.nextWord){this.playSound(`/static/audio/${nextProps.nextWord}.mp3`)}
+        if(nextProps.nextWord !== this.props.nextWord){this.playSound(`https://s3-us-west-2.amazonaws.com/prospelling/audio/${nextProps.nextWord}.mp3`)}
     }
 
 

@@ -31,7 +31,7 @@ class Words extends Component{
                 </tbody>
                 
             </Table>}
-        }
+        
             
         </div>
       )
