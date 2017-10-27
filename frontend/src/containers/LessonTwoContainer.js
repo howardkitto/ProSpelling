@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
 import Video from './Video'
-import Jasmine1 from '../video/Jasmine1.mp4'
 
 
 class LessonTwoContainer extends Component{
@@ -13,7 +12,7 @@ render(){
         <div>
         <h1>Lesson Two</h1>
         {(this.props.spellerName)?<h2>Hello {this.props.spellerName}</h2>:null}
-        <Video  src={Jasmine1} 
+        <Video  src='/video/Jasmine1.mp4'
                 height = {302}
                 width = {450}
                 />

@@ -18,6 +18,8 @@ Howard and Yvette are an awesome team!
 
 `cd frontend && npm run build && cd .. && node server`
 
+2. Change the NODE_ENV setting in process.env to development
+
 2. Then check it like this
 
 `http://localhost:8080`

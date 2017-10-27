@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Container, Row, Col} from 'reactstrap'
 
 import Video from './Video'
-import rosie from '../video/Rosie.mp4'
 
 import Speech from '../containers/Speech'
 import SpellWord from './SpellWord'
@@ -36,7 +35,7 @@ render(){
           <Speech />
         </Col> 
         <Col>
-          <Video  src={rosie}
+          <Video  src='/video/Rosie.mp4'
                 height = {180}
                 width = {302}
                 muted = {true}/>
