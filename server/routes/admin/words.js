@@ -7,11 +7,7 @@ var words
 router.route('/')
 .get((req, res)=>{
     var promise = Words.find().exec()
-        .then((allWords)=>{
-            words = allWords.map((i)=>{return i["word"]})
-        })
-        .then(()=>{
-            console.log(words[0])
+        .then((words)=>{
             res.setHeader('Content-Type', 'application/json')
             res.send(words)
             })

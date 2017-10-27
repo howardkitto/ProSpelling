@@ -5,7 +5,7 @@ const getNextWordApi = () =>{
       .then(response => response.json()
           )
       .catch(
-        (error)=>{console.log('error ' + error)}
+        (error)=>{console.log('api error ' + error)}
       )
 }
 

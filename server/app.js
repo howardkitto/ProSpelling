@@ -6,7 +6,7 @@ const path = require('path');
 const envTest = require('./routes/admin/envtest')
 const adminWords = require('./routes/admin/words')
 
-const getNextWord = require('./routes/assess/getNextWord')
+const getNextWord = require('./routes/assess/nextWordRoute')
 
 const app = express()
 

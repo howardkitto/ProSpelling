@@ -49,8 +49,7 @@ render(){
 
 const mapStateToProps = state => {
   return {
-    spellerName: state.name,
-    answer: state.answer
+    spellerName: state.speller.name
   }
 }
 

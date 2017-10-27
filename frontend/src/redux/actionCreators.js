@@ -21,3 +21,10 @@ export function getNextWord(){
     }
 
 }
+
+export function getWordsList(){
+    return{
+        type: 'GET_WORDS_LIST'
+    }
+
+}

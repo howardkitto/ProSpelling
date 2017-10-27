@@ -1,15 +1,19 @@
-import {createStore, applyMiddleware} from 'redux'
-import speller from './reducers/speller'
+import {createStore, applyMiddleware, compose} from 'redux'
+// import speller from './reducers/speller'
+
+import rootReducer from './reducers/rootReducer'
 import createSagaMiddleware from 'redux-saga'
 import saga from './saga';
 const sagaMiddleware = createSagaMiddleware()
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const defaultState={}
 
 //TO DO: combine reducers into a root reducer
-const  store = createStore( speller,
+const  store = createStore( rootReducer,
                             defaultState,
-                            applyMiddleware(sagaMiddleware))
+                            composeEnhancers(applyMiddleware(sagaMiddleware))
+)
                             
 
 sagaMiddleware.run(saga);

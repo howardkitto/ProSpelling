@@ -124,7 +124,7 @@ render(){
 
 const mapStateToProps = state => {
     return {
-      answer: state.answer
+      answer: state.assessment.answer
     }
   }
 
