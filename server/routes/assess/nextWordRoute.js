@@ -1,15 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
-
-
-const getOneWord = (nextWord) => {
-    return new Promise((resolve, reject) =>{
-        nextWord.allWordsArray = nextWord.allWords.map((i)=>{return i["word"]})
-    
-        resolve(nextWord.allWordsArray[12])
-    }
-)}   
+const getNextWord = require('../../businessLogic/getNextWord')   
 
 router.route('/')
 .get((req, res)=>{
@@ -21,7 +13,7 @@ router.route('/')
         nextWord.timeStamp = Date.now()
         //ToDo: Catch errors
         nextWord.allWords = await Words.find().exec()
-        nextWord.word = await getOneWord(nextWord)
+        nextWord.word = await getNextWord(nextWord)
         
         res.json(nextWord)
 

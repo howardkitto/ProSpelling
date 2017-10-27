@@ -22,7 +22,7 @@ class SpellWord extends Component{
 
     componentWillReceiveProps(nextProps)
     {
-        if(nextProps.nextWord){this.playSound(`/audio/${nextProps.nextWord}.mp3`)}
+        if(nextProps.nextWord !== this.props.nextWord){this.playSound(`/audio/${nextProps.nextWord}.mp3`)}
     }
 
 
@@ -40,8 +40,8 @@ class SpellWord extends Component{
 
 const mapStateToProps = state => {
     return {
-      answer: state.answer,
-      nextWord: state.nextWord
+      answer: state.assessment.answer,
+      nextWord: state.assessment.nextWord
     }
   }
 
