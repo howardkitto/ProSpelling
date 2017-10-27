@@ -12,6 +12,7 @@ const app = require('./server/app.js');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+
 mongoose.connect(process.env.MONGO_HOST, {
   useMongoClient: true,
 }).then(console.log('DB Connected'))
