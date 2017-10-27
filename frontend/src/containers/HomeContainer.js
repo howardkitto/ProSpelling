@@ -35,7 +35,7 @@ render(){
           <Speech />
         </Col> 
         <Col>
-          <Video  src='/video/Rosie.mp4'
+          <Video  src='/static/video/Rosie.mp4'
                 height = {180}
                 width = {302}
                 muted = {true}/>
