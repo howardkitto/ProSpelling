@@ -23,7 +23,7 @@ render(){
   // console.log(typeof(this.state.data))
   return(
 <div><h2>Environment Test</h2>
-      <h3>V0.01</h3>
+      <h3>V0.01.1</h3>
     {Object.keys(this.state.data).map((key, value)=>
     <div key={key}>{key} = {this.state.data[key]}</div>)}
 </div>
