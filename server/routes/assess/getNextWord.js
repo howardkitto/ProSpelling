@@ -2,23 +2,32 @@ const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
 
-var words
+
+const getOneWord = (nextWord) => {
+    return new Promise((resolve, reject) =>{
+        nextWord.allWordsArray = nextWord.allWords.map((i)=>{return i["word"]})
+    
+        resolve(nextWord.allWordsArray[12])
+    }
+)}   
 
 router.route('/')
 .get((req, res)=>{
-    var promise = Words.find().exec()
-        .then((allWords)=>{
-            words = allWords.map((i)=>{return i["word"]})
-        })
-        .then(()=>{
-            res.setHeader('Content-Type', 'application/json')
-            res.json({nextWord : words[1]})
-            })
-        .catch((err)=>{
-            console.log('error ' + err)
-            })
 
-        }
-)
+    const processNextWord = async ()=>{
+        
+        var nextWord = {}
+
+        nextWord.timeStamp = Date.now()
+        //ToDo: Catch errors
+        nextWord.allWords = await Words.find().exec()
+        nextWord.word = await getOneWord(nextWord)
+        
+        res.json(nextWord)
+
+       }
+
+    processNextWord()
+})
 
 module.exports = router

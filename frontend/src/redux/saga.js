@@ -7,7 +7,8 @@ import getNextWordApi from './data/getNextWordApi'
 export function* getNextWord(){
     try{    
     const response = yield call(getNextWordApi)
-    yield put({type:'GOT_NEXT_WORD', nextWord: response.nextWord})
+    yield put({type:'GOT_NEXT_WORD', data: response})
+    console.log(response)
     }
     catch(e){console.log('api error ' + e)}
 
