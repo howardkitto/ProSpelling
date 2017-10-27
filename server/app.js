@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan');
 const path = require('path');
 
-const envTest = require('./routes/admin/envtest')
+const envTest = require('./routes/admin/envTest')
 const adminWords = require('./routes/admin/words')
 
 const getNextWord = require('./routes/assess/nextWordRoute')
