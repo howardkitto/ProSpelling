@@ -15,7 +15,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 //     app.use(express.static('frontend/build')) :
 //     console.log('dev mode')
 
-app.use(express.static('frontend/build')) 
+// app.use(express.static('frontend/build')) 
   
  
 app.use('/admin/envtest', envTest)
