@@ -12,8 +12,8 @@ router.route('/')
 
         nextWord.timeStamp = Date.now()
         //ToDo: Catch errors
-        nextWord.allWords = await Words.find().exec()
-        nextWord.word = await getNextWord(nextWord)
+        var allWords = await Words.find().exec()
+        nextWord.word = await getNextWord(allWords)
         
         res.json(nextWord)
 
