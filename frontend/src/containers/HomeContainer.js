@@ -7,6 +7,7 @@ import Video from './Video'
 
 import Speech from '../containers/Speech'
 import SpellWord from './SpellWord'
+import LevelSelector from './LevelSelector'
 
 import UserDetailsForm from './UserDetailsForm'
 
@@ -20,6 +21,7 @@ render(){
     <Container fluid>
       <Row>
       <Col>
+        <LevelSelector />
         <SpellWord />
         </Col>
         <Col>

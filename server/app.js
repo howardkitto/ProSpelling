@@ -7,7 +7,6 @@ const envTest = require('./routes/admin/envTest')
 
 const adminWords = require('./routes/admin/words')
 const getNextWord = require('./routes/assess/nextWordRoute')
-const levels = require('./routes/assess/levelsRoute')
 
 const app = express()
 
@@ -19,6 +18,5 @@ app.use(express.static('frontend/build'))
 app.use('/admin/envtest', envTest) 
 app.use('/admin/words', adminWords)
 app.use('/assess/getnextword', getNextWord)
-app.use('/assess/levels', levels)
 
 module.exports = {app}

@@ -8,6 +8,15 @@ export function saveName(name){
     }
 }
 
+export function levelSelected(level){
+    console.log('LEVEL_SELECTED ' + level)
+    return {
+        type: 'LEVEL_SELECTED',
+        level: level
+    }
+}
+
+
 export function saveAnswer(answer){
     return {
         type: 'GET_ANSWER',
