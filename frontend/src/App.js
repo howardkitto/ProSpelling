@@ -36,6 +36,7 @@ class App extends Component {
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/admin/words" component={Words}/>
+              <Route path="/admin/envtest" component={EnvTest}/>
               <Route component={NoMatch}/>
             </Switch>
         </Container>  
