@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getWordsList} from './../../redux/actionCreators'
+import {getWordsList, 
+        createWord,
+        editWord,
+        updateWord,
+        deleteWord} from './../../redux/actionCreators'
 import {Table, Button, 
         Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
 
@@ -12,11 +16,7 @@ class Words extends Component{
         super(props)
 
         this.state = {
-            modal:false,
-            word:{  word:'',
-                    level:'',
-                    assessment:'',
-                    characteristics:''}
+            modal:false
         }
 
         this.toggle = this.toggle.bind(this);
@@ -29,20 +29,27 @@ class Words extends Component{
                         level:'',
                         assessment:'',
                         characteristics:''}
-
-        this.setState({ word:newWord,
-                        modal:!this.state.modal})
+        
+        this.props.editWord(newWord)
+        this.setState({modal:!this.state.modal})
        }
 
     edit(word){
-        //make sure none of the fields are null
+        // make sure none of the fields are null
         if(!word.word)word.word=''
         if(!word.level)word.level=''
         if(!word.assessment)word.assessment=''
         if(!word.characteristics)word.characteristics=''
 
-        this.setState({modal : !this.state.modal,
-                         word : word})
+        // this.setState({modal : !this.state.modal})
+
+        this.props.editWord(word)
+        this.setState({modal : !this.state.modal})
+    }
+
+    saveClicked(){
+        this.props.createWord()
+        this.setState({modal : !this.state.modal})
     }
 
     toggle(word) {
@@ -50,9 +57,7 @@ class Words extends Component{
       }
 
   componentDidMount(){
-    
     this.props.getWordsList()
-
   }
 
   render(){
@@ -84,8 +89,8 @@ class Words extends Component{
             <WordForm word={this.state.word}/>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={this.toggle}>Save</Button>
-            <Button color="danger" onClick={this.toggle}>Delete</Button>
+            <Button color="success" onClick={()=>this.saveClicked()}>Save</Button>
+            <Button color="danger" onClick={()=>this.props.deleteWord()}>Delete</Button>
             <Button color="info" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
 
@@ -97,14 +102,18 @@ class Words extends Component{
 
 const mapStateToProps = state => {
     return {
-      wordsList: state.words.wordsList 
+      wordsList: state.wordsAdmin.wordsList 
     }
   }
 
-  const mapDispatchToProps = dispatch => {
-    return {
-            getWordsList : () => dispatch(getWordsList())
-          }
+const mapDispatchToProps = dispatch => {
+return {
+        getWordsList : () => dispatch(getWordsList()),
+        createWord : () => dispatch(createWord()),
+        editWord : (word) => dispatch(editWord(word)),
+        updateWord : () => dispatch(updateWord()),
+        deleteWord : () => dispatch(deleteWord())
+        }
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Words)

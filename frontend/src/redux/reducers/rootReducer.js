@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 
 import speller from './speller'
 import assessment from './assessment'
-import words from './words'
+import wordsAdmin from './wordsAdmin'
 
 const rootReducer = combineReducers({   speller,
-                                        words,
+                                        wordsAdmin,
                                         assessment})
 
 export default rootReducer;

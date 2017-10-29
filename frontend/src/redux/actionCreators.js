@@ -16,11 +16,42 @@ export function levelSelected(level){
     }
 }
 
-
 export function saveAnswer(answer){
     return {
         type: 'GET_ANSWER',
         answer: answer
+    }
+}
+
+export function createWord(word){
+    console.log('CREATE_WORD')
+    return {
+        type: 'CREATE_WORD',
+        word: word
+    }
+}
+
+export function editWord(word){
+    console.log('EDIT_WORD' + JSON.stringify(word))
+    return {
+        type: 'EDIT_WORD',
+        word: word
+    }
+}
+
+export function updateWord(word){
+    console.log('UPDATE_WORD')
+    return {
+        type: 'UPDATE_WORD',
+        word: word
+    }
+}
+
+export function deleteWord(word){
+    console.log('DELETE_WORD')
+    return {
+        type: 'DELETE_WORD',
+        word: word
     }
 }
 

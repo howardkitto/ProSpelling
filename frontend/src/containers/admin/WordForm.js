@@ -2,27 +2,30 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Form, FormGroup, Label, Col, Input} from 'reactstrap'
 
-class WordForm extends Component{
+import {editWord} from '../../redux/actionCreators'
 
+class WordForm extends Component{
+ 
   constructor(props){
     super(props)
     this.state = {
       word:this.props.word
     }
   }
-
   onChange(e){
-    console.log(e.target.name +' '+ e.target.value)
+    // console.log(e.target.name +' '+ e.target.value)
 
     const key = e.target.name
     const value = e.target.value
     
-    var word = this.state.word
+    var word = this.props.word
     word[key]=value
 
     this.setState({word})
 
-    console.log(JSON.stringify(this.state.word))
+    this.props.editWord(word)
+
+    console.log(JSON.stringify(word))
   }
     
     render(){
@@ -70,13 +73,14 @@ class WordForm extends Component{
 
 const mapStateToProps = state => {
     return {
+      word: state.wordsAdmin.word 
       
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-            
+      editWord : (word) => dispatch(editWord(word))
           }
   }
 
