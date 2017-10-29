@@ -2,6 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import getNextWordApi from './data/getNextWordApi'
 import getWordsListApi from './data/getWordsListApi'
+import postWordApi from './data/postWordApi'
 
 //3. Workers
 
@@ -21,6 +22,14 @@ export function* getWordsList(){
     catch(e){console.log('getWordsList api error ' + e)}
 }
 
+export function* postWord(action){
+    try{    
+    const response = yield call(postWordApi, action)
+    yield put({type:'CREATED_WORD', data: response})
+    }
+    catch(e){console.log('getNextWord api error ' + e)}
+}
+
 //2. Watchers
 
 export function* watchForGetNextWord(){
@@ -31,12 +40,17 @@ export function* watchForGetWordsList(){
     yield takeEvery('GET_WORDS_LIST', getWordsList)
 }
 
+export function* watchForCreateWord(){
+    yield takeEvery('CREATE_WORD', postWord)
+}
+
 //1. Root Saga
 
 export default function* saga(){
      
     yield all([
       watchForGetNextWord(),
-      watchForGetWordsList()
+      watchForGetWordsList(),
+      watchForCreateWord()
     ])
     }
