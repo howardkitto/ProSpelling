@@ -5,9 +5,9 @@ import getWordsListApi from './data/getWordsListApi'
 
 //3. Workers
 
-export function* getNextWord(){
+export function* getNextWord(action){
     try{    
-    const response = yield call(getNextWordApi)
+    const response = yield call(getNextWordApi, action)
     yield put({type:'GOT_NEXT_WORD', data: response})
     }
     catch(e){console.log('getNextWord api error ' + e)}

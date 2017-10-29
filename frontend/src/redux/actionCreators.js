@@ -24,9 +24,10 @@ export function saveAnswer(answer){
     }
 }
 
-export function getNextWord(){
+export function getNextWord(level){
     return{
-        type: 'GET_NEXT_WORD'
+        type: 'GET_NEXT_WORD',
+        level: level
     }
 
 }

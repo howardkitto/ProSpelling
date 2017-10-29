@@ -4,7 +4,9 @@ const Words = require('../../models/Words')
 const getNextWord = require('../../businessLogic/getNextWord')   
 
 router.route('/')
-.get((req, res)=>{
+
+.post((req, res)=>{
+    console.log('got post ' + req.body.level)
 
     const processNextWord = async ()=>{
         
@@ -12,7 +14,7 @@ router.route('/')
 
         nextWord.timeStamp = Date.now()
         //ToDo: Catch errors
-        var allWords = await Words.find().exec()
+        var allWords = await Words.find({"level":req.body.level}).exec()
         nextWord.word = await getNextWord(allWords)
         
         res.json(nextWord)
