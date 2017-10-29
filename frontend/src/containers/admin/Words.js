@@ -24,7 +24,7 @@ class Words extends Component{
     }
 
     createWord() {
-        //crerate an empty word object
+        //create an empty word object
         var newWord = { word:'',
                         level:'',
                         assessment:'',
@@ -41,15 +41,23 @@ class Words extends Component{
         if(!word.assessment)word.assessment=''
         if(!word.characteristics)word.characteristics=''
 
-        // this.setState({modal : !this.state.modal})
-
         this.props.editWord(word)
         this.setState({modal : !this.state.modal})
     }
 
     saveClicked(){
-        this.props.createWord()
+        if( !this.props.formWord._id){
+        this.props.createWord(this.props.formWord)}
+        else
+            this.props.updateWord(this.props.formWord)
+
         this.setState({modal : !this.state.modal})
+    }
+
+    deleteClicked(){
+        this.props.deleteWord(this.props.formWord)
+        this.setState({modal : !this.state.modal})
+
     }
 
     toggle(word) {
@@ -90,7 +98,7 @@ class Words extends Component{
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={()=>this.saveClicked()}>Save</Button>
-            <Button color="danger" onClick={()=>this.props.deleteWord()}>Delete</Button>
+            <Button color="danger" onClick={()=>this.deleteClicked()}>Delete</Button>
             <Button color="info" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
 
@@ -102,16 +110,17 @@ class Words extends Component{
 
 const mapStateToProps = state => {
     return {
-      wordsList: state.wordsAdmin.wordsList 
+      wordsList: state.wordsAdmin.wordsList,
+      formWord: state.wordsAdmin.word 
     }
   }
 
 const mapDispatchToProps = dispatch => {
 return {
         getWordsList : () => dispatch(getWordsList()),
-        createWord : () => dispatch(createWord()),
+        createWord : (word) => dispatch(createWord(word)),
         editWord : (word) => dispatch(editWord(word)),
-        updateWord : () => dispatch(updateWord()),
+        updateWord : (word) => dispatch(updateWord(word)),
         deleteWord : () => dispatch(deleteWord())
         }
   }

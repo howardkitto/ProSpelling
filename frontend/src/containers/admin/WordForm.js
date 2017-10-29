@@ -24,8 +24,6 @@ class WordForm extends Component{
     this.setState({word})
 
     this.props.editWord(word)
-
-    console.log(JSON.stringify(word))
   }
     
     render(){
