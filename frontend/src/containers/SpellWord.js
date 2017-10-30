@@ -17,9 +17,6 @@ class SpellWord extends Component{
         }
       }
 
-    componentDidMount()
-    {
-    }
 
     componentWillReceiveProps(nextProps)
     {

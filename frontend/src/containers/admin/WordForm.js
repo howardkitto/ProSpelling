@@ -29,6 +29,7 @@ class WordForm extends Component{
     render(){
         return(
         <Form>
+          {this.props.error}
         <FormGroup row>
           <Label for="word" sm={3}>Word</Label>
           <Col sm={9}>
@@ -61,6 +62,14 @@ class WordForm extends Component{
                     onChange={(e)=>this.onChange(e)} />
           </Col>
         </FormGroup>
+        <FormGroup row>
+          <Label for="level" sm={3}>Audio File</Label>
+          <Col sm={9}>
+            <Input  name="audioFileName"
+                    value={this.state.word.audioFileName}
+                    onChange={(e)=>this.onChange(e)} />
+          </Col>
+        </FormGroup>
         </Form>
     )
     }
@@ -71,7 +80,8 @@ class WordForm extends Component{
 
 const mapStateToProps = state => {
     return {
-      word: state.wordsAdmin.word 
+      word: state.wordsAdmin.word,
+      error: state.wordsAdmin.formError 
       
     }
   }

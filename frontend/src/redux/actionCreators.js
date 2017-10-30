@@ -24,7 +24,7 @@ export function saveAnswer(answer){
 }
 
 export function createWord(word){
-    console.log('CREATE_WORD ' +JSON.stringify(word))
+    // console.log('CREATE_WORD ' +JSON.stringify(word))
     return {
         type: 'CREATE_WORD',
         word: word
@@ -48,7 +48,7 @@ export function updateWord(word){
 }
 
 export function deleteWord(word){
-    console.log('DELETE_WORD')
+    console.log('DELETE_WORD action '+JSON.stringify(word))
     return {
         type: 'DELETE_WORD',
         word: word

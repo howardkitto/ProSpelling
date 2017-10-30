@@ -18,8 +18,8 @@ function speller(state=[], action){
             ...state,
             nextWord: action.data.word
             }
-            default:
-            return state
+        default:
+        return state
         }
 }
 

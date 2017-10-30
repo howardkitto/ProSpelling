@@ -9,6 +9,7 @@ import {Table, Button,
         Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
 
 import WordForm from './WordForm'
+import DateTime from '../../components/DateTime'
 
 class Words extends Component{
 
@@ -28,7 +29,8 @@ class Words extends Component{
         var newWord = { word:'',
                         level:'',
                         assessment:'',
-                        characteristics:''}
+                        characteristics:'',
+                        audioFileName:''}
         
         this.props.editWord(newWord)
         this.setState({modal:!this.state.modal})
@@ -40,31 +42,39 @@ class Words extends Component{
         if(!word.level)word.level=''
         if(!word.assessment)word.assessment=''
         if(!word.characteristics)word.characteristics=''
+        if(!word.audioFileName)word.audioFileName=''
 
+        console.log('page function got ' + JSON.stringify(word))
         this.props.editWord(word)
         this.setState({modal : !this.state.modal})
     }
 
-    saveClicked(){
-        if( !this.props.formWord._id){
-        this.props.createWord(this.props.formWord)}
-        else
-            this.props.updateWord(this.props.formWord)
+saveClicked(){
+    if( !this.props.formWord._id){
+    this.props.createWord(this.props.formWord)}
+    else
+        this.props.updateWord(this.props.formWord)
 
-        this.setState({modal : !this.state.modal})
+    // this.setState({modal : !this.state.modal})
+}
+
+deleteClicked(){
+    console.log('delete clicked ' + JSON.stringify(this.props.formWord))
+    this.props.deleteWord(this.props.formWord)
+    this.setState({modal : !this.state.modal})
     }
 
-    deleteClicked(){
-        this.props.deleteWord(this.props.formWord)
-        this.setState({modal : !this.state.modal})
-
-    }
-
-    toggle(word) {
-       this.setState({modal : !this.state.modal})
+toggle(word) {
+    this.setState({modal : !this.state.modal})
       }
 
-  componentDidMount(){
+componentWillReceiveProps(nextProps)
+{
+    if(!nextProps.wordsList){this.props.getWordsList()}
+    if(nextProps.success){this.setState({modal : !this.state.modal})}
+}
+
+componentDidMount(){
     this.props.getWordsList()
   }
 
@@ -76,7 +86,8 @@ class Words extends Component{
                 <thead>
                     <tr>
                         <td>Word</td>
-                        <td>Level</td>
+                        <td>Date Created</td>
+                        <td>Date Updated</td>
                         <td><Button color="success" onClick={this.createWord}>Create New Word</Button></td>
                     </tr>
                 </thead>
@@ -84,7 +95,8 @@ class Words extends Component{
                 {this.props.wordsList.map((word, index)=>
                     <tr key={word._id}>
                     <td>{word.word}</td>
-                    <td>{word.level}</td>
+                    <td><DateTime utc={word.createdAt}/></td>
+                    <td><DateTime utc={word.updatedAt}/></td>
                     <td><Button color ="warning" onClick={()=>this.edit(this.props.wordsList[index])}>Edit</Button></td>
                 </tr>)}
                 </tbody>                
@@ -111,7 +123,8 @@ class Words extends Component{
 const mapStateToProps = state => {
     return {
       wordsList: state.wordsAdmin.wordsList,
-      formWord: state.wordsAdmin.word 
+      formWord: state.wordsAdmin.word,
+      success: state.wordsAdmin.success 
     }
   }
 
@@ -121,7 +134,7 @@ return {
         createWord : (word) => dispatch(createWord(word)),
         editWord : (word) => dispatch(editWord(word)),
         updateWord : (word) => dispatch(updateWord(word)),
-        deleteWord : () => dispatch(deleteWord())
+        deleteWord : (word) => dispatch(deleteWord(word))
         }
   }
 
