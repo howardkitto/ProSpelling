@@ -20,8 +20,10 @@ class SpellWord extends Component{
 
     componentWillReceiveProps(nextProps)
     {
-        if(nextProps.level !== this.props.level){this.props.getNextWord(nextProps.level)}
-        if(nextProps.nextWord !== this.props.nextWord){this.playSound(`https://s3-us-west-2.amazonaws.com/prospelling/audio/${nextProps.nextWord}.mp3`)}
+        if(nextProps.level !== this.props.level)
+            {this.props.getNextWord(nextProps.level)}
+        if(nextProps.nextWord !== this.props.nextWord)
+            {this.playSound(nextProps.audioFile)}
     }
 
     render(){
@@ -45,7 +47,8 @@ const mapStateToProps = state => {
     return {
         level: state.assessment.level,
       answer: state.assessment.answer,
-      nextWord: state.assessment.nextWord
+      nextWord: state.assessment.nextWord,
+      audioFile: state.assessment.audioFile
     }
   }
 

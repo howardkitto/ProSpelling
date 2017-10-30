@@ -1,5 +1,5 @@
 const putWordApi = (action) =>{
-    console.log('putWordApi ' + JSON.stringify(action))
+    // console.log('putWordApi ' + JSON.stringify(action))
   
     const request = new Request('../admin/words', {
       method: 'PUT',

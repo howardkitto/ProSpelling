@@ -65,7 +65,7 @@ router.route('/')
 })
 
 .delete((req, res)=>{
-    console.log('Gonna delete ' + JSON.stringify(req.body))
+    // console.log('Gonna delete ' + JSON.stringify(req.body))
     var promise = Words.findByIdAndRemove(req.body._id).exec()
     .then(()=>{
         res.setHeader('Content-Type', 'application/json')

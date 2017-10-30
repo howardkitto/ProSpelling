@@ -14,9 +14,11 @@ function speller(state=[], action){
             answer: action.answer
             }
         case 'GOT_NEXT_WORD':
+        console.log('reducer got ' + JSON.stringify(action.word))
             return{
             ...state,
-            nextWord: action.data.word
+            nextWord: action.word.word,
+            audioFile: action.word.audioFileName
             }
         default:
         return state

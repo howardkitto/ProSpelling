@@ -14,7 +14,7 @@ const wordsAdmin = (state=[], action)=>{
                 word:action.word
             }
         case 'UPDATED_WORD':
-        console.log('UPDATED_WORD Reducer got ' +JSON.stringify(action))
+        // console.log('UPDATED_WORD Reducer got ' +JSON.stringify(action))
             return{
                 success:true,
                 wordList:[]

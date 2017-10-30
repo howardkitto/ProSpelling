@@ -9,7 +9,7 @@ export function saveName(name){
 }
 
 export function levelSelected(level){
-    console.log('LEVEL_SELECTED ' + level)
+    // console.log('LEVEL_SELECTED ' + level)
     return {
         type: 'LEVEL_SELECTED',
         level: level
@@ -40,7 +40,7 @@ export function editWord(word){
 }
 
 export function updateWord(word){
-    console.log('UPDATE_WORD ' +JSON.stringify(word))
+    // console.log('UPDATE_WORD ' +JSON.stringify(word))
     return {
         type: 'UPDATE_WORD',
         word: word
@@ -48,7 +48,7 @@ export function updateWord(word){
 }
 
 export function deleteWord(word){
-    console.log('DELETE_WORD action '+JSON.stringify(word))
+    // console.log('DELETE_WORD action '+JSON.stringify(word))
     return {
         type: 'DELETE_WORD',
         word: word

@@ -44,7 +44,6 @@ class Words extends Component{
         if(!word.characteristics)word.characteristics=''
         if(!word.audioFileName)word.audioFileName=''
 
-        console.log('page function got ' + JSON.stringify(word))
         this.props.editWord(word)
         this.setState({modal : !this.state.modal})
     }
@@ -54,12 +53,9 @@ saveClicked(){
     this.props.createWord(this.props.formWord)}
     else
         this.props.updateWord(this.props.formWord)
-
-    // this.setState({modal : !this.state.modal})
 }
 
 deleteClicked(){
-    console.log('delete clicked ' + JSON.stringify(this.props.formWord))
     this.props.deleteWord(this.props.formWord)
     this.setState({modal : !this.state.modal})
     }

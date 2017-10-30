@@ -11,7 +11,8 @@ import deleteWordApi from './data/deleteWordApi'
 export function* getNextWord(action){
     try{    
     const response = yield call(getNextWordApi, action)
-    yield put({type:'GOT_NEXT_WORD', data: response})
+    // console.log('saga got ' + response)
+    yield put({type:'GOT_NEXT_WORD', word: response.word})
     }
     catch(e){console.log('getNextWord api error ' + e)}
 }
@@ -38,7 +39,6 @@ export function* postWord(action){
 export function* putWord(action){
     try{
     const response = yield call(putWordApi, action)
-    console.log('saga putWord got '+ JSON.stringify(response))    
     yield (!response.message)?   
         put({type:'UPDATED_WORD', data: response}):
         put({type:'FORM_ERROR', message:response.message})
