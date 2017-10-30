@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 
 import{getNextWord} from '../redux/actionCreators'
 
+import LevelSelector from './LevelSelector'
+
 
 class SpellWord extends Component{
 
@@ -15,23 +17,24 @@ class SpellWord extends Component{
         }
       }
 
-    componentDidMount()
-    {
-        this.props.getNextWord()
-    }
 
     componentWillReceiveProps(nextProps)
     {
+        if(nextProps.level !== this.props.level){this.props.getNextWord(nextProps.level)}
         if(nextProps.nextWord !== this.props.nextWord){this.playSound(`https://s3-us-west-2.amazonaws.com/prospelling/audio/${nextProps.nextWord}.mp3`)}
     }
-
 
     render(){
 
         return(
-            <div>
-                <div>Can You Spell {this.props.nextWord} ?</div>
-                <audio type="audio/mpeg" ref={(audio) => { this.audioPlayer = audio}}/>
+            <div>{!this.props.level?
+                    <LevelSelector />:
+                    <div>
+                    <h3>Can You Spell {this.props.nextWord} ?</h3>
+                    <audio type="audio/mpeg" ref={(audio) => {this.audioPlayer = audio}}/>
+                    </div>
+            }
+                
             </div>
         )
 
@@ -40,6 +43,7 @@ class SpellWord extends Component{
 
 const mapStateToProps = state => {
     return {
+        level: state.assessment.level,
       answer: state.assessment.answer,
       nextWord: state.assessment.nextWord
     }
@@ -47,7 +51,7 @@ const mapStateToProps = state => {
 
   const mapDispatchToProps = dispatch => {
     return {
-            getNextWord : () => dispatch(getNextWord())
+            getNextWord : (level) => dispatch(getNextWord(level))
           }
   }
 

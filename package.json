@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/howardkitto/prospelling#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "mongoose": "^4.12.3",

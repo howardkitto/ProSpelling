@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 
 const Words = new mongoose.Schema({
-    word: {type: String},
-    level:  {type: String},
-    assesment: {type : String},
-    characteristics:{type: String}
+    word: {type: String, required:true},
+    level:  {type: Number, required:true},
+    assessment: {type : String},
+    characteristics:{type: String},
+    audioFileName:{type: String}
 }, {timestamps:{}})
 
 
