@@ -27,7 +27,7 @@ componentWillReceiveProps(nextProps)
         {this.props.getNextWord(nextProps.level)}
     if(nextProps.assessmentState === 'checkingAnswer')
         {wordResult(this.props.nextWord, this.props.answer)
-        .then((result)=>console.log('got this result ' + JSON.stringify(result)))
+        .then((result)=>this.props.changeAssessmentState(result.yesOrNo))
     }
 }
 
@@ -43,6 +43,8 @@ assessment(){
             return<Button   color='warning'
                             onClick={()=>this.playSound(this.props.audioFile)}>
                             Play the Sound Again</Button>
+        case 'loadingAudio':
+            return<div>Loading...</div>
         case 'waitForAnswer':
             return <div>
                         <Button   color='warning'
@@ -50,6 +52,12 @@ assessment(){
                         Play the Sound Again</Button> 
                         <AnswerContainer />
                     </div>
+        case 'correct':
+            return <div><h1>AWESOME!</h1>
+                        <Button color="success">Wanna Try Another?</Button></div>
+        case 'incorrect':
+        return <div><h1>Doh!</h1>
+                    <Button color="info">Wanna Try Again?</Button></div>
         default:
             return<div>{!this.props.level?
             <LevelSelector />:null}</div>
@@ -64,7 +72,7 @@ assessment(){
             
             <audio type="audio/mpeg" 
             ref={(audio) => this.audioPlayer=audio}
-            onLoadStart={()=>this.props.changeAssessmentState('loading audio')}
+            onLoadStart={()=>this.props.changeAssessmentState('loadingAudio')}
             onPlaying={()=>this.props.changeAssessmentState('playing')}
             onEnded={()=>this.props.changeAssessmentState('waitForAnswer')}/>
             </div>
