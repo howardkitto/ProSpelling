@@ -1,18 +1,18 @@
 //Speller - a person who spells with a specified ability
 
-function assessment(state=[], action){
+function question(state=[], action){
     // console.log('Speller Reducer running' + JSON.stringify(action))
     switch(action.type){
         case 'LEVEL_SELECTED':
         return{
             ...state,
             level: action.level,
-            assessmentState:'waitingforWord'
+            questionState:'waitingforWord'
         }
-        case 'CHANGE_ASSESSMENT_STATE':
+        case 'CHANGE_QUESTION_STATE':
         return{
         ...state,
-        assessmentState:action.assessmentState
+        questionState:action.questionState
         }
         case 'GET_ANSWER':
             return{
@@ -23,13 +23,13 @@ function assessment(state=[], action){
         // console.log('reducer got ' + JSON.stringify(action.word))
             return{
             ...state,
-            nextWord: action.word.word,
+            word: action.word.word,
             audioFile: action.word.audioFileName,
-            assessmentState: 'waitingForAudio'
+            questionState: 'waitingForAudio'
             }
         default:
         return state
         }
 }
 
-export default assessment
+export default question

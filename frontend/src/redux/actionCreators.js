@@ -8,11 +8,11 @@ export function saveName(name){
     }
 }
 
-export function changeAssessmentState(assessmentState){
-    // console.log('changeAssessmentState got '+ assessmentState)
+export function changeQuestionState(questionState){
+    // console.log('changeQuestionState got '+ questionState)
     return {
-        type: 'CHANGE_ASSESSMENT_STATE',
-        assessmentState: assessmentState
+        type: 'CHANGE_QUESTION_STATE',
+        questionState: questionState
     }
 }
 
@@ -63,7 +63,7 @@ export function deleteWord(word){
     }
 }
 
-export function getNextWord(level){
+export function getWord(level){
     return{
         type: 'GET_NEXT_WORD',
         level: level

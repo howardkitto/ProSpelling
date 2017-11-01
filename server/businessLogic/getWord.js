@@ -1,4 +1,4 @@
-const getNextWord = (allWords) => {
+const getWord = (allWords) => {
     return new Promise((resolve, reject) =>{
         allWordsArray = allWords.map((i)=>
             {return {word:i.word, 
@@ -11,4 +11,4 @@ const getNextWord = (allWords) => {
     }
 )} 
 
-module.exports = getNextWord
+module.exports = getWord

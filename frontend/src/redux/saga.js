@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 
-import getNextWordApi from './data/getNextWordApi'
+import getWordApi from './data/getWordApi'
 import getWordsListApi from './data/getWordsListApi'
 import postWordApi from './data/postWordApi'
 import putWordApi from './data/putWordApi'
@@ -8,13 +8,13 @@ import deleteWordApi from './data/deleteWordApi'
 
 //3. Workers
 
-export function* getNextWord(action){
+export function* getWord(action){
     try{    
-    const response = yield call(getNextWordApi, action)
+    const response = yield call(getWordApi, action)
     // console.log('saga got ' + response)
     yield put({type:'GOT_NEXT_WORD', word: response.word})
     }
-    catch(e){console.log('getNextWord api error ' + e)}
+    catch(e){console.log('getWord api error ' + e)}
 }
 
 export function* getWordsList(){
@@ -33,7 +33,7 @@ export function* postWord(action){
     put({type:'CREATED_WORD', data: response}):
     put({type:'FORM_ERROR', message:response.message})
     }
-    catch(e){console.log('getNextWord api error ' + e)}
+    catch(e){console.log('getWord api error ' + e)}
 }
 
 export function* putWord(action){
@@ -43,7 +43,7 @@ export function* putWord(action){
         put({type:'UPDATED_WORD', data: response}):
         put({type:'FORM_ERROR', message:response.message})
     }
-    // catch(e){console.log('updateNextWord API error ' + e)}
+    // catch(e){console.log('updateWord API error ' + e)}
     catch(e){yield put({type:'FORM_ERROR', message:'API Error'})}
 }
 
@@ -58,8 +58,8 @@ export function* deleteWord(action){
 
 //2. Watchers
 
-export function* watchForGetNextWord(){
-    yield takeEvery('GET_NEXT_WORD', getNextWord)
+export function* watchForGetWord(){
+    yield takeEvery('GET_NEXT_WORD', getWord)
 }
 
 export function* watchForGetWordsList(){
@@ -82,7 +82,7 @@ export function* watchForDeleteWord(){
 export default function* saga(){
      
     yield all([
-      watchForGetNextWord(),
+      watchForGetWord(),
       watchForGetWordsList(),
       watchForCreateWord(),
       watchForUpdateWord(),

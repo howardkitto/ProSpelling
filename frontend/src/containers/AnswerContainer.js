@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {saveAnswer,
-        changeAssessmentState} from '../redux/actionCreators'
+        changeQuestionState} from '../redux/actionCreators'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -93,7 +93,7 @@ render(){
                 <button className='btn btn-primary'
                         onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
                 <button className='btn btn-success'
-                        onClick={_=>this.props.changeAssessmentState('checkingAnswer')}>Click here when you think you've got it</button>
+                        onClick={_=>this.props.changeQuestionState('checkingAnswer')}>Click here when you think you've got it</button>
                 </div>
             )
         default :
@@ -111,22 +111,22 @@ render(){
                             onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
                     : null}
                     <button className='btn btn-success'
-                        onClick={_=>this.props.changeAssessmentState('checkingAnswer')}>Click here when you think you've got it</button>
+                        onClick={_=>this.props.changeQuestionState('checkingAnswer')}>Click here when you think you've got it</button>
                 </div>
             )}
         }}
 
 const mapStateToProps = state => {
     return {
-      answer: state.assessment.answer,
-      nextWord: state.assessment.nextWord
+      answer: state.question.answer,
+      word: state.question.word
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
             saveAnswer : (answer) => dispatch(saveAnswer(answer)),
-            changeAssessmentState: (assessmentState) => dispatch(changeAssessmentState(assessmentState))
+            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
           }
   }
 

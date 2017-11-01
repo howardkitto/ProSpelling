@@ -47,10 +47,10 @@ class WordForm extends Component{
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Label sm={3}>Assessment</Label>
+          <Label sm={3}>question</Label>
           <Col sm={9}>
-            <Input  name="assessment"
-                    value={this.state.word.assessment}
+            <Input  name="question"
+                    value={this.state.word.question}
                     onChange={(e)=>this.onChange(e)}/>
           </Col>
         </FormGroup>

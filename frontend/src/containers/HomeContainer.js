@@ -5,7 +5,7 @@ import {Container, Row, Col} from 'reactstrap'
 
 import Video from './Video'
 
-import QuestionContainer from './QuestionContainer'
+import AssessmentContainer from './AssessmentContainer'
 
 import UserDetailsForm from './UserDetailsForm'
 
@@ -19,7 +19,7 @@ render(){
     <Container fluid>
       <Row>
       <Col>
-        <QuestionContainer />
+        <AssessmentContainer />
         </Col>
         <Col>
           {(this.props.spellerName)?

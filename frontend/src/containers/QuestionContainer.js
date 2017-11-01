@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'reactstrap'
 
-import{getNextWord,
-    changeAssessmentState } from '../redux/actionCreators'
+import{getWord,
+    changeQuestionState } from '../redux/actionCreators'
 
 import wordResult from '../helperLogic/wordResult'
 
@@ -24,15 +24,15 @@ class QuestionContainer extends Component{
 componentWillReceiveProps(nextProps)
 {
     if(nextProps.level !== this.props.level)
-        {this.props.getNextWord(nextProps.level)}
-    if(nextProps.assessmentState === 'checkingAnswer')
-        {wordResult(this.props.nextWord, this.props.answer)
-        .then((result)=>this.props.changeAssessmentState(result.yesOrNo))
+        {this.props.getWord(nextProps.level)}
+    if(nextProps.questionState === 'checkingAnswer')
+        {wordResult(this.props.word, this.props.answer)
+        .then((result)=>this.props.changeQuestionState(result.yesOrNo))
     }
 }
 
-assessment(){
-    switch(this.props.assessmentState){
+question(){
+    switch(this.props.questionState){
         case 'waitingForAudio':
             return <Button color='success'
                             onClick={()=>this.playSound(this.props.audioFile)}>
@@ -67,14 +67,14 @@ assessment(){
     render(){
         return(
             <div>
-            <div className="assessmentState">{this.props.assessmentState}</div>
-            <div>{this.assessment()}</div>
+            <div className="questionState">{this.props.questionState}</div>
+            <div>{this.question()}</div>
             
             <audio type="audio/mpeg" 
             ref={(audio) => this.audioPlayer=audio}
-            onLoadStart={()=>this.props.changeAssessmentState('loadingAudio')}
-            onPlaying={()=>this.props.changeAssessmentState('playing')}
-            onEnded={()=>this.props.changeAssessmentState('waitForAnswer')}/>
+            onLoadStart={()=>this.props.changeQuestionState('loadingAudio')}
+            onPlaying={()=>this.props.changeQuestionState('playing')}
+            onEnded={()=>this.props.changeQuestionState('waitForAnswer')}/>
             </div>
         )
     }
@@ -82,18 +82,18 @@ assessment(){
 
 const mapStateToProps = state => {
     return {
-        level: state.assessment.level,
-      answer: state.assessment.answer,
-      nextWord: state.assessment.nextWord,
-      audioFile: state.assessment.audioFile,
-      assessmentState:state.assessment.assessmentState
+        level: state.question.level,
+      answer: state.question.answer,
+      word: state.question.word,
+      audioFile: state.question.audioFile,
+      questionState:state.question.questionState
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-            getNextWord : (level) => dispatch(getNextWord(level)),
-            changeAssessmentState: (assessmentState) => dispatch(changeAssessmentState(assessmentState))
+            getWord : (level) => dispatch(getWord(level)),
+            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
           }
   }
 

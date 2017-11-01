@@ -1,5 +1,5 @@
 const postWordApi = (action) =>{
-    // console.log('getNextWordAPI ' + JSON.stringify(action))
+    // console.log('getWordAPI ' + JSON.stringify(action))
   
     const request = new Request('../admin/words', {
       method: 'POST',

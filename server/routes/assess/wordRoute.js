@@ -1,27 +1,27 @@
 const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
-const getNextWord = require('../../businessLogic/getNextWord')   
+const getWord = require('../../businessLogic/getWord')   
 
 router.route('/')
 
 .post((req, res)=>{
     console.log('got post ' + req.body.level)
 
-    const processNextWord = async ()=>{
+    const processWord = async ()=>{
         
-        var nextWord = {}
+        var word = {}
 
-        nextWord.timeStamp = Date.now()
+        word.timeStamp = Date.now()
         //ToDo: Catch errors
         var allWords = await Words.find({"level":req.body.level}).exec()
-        nextWord.word = await getNextWord(allWords)
+        word.word = await getWord(allWords)
         
-        res.json(nextWord)
+        res.json(word)
 
        }
 
-    processNextWord()
+    processWord()
 })
 
 module.exports = router

@@ -1,7 +1,7 @@
-const getNextWordApi = (action) =>{
-  // console.log('getNextWordAPI ' + JSON.stringify(action))
+const getWordApi = (action) =>{
+  // console.log('getWordAPI ' + JSON.stringify(action))
 
-  const request = new Request('../assess/getnextword', {
+  const request = new Request('../assess/getword', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -17,4 +17,4 @@ const getNextWordApi = (action) =>{
       )
 }
 
-export default getNextWordApi
+export default getWordApi

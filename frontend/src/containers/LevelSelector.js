@@ -52,7 +52,7 @@ class LevelSelector extends Component{
 
 const mapStateToProps = state => {
     return {
-      level: state.assessment.level
+      level: state.question.level
     }
   }
 
