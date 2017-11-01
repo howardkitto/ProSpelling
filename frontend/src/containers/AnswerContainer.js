@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {saveAnswer} from '../redux/actionCreators'
+import {saveAnswer,
+        changeAssessmentState} from '../redux/actionCreators'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -10,11 +11,10 @@ const speechSupported = window.SpeechRecognition ||
 
 const recognition = speechSupported ? new speechSupported() : null
 
-class Speech extends Component  {
+class AnswerContainer extends Component  {
 
     constructor(){
         super()
-
         this.state = {
             listening : false,
             useSpeech : false,
@@ -22,11 +22,19 @@ class Speech extends Component  {
         }
     }
 
+answerWithConfidence(){
+    if (this.state.speechConfidence > 0.9)
+        return<div style={{color:'green'}} >{this.props.answer}</div>
+    else if (this.state.speechConfidence > 0.8)
+        return<div style={{color:'organge'}}>{this.props.answer}</div>
+    else 
+        return<div style={{color:'red'}}>{this.props.answer}</div>
+    }
+
 setUpSpeechRecog(reset){
     if(reset){
         this.props.saveAnswer(null)
     }
-    
     recognition.lang = 'en-US'
     recognition.interimResults = true
     recognition.maxAlternatives = 5
@@ -40,30 +48,18 @@ setUpSpeechRecog(reset){
         }
     }
 
-    recognition.onstart = event =>this.setState({   listening:true,
-                                                    speechConfidence:1});
-    recognition.onresult = event => {this.props.saveAnswer(event.results[0][0].transcript)
-                                    this.confidenceStyle(event.results[0][0].confidence)}
-    recognition.onspeechend = event =>this.setState({listening:false});
+    recognition.onstart=event=>this.setState({ listening:true,
+                                                speechConfidence:1})
+    recognition.onresult=event=>{this.props.saveAnswer(event.results[0][0].transcript)
+                                 this.setState({speechConfidence : event.results[0][0].confidence})}
+    recognition.onspeechend=event=>this.setState({listening:false});
 }
-
-confidenceStyle(confidenceScore){
-    this.setState({speechConfidence:confidenceScore})
-    if (confidenceScore > 0.9){
-        this.speechResultDiv.style.color='green'}
-    else if (confidenceScore > 0.8){
-        this.speechResultDiv.style.color='orange'}
-    else {
-        this.speechResultDiv.style.color='red'
-        }    
-    }
-    
 
 toggleTextOrSpeech(){
     this.setState({useSpeech:!this.state.useSpeech},
             ()=>{if(!this.state.useSpeech){
                 recognition.stop()
-                this.textInput.value=this.props.answer
+                this.textInput.value=(this.props.answer)?this.props.answer:''
                 }
                 else{
                 this.setUpSpeechRecog()    
@@ -83,14 +79,12 @@ componentDidMount(){
         this.setUpSpeechRecog()
         }
 }
-    
 render(){
     switch(this.state.useSpeech){
         case (true) : 
             return (
                 <div>
-                <div    ref={(div)=>{this.speechResultDiv = div}}> 
-                        {this.props.answer}</div>
+                <div>{this.answerWithConfidence()}</div>
                 {(this.state.listening)?
                     <div className="listeningText">Listening</div>:
                     <div className="listeningText">Not Listening</div>}
@@ -98,6 +92,8 @@ render(){
                         onClick={_=>this.toggleTextOrSpeech()}>Switch to Text</button>
                 <button className='btn btn-primary'
                         onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
+                <button className='btn btn-success'
+                        onClick={_=>this.props.changeAssessmentState('checkingAnswer')}>Click here when you think you've got it</button>
                 </div>
             )
         default :
@@ -114,24 +110,24 @@ render(){
                     <button className='btn btn-info'
                             onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
                     : null}
+                    <button className='btn btn-success'
+                        onClick={_=>this.props.changeAssessmentState('checkingAnswer')}>Click here when you think you've got it</button>
                 </div>
-            )
-    }
-    
-        }
-
-}
+            )}
+        }}
 
 const mapStateToProps = state => {
     return {
-      answer: state.assessment.answer
+      answer: state.assessment.answer,
+      nextWord: state.assessment.nextWord
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-            saveAnswer : (answer) => dispatch(saveAnswer(answer))
+            saveAnswer : (answer) => dispatch(saveAnswer(answer)),
+            changeAssessmentState: (assessmentState) => dispatch(changeAssessmentState(assessmentState))
           }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Speech)
+export default connect(mapStateToProps, mapDispatchToProps)(AnswerContainer)

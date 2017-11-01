@@ -49,3 +49,8 @@
   padding:8px;
   color:lightgray;
 }
+
+.assessmentState{
+  position:fixed;bottom:0;
+  color:lightgrey;
+}

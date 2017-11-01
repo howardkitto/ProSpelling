@@ -12,7 +12,15 @@ class LevelSelector extends Component{
     
         this.toggle = this.toggle.bind(this);
         this.state = {
-            levels : [1,2,3,4],
+            levels : [  { number:1,
+                        description:"I'm a beginner"},
+                        { number:2,
+                        description:"I'm struggling"},
+                        { number:1,
+                        description:"I want to improve"},
+                        { number:1,
+                        description:"I'm pretty good"}
+                        ],
           dropdownOpen: false
         };
       }
@@ -32,8 +40,8 @@ class LevelSelector extends Component{
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.state.levels.map((level, index)=>
-                        <DropdownItem key={index} onClick={(e)=>this.props.levelSelected(level)}>
-                        {level}</DropdownItem>
+                        <DropdownItem key={index} onClick={(e)=>this.props.levelSelected(level.number)}>
+                        {level.description}</DropdownItem>
                     )}
                 </DropdownMenu>
             </Dropdown>

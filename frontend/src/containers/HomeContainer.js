@@ -5,8 +5,7 @@ import {Container, Row, Col} from 'reactstrap'
 
 import Video from './Video'
 
-import Speech from '../containers/Speech'
-import SpellWord from './SpellWord'
+import QuestionContainer from './QuestionContainer'
 
 import UserDetailsForm from './UserDetailsForm'
 
@@ -20,7 +19,7 @@ render(){
     <Container fluid>
       <Row>
       <Col>
-        <SpellWord />
+        <QuestionContainer />
         </Col>
         <Col>
           {(this.props.spellerName)?
@@ -32,7 +31,6 @@ render(){
         </Row> 
         <Row>
         <Col>
-          <Speech />
         </Col> 
         <Col>
           <Video  src='https://s3-us-west-2.amazonaws.com/prospelling/video/Rosie.mp4'

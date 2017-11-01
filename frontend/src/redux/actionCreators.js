@@ -8,6 +8,14 @@ export function saveName(name){
     }
 }
 
+export function changeAssessmentState(assessmentState){
+    // console.log('changeAssessmentState got '+ assessmentState)
+    return {
+        type: 'CHANGE_ASSESSMENT_STATE',
+        assessmentState: assessmentState
+    }
+}
+
 export function levelSelected(level){
     // console.log('LEVEL_SELECTED ' + level)
     return {
@@ -67,5 +75,10 @@ export function getWordsList(){
     return{
         type: 'GET_WORDS_LIST'
     }
+}
 
+export function submitAnswer(){
+    return{
+        type: 'SUBMIT_ANSWER'
+    }
 }
