@@ -83,8 +83,6 @@ checkAnswer(){
     .then((result)=>{
         this.props.gotAnswer(result.yesOrNo, result.score)
         if(result.yesOrNo === 'correct')
-            // this.props.changeAssessmentState('waitingToContinue')}
-            // // this.props.changeQuestionState('resetQuestion')}
             this.props.saveProgress(this.props.question)
         else{
             this.props.changeQuestionState('tryAgain')}
@@ -112,8 +110,10 @@ render(){
                         onClick={_=>this.toggleTextOrSpeech()}>Switch to Text</button>
                 <button className='btn btn-primary'
                         onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
+                {(this.props.answer)?
                 <button className='btn btn-success'
-                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
+                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>:
+                        <div>I don't got an answer yet!</div>}
                 </div>
             )
         default :
@@ -130,8 +130,10 @@ render(){
                     <button className='btn btn-info'
                             onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
                     : null}
-                    <button className='btn btn-success'
-                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
+                    {(this.props.answer)?
+                <button className='btn btn-success'
+                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>:
+                        <div>I don't got an answer yet!</div>}
                 </div>
             )}
         }}

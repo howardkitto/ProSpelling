@@ -7,8 +7,6 @@ import Video from './Video'
 
 import AssessmentContainer from './AssessmentContainer'
 
-import UserDetailsForm from './UserDetailsForm'
-
 class HomeContainer extends Component{
 
 
@@ -21,17 +19,9 @@ render(){
       <Col>
         <AssessmentContainer />
         </Col>
-        <Col>
-          {(this.props.spellerName)?
-            <h3 className="display-3">Hello, {this.props.spellerName}</h3>:
-          <UserDetailsForm headerText = "What is your name?  "/>}   
-        </Col>
-        
-          
         </Row> 
         <Row>
-        <Col>
-        </Col> 
+    
         <Col>
           <Video  src='https://s3-us-west-2.amazonaws.com/prospelling/video/Rosie.mp4'
                 height = {180}

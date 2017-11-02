@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import hand from '../images/righthandoutline.png'
 
 import Letter from '../components/Letter'
+import UserDetailsForm from './UserDetailsForm'
 
 
 class LessonOneContainer extends Component{
@@ -40,6 +41,9 @@ render(){
         
         {(this.props.spellerName)?<h2>Hello {this.props.spellerName}</h2>:null}
       </div>
+      <div>{(this.props.spellerName)?
+            <h3 className="display-3">Hello, {this.props.spellerName}</h3>:
+          <UserDetailsForm headerText = "What is your name?  "/>}   </div>
             <div className="row">
       <div className="a_box"> {this.renderLetter('a')}</div>
       <div className="e_box"> {this.renderLetter('e')}</div>
