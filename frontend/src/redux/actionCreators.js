@@ -1,6 +1,28 @@
 //action types
 
+import uuid from 'uuid'
+
 // action creators
+
+export function startAssessment(level){
+    // console.log('LEVEL_SELECTED ' + level)
+    let timestamp = new Date()
+    let assessmentId = uuid()
+    return {
+        type: 'START_ASSESSMENT',
+        assessmentId: assessmentId,
+        level: level,
+        createdAt: timestamp
+    }
+}
+
+export function changeAssessmentState(assessmentState){
+    return{
+        type: 'CHANGE_ASSESSMENT_STATE',
+        assessmentState:assessmentState
+    }
+}
+
 export function saveName(name){
     return {
         type: 'GET_SPELLER_NAME',
@@ -16,18 +38,20 @@ export function changeQuestionState(questionState){
     }
 }
 
-export function levelSelected(level){
-    // console.log('LEVEL_SELECTED ' + level)
-    return {
-        type: 'LEVEL_SELECTED',
-        level: level
-    }
-}
-
 export function saveAnswer(answer){
     return {
         type: 'GET_ANSWER',
         answer: answer
+    }
+}
+
+export function gotAnswer(result, score){
+    const timestamp = new Date()
+    return{
+        type: 'GOT_ANSWER',
+        answerTimestamp: timestamp,
+        result: result,
+        score: score
     }
 }
 
@@ -64,8 +88,9 @@ export function deleteWord(word){
 }
 
 export function getWord(level){
+    // console.log('GET_WORD action '+JSON.stringify(level))
     return{
-        type: 'GET_NEXT_WORD',
+        type: 'GET_WORD',
         level: level
     }
 
@@ -77,8 +102,20 @@ export function getWordsList(){
     }
 }
 
+export function tryAgain(){
+    return{
+        type: 'TRY_AGAIN'
+    }
+}
+
 export function submitAnswer(){
     return{
         type: 'SUBMIT_ANSWER'
     }
 }
+
+export function saveProgress(question){
+    return{
+        type: 'SAVE_PROGRESS',
+        question:question
+    }}

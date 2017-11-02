@@ -11,8 +11,8 @@ import deleteWordApi from './data/deleteWordApi'
 export function* getWord(action){
     try{    
     const response = yield call(getWordApi, action)
-    // console.log('saga got ' + response)
-    yield put({type:'GOT_NEXT_WORD', word: response.word})
+    // console.log('saga got ' + JSON.stringify(response))
+    yield put({type:'GOT_WORD', word: response})
     }
     catch(e){console.log('getWord api error ' + e)}
 }
@@ -59,7 +59,7 @@ export function* deleteWord(action){
 //2. Watchers
 
 export function* watchForGetWord(){
-    yield takeEvery('GET_NEXT_WORD', getWord)
+    yield takeEvery('GET_WORD', getWord)
 }
 
 export function* watchForGetWordsList(){

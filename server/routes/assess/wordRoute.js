@@ -10,12 +10,9 @@ router.route('/')
 
     const processWord = async ()=>{
         
-        var word = {}
-
-        word.timeStamp = Date.now()
         //ToDo: Catch errors
         var allWords = await Words.find({"level":req.body.level}).exec()
-        word.word = await getWord(allWords)
+        var word = await getWord(allWords)
         
         res.json(word)
 

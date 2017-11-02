@@ -3,12 +3,6 @@
 function question(state=[], action){
     // console.log('Speller Reducer running' + JSON.stringify(action))
     switch(action.type){
-        case 'LEVEL_SELECTED':
-        return{
-            ...state,
-            level: action.level,
-            questionState:'waitingforWord'
-        }
         case 'CHANGE_QUESTION_STATE':
         return{
         ...state,
@@ -19,14 +13,38 @@ function question(state=[], action){
             ...state,
             answer: action.answer
             }
-        case 'GOT_NEXT_WORD':
-        // console.log('reducer got ' + JSON.stringify(action.word))
+        case 'GOT_WORD':
+        console.log('reducer got ' + JSON.stringify(action))
             return{
-            ...state,
             word: action.word.word,
-            audioFile: action.word.audioFileName,
-            questionState: 'waitingForAudio'
+            audioFileName: action.word.audioFileName,
+            askTimeStamp: action.word.timeStamp,
+            attempt: 1,
+            questionState: 'wordLoaded'
             }
+        case 'GOT_ANSWER':
+        // console.log('reducer got ' + JSON.stringify(action))
+            return{
+                ...state,
+                answerTimeStamp: action.answerTimestamp,
+                result: action.result,
+                score: action.score
+            }
+        case 'TRY_AGAIN':
+        console.log('here is the state  ' + JSON.stringify(state))
+        //To Do: this evil and wrong!
+        let word = state.word
+        let audioFileName = state.audioFileName
+        let askTimeStamp = state.askTimeStamp
+        let attempt = state.attempt + 1
+        return{
+            word: word,
+            audioFileName: audioFileName,
+            attempt: attempt,
+            askTimeStamp:askTimeStamp,
+            questionState: 'wordLoaded'
+        }
+
         default:
         return state
         }

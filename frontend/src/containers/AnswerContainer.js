@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {saveAnswer,
-        changeQuestionState} from '../redux/actionCreators'
+        gotAnswer,
+        tryAgain,
+        changeQuestionState,
+        saveProgress,
+        changeAssessmentState} from '../redux/actionCreators'
+
+import wordResult from '../helperLogic/wordResult'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -72,6 +78,20 @@ handleTypedAnswer(e){
     this.props.saveAnswer(e.target.value)
 }
 
+checkAnswer(){
+    wordResult(this.props.word, this.props.answer)
+    .then((result)=>{
+        this.props.gotAnswer(result.yesOrNo, result.score)
+        if(result.yesOrNo === 'correct')
+            // this.props.changeAssessmentState('waitingToContinue')}
+            // // this.props.changeQuestionState('resetQuestion')}
+            this.props.saveProgress(this.props.question)
+        else{
+            this.props.changeQuestionState('tryAgain')}
+        
+    })
+}
+
 componentDidMount(){
 
     if(recognition) {
@@ -93,7 +113,7 @@ render(){
                 <button className='btn btn-primary'
                         onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
                 <button className='btn btn-success'
-                        onClick={_=>this.props.changeQuestionState('checkingAnswer')}>Click here when you think you've got it</button>
+                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
                 </div>
             )
         default :
@@ -111,7 +131,7 @@ render(){
                             onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
                     : null}
                     <button className='btn btn-success'
-                        onClick={_=>this.props.changeQuestionState('checkingAnswer')}>Click here when you think you've got it</button>
+                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
                 </div>
             )}
         }}
@@ -119,14 +139,19 @@ render(){
 const mapStateToProps = state => {
     return {
       answer: state.question.answer,
-      word: state.question.word
+      word: state.question.word,
+      question: state.question
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
             saveAnswer : (answer) => dispatch(saveAnswer(answer)),
-            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
+            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
+            gotAnswer: (answer) => dispatch(gotAnswer(answer)),
+            tryAgain : (answer) => dispatch(tryAgain(answer)),
+            saveProgress : (question) => dispatch(saveProgress(question)),
+            changeAssessmentState : (assessmentState)=>dispatch(changeAssessmentState(assessmentState))
           }
   }
 

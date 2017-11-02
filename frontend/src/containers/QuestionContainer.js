@@ -3,16 +3,15 @@ import {connect} from 'react-redux'
 import {Button} from 'reactstrap'
 
 import{getWord,
-    changeQuestionState } from '../redux/actionCreators'
+    tryAgain,
+    changeQuestionState} from '../redux/actionCreators'
 
-import wordResult from '../helperLogic/wordResult'
-
-import LevelSelector from './LevelSelector'
 import AnswerContainer from '../containers/AnswerContainer'
 
 class QuestionContainer extends Component{
 
     playSound(theSrc){
+        console.log('playsound ' + theSrc)
         this.audioPlayer.src = theSrc
         let playPromise = this.audioPlayer.play()
         //catch and surpress a bug in chrome
@@ -21,53 +20,36 @@ class QuestionContainer extends Component{
         }
       }
 
-componentWillReceiveProps(nextProps)
-{
-    if(nextProps.level !== this.props.level)
-        {this.props.getWord(nextProps.level)}
-    if(nextProps.questionState === 'checkingAnswer')
-        {wordResult(this.props.word, this.props.answer)
-        .then((result)=>this.props.changeQuestionState(result.yesOrNo))
-    }
-}
-
 question(){
     switch(this.props.questionState){
-        case 'waitingForAudio':
-            return <Button color='success'
-                            onClick={()=>this.playSound(this.props.audioFile)}>
-                    Click here and we'll get started!
-                    </Button>
-                        
         case 'playing':
             return<Button   color='warning'
-                            onClick={()=>this.playSound(this.props.audioFile)}>
+                            onClick={()=>this.playSound(this.props.audioFileName)}>
                             Play the Sound Again</Button>
         case 'loadingAudio':
             return<div>Loading...</div>
         case 'waitForAnswer':
             return <div>
                         <Button   color='warning'
-                        onClick={()=>this.playSound(this.props.audioFile)}>
+                        onClick={()=>this.playSound(this.props.audioFileName)}>
                         Play the Sound Again</Button> 
                         <AnswerContainer />
                     </div>
-        case 'correct':
-            return <div><h1>AWESOME!</h1>
-                        <Button color="success">Wanna Try Another?</Button></div>
-        case 'incorrect':
-        return <div><h1>Doh!</h1>
-                    <Button color="info">Wanna Try Again?</Button></div>
+        case 'tryAgain':
+            return  <div><h1>Doh!</h1>
+                        <Button color="info" onClick={()=>this.props.tryAgain()}>Wanna Try Again?</Button>
+                    </div>
         default:
-            return<div>{!this.props.level?
-            <LevelSelector />:null}</div>
+            return <Button color='success'
+                        onClick={()=>this.playSound(this.props.audioFileName)}>
+                        Click here and we'll get started!
+                    </Button>
         }
     }
     
     render(){
         return(
             <div>
-            <div className="questionState">{this.props.questionState}</div>
             <div>{this.question()}</div>
             
             <audio type="audio/mpeg" 
@@ -82,18 +64,21 @@ question(){
 
 const mapStateToProps = state => {
     return {
-        level: state.question.level,
-      answer: state.question.answer,
-      word: state.question.word,
-      audioFile: state.question.audioFile,
-      questionState:state.question.questionState
+        level: state.assessment.level,
+        answer: state.question.answer,
+        word: state.question.word,
+        audioFileName: state.question.audioFileName,
+        result:state.question.result,
+        questionState:state.question.questionState,
+        assessmentState:state.assessment.assessmentState
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
             getWord : (level) => dispatch(getWord(level)),
-            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
+            tryAgain : () =>dispatch(tryAgain()),
+            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
           }
   }
 
