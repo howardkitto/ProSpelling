@@ -82,7 +82,7 @@ componentDidMount(){
                 <thead>
                     <tr>
                         <td>Word</td>
-                        <td>Date Created</td>
+                        <td>Level</td>
                         <td>Date Updated</td>
                         <td><Button color="success" onClick={this.createWord}>Create New Word</Button></td>
                     </tr>
@@ -91,7 +91,7 @@ componentDidMount(){
                 {this.props.wordsList.map((word, index)=>
                     <tr key={word._id}>
                     <td>{word.word}</td>
-                    <td><DateTime utc={word.createdAt}/></td>
+                    <td>{word.level}</td>
                     <td><DateTime utc={word.updatedAt}/></td>
                     <td><Button color ="warning" onClick={()=>this.edit(this.props.wordsList[index])}>Edit</Button></td>
                 </tr>)}
