@@ -31,11 +31,14 @@ class AnswerContainer extends Component  {
 
 answerWithConfidence(){
     if (this.state.speechConfidence > 0.9)
-        return<div style={{color:'green'}} >{this.props.answer}</div>
+        return<div className = "transcript" 
+                    style={{color:'green'}} >{this.props.answer}</div>
     else if (this.state.speechConfidence > 0.8)
-        return<div style={{color:'organge'}}>{this.props.answer}</div>
+        return<div className = "transcript" 
+                style={{color:'organge'}}>{this.props.answer}</div>
     else 
-        return<div style={{color:'red'}}>{this.props.answer}</div>
+        return<div className = "transcript" 
+                    style={{color:'red'}}>{this.props.answer}</div>
     }
 
 setUpSpeechRecog(reset){
@@ -96,6 +99,8 @@ checkAnswer(){
 transcriptFeedback(){
     if(this.state.listening)
         return <div className="listeningText">Listening</div>
+    else if(!this.state.listening && !this.props.answer)
+        return<div className="listeningText">I didn't hear anything = click restart</div>
     else if(this.state.resultIsFinal)
         return <button className='btn btn-success'
         onClick={()=>this.checkAnswer()}>Check your answer</button>

@@ -42,7 +42,7 @@ function question(state=[], action){
             audioFileName: audioFileName,
             attempt: attempt,
             askTimeStamp:askTimeStamp,
-            questionState: 'wordLoaded'
+            questionState: 'playing'
         }
 
         default:

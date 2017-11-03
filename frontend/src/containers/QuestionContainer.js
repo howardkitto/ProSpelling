@@ -20,6 +20,11 @@ class QuestionContainer extends Component{
         }
       }
 
+      tryAgain(audioSrc){
+        this.props.tryAgain()
+        this.playSound(audioSrc)
+      }
+
 question(){
     switch(this.props.questionState){
         case 'playing':
@@ -37,12 +42,12 @@ question(){
                     </div>
         case 'tryAgain':
             return  <div><h1>Doh!</h1>
-                        <Button color="info" onClick={()=>this.props.tryAgain()}>Wanna Try Again?</Button>
+                        <Button color="info" onClick={()=>{this.tryAgain(this.props.audioFileName)}}>Wanna Try Again?</Button>
                     </div>
         default:
             return <Button color='success'
                         onClick={()=>this.playSound(this.props.audioFileName)}>
-                        Click here and we'll get started!
+                        Click to start!
                     </Button>
         }
     }

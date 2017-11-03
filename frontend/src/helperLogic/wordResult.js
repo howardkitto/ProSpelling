@@ -6,7 +6,7 @@ const wordResult = (question, answer)=>{
         let result = {}
             result.cleanedAnswer=answer.replace(/ /g, '').trim().toLowerCase()
             result.yesOrNo=(result.cleanedAnswer===question)?'correct':'incorrect'
-            result.score=levenshtein(question, answer)
+            result.score=levenshtein(answer, question)
     
         resolve(result)
 
