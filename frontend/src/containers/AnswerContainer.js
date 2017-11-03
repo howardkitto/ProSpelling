@@ -24,7 +24,8 @@ class AnswerContainer extends Component  {
         this.state = {
             listening : false,
             useSpeech : false,
-            speechConfidence: 0
+            speechConfidence: 0,
+            resultIsFinal:false
         }
     }
 
@@ -57,6 +58,8 @@ setUpSpeechRecog(reset){
     recognition.onstart=event=>this.setState({ listening:true,
                                                 speechConfidence:1})
     recognition.onresult=event=>{this.props.saveAnswer(event.results[0][0].transcript)
+                                this.setState({resultIsFinal:event.results[0].isFinal})
+
                                  this.setState({speechConfidence : event.results[0][0].confidence})}
     recognition.onspeechend=event=>this.setState({listening:false});
 }
@@ -90,6 +93,16 @@ checkAnswer(){
     })
 }
 
+transcriptFeedback(){
+    if(this.state.listening)
+        return <div className="listeningText">Listening</div>
+    else if(this.state.resultIsFinal)
+        return <button className='btn btn-success'
+        onClick={()=>this.checkAnswer()}>Check your answer</button>
+    else
+        return <div className="listeningText">Wait</div>
+}
+
 componentDidMount(){
 
     if(recognition) {
@@ -103,17 +116,13 @@ render(){
             return (
                 <div>
                 <div>{this.answerWithConfidence()}</div>
-                {(this.state.listening)?
-                    <div className="listeningText">Listening</div>:
-                    <div className="listeningText">Not Listening</div>}
+               
+                {this.transcriptFeedback()}
+
                 <button className='btn btn-info'
                         onClick={_=>this.toggleTextOrSpeech()}>Switch to Text</button>
                 <button className='btn btn-primary'
                         onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
-                {(this.props.answer)?
-                <button className='btn btn-success'
-                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>:
-                        <div>I don't got an answer yet!</div>}
                 </div>
             )
         default :
@@ -158,3 +167,11 @@ const mapDispatchToProps = dispatch => {
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerContainer)
+
+
+// (this.state.listening)?
+//     <div className="listeningText">Listening</div>:
+//     <div className="listeningText">Wait</div>}
+// {(this.state.resultIsFinal)?
+//     <div className="listeningText">Final Result</div>:
+//     <div className="listeningText">Still working</div>
