@@ -6,7 +6,8 @@ const getWordApi = (action) =>{
     headers: new Headers({
       'Content-Type': 'application/json'
     }), 
-    body: (JSON.stringify({level : action.level}))
+    body: (JSON.stringify(  {level : action.level,
+                            assessment : action.assessment}))
   });
 
   return fetch(request)

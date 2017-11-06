@@ -10,6 +10,8 @@ import deleteWordApi from './data/deleteWordApi'
 
 export function* getWord(action){
     try{    
+
+    // console.log('saga sending ' + JSON.stringify(action))
     const response = yield call(getWordApi, action)
     // console.log('saga got ' + JSON.stringify(response))
     yield put({type:'GOT_WORD', word: response})

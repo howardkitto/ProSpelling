@@ -7,7 +7,7 @@ import {saveAnswer,
         saveProgress,
         changeAssessmentState} from '../redux/actionCreators'
 
-import wordResult from '../helperLogic/wordResult'
+import prepareResult from '../helperLogic/prepareResult'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -85,14 +85,13 @@ handleTypedAnswer(e){
 }
 
 checkAnswer(){
-    wordResult(this.props.word, this.props.answer)
+    prepareResult(this.props.word, this.props.answer)
     .then((result)=>{
         this.props.gotAnswer(result.yesOrNo, result.score)
         if(result.yesOrNo === 'correct')
             this.props.saveProgress(this.props.question)
         else{
             this.props.changeQuestionState('tryAgain')}
-        
     })
 }
 
@@ -132,22 +131,28 @@ render(){
             )
         default :
             return (
-                <div>Using Text
+                <div>
                         <input  type='text'
                                 ref={(input)=>{this.textInput=input}}
                                 autoFocus
                                 className="answerTextBox"
                                 onChange={(e)=>{this.handleTypedAnswer(e)}}
                         />
-
+                    
                     {(recognition) ?
+                    <div>
                     <button className='btn btn-info'
                             onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
+                    </div>
                     : null}
+
                     {(this.props.answer)?
+                    <div>
                 <button className='btn btn-success'
-                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>:
-                        <div>I don't got an answer yet!</div>}
+                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
+                    </div>:
+                    null}
+                    
                 </div>
             )}
         }}
@@ -172,11 +177,3 @@ const mapDispatchToProps = dispatch => {
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerContainer)
-
-
-// (this.state.listening)?
-//     <div className="listeningText">Listening</div>:
-//     <div className="listeningText">Wait</div>}
-// {(this.state.resultIsFinal)?
-//     <div className="listeningText">Final Result</div>:
-//     <div className="listeningText">Still working</div>

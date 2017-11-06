@@ -14,7 +14,7 @@ function question(state=[], action){
             answer: action.answer
             }
         case 'GOT_WORD':
-        console.log('reducer got ' + JSON.stringify(action))
+        // console.log('reducer got ' + JSON.stringify(action))
             return{
             word: action.word.word,
             audioFileName: action.word.audioFileName,
@@ -31,17 +31,12 @@ function question(state=[], action){
                 score: action.score
             }
         case 'TRY_AGAIN':
-        console.log('here is the state  ' + JSON.stringify(state))
-        //To Do: this evil and wrong!
-        let word = state.word
-        let audioFileName = state.audioFileName
-        let askTimeStamp = state.askTimeStamp
-        let attempt = state.attempt + 1
+        // console.log('here is the state  ' + JSON.stringify(state))
         return{
-            word: word,
-            audioFileName: audioFileName,
-            attempt: attempt,
-            askTimeStamp:askTimeStamp,
+            word: state.word,
+            audioFileName: state.audioFileName,
+            attempt: state.attempt + 1,
+            askTimeStamp:state.askTimeStamp,
             questionState: 'playing'
         }
 

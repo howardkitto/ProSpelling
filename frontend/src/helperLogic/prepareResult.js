@@ -1,7 +1,7 @@
 import levenshtein from './levenshtein'
 
 
-const wordResult = (question, answer)=>{
+const prepareResult = (question, answer)=>{
     return new Promise((resolve, reject)=>{
         let result = {}
             result.cleanedAnswer=answer.replace(/ /g, '').trim().toLowerCase()
@@ -13,4 +13,4 @@ const wordResult = (question, answer)=>{
     })
 }
 
-export default wordResult
+export default prepareResult

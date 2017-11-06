@@ -87,11 +87,12 @@ export function deleteWord(word){
     }
 }
 
-export function getWord(level){
-    // console.log('GET_WORD action '+JSON.stringify(level))
+export function getWord(level, assessment){
+    // console.log('GET_WORD action '+JSON.stringify(assessment))
     return{
         type: 'GET_WORD',
-        level: level
+        level: level,
+        assessment: assessment
     }
 
 }

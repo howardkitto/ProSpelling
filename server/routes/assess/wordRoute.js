@@ -6,11 +6,12 @@ const getWord = require('../../businessLogic/getWord')
 router.route('/')
 
 .post((req, res)=>{
-    console.log('got post ' + req.body.level)
+    console.log('got post ' + JSON.stringify(req.body))
 
     const processWord = async ()=>{
         
         //ToDo: Catch errors
+        // var previousWord = 
         var allWords = await Words.find({"level":req.body.level}).exec()
         var word = await getWord(allWords)
         

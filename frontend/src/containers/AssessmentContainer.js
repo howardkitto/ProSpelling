@@ -10,17 +10,20 @@ import {getWord,
 
 class AssessmentContainer extends Component{
 
+
     assessment(){
         switch(this.props.assessmentState){
             case "startAssessment":
-                this.props.getWord(this.props.level)
+                this.props.getWord(this.props.level, this.props.assessment)
                 return <div>Getting first word</div>
             case "inProgress":
                 return <div><QuestionContainer/></div>
             case "waitingToContinue":
                 return <div>Awesome!
-                    <Button onClick={()=>this.props.getWord(this.props.level)}>
+                    <div>
+                    <Button color="info" onClick={()=>this.props.getWord(this.props.level, this.props.assessment)}>
                     Click for Next Word</Button>
+                    </div>
                 </div>
             default:
                 return <div>
@@ -28,7 +31,6 @@ class AssessmentContainer extends Component{
                     </div>
         }
     }
-
 
     render(){
 
@@ -38,25 +40,25 @@ class AssessmentContainer extends Component{
                 <div className="stateDisplay">  <div>assessment: {this.props.assessmentState}</div>
                                                 <div>question: {this.props.questionState}</div>
                 </div>
-            </div>
-            
+            </div>          
         )
     }
 }
 
   const mapStateToProps = state => {
     return {
-        assessmentId:state.assessment.assessmentId,
+        assessment:state.assessment,
         level:state.assessment.level,
         question:state.question,
         assessmentState:state.assessment.assessmentState,
-        questionState:state.question.questionState
+        questionState:state.question.questionState,
+        progress:state.assessment.progress
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-        getWord : (level) => dispatch(getWord(level)),
+        getWord : (level, assessment) => dispatch(getWord(level, assessment)),
         changeQuestionState : (questionState) => dispatch(changeQuestionState(questionState))
           }
   }

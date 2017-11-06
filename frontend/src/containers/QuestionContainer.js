@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'reactstrap'
 
-import{getWord,
+import{
     tryAgain,
     changeQuestionState} from '../redux/actionCreators'
 
@@ -11,7 +11,7 @@ import AnswerContainer from '../containers/AnswerContainer'
 class QuestionContainer extends Component{
 
     playSound(theSrc){
-        console.log('playsound ' + theSrc)
+        // console.log('playsound ' + theSrc)
         this.audioPlayer.src = theSrc
         let playPromise = this.audioPlayer.play()
         //catch and surpress a bug in chrome
@@ -81,7 +81,6 @@ const mapStateToProps = state => {
 
   const mapDispatchToProps = dispatch => {
     return {
-            getWord : (level) => dispatch(getWord(level)),
             tryAgain : () =>dispatch(tryAgain()),
             changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
           }
