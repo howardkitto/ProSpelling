@@ -24,11 +24,15 @@ function assessment(state=[], action){
                 assessmentState:'waitingToContinue'
             }
         case 'SAVE_PROGRESS':
-        console.log('reducer got ' + JSON.stringify(action))
+        // console.log('reducer got ' + JSON.stringify(action))
             return{
                 ...state,
                 progress: [...state.progress, action.question],
                 assessmentState: 'waitingToContinue'
+            }
+        case 'ASSESSMENT_COMPLETE':
+            return{
+                assessmentState: 'complete'
             }
         default:
         return state

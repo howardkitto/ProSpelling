@@ -25,6 +25,8 @@ class AssessmentContainer extends Component{
                     Click for Next Word</Button>
                     </div>
                 </div>
+            case "complete":
+                return <div>Assessment Complete</div>
             default:
                 return <div>
                         {!this.props.assessmentId?<LevelSelector />:null}

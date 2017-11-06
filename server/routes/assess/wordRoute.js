@@ -12,6 +12,7 @@ router.route('/')
     const processWord = async ()=>{
         
         //ToDo: Catch errors
+        
         let allWords = await Words.find({"level":req.body.level}).exec()
             .catch(error => console.log(error));
         let remainingWords = await filterPreviousWords(req.body.assessment, allWords)
