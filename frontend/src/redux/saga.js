@@ -13,7 +13,7 @@ export function* getWord(action){
 
     // console.log('saga sending ' + JSON.stringify(action))
     const response = yield call(getWordApi, action)
-    // console.log('saga got ' + JSON.stringify(response))
+    console.log('saga got ' + JSON.stringify(response))
     yield put({type:'GOT_WORD', word: response})
     }
     catch(e){console.log('getWord api error ' + e)}
