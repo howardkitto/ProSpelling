@@ -1,18 +1,21 @@
 const mongoose = require('mongoose');
 
-const Question = new mongoose.Schema({
-  questionId : {type: String},
+const Questions = new mongoose.Schema({
   word :{type: String},
   answer:{type: String},
   score:{type: Number},
-  answer_time:{type:Date}
-}, {timestamps:{}});
+  attempt:{type:Number},
+  result:{type:String},
+  askTimeStamp:{type:Date},
+  answerTimeStamp:{type:Date}
+});
+
 
 const  Assessments = new mongoose.Schema({
-  userId: {type: String},
-  assessmentLevel: {type: String},
-  assessmentScore: {type: Number},
-  question: Question
+  assessmentId: {type: String, required:true},
+  level: {type: Number, required:true},
+  questions: [Questions]
 }, {timestamps:{}} ); 
+
 
 module.exports = mongoose.model('Assessments', Assessments);

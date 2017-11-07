@@ -1,8 +1,10 @@
 const filterPreviousWords = (assessmentSoFar, allWords)=>{
     return new Promise((resolve, reject)=>{
 
+        // console.log(JSON.stringify(assessmentSoFar))
+
         //Make and array of the words answered so far
-        let previousWords = assessmentSoFar.progress.map((y)=>{
+        let previousWords = assessmentSoFar.questions.map((y)=>{
             return y["word"]
         })
 

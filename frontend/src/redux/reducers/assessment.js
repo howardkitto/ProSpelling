@@ -10,7 +10,7 @@ function assessment(state=[], action){
                 assessmentId: action.assessmentId,
                 createdAt:action.createdAt,
                 level: action.level,
-                progress: [],
+                questions: [],
                 assessmentState:'startAssessment'
             }
         case 'GOT_WORD':
@@ -27,7 +27,7 @@ function assessment(state=[], action){
         // console.log('reducer got ' + JSON.stringify(action))
             return{
                 ...state,
-                progress: [...state.progress, action.question],
+                questions: [...state.questions, action.question],
                 assessmentState: 'waitingToContinue'
             }
         case 'ASSESSMENT_COMPLETE':
