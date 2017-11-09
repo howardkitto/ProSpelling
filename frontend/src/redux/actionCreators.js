@@ -120,3 +120,13 @@ export function saveProgress(question){
         type: 'SAVE_PROGRESS',
         question:question
     }}
+
+export function getAssessments(page, limit){
+    return{
+        type: 'GET_ASSESSMENTS',
+        page,
+        limit
+
+
+    }
+}

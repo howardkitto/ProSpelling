@@ -16,7 +16,7 @@ router.route('/')
         }))
         .then((words)=>{
             res.setHeader('Content-Type', 'application/json')
-            res.send(words)
+            res.json(words)
             })
         .catch((err)=>{
             console.log('error ' + err)

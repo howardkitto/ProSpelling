@@ -5,6 +5,7 @@ import getWordsListApi from './data/getWordsListApi'
 import postWordApi from './data/postWordApi'
 import putWordApi from './data/putWordApi'
 import deleteWordApi from './data/deleteWordApi'
+import getAssessmentsApi from './data/getAssessmentsApi'
 
 //3. Workers
 
@@ -60,6 +61,17 @@ export function* deleteWord(action){
     catch(e){console.log('deleteWord API error ' + e)}
 }
 
+export function* getAssessments(action){
+    try{
+        // console.log('saga delete word got '+ JSON.stringify(action))    
+        const response = yield call(getAssessmentsApi, action)
+        // console.log('saga got ' + JSON.stringify(response))
+        yield put({type:'GOT_ASSESSMENTS', data: response})
+        }
+        catch(e){console.log('getAssessments API error ' + e)}
+    }
+
+
 //2. Watchers
 
 export function* watchForGetWord(){
@@ -81,6 +93,10 @@ export function* watchForUpdateWord(){
 export function* watchForDeleteWord(){
     yield takeEvery('DELETE_WORD', deleteWord)
 }
+
+export function* watchForGetAssessments(){
+    yield takeEvery('GET_ASSESSMENTS', getAssessments)
+}
 //1. Root Saga
 
 export default function* saga(){
@@ -90,7 +106,8 @@ export default function* saga(){
       watchForGetWordsList(),
       watchForCreateWord(),
       watchForUpdateWord(),
-      watchForDeleteWord()
+      watchForDeleteWord(),
+      watchForGetAssessments()
       
     ])
     }

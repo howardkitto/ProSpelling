@@ -8,6 +8,7 @@ const path = require('path');
 const envTest = require('./routes/admin/envTest')
 const adminWords = require('./routes/admin/words')
 const getWord = require('./routes/assess/wordRoute')
+const adminAssessments = require('./routes/admin/assessments')
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(express.static('frontend/build'))
  
 app.use('/admin/envtest', envTest) 
 app.use('/admin/words', adminWords)
+app.use('/admin/assessments', adminAssessments)
 app.use('/assess/getword', getWord)
 
 module.exports = {app}

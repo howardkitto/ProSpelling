@@ -8,6 +8,7 @@ import LessonTwoContainer from './containers/LessonTwoContainer'
 import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
+import Assessments from './containers/admin/Assessments'
 
 import { Provider } from 'react-redux';
 import store from './redux/store'
@@ -36,6 +37,7 @@ class App extends Component {
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/admin/words" component={Words}/>
+              <Route path="/admin/assessments" component={Assessments}/>
               <Route path="/admin/envtest" component={EnvTest}/>
               <Route component={NoMatch}/>
             </Switch>
