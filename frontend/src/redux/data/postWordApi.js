@@ -1,7 +1,7 @@
 const postWordApi = (action) =>{
     // console.log('getWordAPI ' + JSON.stringify(action))
   
-    const request = new Request('../admin/words', {
+    const request = new Request('../api/words', {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'

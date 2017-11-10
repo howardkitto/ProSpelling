@@ -1,7 +1,7 @@
 const putWordApi = (action) =>{
     // console.log('putWordApi ' + JSON.stringify(action))
   
-    const request = new Request('../admin/words', {
+    const request = new Request('../api/words', {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json'

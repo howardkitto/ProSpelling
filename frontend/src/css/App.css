@@ -58,3 +58,21 @@
 .transcript{
   font-size: 24px;
 }
+
+.letsStart{
+  border-style: solid;
+  border-color: gray;
+  border-radius: 25px;
+  width:500px;
+  height:200px;
+  background: url('../images/paws.png') no-repeat;
+  line-height: 200px;
+  text-align: center;
+}
+
+.letsStartText{
+  color:red;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}

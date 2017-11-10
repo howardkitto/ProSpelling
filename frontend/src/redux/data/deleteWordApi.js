@@ -1,7 +1,7 @@
 const deleteWordApi = (action) =>{
     // console.log('deleteWordApi ' + JSON.stringify(action.word))
   
-    const request = new Request('../admin/words', {
+    const request = new Request('../api/words', {
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json'

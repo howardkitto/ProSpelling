@@ -10,8 +10,11 @@ import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
 import Assessments from './containers/admin/Assessments'
 
+
 import { Provider } from 'react-redux';
 import store from './redux/store'
+import { ConnectedRouter } from 'react-router-redux'
+// import createHistory from 'history/createBrowserHistory'
 
 import {
     BrowserRouter as Router,
@@ -22,14 +25,15 @@ import {
 import {Container} from 'reactstrap'
 import './css/App.css'
 
-
 class App extends Component {
+
 
   render() {
 
     return (
       <Provider store={store}>
-        <Router>
+      
+        <Router >
         <Container fluid>
           <Nav />
             <Switch>
@@ -43,6 +47,7 @@ class App extends Component {
             </Switch>
         </Container>  
       </Router>
+      
     </Provider>
     );
   }

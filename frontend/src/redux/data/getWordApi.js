@@ -1,7 +1,7 @@
 const getWordApi = (action) =>{
   // console.log('getWordAPI ' + JSON.stringify(action))
 
-  const request = new Request('../assess/getword', {
+  const request = new Request('../api/getword', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json'

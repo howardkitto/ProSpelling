@@ -1,7 +1,7 @@
 const getAssessmentsListApi = (action) =>{
   // console.log('getWordsListAPI')
 
-  return fetch('../admin/assessments/page/'+action.page+'/limit/'+action.limit)
+  return fetch('../api/assessments/page/'+action.page+'/limit/'+action.limit)
       .then(response => response.json()
           )
       .catch(

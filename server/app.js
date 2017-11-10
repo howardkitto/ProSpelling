@@ -21,9 +21,9 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 app.use(express.static('frontend/build')) 
   
  
-app.use('/admin/envtest', envTest) 
-app.use('/admin/words', adminWords)
-app.use('/admin/assessments', adminAssessments)
-app.use('/assess/getword', getWord)
+app.use('/api/envtest', envTest) 
+app.use('/api/words', adminWords)
+app.use('/api/assessments', adminAssessments)
+app.use('/api/getword', getWord)
 
 module.exports = {app}
