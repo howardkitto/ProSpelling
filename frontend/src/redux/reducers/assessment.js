@@ -34,10 +34,6 @@ function assessment(state=[], action){
             return{
                 assessmentState: 'complete'
             }
-        case 'GOT_ASSESSMENTS':
-            return{
-                count: action.data.count
-            }
         default:
         return state
         }
