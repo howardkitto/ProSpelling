@@ -89,8 +89,9 @@ checkAnswer(){
     .then((result)=>{
         this.props.gotAnswer(result.yesOrNo, result.score)
         if(result.yesOrNo === 'correct')
-            this.props.saveProgress(this.props.question)
+            this.props.saveProgress(this.props.question, 'waitingToContinue')
         else{
+            this.props.saveProgress(this.props.question, 'inProgress')
             this.props.changeQuestionState('tryAgain')}
     })
 }
@@ -171,7 +172,7 @@ const mapDispatchToProps = dispatch => {
             changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
             gotAnswer: (answer) => dispatch(gotAnswer(answer)),
             tryAgain : (answer) => dispatch(tryAgain(answer)),
-            saveProgress : (question) => dispatch(saveProgress(question)),
+            saveProgress : (question, nextState) => dispatch(saveProgress(question, nextState)),
             changeAssessmentState : (assessmentState)=>dispatch(changeAssessmentState(assessmentState))
           }
   }

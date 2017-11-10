@@ -115,10 +115,11 @@ export function submitAnswer(){
     }
 }
 
-export function saveProgress(question){
+export function saveProgress(question, nextState){
     return{
         type: 'SAVE_PROGRESS',
-        question:question
+        question:question,
+        nextState: nextState
     }}
 
 export function getAssessments(page, limit){
