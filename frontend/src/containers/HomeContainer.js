@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import {Container, Row, Col} from 'reactstrap'
+import {Row, Col} from 'reactstrap'
 
-import Video from './Video'
 import AssessmentContainer from './AssessmentContainer'
 
 class HomeContainer extends Component{

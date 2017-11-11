@@ -19,11 +19,14 @@ app.use(bodyParser.json());
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 app.use(express.static('frontend/build')) 
-  
- 
-app.use('/api/envtest', envTest) 
-app.use('/api/words', adminWords)
-app.use('/api/assessments', adminAssessments)
-app.use('/api/getword', getWord)
+
+  app.use('/api/envtest', envTest) 
+  app.use('/api/words', adminWords)
+  app.use('/api/assessments', adminAssessments)
+  app.use('/api/getword', getWord)
+
+  app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  });
 
 module.exports = {app}

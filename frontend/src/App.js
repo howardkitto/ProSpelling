@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Provider} from 'react-redux'
 
 import Nav from './containers/Nav'
 import HomeContainer from './containers/HomeContainer'
@@ -10,14 +10,13 @@ import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
 import Assessments from './containers/admin/Assessments'
 
-
-import { Provider } from 'react-redux';
-
 import {
-    BrowserRouter as Router,
     Route,
     Switch
   } from 'react-router-dom'
+
+import { ConnectedRouter } from 'react-router-redux'
+import store, {history} from './redux/store'
 
 import {Container} from 'reactstrap'
 import './css/App.css'
@@ -25,10 +24,11 @@ import './css/App.css'
 class App extends Component {
 
   render() {
+    console.log(history)
 
     return (
-    
-        <Router >
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
         <Container fluid>
           <Nav />
             <Switch>
@@ -41,7 +41,8 @@ class App extends Component {
               <Route component={NoMatch}/>
             </Switch>
         </Container>  
-      </Router>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }

@@ -21,11 +21,13 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/"><img src={logo}/></NavbarBrand>
+          <NavbarBrand href="/"><img src={logo} alt="Pro Spelling"/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-                <NavLink tag={Link} to="/lessonone" activeclassname="activeNavLink">
+                <NavLink tag={Link} 
+                  to="/lessonone" 
+                  activeclassname="activeNavLink">
                 Lesson One
                 </NavLink>
                 <NavLink tag={Link} to="/lessontwo" activeclassname="activeNavLink">
