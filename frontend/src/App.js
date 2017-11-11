@@ -12,8 +12,6 @@ import Assessments from './containers/admin/Assessments'
 
 
 import { Provider } from 'react-redux';
-import store, {history} from './redux/store'
-import { ConnectedRouter } from 'react-router-redux'
 
 import {
     BrowserRouter as Router,
@@ -29,7 +27,6 @@ class App extends Component {
   render() {
 
     return (
-      <Provider store={store}>
     
         <Router >
         <Container fluid>
@@ -45,7 +42,6 @@ class App extends Component {
             </Switch>
         </Container>  
       </Router>
-    </Provider>
     );
   }
 }
