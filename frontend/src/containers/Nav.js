@@ -25,10 +25,10 @@ export default class Example extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-                <NavLink tag={Link} to="/lessonone" activeclassname="active">
+                <NavLink tag={Link} to="/lessonone" activeclassname="activeNavLink">
                 Lesson One
                 </NavLink>
-                <NavLink tag={Link} to="/lessontwo" activeclassname="active">
+                <NavLink tag={Link} to="/lessontwo" activeclassname="activeNavLink">
                 Lesson Two
                 </NavLink>
             </Nav>

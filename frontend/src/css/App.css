@@ -61,18 +61,25 @@
 
 .letsStart{
   border-style: solid;
-  border-color: gray;
+  border-color: lightgreen;
   border-radius: 25px;
   width:500px;
   height:200px;
-  background: url('../images/paws.png') no-repeat;
+  background: url('../images/paws.png');
   line-height: 200px;
   text-align: center;
 }
 
 .letsStartText{
-  color:red;
+  color:darkgreen;
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  font-size: 30px
+}
+
+.assessmentDiv{
+  border-style: solid;
+  border-color: lightgreen;
+  border-radius: 25px;
 }

@@ -39,9 +39,7 @@ class AssessmentContainer extends Component{
         return(
             <div>
                 {this.assessment()}
-                <div className="stateDisplay">  <div>assessment: {this.props.assessmentState}</div>
-                                                <div>question: {this.props.questionState}</div>
-                </div>
+                
             </div>          
         )
     }

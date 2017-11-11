@@ -12,9 +12,8 @@ import Assessments from './containers/admin/Assessments'
 
 
 import { Provider } from 'react-redux';
-import store from './redux/store'
+import store, {history} from './redux/store'
 import { ConnectedRouter } from 'react-router-redux'
-// import createHistory from 'history/createBrowserHistory'
 
 import {
     BrowserRouter as Router,
@@ -27,12 +26,11 @@ import './css/App.css'
 
 class App extends Component {
 
-
   render() {
 
     return (
       <Provider store={store}>
-      
+    
         <Router >
         <Container fluid>
           <Nav />
@@ -47,7 +45,6 @@ class App extends Component {
             </Switch>
         </Container>  
       </Router>
-      
     </Provider>
     );
   }

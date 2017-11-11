@@ -12,17 +12,6 @@ class HomeContainer extends Component{
 render(){
 
   return(
-
-    <Container fluid>
-     <Row>
-        <Col>
-        </Col>
-        <Col>
-        <AssessmentContainer />
-        </Col>
-        <Col>
-        </Col>
-      </Row>
       <Row>
         <Col>
         </Col>
@@ -31,14 +20,19 @@ render(){
       <span className="letsStartText">
       Let's Start...
       Can you spell...
+      
       </span>
+      
       </div>
+
+      <div className="assessmentDiv">
+        <AssessmentContainer />
+        </div>
       </Col>
       <Col>
         </Col>
         </Row> 
        
-    </Container>
         )
     }
 }
@@ -50,3 +44,8 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(HomeContainer)
+
+//put this in to show the states
+//<div className="stateDisplay">  <div>assessment: {this.props.assessmentState}</div>
+//                                                <div>question: {this.props.questionState}</div>
+//                </div>

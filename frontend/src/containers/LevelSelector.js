@@ -35,7 +35,7 @@ class LevelSelector extends Component{
     render(){
         return(
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="info">
+                <DropdownToggle caret color="success">
                     Choose Level
                 </DropdownToggle>
                 <DropdownMenu>
