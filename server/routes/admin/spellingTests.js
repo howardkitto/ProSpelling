@@ -1,6 +1,6 @@
 const express = require('express');
 const router = new express.Router();
-const Assessments = require('../../models/Assessments')
+const SpellingTests = require('../../models/SpellingTests')
 
 
 router.route('/page/:page/limit/:limit')
@@ -16,7 +16,7 @@ router.route('/page/:page/limit/:limit')
 
 //this is a new patern for me - need to understand it better   
     let counter = ()=>{
-       return Assessments.count().exec()
+       return SpellingTests.count().exec()
        .then((c)=>{return c})
        .catch((err)=>console.log(err))
     }
@@ -24,16 +24,16 @@ router.route('/page/:page/limit/:limit')
     counter()
         .then((count)=>{assCount = count})
 
-    let promise = Assessments.find()
+    let promise = SpellingTests.find()
         .skip(skip)
         .limit(limit)
         .lean()
         .exec()
     .then(results=>{
-        let assessment = {}
-        assessment.count = assCount
-        assessment.questions = results 
-        res.json(assessment)})
+        let spellingTest = {}
+        spellingTest.count = assCount
+        spellingTest.questions = results 
+        res.json(spellingTest)})
     .catch((err)=>console.log(err))
 
 })

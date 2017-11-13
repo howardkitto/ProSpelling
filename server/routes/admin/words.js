@@ -30,7 +30,7 @@ router.route('/')
 
     const word = {    'word':req.body.word,
                         'level':req.body.level,
-                        'assessment':req.body.assessment,
+                        'assessments':req.body.assessments,
                         'characteristics': req.body.characteristics,
                         'audioFileName': req.body.audioFileName
                         }
@@ -50,7 +50,7 @@ router.route('/')
 
         const word = {  'word':req.body.word,
                         'level':req.body.level,
-                        'assessment':req.body.assessment,
+                        'assessments':req.body.assessments,
                         'characteristics': req.body.characteristics,
                         'audioFileName': req.body.audioFileName}
                         

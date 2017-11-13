@@ -1,10 +1,10 @@
-const filterPreviousWords = (assessmentSoFar, allWords)=>{
+const filterPreviousWords = (spellingTestSoFar, allWords)=>{
     return new Promise((resolve, reject)=>{
 
-        // console.log(JSON.stringify(assessmentSoFar))
+        // console.log(JSON.stringify(spellingTestSoFar))
 
         //Make and array of the words answered so far
-        let previousWords = assessmentSoFar.questions.map((y)=>{
+        let previousWords = spellingTestSoFar.questions.map((y)=>{
             return y["word"]
         })
 

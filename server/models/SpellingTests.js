@@ -11,11 +11,11 @@ const Questions = new mongoose.Schema({
 });
 
 
-const  Assessments = new mongoose.Schema({
-  assessmentId: {type: String, required:true},
+const  SpellingTests = new mongoose.Schema({
+  spellingTestId: {type: String, required:true},
   level: {type: Number, required:true},
   questions: [Questions]
 }, {timestamps:{}} ); 
 
 
-module.exports = mongoose.model('Assessments', Assessments);
+module.exports = mongoose.model('SpellingTests', SpellingTests);
