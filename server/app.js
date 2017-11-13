@@ -8,7 +8,7 @@ const path = require('path');
 const envTest = require('./routes/admin/envTest')
 const adminWords = require('./routes/admin/words')
 const getWord = require('./routes/assess/wordRoute')
-const adminAssessments = require('./routes/admin/assessments')
+const adminSpellingTests = require('./routes/admin/spellingTests')
 
 const app = express()
 
@@ -22,7 +22,7 @@ app.use(express.static('frontend/build'))
 
   app.use('/api/envtest', envTest) 
   app.use('/api/words', adminWords)
-  app.use('/api/assessments', adminAssessments)
+  app.use('/api/spellingtests', adminSpellingTests)
   app.use('/api/getword', getWord)
 
   app.get('/*', function (req, res) {

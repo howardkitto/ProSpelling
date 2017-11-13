@@ -1,7 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
-const saveAssessment = require('../../businessLogic/saveAssessment')
+const saveSpellingTest = require('../../businessLogic/saveSpellingTest')
 const getWord = require('../../businessLogic/getWord')   
 const filterPreviousWords = require('../../businessLogic/filterPreviousWords')
 
@@ -12,9 +12,9 @@ router.route('/')
 
     const processWord = async ()=>{
         
-        let savedAssessment = await(saveAssessment(req.body.assessment))
+        let savedSpellingTest = await(saveSpellingTest(req.body.spellingTest))
         let allWords = await Words.find({"level":req.body.level}).exec()
-        let remainingWords = await filterPreviousWords(savedAssessment, allWords)
+        let remainingWords = await filterPreviousWords(savedSpellingTest, allWords)
         let word = await getWord(remainingWords)
         
         res.json(word)

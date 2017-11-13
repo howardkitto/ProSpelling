@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import {Button, Row, Col} from 'reactstrap'
 
@@ -7,6 +8,15 @@ class HomeContainer extends Component{
 
 
 render(){
+
+  const LetsStartButton = withRouter(({ history}) => (
+    <Button
+      className="startButton"
+      onClick={() => { history.push('/phaseoneassessment') }}
+    >
+      Click Me!
+    </Button>
+  ))
 
   return(
       <Row>
@@ -18,7 +28,7 @@ render(){
           <div>
           Can you spell?
           </div>
-          <Button className="startButton">Let's Start...</Button>
+          <LetsStartButton />
       </div>
       </div>
       </Col>
@@ -39,6 +49,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(HomeContainer)
 
 //put this in to show the states
-//<div className="stateDisplay">  <div>assessment: {this.props.assessmentState}</div>
+//<div className="stateDisplay">  <div>spellingTest: {this.props.spellingTestState}</div>
 //                                                <div>question: {this.props.questionState}</div>
 //                </div>

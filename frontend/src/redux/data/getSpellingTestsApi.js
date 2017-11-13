@@ -1,7 +1,7 @@
-const getAssessmentsListApi = (action) =>{
+const getSpellingTestsListApi = (action) =>{
   // console.log('getWordsListAPI')
 
-  return fetch('../api/assessments/page/'+action.page+'/limit/'+action.limit)
+  return fetch('../api/spellingTests/page/'+action.page+'/limit/'+action.limit)
       .then(response => response.json()
           )
       .catch(
@@ -9,4 +9,4 @@ const getAssessmentsListApi = (action) =>{
       )
 }
 
-export default getAssessmentsListApi
+export default getSpellingTestsListApi

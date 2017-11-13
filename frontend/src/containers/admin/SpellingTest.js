@@ -6,9 +6,9 @@ import {Table,
 import Paginator from '../../components/Paginator'
 import DateTime from '../../components/DateTime'
 
-import {getAssessments} from '../../redux/actionCreators'
+import {getSpellingTests} from '../../redux/actionCreators'
 
-class Assessments extends Component{
+class SpellingTests extends Component{
 
     constructor(){
         super()
@@ -19,16 +19,16 @@ class Assessments extends Component{
     }
 
 componentDidMount(){
-    this.props.getAssessments(this.state.page, this.state.limit)
+    this.props.getSpellingTests(this.state.page, this.state.limit)
 
 }
 
 render(){
     return(
         <div>
-    <div>List of Assessments</div>
+    <div>List of SpellingTests</div>
     
-    {(!this.props.assessments)?<div>Loading Assessments</div>:
+    {(!this.props.spellingTests)?<div>Loading SpellingTests</div>:
     <div>
     <Table striped bordered hover responsive>
         <thead>
@@ -40,9 +40,9 @@ render(){
             </tr>
         </thead>
         <tbody>
-        {this.props.assessments.map((a)=>
+        {this.props.spellingTests.map((a)=>
         
-            <tr key={a.assessmentId}>
+            <tr key={a.spellingTestId}>
             <td>Anonymous</td>
             <td>{a.questions.length}</td>
             <td><DateTime utc={a.createdAt}/></td>
@@ -56,7 +56,7 @@ render(){
         <Paginator  count={this.props.count}
                     limit={this.state.limit}
                     page={this.state.page}
-                    onClick={(page, limit)=>this.props.getAssessments(page, limit)}/>
+                    onClick={(page, limit)=>this.props.getSpellingTests(page, limit)}/>
     </div>
     }</div>
     
@@ -66,16 +66,16 @@ render(){
 }
 const mapStateToProps = state => {
     return {
-        count: state.assessmentAdmin.count,
-        assessments: state.assessmentAdmin.assessments
+        count: state.spellingTestAdmin.count,
+        spellingTests: state.spellingTestAdmin.spellingTests
 
     }
   }
 
 const mapDispatchToProps = dispatch => {
 return {
-        getAssessments : (page, limit) => dispatch(getAssessments(page, limit)),
+        getSpellingTests : (page, limit) => dispatch(getSpellingTests(page, limit)),
         }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Assessments)
+export default connect(mapStateToProps, mapDispatchToProps)(SpellingTests)

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
 
-import {startAssessment} from '../redux/actionCreators'
+import {startSpellingTest} from '../redux/actionCreators'
 
 class LevelSelector extends Component{
 
@@ -40,7 +40,7 @@ class LevelSelector extends Component{
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.state.levels.map((level, index)=>
-                        <DropdownItem key={index} onClick={(e)=>this.props.startAssessment(level.number)}>
+                        <DropdownItem key={index} onClick={(e)=>this.props.startSpellingTest(level.number)}>
                         {level.description}</DropdownItem>
                     )}
                 </DropdownMenu>
@@ -58,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        startAssessment : (level) => dispatch(startAssessment(level))
+        startSpellingTest : (level) => dispatch(startSpellingTest(level))
           }
   }
 

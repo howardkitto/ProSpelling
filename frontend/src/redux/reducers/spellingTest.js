@@ -1,42 +1,42 @@
 //Speller - a person who spells with a specified ability
 
-function assessment(state=[], action){
-    // console.log('assessment Reducer running' + JSON.stringify(action))
+function spellingTest(state=[], action){
+    // console.log('spellingTest Reducer running' + JSON.stringify(action))
     switch(action.type){
         
-        case 'START_ASSESSMENT':
+        case 'START_SPELLING_TEST':
             return{
                 ...state,
-                assessmentId: action.assessmentId,
+                spellingTestId: action.spellingTestId,
                 createdAt:action.createdAt,
                 level: action.level,
                 questions: [],
-                assessmentState:'startAssessment'
+                spellingTestState:'startSpellingTest'
             }
         case 'GOT_WORD':
             return {
                 ...state,
-                assessmentState:'inProgress'
+                spellingTestState:'inProgress'
             }
-        case 'CHANGE_ASSESSMENT_STATE':
+        case 'CHANGE_SPELLING_TEST_STATE':
             return{
                 ...state,
-                assessmentState:'waitingToContinue'
+                spellingTestState:'waitingToContinue'
             }
         case 'SAVE_PROGRESS':
         console.log('reducer got ' + JSON.stringify(action))
             return{
                 ...state,
                 questions: [...state.questions, action.question],
-                assessmentState: action.nextState
+                spellingTestState: action.nextState
             }
-        case 'ASSESSMENT_COMPLETE':
+        case 'SPELLING_TEST_COMPLETE':
             return{
-                assessmentState: 'complete'
+                spellingTestState: 'complete'
             }
         default:
         return state
         }
 }
 
-export default assessment
+export default spellingTest

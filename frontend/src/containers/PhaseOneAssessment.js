@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {startAssessment} from '../redux/actionCreators'
-import AssessmentContainer from './AssessmentContainer'
+import {startSpellingTest} from '../redux/actionCreators'
+import SpellingTestContainer from './SpellingTestContainer'
 
 class PhaseOneAssessment extends Component{
 
     render(){
         return(
             <div>
-            <AssessmentContainer/></div>
+            <SpellingTestContainer/></div>
         )
     }
 }
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        startAssessment : (level) => dispatch(startAssessment(level))
+        startSpellingTest : (level) => dispatch(startSpellingTest(level))
           }
   }
 

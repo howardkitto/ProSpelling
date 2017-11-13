@@ -13,5 +13,5 @@ module.exports.connect = (uri) => {
   });
 
   // load models
-  require('./Assessments');
+  // require('./SpellingTests');
 };
