@@ -8,28 +8,28 @@ import LevelSelector from './LevelSelector'
 import {getWord,
         changeQuestionState} from '../redux/actionCreators'
 
-class AssessmentContainer extends Component{
+class SpellingTestContainer extends Component{
 
 
-    assessment(){
-        switch(this.props.assessmentState){
-            case "startAssessment":
-                this.props.getWord(this.props.level, this.props.assessment)
+    spellingTest(){
+        switch(this.props.spellingTestState){
+            case "startSpellingTest":
+                this.props.getWord(this.props.level, this.props.spellingTest)
                 return <div>Getting first word</div>
             case "inProgress":
                 return <div><QuestionContainer/></div>
             case "waitingToContinue":
                 return <div>Awesome!
                     <div>
-                    <Button color="info" onClick={()=>this.props.getWord(this.props.level, this.props.assessment)}>
+                    <Button color="info" onClick={()=>this.props.getWord(this.props.level, this.props.spellingTest)}>
                     Click for Next Word</Button>
                     </div>
                 </div>
             case "complete":
-                return <div>Assessment Complete</div>
+                return <div>SpellingTest Complete</div>
             default:
                 return <div>
-                        {!this.props.assessmentId?<LevelSelector />:null}
+                        {!this.props.spellingTestId?<LevelSelector />:null}
                     </div>
         }
     }
@@ -38,7 +38,7 @@ class AssessmentContainer extends Component{
 
         return(
             <div>
-                {this.assessment()}
+                {this.spellingTest()}
                 
             </div>          
         )
@@ -47,20 +47,20 @@ class AssessmentContainer extends Component{
 
   const mapStateToProps = state => {
     return {
-        assessment:state.assessment,
-        level:state.assessment.level,
+        spellingTest:state.spellingTest,
+        level:state.spellingTest.level,
         question:state.question,
-        assessmentState:state.assessment.assessmentState,
+        spellingTestState:state.spellingTest.spellingTestState,
         questionState:state.question.questionState,
-        progress:state.assessment.progress
+        progress:state.spellingTest.progress
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-        getWord : (level, assessment) => dispatch(getWord(level, assessment)),
+        getWord : (level, spellingTest) => dispatch(getWord(level, spellingTest)),
         changeQuestionState : (questionState) => dispatch(changeQuestionState(questionState))
           }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssessmentContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SpellingTestContainer)

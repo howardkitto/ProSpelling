@@ -69,13 +69,13 @@ question(){
 
 const mapStateToProps = state => {
     return {
-        level: state.assessment.level,
+        level: state.spellingTest.level,
         answer: state.question.answer,
         word: state.question.word,
         audioFileName: state.question.audioFileName,
         result:state.question.result,
         questionState:state.question.questionState,
-        assessmentState:state.assessment.assessmentState
+        spellingTestState:state.spellingTest.spellingTestState
     }
   }
 

@@ -4,22 +4,22 @@ import uuid from 'uuid'
 
 // action creators
 
-export function startAssessment(level){
+export function startSpellingTest(level){
     console.log('LEVEL_SELECTED ' + level)
     let timestamp = new Date()
-    let assessmentId = uuid()
+    let spellingTestId = uuid()
     return {
-        type: 'START_ASSESSMENT',
-        assessmentId: assessmentId,
+        type: 'START_SPELLING_TEST',
+        spellingTestId: spellingTestId,
         level: level,
         createdAt: timestamp
     }
 }
 
-export function changeAssessmentState(assessmentState){
+export function changeSpellingTestState(spellingTestState){
     return{
-        type: 'CHANGE_ASSESSMENT_STATE',
-        assessmentState:assessmentState
+        type: 'CHANGE_SPELLING_TEST_STATE',
+        spellingTestState:spellingTestState
     }
 }
 
@@ -87,12 +87,12 @@ export function deleteWord(word){
     }
 }
 
-export function getWord(level, assessment){
-    console.log('GET_WORD action '+JSON.stringify(assessment))
+export function getWord(level, spellingTest){
+    console.log('GET_WORD action '+JSON.stringify(spellingTest))
     return{
         type: 'GET_WORD',
         level: level,
-        assessment: assessment
+        spellingTest: spellingTest
     }
 
 }
@@ -122,9 +122,9 @@ export function saveProgress(question, nextState){
         nextState: nextState
     }}
 
-export function getAssessments(page, limit){
+export function getSpellingTests(page, limit){
     return{
-        type: 'GET_ASSESSMENTS',
+        type: 'GET_SPELLING_TESTS',
         page,
         limit
 

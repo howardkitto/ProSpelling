@@ -7,7 +7,7 @@ const getWordApi = (action) =>{
       'Content-Type': 'application/json'
     }), 
     body: (JSON.stringify(  {level : action.level,
-                            assessment : action.assessment}))
+                            spellingTest : action.spellingTest}))
   });
 
   return fetch(request)

@@ -9,7 +9,7 @@ import PhaseOneAssessment from './containers/PhaseOneAssessment'
 import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
-import Assessments from './containers/admin/Assessments'
+import SpellingTest from './containers/admin/SpellingTest'
 
 import {
     Route,
@@ -37,7 +37,7 @@ class App extends Component {
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/admin/words" component={Words}/>
-              <Route path="/admin/assessments" component={Assessments}/>
+              <Route path="/admin/spellingtests" component={SpellingTest}/>
               <Route path="/admin/envtest" component={EnvTest}/>
               <Route component={NoMatch}/>
             </Switch>
