@@ -8,7 +8,7 @@ const filterPreviousWords = require('../../businessLogic/filterPreviousWords')
 router.route('/')
 
 .post((req, res)=>{
-    // console.log('got post ' + JSON.stringify(req.body))
+    console.log('got post ' + JSON.stringify(req.body))
 
     const processWord = async ()=>{
         

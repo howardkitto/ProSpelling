@@ -5,6 +5,7 @@ import Nav from './containers/Nav'
 import HomeContainer from './containers/HomeContainer'
 import LessonOneContainer from './containers/LessonOneContainer'
 import LessonTwoContainer from './containers/LessonTwoContainer'
+import PhaseOneAssessment from './containers/PhaseOneAssessment'
 import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
@@ -24,7 +25,6 @@ import './css/App.css'
 class App extends Component {
 
   render() {
-    console.log(history)
 
     return (
       <Provider store={store}>
@@ -33,6 +33,7 @@ class App extends Component {
           <Nav />
             <Switch>
               <Route exact path="/" component={HomeContainer}/>
+              <Route path="/phaseoneassessment" component={PhaseOneAssessment}/>
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/admin/words" component={Words}/>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
-import {Row, Col} from 'reactstrap'
-
-import AssessmentContainer from './AssessmentContainer'
+import {Button, Row, Col} from 'reactstrap'
 
 class HomeContainer extends Component{
 
@@ -16,17 +14,13 @@ render(){
         </Col>
       <Col>
       <div className="letsStart">
-      <span className="letsStartText">
-      Let's Start...
-      Can you spell...
-      
-      </span>
-      
+        <div className="letsStartText">
+          <div>
+          Can you spell?
+          </div>
+          <Button className="startButton">Let's Start...</Button>
       </div>
-
-      <div className="assessmentDiv">
-        <AssessmentContainer />
-        </div>
+      </div>
       </Col>
       <Col>
         </Col>

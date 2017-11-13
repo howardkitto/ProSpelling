@@ -61,16 +61,18 @@
 
 .letsStart{
   border-style: solid;
-  border-color: lightgreen;
+  border-color: darkolivegreen;
   border-radius: 25px;
   width:500px;
   height:200px;
-  background: url('../images/paws.png');
+  background: url('../images/paws.png') no-repeat;
   line-height: 200px;
-  text-align: center;
+  text-align: right;
 }
 
 .letsStartText{
+  width: 300px;
+  padding-right: 50px;
   color:darkgreen;
   display: inline-block;
   vertical-align: middle;
@@ -82,4 +84,9 @@
   border-style: solid;
   border-color: lightgreen;
   border-radius: 25px;
+}
+
+.btn-secondary{
+  background-color: #29b072  !important;
+  border-color: darkgreen!important;
 }

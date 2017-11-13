@@ -5,7 +5,7 @@ import uuid from 'uuid'
 // action creators
 
 export function startAssessment(level){
-    // console.log('LEVEL_SELECTED ' + level)
+    console.log('LEVEL_SELECTED ' + level)
     let timestamp = new Date()
     let assessmentId = uuid()
     return {
@@ -88,7 +88,7 @@ export function deleteWord(word){
 }
 
 export function getWord(level, assessment){
-    // console.log('GET_WORD action '+JSON.stringify(assessment))
+    console.log('GET_WORD action '+JSON.stringify(assessment))
     return{
         type: 'GET_WORD',
         level: level,
