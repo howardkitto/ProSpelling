@@ -26,7 +26,7 @@ componentDidMount(){
 render(){
     return(
         <div>
-    <div>List of SpellingTests</div>
+    <h1>Spelling Tests</h1>
     
     {(!this.props.spellingTests)?<div>Loading SpellingTests</div>:
     <div>

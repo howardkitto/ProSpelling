@@ -12,6 +12,10 @@ class WordForm extends Component{
       word:this.props.word
     }
   }
+
+  componentDidMount(){
+    console.log(this.props.word)
+  }
   onChange(e){
     // console.log(e.target.name +' '+ e.target.value)
 

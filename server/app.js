@@ -9,6 +9,7 @@ const envTest = require('./routes/admin/envTest')
 const adminWords = require('./routes/admin/words')
 const getWord = require('./routes/assess/wordRoute')
 const adminSpellingTests = require('./routes/admin/spellingTests')
+const adminAssessments = require('./routes/admin/assessments')
 
 const app = express()
 
@@ -24,7 +25,9 @@ app.use(express.static('frontend/build'))
   app.use('/api/words', adminWords)
   app.use('/api/spellingtests', adminSpellingTests)
   app.use('/api/getword', getWord)
+  app.use('/api/assessments', adminAssessments)
 
+//if you dont have this and the use static above then Safari doesn't work
   app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
   });

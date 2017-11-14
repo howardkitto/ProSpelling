@@ -2,10 +2,12 @@ const wordsAdmin = (state=[], action)=>{
 // console.log('words reducer is running')
     switch(action.type){
         case 'GOT_WORDS_LIST':
+        console.log('GOT_WORDS_LIST reducer got '+JSON.stringify(action))
             return{
                 ...state,
                 success:false,
-                wordsList : action.data
+                count:action.data.count,
+                wordsList:action.data.words
             }
         case 'EDIT_WORD':
         // console.log('Reducer got ' +JSON.stringify(action.word))

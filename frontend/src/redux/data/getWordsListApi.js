@@ -1,7 +1,7 @@
-const getWordsListApi = () =>{
-  // console.log('getWordsListAPI')
+const getWordsListApi = (action) =>{
+  console.log('getWordsListAPI ' + JSON.stringify(action))
 
-  return fetch('../api/words')
+  return fetch('../api/words/page/'+action.page+'/limit/'+action.limit)
       .then(response => response.json()
           )
       .catch(

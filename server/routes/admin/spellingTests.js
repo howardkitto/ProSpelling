@@ -9,11 +9,10 @@ router.route('/page/:page/limit/:limit')
 
     console.log('got params '+JSON.stringify(req.params))
 
-    let assCount = 0
+    let testCount = 0
     let limit = Number(req.params.limit)
     let skip = Number(req.params.page) * limit
    
-
 //this is a new patern for me - need to understand it better   
     let counter = ()=>{
        return SpellingTests.count().exec()
@@ -22,7 +21,7 @@ router.route('/page/:page/limit/:limit')
     }
 
     counter()
-        .then((count)=>{assCount = count})
+        .then((count)=>{testCount = count})
 
     let promise = SpellingTests.find()
         .skip(skip)
@@ -31,8 +30,9 @@ router.route('/page/:page/limit/:limit')
         .exec()
     .then(results=>{
         let spellingTest = {}
-        spellingTest.count = assCount
+        spellingTest.count = testCount
         spellingTest.questions = results 
+        res.setHeader('Content-Type', 'application/json')
         res.json(spellingTest)})
     .catch((err)=>console.log(err))
 

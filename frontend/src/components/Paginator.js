@@ -8,7 +8,7 @@ const Paginator = (props)=>{
 
     let pagingArray = []
     
-    for (var p=1; p<props.count/props.limit; p++){
+    for (var p=0; p<props.count/props.limit; p++){
         pagingArray.push(p)
     }
 

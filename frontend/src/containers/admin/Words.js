@@ -10,6 +10,7 @@ import {Table, Button,
 
 import WordForm from './WordForm'
 import DateTime from '../../components/DateTime'
+import Paginator from '../../components/Paginator'
 
 class Words extends Component{
 
@@ -17,7 +18,9 @@ class Words extends Component{
         super(props)
 
         this.state = {
-            modal:false
+            modal:false,
+            page:0,
+            limit:5
         }
 
         this.toggle = this.toggle.bind(this);
@@ -36,16 +39,16 @@ class Words extends Component{
         this.setState({modal:!this.state.modal})
        }
 
-    edit(word){
+edit(word){
         // make sure none of the fields are null
-        if(!word.word)word.word=''
-        if(!word.level)word.level=''
-        if(!word.question)word.question=''
-        if(!word.characteristics)word.characteristics=''
-        if(!word.audioFileName)word.audioFileName=''
+    if(!word.word)word.word=''
+    if(!word.level)word.level=''
+    if(!word.question)word.question=''
+    if(!word.characteristics)word.characteristics=''
+    if(!word.audioFileName)word.audioFileName=''
 
-        this.props.editWord(word)
-        this.setState({modal : !this.state.modal})
+    this.props.editWord(word)
+    this.setState({modal : !this.state.modal})
     }
 
 saveClicked(){
@@ -60,23 +63,23 @@ deleteClicked(){
     this.setState({modal : !this.state.modal})
     }
 
-toggle(word) {
+toggle() {
     this.setState({modal : !this.state.modal})
       }
 
 componentWillReceiveProps(nextProps)
-{
-    if(!nextProps.wordsList){this.props.getWordsList()}
+{   
+    if(!nextProps.wordsList){this.props.getWordsList(this.state.page, this.state.limit)}
     if(nextProps.success){this.setState({modal : !this.state.modal})}
 }
 
 componentDidMount(){
-    this.props.getWordsList()
+    this.props.getWordsList(this.state.page, this.state.limit)
   }
 
   render(){
       return(
-          <div>
+          <div><h1>Words</h1>
         {(!this.props.wordsList)?<div>Loading Words</div>:
             <Table striped bordered hover responsive>
                 <thead>
@@ -97,12 +100,17 @@ componentDidMount(){
                 </tr>)}
                 </tbody>                
             </Table>
+            
             }
+        <Paginator  count={this.props.count}
+                    limit={this.state.limit}
+                    page={this.state.page}
+                    onClick={(page, limit)=>this.props.getWordsList(page, limit)}/>
         
          <Modal isOpen={this.state.modal} toggle={this.toggle}>
          <ModalHeader toggle={this.toggle}>Edit Word</ModalHeader>
          <ModalBody>
-            <WordForm word={this.state.word}/>
+            <WordForm/>
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={()=>this.saveClicked()}>Save</Button>
@@ -118,15 +126,16 @@ componentDidMount(){
 
 const mapStateToProps = state => {
     return {
-      wordsList: state.wordsAdmin.wordsList,
-      formWord: state.wordsAdmin.word,
-      success: state.wordsAdmin.success 
+        count: state.wordsAdmin.count,
+        wordsList: state.wordsAdmin.wordsList,
+        formWord: state.wordsAdmin.word,
+        success: state.wordsAdmin.success 
     }
   }
 
 const mapDispatchToProps = dispatch => {
 return {
-        getWordsList : () => dispatch(getWordsList()),
+        getWordsList : (page, limit) => dispatch(getWordsList(page, limit)),
         createWord : (word) => dispatch(createWord(word)),
         editWord : (word) => dispatch(editWord(word)),
         updateWord : (word) => dispatch(updateWord(word)),

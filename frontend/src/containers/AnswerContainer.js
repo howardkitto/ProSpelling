@@ -4,8 +4,9 @@ import {saveAnswer,
         gotAnswer,
         tryAgain,
         changeQuestionState,
-        saveProgress,
-        changeSpellingTestState} from '../redux/actionCreators'
+        // changeSpellingTestState,
+        saveProgress
+        } from '../redux/actionCreators'
 
 import prepareResult from '../helperLogic/prepareResult'
 
@@ -172,8 +173,8 @@ const mapDispatchToProps = dispatch => {
             changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
             gotAnswer: (answer) => dispatch(gotAnswer(answer)),
             tryAgain : (answer) => dispatch(tryAgain(answer)),
-            saveProgress : (question, nextState) => dispatch(saveProgress(question, nextState)),
-            changeSpellingTestState : (spellingTestState)=>dispatch(changeSpellingTestState(spellingTestState))
+            saveProgress : (question, nextState) => dispatch(saveProgress(question, nextState))
+            // changeSpellingTestState : (spellingTestState)=>dispatch(changeSpellingTestState(spellingTestState))
           }
   }
 
