@@ -22,7 +22,7 @@ class WordForm extends Component{
   
   }
   onChange(e){
-    // console.log(e.target.name +' '+ e.target.value)
+    console.log(e.target.name +' '+ e.target.value)
 
     const key = e.target.name
     const value = e.target.value
@@ -36,18 +36,31 @@ class WordForm extends Component{
   }
 
  addToAssessment(e){
-    console.log(e.target.id)
+    
     let word = this.state.word
+
+    let deleteThisOne = word.linkedAssessments.findIndex(w=>w.assessmentId===e.target.id)
+
+    if(deleteThisOne!== -1){
+
+      console.log('delete ' + deleteThisOne + ' of ' + JSON.stringify(word.linkedAssessments))
+      word.linkedAssessments.splice(deleteThisOne, 1)
+      console.log("word at the end " + JSON.stringify(word.linkedAssessments))
+      this.setState({word})
+      // this.props.editWord(word)
+      
+    }
+    else{
     let assessment = {}
     assessment.assessmentId = e.target.id
     assessment.title = this.props.allAssessments.find(t => t._id === e.target.id).title
 
-    console.log("word at the start " + JSON.stringify(word))
+    // console.log("word at the start " + JSON.stringify(word))
     word.linkedAssessments.push(assessment)
-    console.log("word at the end " + JSON.stringify(word))
+    // console.log("word at the end " + JSON.stringify(word))
     this.setState({word})
 
-    this.props.editWord(word)
+    this.props.editWord(word)}
 
   }
 
@@ -130,3 +143,5 @@ const mapStateToProps = state => {
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WordForm)
+
+
