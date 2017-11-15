@@ -39,16 +39,18 @@ class WordForm extends Component{
     console.log(e.target.id)
     let word = this.state.word
     let assessment = {}
-    assessment.id = e.target.id
-    assessment.title = "randomness"
+    assessment.assessmentId = e.target.id
+    assessment.title = this.props.allAssessments.find(t => t._id === e.target.id).title
+
     console.log("word at the start " + JSON.stringify(word))
-    word.assessments.push({assessment})
+    word.linkedAssessments.push(assessment)
     console.log("word at the end " + JSON.stringify(word))
     this.setState({word})
 
     this.props.editWord(word)
 
   }
+
     
     render(){
       const{allAssessments}=this.props
@@ -71,20 +73,22 @@ class WordForm extends Component{
                     onChange={(e)=>this.onChange(e)}/>
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Label sm={3}>Assessments</Label>
-          <Col sm={9}><div>
-            {(!allAssessments)?
-              <span>loading</span>:
-              <div>{allAssessments.map((a)=>
-              <div key={a._id}>
-                <span><Input type="checkbox"
-                          id={a._id}
-                          onClick={(e)=>this.addToAssessment(e)}/></span>
-                <span>{a.title}</span></div>)}</div>}
-            </div>
-          </Col>
-        </FormGroup>
+    <FormGroup row>
+      <Label sm={3}>Assessments</Label>
+      <Col sm={9}><div>
+        {(!allAssessments)?
+          <span>loading</span>:
+          <div>{allAssessments.map((a)=>
+          <div key={a._id}>
+            <span><Input type="checkbox"
+                      id={a._id}
+                      onChange={(e)=>this.addToAssessment(e)}
+                      checked={(this.state.word.linkedAssessments.find(w=>w.assessmentId===a._id)?true:false)}/>
+              </span>
+            <span>{a.title}</span></div>)}</div>}
+        </div>
+      </Col>
+    </FormGroup>
         <FormGroup row>
           <Label for="level" sm={3}>Characteristics</Label>
           <Col sm={9}>

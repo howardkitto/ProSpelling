@@ -47,11 +47,11 @@ router.route('/page/:page/limit/:limit')
 router.route('/')
 .post(function(req, res){
 
-    // console.log('make a word ' + JSON.stringify(req.body))
+    console.log('make a word ' + JSON.stringify(req.body))
 
     const word = {    'word':req.body.word,
                         'level':req.body.level,
-                        'assessments':req.body.assessments,
+                        'linkedAssessments':req.body.linkedAssessments,
                         'characteristics': req.body.characteristics,
                         'audioFileName': req.body.audioFileName
                         }

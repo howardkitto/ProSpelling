@@ -83,7 +83,7 @@ class Assessments extends Component{
                         <td>Title</td>
                         <td>Description</td>
                         <td>Date Updated</td>
-                        <td><Button color="success" onClick={this.createAssessment}>Create New Word</Button></td>
+                        <td><Button color="success" onClick={this.createAssessment}>New Assessment</Button></td>
                     </tr>
                 </thead>
                 <tbody>
