@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Form, FormGroup, Label, Col, Input} from 'reactstrap'
 
-import {editWord} from '../../redux/actionCreators'
+import {editWord, getAssessmentsList} from '../../redux/actionCreators'
 
 class WordForm extends Component{
  
@@ -15,6 +15,11 @@ class WordForm extends Component{
 
   componentDidMount(){
     console.log(this.props.word)
+  
+    if(!this.props.assessments)
+    //need to fix this hardcoded stuff
+      this.props.getAssessmentsList(0,10)
+  
   }
   onChange(e){
     // console.log(e.target.name +' '+ e.target.value)
@@ -29,8 +34,24 @@ class WordForm extends Component{
 
     this.props.editWord(word)
   }
+
+ addToAssessment(e){
+    console.log(e.target.id)
+    let word = this.state.word
+    let assessment = {}
+    assessment.id = e.target.id
+    assessment.title = "randomness"
+    console.log("word at the start " + JSON.stringify(word))
+    word.assessments.push({assessment})
+    console.log("word at the end " + JSON.stringify(word))
+    this.setState({word})
+
+    this.props.editWord(word)
+
+  }
     
     render(){
+      const{allAssessments}=this.props
         return(
         <Form>
           {this.props.error}
@@ -52,10 +73,16 @@ class WordForm extends Component{
         </FormGroup>
         <FormGroup row>
           <Label sm={3}>Assessments</Label>
-          <Col sm={9}>
-            <Input  name="question"
-                    value={this.state.word.assessments}
-                    onChange={(e)=>this.onChange(e)}/>
+          <Col sm={9}><div>
+            {(!allAssessments)?
+              <span>loading</span>:
+              <div>{allAssessments.map((a)=>
+              <div key={a._id}>
+                <span><Input type="checkbox"
+                          id={a._id}
+                          onClick={(e)=>this.addToAssessment(e)}/></span>
+                <span>{a.title}</span></div>)}</div>}
+            </div>
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -85,14 +112,16 @@ class WordForm extends Component{
 const mapStateToProps = state => {
     return {
       word: state.wordsAdmin.word,
-      error: state.wordsAdmin.formError 
+      error: state.wordsAdmin.formError,
+      allAssessments: state.assessmentAdmin.assessmentList 
       
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-      editWord : (word) => dispatch(editWord(word))
+      editWord : (word) => dispatch(editWord(word)),
+      getAssessmentsList: (page, limit)=>dispatch(getAssessmentsList(page, limit))
           }
   }
 
