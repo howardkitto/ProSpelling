@@ -48,9 +48,9 @@ export default class Example extends React.Component {
                     Admin
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem href='/admin/words'>Words</DropdownItem>
-                    <DropdownItem href='/admin/spellingtests'>Spelling Tests</DropdownItem>
-                    <DropdownItem href='/admin/assessments'>Assessments</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/words'>Words</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
               </DropdownMenu>
             </UncontrolledNavDropdown>
             </Nav>

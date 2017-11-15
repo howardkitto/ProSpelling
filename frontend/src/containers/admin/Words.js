@@ -31,7 +31,7 @@ class Words extends Component{
         //create an empty word object
         var newWord = { word:'',
                         level:'',
-                        question:'',
+                        linkedAssessments:[],
                         characteristics:'',
                         audioFileName:''}
         
@@ -43,7 +43,7 @@ edit(word){
         // make sure none of the fields are null
     if(!word.word)word.word=''
     if(!word.level)word.level=''
-    if(!word.question)word.question=''
+    if(!word.linkedAssessments)word.linkedAssessments=[]
     if(!word.characteristics)word.characteristics=''
     if(!word.audioFileName)word.audioFileName=''
 
