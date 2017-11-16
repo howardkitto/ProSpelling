@@ -1,13 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {startSpellingTest} from '../redux/actionCreators'
+import {startSpellingTest,
+        getAssessmentbyTitle} from '../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
 
 class PhaseOneAssessment extends Component{
 
     componentDidMount(){
+        this.props.getAssessmentbyTitle('Phase One')
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.foundAss._id)
         this.props.startSpellingTest({criteria:'assessment',
-                                    value:'5a0ab6a769eecb75ed2b8f04'})
+                                    value:nextProps.foundAss._id})
+
     }
     render(){
         return(
@@ -21,14 +28,15 @@ class PhaseOneAssessment extends Component{
 
 const mapStateToProps = state => {
     return {
+        foundAss: state.assessmentAdmin.foundAssessment
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
         // startSpellingTest : (level) => dispatch(startSpellingTest({level:2}))
-        startSpellingTest : (selection) => dispatch(startSpellingTest(selection))
-        
+        startSpellingTest : (selection) => dispatch(startSpellingTest(selection)),
+        getAssessmentbyTitle:(assessmentTitle)=>dispatch(getAssessmentbyTitle(assessmentTitle))
           }
   }
 

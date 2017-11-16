@@ -91,6 +91,12 @@ let promise = Assessments.find().exec()
     }
 )
 
+router.route('/assessmentTitle/:assessmentTitle')
+.get((req,res)=>{
+    console.log(req.params.assessmentTitle)
+    var promise = Assessments.findOne({'title':req.params.assessmentTitle}).exec()
+    .then((assessment)=>{res.json({'foundAssessment':assessment})})
+})
 
 
 module.exports = router

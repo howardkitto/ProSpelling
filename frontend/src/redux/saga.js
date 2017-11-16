@@ -24,6 +24,7 @@ const apiActions = ['GET_WORD',
                     'GET_SPELLING_TESTS',
                     'CREATE_ASSESSMENT',
                     'GET_ASSESSMENTS',
+                    'GET_ASSESSMENT_BY_TITLE',
                     'UPDATE_ASSESSMENT',
                     'DELETE_ASSESSMENT']
 

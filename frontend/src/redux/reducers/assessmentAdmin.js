@@ -38,6 +38,10 @@ const assessmentAdmin = (state=[], action)=>{
                     ...state,
                     formError:action.message
                 }
+            case 'GOT_ASSESSMENT_ID':
+            return{
+                foundAssessment:action.data.foundAssessment
+            }
             default:
             return state
     }}

@@ -25,6 +25,8 @@ const DELETE_WORD = 'DELETE_WORD'
 
 //ASSESSMENT ADMIN ACTIONS
 const GET_ASSESSMENTS = 'GET_ASSESSMENTS'
+const GET_ASSESSMENT_BY_TITLE = 'GET_ASSESSMENT_BY_TITLE'
+const GOT_ASSESSMENT_ID = 'GOT_ASSESSMENT_ID'
 const CREATE_ASSESSMENT = 'CREATE_ASSESSMENT'
 const EDIT_ASSESSMENT = 'EDIT_ASSESSMENT'
 const UPDATE_ASSESSMENT = 'UPDATE_ASSESSMENT'
@@ -178,6 +180,15 @@ export function getAssessmentsList(page, limit){
     }
 }
 
+export function getAssessmentbyTitle(assessmentTitle){
+console.log('GET_ASSESSMENT_BY_TITLE' + assessmentTitle)
+    return{
+        type:GET_ASSESSMENT_BY_TITLE,
+        path:'../api/assessments/assessmentTitle/'+assessmentTitle,
+        method:'GET',
+        returnAction: GOT_ASSESSMENT_ID
+}
+}
 export function createAssessment(assessment){
     // console.log('CREATE_ASSESSMENT' +JSON.stringify(assessment))
     return {

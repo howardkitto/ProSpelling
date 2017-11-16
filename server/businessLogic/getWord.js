@@ -11,7 +11,7 @@ const getWord = (allWords) => {
             resolve({message:'end of assessment'})
         }
         else{
-            console.log('got these words ' + JSON.stringify(allWordsArray))
+            // console.log('got these words ' + JSON.stringify(allWordsArray))
             const wordNumber = Math.floor((Math.random() * allWordsArray.length));    
             resolve(allWordsArray[wordNumber])
         }
