@@ -4,14 +4,15 @@ import {connect} from 'react-redux'
 import hand from '../images/righthandoutline.png'
 
 import Letter from '../components/Letter'
-import UserDetailsForm from './UserDetailsForm'
-
 
 class LessonOneContainer extends Component{
 
 
     playSound(letter){
         this.audioPlayer.src = (`/static/audio/${letter}.mp3`)
+
+        this.audioPlayer.src = (`https://s3-us-west-2.amazonaws.com/prospelling/audio/${letter}.mp3`)
+        
         let playPromise = this.audioPlayer.play()
         //catch and surpress a bug in chrome
         if (playPromise !== undefined){
@@ -35,15 +36,8 @@ class LessonOneContainer extends Component{
 render(){
 
     return( 
-<div>
         <div className="page-header">
         <h1>Short Vowel Sounds</h1>
-        
-        {(this.props.spellerName)?<h2>Hello {this.props.spellerName}</h2>:null}
-      </div>
-      <div>{(this.props.spellerName)?
-            <h3 className="display-3">Hello, {this.props.spellerName}</h3>:
-          <UserDetailsForm headerText = "What is your name?  "/>}   </div>
             <div className="row">
       <div className="a_box"> {this.renderLetter('a')}</div>
       <div className="e_box"> {this.renderLetter('e')}</div>
@@ -66,7 +60,7 @@ render(){
 
 const mapStateToProps = state => {
   return {
-    spellerName: state.name
+    
   }
 }
 

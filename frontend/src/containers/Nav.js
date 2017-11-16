@@ -35,6 +35,21 @@ export default class Example extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+            <UncontrolledNavDropdown>
+                  <DropdownToggle nav caret>
+                    Admin
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem tag={Link} to='/admin/words'>Words</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledNavDropdown>
+            <NavLink tag={Link} 
+                  to="/user/registration" 
+                  activeclassname="activeNavLink">
+                Register
+                </NavLink>
                 <NavLink tag={Link} 
                   to="/lessonone" 
                   activeclassname="activeNavLink">
@@ -46,16 +61,7 @@ export default class Example extends React.Component {
                 <NavLink tag={Link} to="/quickquiz" activeclassname="activeNavLink">
                 QuickQuiz
                 </NavLink>
-                <UncontrolledNavDropdown>
-                  <DropdownToggle nav caret>
-                    Admin
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem tag={Link} to='/admin/words'>Words</DropdownItem>
-                    <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
-                    <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledNavDropdown>
+                
             </Nav>
           </Collapse>
         </Navbar>

@@ -12,6 +12,7 @@ import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
 import SpellingTest from './containers/admin/SpellingTest'
 import Assessments from './containers/admin/Assessments'
+import RegistrationContainer from './containers/user/registrationContainer'
 
 import {
     Route,
@@ -39,6 +40,7 @@ class App extends Component {
               <Route path="/quickquiz" component={QuickQuiz}/>
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
+              <Route path="/user/registration" component={RegistrationContainer}/>
               <Route path="/admin/words" component={Words}/>
               <Route path="/admin/spellingtests" component={SpellingTest}/>
               <Route path='/admin/assessments' component={Assessments}/>
