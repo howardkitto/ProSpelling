@@ -43,6 +43,9 @@ export default class Example extends React.Component {
                 <NavLink tag={Link} to="/lessontwo" activeclassname="activeNavLink">
                 Lesson Two
                 </NavLink>
+                <NavLink tag={Link} to="/quickquiz" activeclassname="activeNavLink">
+                QuickQuiz
+                </NavLink>
                 <UncontrolledNavDropdown>
                   <DropdownToggle nav caret>
                     Admin

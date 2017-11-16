@@ -16,9 +16,9 @@ function question(state=[], action){
         case 'GOT_WORD':
         // console.log('reducer got ' + JSON.stringify(action))
             return{
-            word: action.word.word,
-            audioFileName: action.word.audioFileName,
-            askTimeStamp: action.word.timeStamp,
+            word: action.data.word,
+            audioFileName: action.data.audioFileName,
+            askTimeStamp: action.data.timeStamp,
             attempt: 1,
             questionState: 'wordLoaded'
             }

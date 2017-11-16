@@ -5,15 +5,17 @@ const saveSpellingTest = require('../../businessLogic/saveSpellingTest')
 const getWord = require('../../businessLogic/getWord')   
 const filterPreviousWords = require('../../businessLogic/filterPreviousWords')
 
-router.route('/')
+router.route('/criteria/:criteria/value/:value')
 
 .post((req, res)=>{
-    console.log('got post ' + JSON.stringify(req.body))
+    console.log('got post ' + JSON.stringify(req.params.value))
 
     const processWord = async ()=>{
         
-        let savedSpellingTest = await(saveSpellingTest(req.body.spellingTest))
-        let allWords = await Words.find({"level":req.body.level}).exec()
+        let savedSpellingTest = await(saveSpellingTest(req.body))
+        let allWords = (req.params.criteria=='level')?
+            await Words.find({"level":req.params.value}).exec()
+            :await Words.find({'linkedAssessments.assessmentId':req.params.value})
         let remainingWords = await filterPreviousWords(savedSpellingTest, allWords)
         let word = await getWord(remainingWords)
         
@@ -21,7 +23,7 @@ router.route('/')
 
        }
 
-    processWord().catch(error => console.log(error));
+    processWord().catch(error => console.log('error'));
 })
 
 module.exports = router

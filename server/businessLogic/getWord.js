@@ -5,11 +5,19 @@ const getWord = (allWords) => {
             {return {word:i.word, 
                     audioFileName:process.env.AUDIO_DOMAIN + i.audioFileName,
                     timeStamp:timeStamp}})
-        // console.log('got these words ' + JSON.stringify(allWordsArray))
-
-        const wordNumber = Math.floor((Math.random() * allWordsArray.length));
-    
-        resolve(allWordsArray[wordNumber])
+        
+        if(allWords.length==0){
+            console.log('end of assessment')
+            resolve({message:'end of assessment'})
+        }
+        else{
+            console.log('got these words ' + JSON.stringify(allWordsArray))
+            const wordNumber = Math.floor((Math.random() * allWordsArray.length));    
+            resolve(allWordsArray[wordNumber])
+        }
+        
+        
+        
     }
 )} 
 

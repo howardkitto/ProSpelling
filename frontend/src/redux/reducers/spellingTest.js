@@ -6,10 +6,11 @@ function spellingTest(state=[], action){
         
         case 'START_SPELLING_TEST':
             return{
-                ...state,
+                // ...state,
                 spellingTestId: action.spellingTestId,
                 createdAt:action.createdAt,
-                level: action.level,
+                criteria: action.criteria,
+                value: action.value,
                 questions: [],
                 spellingTestState:'startSpellingTest'
             }

@@ -28,7 +28,7 @@ const assessmentAdmin = (state=[], action)=>{
                     assessmentList:[]
                     }
             case 'DELETED_ASSESSMENT':
-            // console.log('Reducer got ' +JSON.stringify(action))
+            console.log('Reducer got ' +JSON.stringify(action))
                 return{
                     wordList:[]
                     }

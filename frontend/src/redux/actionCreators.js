@@ -5,6 +5,15 @@ import uuid from 'uuid'
 //USER EXPERIENCE ACTIONS
 
 const START_SPELLING_TEST = 'START_SPELLING_TEST'
+const GET_WORD = 'GET_WORD'
+const GET_ANSWER = 'GET_ANSWER'
+const GOT_ANSWER = 'GOT_ANSWER'
+const SUBMIT_ANSWER = 'SUBMIT_ANSWER'
+const SAVE_PROGRESS = 'SAVE_PROGRESS'
+const TRY_AGAIN = 'TRY_AGAIN'
+const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
+
+
 // const CHANGE_SPELLING_TEST_STATE = 'CHANGE_SPELLING_TEST_STATE'
 
 //WORDS ADMIN ACTIONS
@@ -26,57 +35,61 @@ const GET_SPELLING_TESTS = 'GET_SPELLING_TESTS'
 
 // USER EXPERIENCE
 
-export function startSpellingTest(level){
-    // console.log('LEVEL_SELECTED ' + level)
+export function startSpellingTest(selection){
+    console.log(selection.criteria + ' ' + selection.value)
     let timestamp = new Date()
     let spellingTestId = uuid()
     return {
         type: START_SPELLING_TEST,
         spellingTestId,
-        level,
+        criteria: selection.criteria,
+        value: selection.value,
+        assessment: selection.assessment,
         createdAt: timestamp
     }
 }
 
-export function getWord(level, spellingTest){
-    console.log('GET_WORD action '+JSON.stringify(spellingTest))
+export function getWord(criteria, value, spellingTest){
+    // console.log('GET_WORD action '+JSON.stringify(spellingTest))
     return{
-        type: 'GET_WORD',
-        level: level,
-        spellingTest: spellingTest
+        type: GET_WORD,
+        path: '../api/getword/criteria/'+criteria+'/value/'+value,
+        method:'POST',
+        payload:spellingTest,
+        returnAction: 'GOT_WORD'
     }
 }
 
 export function tryAgain(){
     return{
-        type: 'TRY_AGAIN'
+        type: TRY_AGAIN
     }
 }
 
 export function submitAnswer(){
     return{
-        type: 'SUBMIT_ANSWER'
+        type: SUBMIT_ANSWER
     }
 }
 
 export function saveProgress(question, nextState){
     return{
-        type: 'SAVE_PROGRESS',
-        question:question,
-        nextState: nextState
+        type: SAVE_PROGRESS,
+        question,
+        nextState
     }}
 
 export function changeQuestionState(questionState){
     // console.log('changeQuestionState got '+ questionState)
     return {
-        type: 'CHANGE_QUESTION_STATE',
+        type: CHANGE_QUESTION_STATE,
         questionState
     }
 }
 
 export function saveAnswer(answer){
     return {
-        type: 'GET_ANSWER',
+        type: GET_ANSWER,
         answer
     }
 }
@@ -84,7 +97,7 @@ export function saveAnswer(answer){
 export function gotAnswer(result, score){
     const timestamp = new Date()
     return{
-        type: 'GOT_ANSWER',
+        type: GOT_ANSWER,
         answerTimestamp: timestamp,
         result,
         score
@@ -105,8 +118,9 @@ export function saveName(name){
 export function getWordsList(page, limit){
     return{
         type: GET_WORDS_LIST,
-        page,
-        limit
+        path: '../api/words/page/'+page+'/limit/'+limit,
+        method: 'GET',
+        returnAction: 'GOT_WORDS_LIST'
     }
 }
 
@@ -114,7 +128,10 @@ export function createWord(word){
     // console.log('CREATE_WORD ' +JSON.stringify(word))
     return {
         type: CREATE_WORD,
-        word
+        path: '../api/words',
+        method: 'POST',
+        payload: word,
+        returnAction: 'CREATED_WORD'
     }
 }
 
@@ -130,7 +147,10 @@ export function updateWord(word){
     // console.log('UPDATE_WORD ' +JSON.stringify(word))
     return {
         type: UPDATE_WORD,
-        word
+        path:'../api/words',
+        method:'PUT',
+        payload: word,
+        returnAction: 'UPDATED_WORD'
     }
 }
 
@@ -138,7 +158,10 @@ export function deleteWord(word){
     // console.log('DELETE_WORD action '+JSON.stringify(word))
     return {
         type: DELETE_WORD,
-        word
+        path:'../api/words',
+        method:'DELETE',
+        payload: word,
+        returnAction: 'DELETED_WORD'
     }
 }
 
@@ -149,8 +172,9 @@ export function getAssessmentsList(page, limit){
     // console.log('GET_ASSESSMENTS' +JSON.stringify(assessment))
     return{
         type: GET_ASSESSMENTS,
-        page,
-        limit
+        path: '../api/assessments/page/'+page+'/limit/'+limit,
+        method: 'GET',
+        returnAction: 'GOT_ASSESSMENTS'
     }
 }
 
@@ -158,7 +182,10 @@ export function createAssessment(assessment){
     // console.log('CREATE_ASSESSMENT' +JSON.stringify(assessment))
     return {
         type: CREATE_ASSESSMENT,
-        assessment
+        path: '../api/assessments',
+        method: 'POST',
+        payload: assessment,
+        returnAction: 'CREATED_ASSESSMENT'
     }
 }
 
@@ -174,7 +201,10 @@ export function updateAssessment(assessment){
     // console.log('UPDATE_WORD ' +JSON.stringify(word))
     return {
         type: UPDATE_ASSESSMENT,
-        assessment
+        path: '../api/assessments',
+        method: 'PUT',
+        payload: assessment,
+        returnAction: 'UPDATED_ASSESSMENT'
     }
 }
 
@@ -182,7 +212,10 @@ export function deleteAssessment(assessment){
     // console.log('DELETE_ASSESSMENT action '+JSON.stringify(word))
     return {
         type: DELETE_ASSESSMENT,
-        assessment
+        path: '../api/assessments',
+        method:'DELETE',
+        payload: assessment,
+        returnAction: 'DELETED_ASSESSMENT'
     }
 }
 
@@ -191,19 +224,8 @@ export function deleteAssessment(assessment){
 export function getSpellingTests(page, limit){
     return{
         type: GET_SPELLING_TESTS,
-        page,
-        limit
+        path:'../api/spellingTests/page/'+page+'/limit/'+limit,
+        method:'GET',
+        returnAction: 'GOT_SPELLING_TESTS'
     }
 }
-
-
-
-
-
-//Think this is redundant
-// export function changeSpellingTestState(spellingTestState){
-//     return{
-//         type: CHANGE_SPELLING_TEST_STATE,
-//         spellingTestState
-//     }
-// }

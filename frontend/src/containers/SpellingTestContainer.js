@@ -12,16 +12,22 @@ class SpellingTestContainer extends Component{
 
 
     spellingTest(){
-        switch(this.props.spellingTestState){
+
+        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, apiMessage} = this.props
+
+        if(apiMessage ==='end of assessment')
+            return<h1>end of assessment</h1>
+        else{
+        switch(spellingTestState){
             case "startSpellingTest":
-                this.props.getWord(this.props.level, this.props.spellingTest)
+                this.props.getWord(criteria, value, spellingTest)
                 return <div>Getting first word</div>
             case "inProgress":
                 return <div><QuestionContainer/></div>
             case "waitingToContinue":
                 return <div>Awesome!
                     <div>
-                    <Button color="info" onClick={()=>this.props.getWord(this.props.level, this.props.spellingTest)}>
+                    <Button color="info" onClick={()=>getWord(criteria, value, spellingTest)}>
                     Click for Next Word</Button>
                     </div>
                 </div>
@@ -29,9 +35,9 @@ class SpellingTestContainer extends Component{
                 return <div>SpellingTest Complete</div>
             default:
                 return <div>
-                        {!this.props.spellingTestId?<LevelSelector />:null}
+                        {!spellingTestId?<LevelSelector />:null}
                     </div>
-        }
+        }}
     }
 
     render(){
@@ -48,17 +54,19 @@ class SpellingTestContainer extends Component{
   const mapStateToProps = state => {
     return {
         spellingTest:state.spellingTest,
-        level:state.spellingTest.level,
+        criteria:state.spellingTest.criteria,
+        value:state.spellingTest.value,
         question:state.question,
         spellingTestState:state.spellingTest.spellingTestState,
         questionState:state.question.questionState,
-        progress:state.spellingTest.progress
+        progress:state.spellingTest.progress,
+        apiMessage:state.apiMessage.message
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-        getWord : (level, spellingTest) => dispatch(getWord(level, spellingTest)),
+        getWord : (criteria, value, spellingTest) => dispatch(getWord(criteria, value, spellingTest)),
         changeQuestionState : (questionState) => dispatch(changeQuestionState(questionState))
           }
   }

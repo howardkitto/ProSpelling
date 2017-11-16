@@ -1,13 +1,13 @@
 const getWordApi = (action) =>{
-  // console.log('getWordAPI ' + JSON.stringify(action))
+  console.log('callAPI got ' + JSON.stringify(action))
 
-  const request = new Request('../api/getword', {
-    method: 'POST',
+
+    const request = new Request(action.path, {
+    method: action.method,
     headers: new Headers({
       'Content-Type': 'application/json'
     }), 
-    body: (JSON.stringify(  {level : action.level,
-                            spellingTest : action.spellingTest}))
+    body: (JSON.stringify(action.payload))
   });
 
   return fetch(request)

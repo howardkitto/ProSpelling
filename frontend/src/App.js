@@ -6,6 +6,7 @@ import HomeContainer from './containers/HomeContainer'
 import LessonOneContainer from './containers/LessonOneContainer'
 import LessonTwoContainer from './containers/LessonTwoContainer'
 import PhaseOneAssessment from './containers/PhaseOneAssessment'
+import QuickQuiz from './containers/QuickQuiz'
 import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
@@ -35,6 +36,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={HomeContainer}/>
               <Route path="/phaseoneassessment" component={PhaseOneAssessment}/>
+              <Route path="/quickquiz" component={QuickQuiz}/>
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/admin/words" component={Words}/>

@@ -40,7 +40,9 @@ class LevelSelector extends Component{
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.state.levels.map((level, index)=>
-                        <DropdownItem key={index} onClick={(e)=>this.props.startSpellingTest(level.number)}>
+                        <DropdownItem key={index} onClick={(e)=>
+                            this.props.startSpellingTest({criteria:'level',
+                                                        value:level.number})}>
                         {level.description}</DropdownItem>
                     )}
                 </DropdownMenu>
@@ -58,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        startSpellingTest : (level) => dispatch(startSpellingTest(level))
+        startSpellingTest : (selection) => dispatch(startSpellingTest(selection))
           }
   }
 

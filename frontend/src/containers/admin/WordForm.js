@@ -14,7 +14,7 @@ class WordForm extends Component{
   }
 
   componentDidMount(){
-    console.log(this.props.word)
+    // console.log(this.props.word)
   
     if(!this.props.assessments)
     //need to fix this hardcoded stuff
@@ -58,10 +58,10 @@ class WordForm extends Component{
 
     
     render(){
-      const{allAssessments}=this.props
+      const{allAssessments, apiMessage}=this.props
         return(
         <Form>
-          {this.props.error}
+          {apiMessage}
         <FormGroup row>
           <Label for="word" sm={3}>Word</Label>
           <Col sm={9}>
@@ -121,8 +121,8 @@ class WordForm extends Component{
 const mapStateToProps = state => {
     return {
       word: state.wordsAdmin.word,
-      error: state.wordsAdmin.formError,
-      allAssessments: state.assessmentAdmin.assessmentList 
+      allAssessments: state.assessmentAdmin.assessmentList,
+      apiMessage:state.apiMessage.message 
       
     }
   }
