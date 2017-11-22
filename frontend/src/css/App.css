@@ -83,7 +83,18 @@ h1{
   border-color: #AA1946!important;
 }
 
-.videoCanvas{
-  /* position: absolute; */
-  
+#myVideo {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  width: 100%; 
+  height: 100%;
+}
+
+#homepageContent{
+  position: absolute;
+  top: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  padding: 20px;
 }
