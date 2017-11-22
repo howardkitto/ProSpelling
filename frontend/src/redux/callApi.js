@@ -1,4 +1,4 @@
-const getWordApi = (action) =>{
+const callApi = (action) =>{
   console.log('callAPI got ' + JSON.stringify(action))
 
 
@@ -18,4 +18,4 @@ const getWordApi = (action) =>{
       )
 }
 
-export default getWordApi
+export default callApi

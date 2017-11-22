@@ -13,7 +13,7 @@ import {  Collapse,
          } from 'reactstrap';
 import logo from '../images/logo.png'
 
-export default class Example extends React.Component {
+class mainNav extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,14 +27,20 @@ export default class Example extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  navBarStyle(){
+    return(
+      {'backgroundColor':'#212121'}
+    )
+  }
   render() {
     return (
       <div>
-        <Navbar color="faded" light expand="md">
+        <Navbar dark expand="md" style={this.navBarStyle()}>
           <NavbarBrand href="/"><img src={logo} alt="Pro Spelling"/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav  className="ml-auto" navbar>
             <UncontrolledNavDropdown>
                   <DropdownToggle nav caret>
                     Admin
@@ -69,3 +75,5 @@ export default class Example extends React.Component {
     );
   }
 }
+
+export default mainNav
