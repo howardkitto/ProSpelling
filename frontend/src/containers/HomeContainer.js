@@ -19,16 +19,17 @@ render(){
 
   return(
     <div>
-      <video autoPlay muted loop playsInline id="myVideo">
-        <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/test4.mp4' type="video/mp4"/>
-      Browser doesn't support html5 video
-      </video>
-      <div id="homepageContent">
+      <div className="homepageContent">
        <h1>Welcome to Pro Spelling</h1>
         <div>
         <LetsStartButton />
         </div>
       </div>
+      <video autoPlay muted loop playsInline id="myVideo">
+        <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/test4.mp4' type="video/mp4"/>
+      Browser doesn't support html5 video
+      </video>
+      
       </div>
         )
     }

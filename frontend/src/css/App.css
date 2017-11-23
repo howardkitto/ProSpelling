@@ -10,39 +10,6 @@ h1{
   background-color: #212121 !important;
 }
 
-.page-header {
-  text-align: center;
-  font-family: "Comic Sans MS";
-  font-size: 70px;
-  margin-top: .3em;
-  margin-bottom: .3em;
-}
-.letterBox {
-  text-align: center;
-  font-family: "Comic Sans MS";
-  font-size: 100px;
-  }
-
-.a_box {
-  background-color:#9fc5e8;
-  width: 100px;
-}
-.e_box {
-  background-color:#a2c4c9;
-  width: 100px;  
-}
-.i_box {
-  background-color: #ffe59a;
-  width: 100px;
-}
-.o_box {
-  background-color: #d9d2e9;
-  width: 100px;
-}
-.u_box {
-  background-color: #cfe2f3;
-  width: 100px;
-}
 
 .listeningText {
   color: red;
@@ -83,6 +50,19 @@ h1{
   border-color: #AA1946!important;
 }
 
+.homepageContent{
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  z-index: 1;
+}
+
+@media screen and (min-width: 550px) {
+  .homepageContent {
+    position: absolute;
+    top: 100px;
+  }
+}
+
 #myVideo {
   position: relative;
   right: 0;
@@ -91,10 +71,5 @@ h1{
   height: 100%;
 }
 
-#homepageContent{
-  position: absolute;
-  top: 100px;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  padding: 20px;
-}
+
+
