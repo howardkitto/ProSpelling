@@ -1,5 +1,5 @@
 const callApi = (action) =>{
-  console.log('callAPI got ' + JSON.stringify(action))
+  // console.log('callAPI got ' + JSON.stringify(action))
 
 
     const request = new Request(action.path, {
@@ -11,10 +11,16 @@ const callApi = (action) =>{
   });
 
   return fetch(request)
-      .then(response => response.json()
-          )
+      .then(response => {
+        switch(response.status){
+          case 500:return({message:'Server threw an error'})
+          case 404:return ({message:'Wrong Path'})
+          default : return response.json()
+          }
+        }
+      )
       .catch(
-        (error)=>{console.log('api error ' + error)}
+        (error => (console.log('callApi has error')))
       )
 }
 

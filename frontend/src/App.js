@@ -12,7 +12,7 @@ import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
 import SpellingTest from './containers/admin/SpellingTest'
 import Assessments from './containers/admin/Assessments'
-import RegistrationContainer from './containers/user/registrationContainer'
+import RegistrationContainer from './containers/user/RegistrationContainer'
 
 import {
     Route,

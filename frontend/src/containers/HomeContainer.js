@@ -26,6 +26,7 @@ render(){
         </div>
       </div>
       <video autoPlay muted loop playsInline id="myVideo">
+        <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/Homepage1/playlist.m3u8' type="application/x-mpegurl"/>
         <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/test4.mp4' type="video/mp4"/>
       Browser doesn't support html5 video
       </video>

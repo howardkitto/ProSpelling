@@ -35,6 +35,11 @@ const DELETE_ASSESSMENT = 'DELETE_ASSESSMENT'
 //spelling test admin
 const GET_SPELLING_TESTS = 'GET_SPELLING_TESTS'
 
+//Authentication
+
+const CREATE_USER = 'CREATE_USER'
+const CREATED_USER = 'CREATED_USER'
+
 // USER EXPERIENCE
 
 export function startSpellingTest(selection){
@@ -238,5 +243,18 @@ export function getSpellingTests(page, limit){
         path:'../api/spellingTests/page/'+page+'/limit/'+limit,
         method:'GET',
         returnAction: 'GOT_SPELLING_TESTS'
+    }
+}
+
+//Authentication
+
+export const createUser=(user)=>{
+    console.log('CREATE_USER action '+JSON.stringify(user))
+    return{
+        type:CREATE_USER,
+        path:'./register',
+        method:'POST',
+        payload:user,
+        returnAction: CREATED_USER
     }
 }

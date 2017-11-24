@@ -6,7 +6,7 @@ import wordsAdmin from './wordsAdmin'
 import spellingTest from './spellingTest'
 import spellingTestAdmin from './spellingTestAdmin'
 import assessmentAdmin from './assessmentAdmin'
-import apiMessage from './apiMessage'
+import serviceMessage from './serviceMessage'
 
 import { routerReducer} from 'react-router-redux'
 
@@ -15,9 +15,8 @@ const rootReducer = combineReducers({   speller,
                                         wordsAdmin,
                                         spellingTestAdmin,
                                         assessmentAdmin,
-                                        apiMessage,
+                                        serviceMessage,
                                         question,
-
                                         router:routerReducer})
 
 export default rootReducer;

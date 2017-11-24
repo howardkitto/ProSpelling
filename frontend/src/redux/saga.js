@@ -9,9 +9,9 @@ export function* callApiSaga(action){
         const response = yield call(callAPI, action)
         yield (!response.message)?   
         put({type:action.returnAction, data: response}):
-        put({type:'API_MESSAGE', message:response.message})
+        put({type:'SERVICE_MESSAGE', message:response.message})
     }
-    catch(e){console.log('callApiSaga api error ' + e)}
+    catch(e){put({type:'SERVICE_MESSAGE', message:'Problem Contacting Server'})}
 }
 
 //2. Watcher
@@ -26,7 +26,8 @@ const apiActions = ['GET_WORD',
                     'GET_ASSESSMENTS',
                     'GET_ASSESSMENT_BY_TITLE',
                     'UPDATE_ASSESSMENT',
-                    'DELETE_ASSESSMENT']
+                    'DELETE_ASSESSMENT',
+                    'CREATE_USER']
 
 export function* watchForApiActions(){
     yield takeEvery(apiActions, callApiSaga)
