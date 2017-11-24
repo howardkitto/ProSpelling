@@ -52,7 +52,7 @@ class mainNav extends React.Component {
               </DropdownMenu>
             </UncontrolledNavDropdown>
             <NavLink tag={Link} 
-                  to="/user/registration" 
+                  to="/signup" 
                   activeclassname="activeNavLink">
                 Register
                 </NavLink>

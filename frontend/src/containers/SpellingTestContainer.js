@@ -13,9 +13,9 @@ class SpellingTestContainer extends Component{
 
     spellingTest(){
 
-        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, apiMessage} = this.props
+        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, serviceMessage} = this.props
 
-        if(apiMessage ==='end of assessment')
+        if(serviceMessage ==='end of assessment')
             return<h1>end of assessment</h1>
         else{
         switch(spellingTestState){
@@ -60,7 +60,7 @@ class SpellingTestContainer extends Component{
         spellingTestState:state.spellingTest.spellingTestState,
         questionState:state.question.questionState,
         progress:state.spellingTest.progress,
-        apiMessage:state.apiMessage.message
+        serviceMessage:state.serviceMessage.message
     }
   }
 

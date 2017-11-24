@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createUser} from '../../redux/actionCreators'
 
-import RegistrationForm from '../../components/RegistrationForm'
+import SignupForm from '../../components/SignupForm'
 
 
-class RegContainer extends Component{
+class SignupContainer extends Component{
 
     constructor(props){
         super(props)
@@ -35,7 +35,7 @@ class RegContainer extends Component{
     const{serviceMessage}=this.props
 
         return(<div>
-                <RegistrationForm
+                <SignupForm
                     onChange={(e)=>this.onChange(e)}
                     saveUser={this.saveUser}
                      serviceMessage={serviceMessage}/>
@@ -56,8 +56,8 @@ const mapStateToProps = state => {
           }
   }
 
-  RegistrationForm.PropTypes = {
+  SignupContainer.PropTypes = {
     serviceMessage :PropTypes.string
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer)

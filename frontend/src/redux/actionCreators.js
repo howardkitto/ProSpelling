@@ -252,7 +252,7 @@ export const createUser=(user)=>{
     console.log('CREATE_USER action '+JSON.stringify(user))
     return{
         type:CREATE_USER,
-        path:'./register',
+        path:'./signup',
         method:'POST',
         payload:user,
         returnAction: CREATED_USER

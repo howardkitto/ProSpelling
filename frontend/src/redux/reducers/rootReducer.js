@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import speller from './speller'
+import user from './user'
 import question from './question'
 import wordsAdmin from './wordsAdmin'
 import spellingTest from './spellingTest'
@@ -10,7 +10,7 @@ import serviceMessage from './serviceMessage'
 
 import { routerReducer} from 'react-router-redux'
 
-const rootReducer = combineReducers({   speller,
+const rootReducer = combineReducers({   user,
                                         spellingTest,
                                         wordsAdmin,
                                         spellingTestAdmin,

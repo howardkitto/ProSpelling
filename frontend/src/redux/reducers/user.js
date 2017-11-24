@@ -1,12 +1,12 @@
 //Speller - a person who spells with a specified ability
 
-function speller(state=[], action){
+function user(state=[], action){
     // console.log('Speller Reducer running' + JSON.stringify(action))
     switch(action.type){
-        case 'GET_SPELLER_NAME':
+        case 'CREATED_USER':
+        console.log('User Reducer running' + JSON.stringify(action))
             return{
-                ...state,
-                name: action.name
+                token: action.data.token
             }
             default:
             return state
@@ -14,5 +14,4 @@ function speller(state=[], action){
 }
 
 
-
-export default speller
+export default user
