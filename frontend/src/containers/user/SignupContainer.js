@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-
 import {connect} from 'react-redux'
 import {createUser} from '../../redux/actionCreators'
-
 import SignupForm from '../../components/SignupForm'
-
 
 class SignupContainer extends Component{
 
@@ -34,11 +31,13 @@ class SignupContainer extends Component{
     
     const{serviceMessage}=this.props
 
-        return(<div>
+        return(<div className="adminContainer">
+                <div className="userForm">
                 <SignupForm
                     onChange={(e)=>this.onChange(e)}
                     saveUser={this.saveUser}
-                     serviceMessage={serviceMessage}/>
+                    serviceMessage={serviceMessage}/>
+                </div>
                 </div>
         ) 
     }

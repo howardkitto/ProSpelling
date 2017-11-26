@@ -37,7 +37,7 @@ class mainNav extends React.Component {
     return (
       <div>
         <Navbar dark expand="md" style={this.navBarStyle()}>
-          <NavbarBrand href="/"><img src={logo} alt="Pro Spelling"/></NavbarBrand>
+          <NavbarBrand tag={Link} to='/'><img src={logo} alt="Pro Spelling"/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav  className="ml-auto" navbar>
@@ -54,7 +54,12 @@ class mainNav extends React.Component {
             <NavLink tag={Link} 
                   to="/signup" 
                   activeclassname="activeNavLink">
-                Register
+                Sign Up
+                </NavLink>
+                <NavLink tag={Link} 
+                  to="/login" 
+                  activeclassname="activeNavLink">
+                Login
                 </NavLink>
                 <NavLink tag={Link} 
                   to="/lessonone" 

@@ -13,6 +13,7 @@ import Words from './containers/admin/Words'
 import SpellingTest from './containers/admin/SpellingTest'
 import Assessments from './containers/admin/Assessments'
 import SignupContainer from './containers/user/SignupContainer'
+import LoginContainer from './containers/user/LoginContainer'
 
 import {
     Route,
@@ -41,6 +42,7 @@ class App extends Component {
               <Route path="/lessonone" component={LessonOneContainer}/>
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/signup" component={SignupContainer}/>
+              <Route path="/login" component={LoginContainer}/>
               <Route path="/admin/words" component={Words}/>
               <Route path="/admin/spellingtests" component={SpellingTest}/>
               <Route path='/admin/assessments' component={Assessments}/>

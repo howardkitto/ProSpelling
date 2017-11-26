@@ -7,13 +7,13 @@ import {Form,
         Input,
         Button} from 'reactstrap'
 
-const SignupForm = (props)=>{
+const LoginForm = (props)=>{
 
-    const{onChange, saveUser, serviceMessage}=props
+    const{onChange, login, serviceMessage}=props
     
     return(
         <div>
-            <h1>Use this Form to Sign Up</h1>
+            <h1>Use this Form to Login</h1>
             {serviceMessage}
             <Form>
                 <FormGroup>
@@ -25,24 +25,19 @@ const SignupForm = (props)=>{
                     <Label for="password">Password</Label>
                     <Input type="password" name="password" id="password"
                     onChange={(e)=>onChange(e)} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="displayName">Display Name</Label>
-                    <Input type="displayName" name="displayName" id="displayName" 
-                    onChange={(e)=>onChange(e)}/>
-                </FormGroup>
+                </FormGroup>                
                 <Button color='success'
-                        onClick={saveUser}>
-                        Save</Button>
+                        onClick={login}>
+                        Login</Button>
             </Form>
         </div>
     )
 }
 
-SignupForm.PropTypes = {
+LoginForm.PropTypes = {
     onChange: PropTypes.func.isRequired,
-    saveUser: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     serviceMessage :PropTypes.string
 }
 
-export default SignupForm
+export default LoginForm

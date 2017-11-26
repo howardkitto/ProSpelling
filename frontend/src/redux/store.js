@@ -6,6 +6,7 @@ import saga from './saga';
 
 import { routerMiddleware} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
+import {authenticateUser} from '../utils/Auth'
 export const history = createHistory()
 
 const routesMiddleware = routerMiddleware(history)
@@ -18,5 +19,7 @@ const  store = createStore( rootReducer,
                             defaultState,
                             composeEnhancers(applyMiddleware(routesMiddleware, sagaMiddleware)))                            
 sagaMiddleware.run(saga);
+
+store.subscribe(()=>authenticateUser({token:store.getState().user.token}, store))
 
 export default store;

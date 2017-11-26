@@ -73,7 +73,7 @@ class Assessments extends Component{
 
     render(){
         return(
-            <div>
+            <div className="adminContainer">
                 <h1>Assessments</h1>
 
                 {(!this.props.assessmentList)?<div>Loading Assessments</div>:

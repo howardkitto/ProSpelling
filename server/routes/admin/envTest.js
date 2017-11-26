@@ -14,12 +14,14 @@ router.route('/')
     var promise = Words.count().exec()
 
     promise.then((count)=>{
+        console.log('env '+ count)
         env.message = 'Hello World v0.01'
         env.NODE_ENV = process.env.NODE_ENV
         env.MONGO_HOST = process.env.MONGO_HOST;
         env.wordCount = count;
     })
     .then(()=>{
+        
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(env)) 
     })

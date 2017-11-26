@@ -6,7 +6,8 @@ function serviceMessage(state=[], action){
         case 'SERVICE_MESSAGE':
         console.log('SERVICE_MESSAGE CALLED' + JSON.stringify(action))
             return{
-                message: action.message
+                message: action.message.message,
+                errors: action.message.errors
             }
             default:
             return state

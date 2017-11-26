@@ -4,10 +4,24 @@ function user(state=[], action){
     // console.log('Speller Reducer running' + JSON.stringify(action))
     switch(action.type){
         case 'CREATED_USER':
-        console.log('User Reducer running' + JSON.stringify(action))
+        console.log('CREATED_USER' + JSON.stringify(action))
             return{
                 token: action.data.token
             }
+        case 'LOGGEDIN':
+        console.log('LOGGEDIN' + JSON.stringify(action))
+            return{
+                token: action.data.token,
+                userId: action.data.userId,
+                displayName: action.data.displayName,
+            }
+        case 'REMOVE_TOKEN':
+        console.log('REMOVE_TOKEN')
+            return{
+                ...state,
+                token:null
+            }
+        
             default:
             return state
         }

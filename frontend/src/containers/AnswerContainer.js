@@ -8,7 +8,7 @@ import {saveAnswer,
         saveProgress
         } from '../redux/actionCreators'
 
-import prepareResult from '../helperLogic/prepareResult'
+import prepareResult from '../utils/prepareResult'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -16,7 +16,7 @@ const speechSupported = window.SpeechRecognition ||
                         window.msSpeechRecognition ||
                         window.oSpeechRecognition
 
-const recognition = speechSupported ? new speechSupported() : null
+const recognition = speechSupported && new speechSupported()
 
 class AnswerContainer extends Component  {
 

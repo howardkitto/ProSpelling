@@ -39,6 +39,9 @@ const GET_SPELLING_TESTS = 'GET_SPELLING_TESTS'
 
 const CREATE_USER = 'CREATE_USER'
 const CREATED_USER = 'CREATED_USER'
+const LOGIN = 'LOGIN'
+const LOGGEDIN = 'LOGGEDIN'
+const REMOVE_TOKEN = 'REMOVE_TOKEN'
 
 // USER EXPERIENCE
 
@@ -256,5 +259,23 @@ export const createUser=(user)=>{
         method:'POST',
         payload:user,
         returnAction: CREATED_USER
+    }
+}
+
+export const login=(user)=>{
+    console.log('LOGIN action '+JSON.stringify(user))
+    return{
+        type:LOGIN,
+        path:'./login',
+        method:'POST',
+        payload:user,
+        returnAction: LOGGEDIN
+    }
+}
+
+export const removeToken= ()=>{
+    console.log('REMOVE_TOKEN called')
+    return{
+        type: REMOVE_TOKEN
     }
 }

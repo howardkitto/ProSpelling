@@ -30,7 +30,7 @@ router.route('/')
     var promise = Assessments.findByIdAndUpdate(req.body._id, assessment).exec()
         .then((assessment)=>{
             res.setHeader('Content-Type', 'application/json')
-            res.send(assessment)
+            res.json(assessment)
             })
         .catch((err)=>{
             res.send(err)

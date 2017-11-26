@@ -79,7 +79,7 @@ componentDidMount(){
 
   render(){
       return(
-          <div><h1>Words</h1>
+          <div className="adminContainer"><h1>Words</h1>
         {(!this.props.wordsList)?<div>Loading Words</div>:
             <Table striped bordered hover responsive>
                 <thead>
