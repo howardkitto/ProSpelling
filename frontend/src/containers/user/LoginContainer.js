@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {login} from '../../redux/actionCreators'
+import {login,
+        serviceMessage} from '../../redux/actionCreators'
+
+import authValidation from '../../utils/authValidation'
 import LoginForm from '../../components/LoginForm'
 
 class LoginContainer extends Component{
@@ -22,19 +25,28 @@ class LoginContainer extends Component{
     }
 
     login(){
-        this.props.login(this.state.user)
+        //client side validation
+
+        // this.props.login(this.state.user)
+
+        authValidation(this.state.user, 'loginform')
+        .then((errorMessage)=>{
+            if(errorMessage.errors === true)
+                this.props.serviceMessage(errorMessage)
+            else this.props.login(this.state.user)
+        })        
     }
 
     render(){
 
-        const{serviceMessage}=this.props
+        const{errors}=this.props
 
         return(
             <div className="adminContainer">
             <div className="userForm">
-            <LoginForm onChange={(e)=>this.onChange(e)}
-                    login={this.login}
-                    serviceMessage={serviceMessage}/>
+            <LoginForm  onChange={(e)=>this.onChange(e)}
+                        login={this.login}
+                        serviceMessage={errors}/>
             
             </div>
             </div>
@@ -44,13 +56,14 @@ class LoginContainer extends Component{
 
 const mapStateToProps = state => {
     return {
-        serviceMessage: state.serviceMessage.message
+        errors: state.serviceMessage.loginform
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-           login: (user)=>dispatch(login(user))
+           login: (user)=>dispatch(login(user)),
+           serviceMessage:(error)=>dispatch(serviceMessage(error))
           }
   }
 

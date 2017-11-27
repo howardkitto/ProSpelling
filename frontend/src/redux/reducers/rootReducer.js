@@ -10,12 +10,12 @@ import serviceMessage from './serviceMessage'
 
 import { routerReducer} from 'react-router-redux'
 
-const rootReducer = combineReducers({   user,
+const rootReducer = combineReducers({   serviceMessage,
+                                        user,
                                         spellingTest,
                                         wordsAdmin,
                                         spellingTestAdmin,
                                         assessmentAdmin,
-                                        serviceMessage,
                                         question,
                                         router:routerReducer})
 

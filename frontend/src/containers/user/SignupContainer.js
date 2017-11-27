@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {createUser} from '../../redux/actionCreators'
+import {createUser,
+        serviceMessage} from '../../redux/actionCreators'
+import authValidation from '../../utils/authValidation'
 import SignupForm from '../../components/SignupForm'
 
 class SignupContainer extends Component{
@@ -24,19 +26,26 @@ class SignupContainer extends Component{
     }
 
     saveUser(){
+
         this.props.createUser(this.state.user)
+
+    //     authValidation(this.state.user, 'signUpForm')
+    //     .then((errorMessage)=>{
+    //         if(errorMessage.errors === true)
+    //             this.props.serviceMessage(errorMessage)
+    //         else this.props.createUser(this.state.user)
+    //     })     
     }
 
     render(){
     
-    const{serviceMessage}=this.props
+    const{errors}=this.props
 
         return(<div className="adminContainer">
                 <div className="userForm">
-                <SignupForm
-                    onChange={(e)=>this.onChange(e)}
-                    saveUser={this.saveUser}
-                    serviceMessage={serviceMessage}/>
+                <SignupForm onChange={(e)=>this.onChange(e)}
+                            saveUser={this.saveUser}
+                            serviceMessage={errors}/>
                 </div>
                 </div>
         ) 
@@ -45,13 +54,14 @@ class SignupContainer extends Component{
 
 const mapStateToProps = state => {
     return {
-        serviceMessage: state.serviceMessage.message
+        errors: state.serviceMessage.signUpForm
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
-           createUser: (user)=>dispatch(createUser(user))
+           createUser: (user)=>dispatch(createUser(user)),
+           serviceMessage:(error)=>dispatch(serviceMessage(error))
           }
   }
 

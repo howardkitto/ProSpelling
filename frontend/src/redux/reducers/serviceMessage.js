@@ -5,12 +5,9 @@ function serviceMessage(state=[], action){
     switch(action.type){
         case 'SERVICE_MESSAGE':
         console.log('SERVICE_MESSAGE CALLED' + JSON.stringify(action))
-            return{
-                message: action.message.message,
-                errors: action.message.errors
-            }
+            return Object.assign(action.message)
             default:
-            return state
+            return {message:'All Good'}
         }
 }
 

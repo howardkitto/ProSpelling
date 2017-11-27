@@ -7,7 +7,8 @@ import callAPI from './callApi'
 export function* callApiSaga(action){
     try{
         const response = yield call(callAPI, action)
-        yield (!response.message)?
+        console.log("saga got " + JSON.stringify(response))
+        yield (!response.errors)?
         put({type:action.returnAction, data: response}):
         put({type:'SERVICE_MESSAGE', message:response})
     }

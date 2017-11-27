@@ -1,77 +1,42 @@
 const express = require('express');
 const router = new express.Router();
-const validator = require('validator');
+const jwt = require('jsonwebtoken');
+const authValidation = require('../../utils/authValidation')
 const User = require('../../models/User')
-
-function validateSignupForm(payload) {
-    const errors = {};
-    let isFormValid = true;
-    let message = '';
-  
-    if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
-      isFormValid = false;
-      errors.email = 'Please provide a correct email address.';
-    }
-  
-    if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
-      isFormValid = false;
-      errors.password = 'Password must have at least 8 characters.';
-    }
-  
-    if (!payload || typeof payload.displayName !== 'string' || payload.displayName.trim().length === 0) {
-      isFormValid = false;
-      errors.name = 'Please provide a display name.';
-    }
-  
-    if (!isFormValid) {
-      message = 'Check the form for errors.';
-    }
-  
-    return {
-      success: isFormValid,
-      message,
-      errors
-    };
-  }
-
 
 router.route('/')
 .post((req, res)=>{
     //check the form data
 
-    const user = {
-        email: req.body.email,
-        password : req.body.password,
-        displayName : req.body.displayName
+    const newUser = {
+        email: req.body.email.trim().toLowerCase(),
+        password : req.body.password.trim(),
+        displayName : req.body.displayName.trim()
     }
+    const errors = {}
+    const duplicateError = {    errors:true,
+                                signUpForm:{
+                                    message: 'Check the form for errors',
+                                    email:'Sorry this email address is already being used'}}
+    const userDbObj = new User(newUser)
+    let payload = {userId:''}
 
-    const validationResult = validateSignupForm(user);
-    if (!validationResult.success) {
-        return res.status(400).json({
-            success: false,
-            message: validationResult.message,
-            errors: validationResult.errors
-        });
-      }
-    
-    const newUser = new User(user)
-    newUser.save(function(err,data){
-        if(err){
-            
-            if (err.name === 'MongoError' && err.code === 11000) {
-                // the 11000 Mongo code is for a duplication email error
-                // the 409 HTTP status code is for conflict error
-                return res.status(409).json({
-                  success: false,
-                  message: 'Check the form for errors.',
-                  errors: {
-                    email: 'This email is already taken.'
-                  }
-                });
-              }
-        res.send(err)}
-        res.json(data)})
-        
+    let promise = authValidation(newUser, 'signUpForm')
+    .then((errorMessage)=>{ if(errorMessage.errors)
+                                throw errorMessage
+                            else return newUser})
+    .then(()=>{return userDbObj.save()})
+    .then((user)=>{ newUser.userId = user._id})
+    .then(()=>{return jwt.sign({userid:newUser._id}, process.env.JWT_SECRET)})
+    .then((token)=>res.json({   'token':token,
+                                'userId':newUser.userId,
+                                'displayName':newUser.displayName}
+                            ))
+    .catch((error)=>{
+        if(error.name === 'MongoError' && error.code === 11000)
+            {error = duplicateError}
+        res.status(401).json(error)})
 })
 
 module.exports = router
+        

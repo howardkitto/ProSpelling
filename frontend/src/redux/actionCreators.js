@@ -2,6 +2,8 @@
 
 import uuid from 'uuid'
 
+const SERVICE_MESSAGE = 'SERVICE_MESSAGE'
+
 //USER EXPERIENCE ACTIONS
 
 const START_SPELLING_TEST = 'START_SPELLING_TEST'
@@ -277,5 +279,14 @@ export const removeToken= ()=>{
     console.log('REMOVE_TOKEN called')
     return{
         type: REMOVE_TOKEN
+    }
+}
+
+export const serviceMessage=(message)=>{
+    console.log('service message - client side')
+    return{
+        type: SERVICE_MESSAGE,
+        message
+
     }
 }

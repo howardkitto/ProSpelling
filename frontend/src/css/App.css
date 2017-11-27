@@ -6,6 +6,10 @@
   margin:15px;
 }
 
+.serviceMessage{
+  color: red;
+}
+
 .userForm{
   margin: auto;
   width:550px;

@@ -5,26 +5,38 @@ import {Form,
         FormGroup,
         Label,
         Input,
-        Button} from 'reactstrap'
+        Button,
+        FormFeedback,
+        Col} from 'reactstrap'
 
 const LoginForm = (props)=>{
 
     const{onChange, login, serviceMessage}=props
     
-    return(
+    return( 
         <div>
             <h1>Use this Form to Login</h1>
-            {serviceMessage}
+            <h3 className = "serviceMessage">
+            {(serviceMessage)&&serviceMessage.message}
+            </h3>
             <Form>
-                <FormGroup>
-                    <Label for="email">Email</Label>
+                <FormGroup row>
+                    <Label for="email" sm={2}>Email</Label>
+                    <Col sm={10}>
                     <Input type="email" name="email" id="email"
-                    onChange={(e)=>onChange(e)} />
+                    onChange={(e)=>onChange(e)} 
+                    valid={serviceMessage&&serviceMessage.email&&false}/>
+                     <FormFeedback>{serviceMessage&&serviceMessage.email }</FormFeedback>
+                     </Col>
                 </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
+                <FormGroup row>
+                    <Label for="password" sm={2}>Password</Label>
+                    <Col sm={10}>
                     <Input type="password" name="password" id="password"
-                    onChange={(e)=>onChange(e)} />
+                    onChange={(e)=>onChange(e)}
+                    valid={serviceMessage&&serviceMessage.password&&false}/>
+                    <FormFeedback>{(serviceMessage)&&serviceMessage.password }</FormFeedback>
+                    </Col>
                 </FormGroup>                
                 <Button color='success'
                         onClick={login}>

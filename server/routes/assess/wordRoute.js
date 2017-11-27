@@ -1,9 +1,9 @@
 const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
-const saveSpellingTest = require('../../businessLogic/saveSpellingTest')
-const getWord = require('../../businessLogic/getWord')   
-const filterPreviousWords = require('../../businessLogic/filterPreviousWords')
+const saveSpellingTest = require('../../utils/saveSpellingTest')
+const getWord = require('../../utils/getWord')   
+const filterPreviousWords = require('../../utils/filterPreviousWords')
 
 router.route('/criteria/:criteria/value/:value')
 

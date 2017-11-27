@@ -2,32 +2,42 @@ const express = require('express');
 const router = new express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('../../models/User')
+const authValidation = require('../../utils/authValidation')
 
 router.route('/')
 .post((req, res) => {
  
-    const email = req.body.email.trim()
-    const password = req.body.password.trim()
+    const loggerIn = {email:req.body.email.trim().toLowerCase(),
+                      password: req.body.password.trim(),
+                      userId:'',
+                      displayName:''}
+
+    // const errors = {  errors:true}
+    const errors = {}
     const notFound = 'User not found'
     const wrongPassword = 'Password not Correct'
     let payload = {userId:''}
-    let userDeets = {  userId:'',
-                  displayName:''}
 
-    let promise = User.findOne({'email':email}).exec()
+    let promise = authValidation(loggerIn, 'loginform')
+    .then((errorMessage)=>{if(errorMessage.errors)throw errorMessage})
+    .then(_=>User.findOne({'email':loggerIn.email}).exec())
     .then((user)=>{ if(user){ 
                         payload.userId = user._id
-                        userDeets.userId = user._id
-                        userDeets.displayName = user.displayName
+                        loggerIn.userId = user._id
+                        loggerIn.displayName = user.displayName
                         return user}
-                    else {throw (notFound)}})
-    .then((user)=>{return user.comparePassword(password)})
-    .then((isMatch)=>{if(!isMatch){throw (wrongPassword)}})
+                    else {
+                      errors.loginform.email = notFound
+                      throw (errors)}})
+    .then((user)=>{return user.comparePassword(loggerIn.password)})
+    .then((isMatch)=>{if(!isMatch){
+                        errors.loginform.password = wrongPassword 
+                      throw (errors)}})
     .then(()=>{return jwt.sign(payload, process.env.JWT_SECRET)})
-    .then((token)=>{res.json({ 'token':token,
-                                'userId':userDeets.userId,
-                                'displayName':userDeets.displayName })})
-    .catch((error)=>res.status(401).json({'message':error}))
+    .then((token)=>{res.json({  'token':token,
+                                'userId':loggerIn.userId,
+                                'displayName':loggerIn.displayName })})
+    .catch((errors)=>res.status(401).json(errors))
   });
 
   module.exports = router

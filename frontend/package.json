@@ -15,7 +15,8 @@
     "react-router-redux": "^5.0.0-alpha.8",
     "reactstrap": "^5.0.0-alpha.3",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "validator": "^9.1.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.14"

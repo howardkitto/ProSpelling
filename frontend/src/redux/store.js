@@ -20,6 +20,7 @@ const  store = createStore( rootReducer,
                             composeEnhancers(applyMiddleware(routesMiddleware, sagaMiddleware)))                            
 sagaMiddleware.run(saga);
 
+//listen for jwt tokens 
 store.subscribe(()=>authenticateUser({token:store.getState().user.token}, store))
 
 export default store;
