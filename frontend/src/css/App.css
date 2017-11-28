@@ -4,6 +4,11 @@
 
 .adminContainer{
   margin:15px;
+  border-style: solid;
+  border-color: lightgray;
+  border-radius: 15px;
+  padding: 20px;
+  
 }
 
 .serviceMessage{
@@ -23,7 +28,6 @@ h1{
 .bg-dark {
   background-color: #212121 !important;
 }
-
 
 .listeningText {
   color: red;

@@ -3,6 +3,7 @@
 import uuid from 'uuid'
 
 const SERVICE_MESSAGE = 'SERVICE_MESSAGE'
+const ENV_TEST = 'ENV_TEST'
 
 //USER EXPERIENCE ACTIONS
 
@@ -288,5 +289,15 @@ export const serviceMessage=(message)=>{
         type: SERVICE_MESSAGE,
         message
 
+    }
+}
+
+export function envTest(){
+    // console.log('ENV_TEST')
+    return{
+        type: ENV_TEST,
+        path: '../api/envtest',
+        method:'GET',
+        returnAction: 'GOT_ENV'
     }
 }

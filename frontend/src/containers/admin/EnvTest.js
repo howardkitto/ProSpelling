@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+
+import {envTest} from '../../redux/actionCreators'
 
 class EnvTest extends Component{
 
-  constructor(props){
-    super(props)
-    this.state={
-      data: {}
-    }
-  }
-
   componentDidMount(){
         
-    fetch('../api/envTest', {
-      accept: "application/json"
-      })
-      .then((res)=>res.json())
-      .then((data)=>{this.setState({data})})
-      .catch((error)=>{console.log('error ' + error)})
+    this.props.envTest()
       }
 
 render(){
-  // console.log(typeof(this.state.data))
+  const{envData} = this.props
   return(
 <div><h2>Environment Test</h2>
       <h3>V0.01.2</h3>
-    {Object.keys(this.state.data).map((key, value)=>
-    <div key={key}>{key} = {this.state.data[key]}</div>)}
+    {Object.keys(envData).map((key, value)=>
+    <div key={key}>{key} = {envData[key]}</div>)}
 </div>
-    
     
   )
 }
 
 }
 
-export default EnvTest
+const mapStateToProps = state => {
+  return {
+    envData: state.serviceMessage.env
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+return {
+      envTest : () => dispatch(envTest()),
+      }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EnvTest)

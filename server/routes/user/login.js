@@ -12,7 +12,6 @@ router.route('/')
                       userId:'',
                       displayName:''}
 
-    // const errors = {  errors:true}
     const errors = {}
     const notFound = 'User not found'
     const wrongPassword = 'Password not Correct'
@@ -23,6 +22,7 @@ router.route('/')
     .then(_=>User.findOne({'email':loggerIn.email}).exec())
     .then((user)=>{ if(user){ 
                         payload.userId = user._id
+                        payload.role = user.role
                         loggerIn.userId = user._id
                         loggerIn.displayName = user.displayName
                         return user}

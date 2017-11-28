@@ -18,7 +18,7 @@ const authValidation = (user, context)=>{
             {   errorMessage.errors = true
                 errorMessage[context].password = 'Password must have at least 8 characters.';
             }
-        if(context==='signUpForm' && typeof user.displayName !== 'string')
+        if(context==='signUpForm' && user.displayName.trim().length<1)
         {   errorMessage.errors = true
             errorMessage[context].displayName = 'Display Name is Required.';
         }

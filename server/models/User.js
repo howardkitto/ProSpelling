@@ -6,8 +6,9 @@ const salt = bcrypt.genSaltSync(saltRounds)
 const User = new mongoose.Schema({
     email: {type: String, required:true, unique:true},
     password: {type: String, required:true},
-	displayName: String
-}); 
+    displayName: {type: String, required:true},
+    role: { type: String, default: 'user' }
+}, {timestamps:{}}); 
 
 //encrypt the password when the user is saved
 User.pre('save', function (next) {

@@ -27,14 +27,14 @@ class SignupContainer extends Component{
 
     saveUser(){
 
-        this.props.createUser(this.state.user)
+        // this.props.createUser(this.state.user)
 
-    //     authValidation(this.state.user, 'signUpForm')
-    //     .then((errorMessage)=>{
-    //         if(errorMessage.errors === true)
-    //             this.props.serviceMessage(errorMessage)
-    //         else this.props.createUser(this.state.user)
-    //     })     
+        authValidation(this.state.user, 'signUpForm')
+        .then((errorMessage)=>{
+            if(errorMessage.errors === true)
+                this.props.serviceMessage(errorMessage)
+            else this.props.createUser(this.state.user)
+        })     
     }
 
     render(){

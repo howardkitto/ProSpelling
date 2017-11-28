@@ -29,7 +29,8 @@ const apiActions = ['GET_WORD',
                     'UPDATE_ASSESSMENT',
                     'DELETE_ASSESSMENT',
                     'CREATE_USER',
-                    'LOGIN']
+                    'LOGIN',
+                    'ENV_TEST']
 
 export function* watchForApiActions(){
     yield takeEvery(apiActions, callApiSaga)

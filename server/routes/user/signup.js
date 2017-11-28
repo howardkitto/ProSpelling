@@ -6,7 +6,6 @@ const User = require('../../models/User')
 
 router.route('/')
 .post((req, res)=>{
-    //check the form data
 
     const newUser = {
         email: req.body.email.trim().toLowerCase(),
@@ -26,10 +25,9 @@ router.route('/')
                                 throw errorMessage
                             else return newUser})
     .then(()=>{return userDbObj.save()})
-    .then((user)=>{ newUser.userId = user._id})
-    .then(()=>{return jwt.sign({userid:newUser._id}, process.env.JWT_SECRET)})
+    .then((user)=>{return jwt.sign({    userId:user._id,
+                                        role:user.role}, process.env.JWT_SECRET)})
     .then((token)=>res.json({   'token':token,
-                                'userId':newUser.userId,
                                 'displayName':newUser.displayName}
                             ))
     .catch((error)=>{
