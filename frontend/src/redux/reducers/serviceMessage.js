@@ -10,10 +10,13 @@ function serviceMessage(state=[], action){
         case 'GOT_ENV':
         console.log('SERVICE_MESSAGE CALLED' + JSON.stringify(action))
         return {env: Object.assign(action.data)}
+
+        case 'CLEAR_SERVICE_MESSAGE':
+        console.log('CLEAR_SERVICE_MESSAGE CALLED' + JSON.stringify(action))
+        return {message:'All Good'}
         
         default:
-        return {message:'All Good',
-                env:{}}
+        return {message:'All Good'}
         }
 }
 

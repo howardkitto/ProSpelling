@@ -15,8 +15,8 @@ render(){
   return(
 <div><h2>Environment Test</h2>
       <h3>V0.01.2</h3>
-    {Object.keys(envData).map((key, value)=>
-    <div key={key}>{key} = {envData[key]}</div>)}
+    {envData?Object.keys(envData).map((key, value)=>
+    <div key={key}>{key} = {envData[key]}</div>):<div>No Data</div>}
 </div>
     
   )

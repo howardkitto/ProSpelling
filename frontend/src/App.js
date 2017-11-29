@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Provider} from 'react-redux'
 
 import Nav from './containers/Nav'
+import ApiError from './containers/admin/ApiError'
 import HomeContainer from './containers/HomeContainer'
 import LessonOneContainer from './containers/LessonOneContainer'
 import LessonTwoContainer from './containers/LessonTwoContainer'
@@ -34,6 +35,7 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
         <Container fluid>
+        <ApiError />
           <Nav />
             <Switch>
               <Route exact path="/" component={HomeContainer}/>

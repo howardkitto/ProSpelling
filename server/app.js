@@ -25,7 +25,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(express.static('frontend/build')) 
 
-  app.use('/api/envtest', jwtVerify);
+  app.use('/api/envtest', jwtVerify(['user', 'admin']));
 
   app.use('/api/envtest', envTest) 
   app.use('/api/words', adminWords)

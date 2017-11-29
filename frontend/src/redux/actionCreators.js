@@ -3,6 +3,7 @@
 import uuid from 'uuid'
 
 const SERVICE_MESSAGE = 'SERVICE_MESSAGE'
+const CLEAR_SERVICE_MESSAGE = 'CLEAR_SERVICE_MESSAGE'
 const ENV_TEST = 'ENV_TEST'
 
 //USER EXPERIENCE ACTIONS
@@ -299,5 +300,12 @@ export function envTest(){
         path: '../api/envtest',
         method:'GET',
         returnAction: 'GOT_ENV'
+    }
+}
+
+export function clearServiceMessage(context){
+    return{
+        type: CLEAR_SERVICE_MESSAGE,
+        context
     }
 }
