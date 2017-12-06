@@ -3,6 +3,12 @@ const callApi = (action) =>{
 
     console.log('gonna send this.. ' + localStorage.token)
 
+    const errorMessage = {errors: true,
+                            server:{
+                              message:'Server Error',
+                              server: 'Server threw an error'
+                            }}
+
     let headers = {
       'Content-Type': 'application/json'
     }
@@ -22,7 +28,7 @@ const callApi = (action) =>{
 
       .then(response => {
         switch(response.status){
-          case 500:return({message:'Server threw an error'})
+          case 500:return(errorMessage)
           case 404:return ({message:'Wrong Path'})
           case 401:return (response.json())
           case 400:return (response.json())

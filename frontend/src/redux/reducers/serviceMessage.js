@@ -16,7 +16,7 @@ function serviceMessage(state=[], action){
         return {message:'All Good'}
         
         default:
-        return {message:'All Good'}
+        return {message:'No message yet'}
         }
 }
 

@@ -16,6 +16,8 @@ import Assessments from './containers/admin/Assessments'
 import SignupContainer from './containers/user/SignupContainer'
 import LoginContainer from './containers/user/LoginContainer'
 
+import PrivateRoute from './containers/user/PrivateRoute'
+
 import {
     Route,
     Switch
@@ -48,7 +50,7 @@ class App extends Component {
               <Route path="/admin/words" component={Words}/>
               <Route path="/admin/spellingtests" component={SpellingTest}/>
               <Route path='/admin/assessments' component={Assessments}/>
-              <Route path="/admin/envtest" component={EnvTest}/>
+              <PrivateRoute path="/admin/envtest" component={EnvTest} permissions={['monkey', 'user']}/>
               <Route component={NoMatch}/>
             </Switch>
         </Container>  

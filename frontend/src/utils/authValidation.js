@@ -1,7 +1,7 @@
 import validator from 'validator'
 
 const authValidation = (user, context)=>{
-    console.log('validating ' + user +' '+context)
+    // console.log('validating ' + user +' '+context)
 
     return new Promise((resolve, reject)=>{
         let errorMessage = {    'errors': false,

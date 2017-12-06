@@ -46,6 +46,8 @@ const CREATED_USER = 'CREATED_USER'
 const LOGIN = 'LOGIN'
 const LOGGEDIN = 'LOGGEDIN'
 const REMOVE_TOKEN = 'REMOVE_TOKEN'
+const SYNCH_USER = 'SYNCH_USER'
+const LOG_OUT = 'LOG_OUT'
 
 // USER EXPERIENCE
 
@@ -307,5 +309,19 @@ export function clearServiceMessage(context){
     return{
         type: CLEAR_SERVICE_MESSAGE,
         context
+    }
+}
+
+export function synchUser(user){
+    console.log('synchUser ' +JSON.stringify(user))
+    return{
+        type:SYNCH_USER,
+        user
+    }
+}
+
+export function logOut(){
+    return{
+        type: LOG_OUT
     }
 }

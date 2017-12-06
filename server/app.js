@@ -25,7 +25,9 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(express.static('frontend/build')) 
 
-  app.use('/api/envtest', jwtVerify(['user', 'admin']));
+//this is my middleware that checks if the user has a valid token and the right access priviledges
+
+  app.use('/api/envtest', jwtVerify(['admin']));
 
   app.use('/api/envtest', envTest) 
   app.use('/api/words', adminWords)

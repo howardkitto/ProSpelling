@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {  Collapse, 
           Navbar, 
           NavbarToggler, 
@@ -13,7 +14,10 @@ import {  Collapse,
          } from 'reactstrap';
 import logo from '../images/logo.png'
 
-class mainNav extends React.Component {
+import {logOut} from '../redux/actionCreators'
+
+
+class MainNav extends Component {
   constructor(props) {
     super(props);
 
@@ -31,8 +35,9 @@ class mainNav extends React.Component {
   navBarStyle(){
     return(
       {'backgroundColor':'#212121'}
-    )
-  }
+    )}
+
+
   render() {
     return (
       <div>
@@ -49,17 +54,13 @@ class mainNav extends React.Component {
                     <DropdownItem tag={Link} to='/admin/words'>Words</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/envtest'>Env Test</DropdownItem>
               </DropdownMenu>
             </UncontrolledNavDropdown>
             <NavLink tag={Link} 
                   to="/signup" 
                   activeclassname="activeNavLink">
                 Sign Up
-                </NavLink>
-                <NavLink tag={Link} 
-                  to="/login" 
-                  activeclassname="activeNavLink">
-                Login
                 </NavLink>
                 <NavLink tag={Link} 
                   to="/lessonone" 
@@ -72,7 +73,19 @@ class mainNav extends React.Component {
                 <NavLink tag={Link} to="/quickquiz" activeclassname="activeNavLink">
                 QuickQuiz
                 </NavLink>
-                
+                {!this.props.user.displayName?
+                <NavLink tag={Link} 
+                  to="/login" 
+                  activeclassname="activeNavLink">
+                Login
+                </NavLink>:
+                <NavLink tag={Link} 
+                to="/" 
+                activeclassname="activeNavLink"
+                onClick={()=>{this.props.logOut()}}>
+              Logout
+              </NavLink>
+                }
             </Nav>
           </Collapse>
         </Navbar>
@@ -81,4 +94,22 @@ class mainNav extends React.Component {
   }
 }
 
-export default mainNav
+const mapStateToProps = state => {
+  return {
+      user: state.user,
+      errors: state.serviceMessage.loginform
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      logOut: ()=>dispatch(logOut()),
+    
+        }
+}
+
+MainNav.PropTypes = {
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav)

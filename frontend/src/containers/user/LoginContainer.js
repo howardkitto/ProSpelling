@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {login,
         serviceMessage} from '../../redux/actionCreators'
+import {Redirect} from 'react-router-dom'
 
 import authValidation from '../../utils/authValidation'
 import LoginForm from '../../components/LoginForm'
@@ -39,7 +40,14 @@ class LoginContainer extends Component{
 
     render(){
 
-        const{errors}=this.props
+        const{errors, location}=this.props
+        const { from } = location.state || { from: { pathname: '/' } }
+
+        if (this.props.success) {
+            return (
+              <Redirect to={from}/>
+            )
+        }
 
         return(
             <div className="adminContainer">
@@ -56,6 +64,7 @@ class LoginContainer extends Component{
 
 const mapStateToProps = state => {
     return {
+        success: state.user.loginSuccess,
         errors: state.serviceMessage.loginform
     }
   }
@@ -68,7 +77,8 @@ const mapStateToProps = state => {
   }
 
   LoginContainer.PropTypes = {
-    serviceMessage :PropTypes.string
+    serviceMessage :PropTypes.string,
+    location : PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

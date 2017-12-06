@@ -29,26 +29,3 @@ const authValidation = (user, context)=>{
 }
 module.exports = authValidation
 
-// const authValidation = (user, context) =>{
-
-    
-
-//     return new Promise((resolve, reject)=>{
-
-//         const errors = {}
-//         errors.context = context
-
-//         console.log('validating input '+ JSON.stringify(user) + ' '+ context)
-
-//         if (!user || typeof user.email !== 'string' || !validator.isEmail(user.email))       
-//         {   errors.email = 'Please provide a correct email address.';
-//             // throw(errors)
-//         }
-
-//         if(Object.keys(errors).length>1){reject(errors)}
-//         else(resolve(user))
-        
-        
-//     })
-// }
-

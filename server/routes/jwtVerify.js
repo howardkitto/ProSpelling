@@ -23,7 +23,7 @@ module.exports = function(permissions){
     //this pattern allows the middleware to take parameters
     return (req, res, next) => {
     
-    console.log('jwtVerify ' + permissions)
+    // console.log('jwtVerify ' + permissions)
     if (!req.headers.authorization) {
             authError.authorization.noToken = 'No Token Found'
             return res.status(401).send(authError);
@@ -36,8 +36,8 @@ module.exports = function(permissions){
                 return res.status(401).send(authError) 
             }
             User.findById(decoded.userId, (err, user) => {
-                console.log(    'token role '+decoded.role+
-                                ' database role ' + user.role)
+                // console.log(    'token role '+decoded.role+
+                //                 ' database role ' + user.role)
                 if (err|| !user) { 
                     authError.authorization.badToken = 'User Not Found'
                     return res.status(401).send(authError) 

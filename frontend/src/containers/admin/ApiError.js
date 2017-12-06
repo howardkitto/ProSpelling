@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 import {connect} from 'react-redux'
 import {Modal,
+        ModalBody,
+        ModalFooter,
         Button} from 'reactstrap'
 
 import {clearServiceMessage} from '../../redux/actionCreators'
@@ -11,8 +13,8 @@ class ApiError extends Component{
     constructor(props){
         super(props)
         this.state = {
-            showError: 'none',
-            showModal: false
+            showModal: false,
+            currentError:{}
         }
 
         this.toggle = this.toggle.bind(this);
@@ -24,25 +26,32 @@ class ApiError extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('next props '+JSON.stringify(nextProps.apiError))
-        if(nextProps.apiError !== undefined)
-        this.setState({showModal:true})
+        // console.log('next props '+JSON.stringify(nextProps.apiError))
+        if( nextProps.apiError || 
+            nextProps.serverError ||
+            nextProps.permissionsError !== undefined)
+        this.setState({ currentError:   nextProps.apiError || 
+                                        nextProps.serverError ||
+                                        nextProps.permissionsError, 
+                        showModal:true})
         else this.setState({showModal:false})
         
     }
 
     render(){
-    
-    const{apiError}=this.props
 
         return(
     
-        <div style={{display: this.state.showError}}>
+        <div style={{display: 'none'}}>
         <Modal isOpen={this.state.showModal}>
-        <h2>AUTHORIZATION ERROR</h2>
-      {apiError?Object.keys(apiError).map((key, value)=>
-      <div key={key}>{key} = {apiError[key]}</div>):<div>No Data</div>}
+        <ModalBody>
+        <h2>ERROR</h2>
+      {this.state.currentError?Object.keys(this.state.currentError).map((key, value)=>
+      <div key={key}>{key} = {this.state.currentError[key]}</div>):<div>No Data</div>}
+      </ModalBody>
+      <ModalFooter>
       <Button color="info" onClick={this.toggle}>Cancel</Button>
+      </ModalFooter>
       </Modal>
       </div>
         )
@@ -52,7 +61,9 @@ class ApiError extends Component{
 
 const mapStateToProps = state => {
     return {
-        apiError: state.serviceMessage.authorization
+        apiError: state.serviceMessage.authorization,
+        serverError: state.serviceMessage.server,
+        permissionsError: state.serviceMessage.permissions
     }
   }
 
