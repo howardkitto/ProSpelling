@@ -43,7 +43,7 @@ class LoginContainer extends Component{
         const{errors, location}=this.props
         const { from } = location.state || { from: { pathname: '/' } }
 
-        if (this.props.success) {
+        if (this.props.logInSuccess) {
             return (
               <Redirect to={from}/>
             )
@@ -64,7 +64,7 @@ class LoginContainer extends Component{
 
 const mapStateToProps = state => {
     return {
-        success: state.user.loginSuccess,
+        logInSuccess: state.user.logInSuccess,
         errors: state.serviceMessage.loginform
     }
   }

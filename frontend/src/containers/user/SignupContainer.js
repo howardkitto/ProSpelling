@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createUser,
-        serviceMessage} from '../../redux/actionCreators'
+        serviceMessage,
+        logOut} from '../../redux/actionCreators'
 import {Redirect} from 'react-router-dom'
 import authValidation from '../../utils/authValidation'
 import SignupForm from '../../components/SignupForm'
@@ -38,18 +39,23 @@ class SignupContainer extends Component{
         })     
     }
 
+    componentWillMount(){
+        console.log('user ' + this.props.user)
+    }
+
     render(){
     
-    const{errors, success}=this.props
+    const{errors, user}=this.props
 
-        return((!success)?<div className="adminContainer">
+        return((user.token)?
+        <Redirect to ='/' />:
+        <div className="adminContainer">
                 <div className="userForm">
                 <SignupForm onChange={(e)=>this.onChange(e)}
                             saveUser={this.saveUser}
                             serviceMessage={errors}/>
                 </div>
-                </div>:
-                <Redirect to ='/' />
+                </div>
         ) 
     }
 }
@@ -57,14 +63,15 @@ class SignupContainer extends Component{
 const mapStateToProps = state => {
     return {
         errors: state.serviceMessage.signUpForm,
-        success: state.user.success
+        user: state.user
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
            createUser: (user)=>dispatch(createUser(user)),
-           serviceMessage:(error)=>dispatch(serviceMessage(error))
+           serviceMessage:(error)=>dispatch(serviceMessage(error)),
+           logOut:()=>dispatch(logOut())
           }
   }
 

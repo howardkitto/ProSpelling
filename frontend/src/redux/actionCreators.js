@@ -258,7 +258,7 @@ export function getSpellingTests(page, limit){
 //Authentication
 
 export const createUser=(user)=>{
-    console.log('CREATE_USER action '+JSON.stringify(user))
+    // console.log('CREATE_USER action '+JSON.stringify(user))
     return{
         type:CREATE_USER,
         path:'./signup',
@@ -268,8 +268,9 @@ export const createUser=(user)=>{
     }
 }
 
+
 export const login=(user)=>{
-    console.log('LOGIN action '+JSON.stringify(user))
+    // console.log('LOGIN action '+JSON.stringify(user))
     return{
         type:LOGIN,
         path:'./login',
@@ -280,14 +281,14 @@ export const login=(user)=>{
 }
 
 export const removeToken= ()=>{
-    console.log('REMOVE_TOKEN called')
+    // console.log('REMOVE_TOKEN called')
     return{
         type: REMOVE_TOKEN
     }
 }
 
 export const serviceMessage=(message)=>{
-    console.log('service message - client side')
+    // console.log('service message - client side')
     return{
         type: SERVICE_MESSAGE,
         message
@@ -313,7 +314,7 @@ export function clearServiceMessage(context){
 }
 
 export function synchUser(user){
-    console.log('synchUser ' +JSON.stringify(user))
+    // console.log('synchUser ' +JSON.stringify(user))
     return{
         type:SYNCH_USER,
         user

@@ -37,16 +37,23 @@ class MainNav extends Component {
       {'backgroundColor':'#212121'}
     )}
 
+  componentWillReceiveProps(nextProps){
+    console.log('nextProps.user.tokenTimeStamp ' + nextProps.user.tokenTimeStamp)
+  }
+
 
   render() {
-    return (
+
+    
+    return ( 
       <div>
         <Navbar dark expand="md" style={this.navBarStyle()}>
           <NavbarBrand tag={Link} to='/'><img src={logo} alt="Pro Spelling"/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav  className="ml-auto" navbar>
-            <UncontrolledNavDropdown>
+
+            {(this.props.user.role==='admin')&&<UncontrolledNavDropdown>
                   <DropdownToggle nav caret>
                     Admin
                   </DropdownToggle>
@@ -56,12 +63,7 @@ class MainNav extends Component {
                     <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/envtest'>Env Test</DropdownItem>
               </DropdownMenu>
-            </UncontrolledNavDropdown>
-            <NavLink tag={Link} 
-                  to="/signup" 
-                  activeclassname="activeNavLink">
-                Sign Up
-                </NavLink>
+            </UncontrolledNavDropdown>}
                 <NavLink tag={Link} 
                   to="/lessonone" 
                   activeclassname="activeNavLink">
@@ -73,12 +75,19 @@ class MainNav extends Component {
                 <NavLink tag={Link} to="/quickquiz" activeclassname="activeNavLink">
                 QuickQuiz
                 </NavLink>
-                {!this.props.user.displayName?
+                {!this.props.user.token&&
+                 <NavLink tag={Link} 
+                 to="/signup" 
+                 activeclassname="activeNavLink">
+               Sign Up
+               </NavLink>}
+                {!this.props.user.token?
                 <NavLink tag={Link} 
                   to="/login" 
                   activeclassname="activeNavLink">
                 Login
-                </NavLink>:
+                </NavLink>
+                :
                 <NavLink tag={Link} 
                 to="/" 
                 activeclassname="activeNavLink"

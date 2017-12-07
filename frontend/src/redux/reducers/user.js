@@ -5,23 +5,17 @@ function user(state=[], action){
     switch(action.type){
         case 'CREATED_USER':
         console.log('CREATED_USER' + JSON.stringify(action))
-            return{
-                token: action.data.token,
-                displayName: action.data.displayName,
-                success:true
-            }
+            return Object.assign(
+                action.data,
+                {signUpSuccess:true}
+            )   
         case 'LOGGEDIN':
         // console.log('LOGGEDIN' + JSON.stringify(action))
-            return Object.assign(action.data)
+            return Object.assign(action.data,
+                {logInSuccess:true})
+
         case 'SYNCH_USER':
             return Object.assign(action.user)
-        case 'REMOVE_TOKEN':
-        // console.log('REMOVE_TOKEN')
-            return{
-                ...state,
-                token:null,
-                loginSuccess:true
-            }
         case 'LOG_OUT':
             return{
                 logOut:true

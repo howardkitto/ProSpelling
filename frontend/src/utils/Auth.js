@@ -1,25 +1,30 @@
 
-import {removeToken, synchUser} from '../redux/actionCreators'
+import {synchUser} from '../redux/actionCreators'
 
 
 //store the jwt and a time stamp in localstorage
 export const authenticateUser= (user, store) => {
-        // console.log('store got '+JSON.stringify(user))
-        if((user.token))
+        //if the user has just signedUp or logged in set the local storage
+
+        console.log('user ' + user.length)
+        
+        if((user.signUpSuccess || user.logInSuccess))
             {   
                 Object.keys(user).map((key, value)=>localStorage.setItem(key, user[key]))
                 localStorage.setItem('tokenTimeStamp', new Date())
-                
-        //remove the token from redux to stop the local store from being overwritten          
-            store.dispatch(removeToken())
+                // localStorage.removeItem('logInSuccess')
+
+            // store.dispatch(synchUser(localStorage))
         }
 
+        //populate redux from the local store, test that the user object has anything in it
+        if(localStorage.tokenTimeStamp && user.length==0)
+            {   console.log('synching')
+                store.dispatch(synchUser(localStorage))}
+        
         if(user.logOut){
             localStorage.clear()
         }
-
-        if(localStorage.tokenTimeStamp && !user.tokenTimeStamp)
-            {   store.dispatch(synchUser(localStorage))}
       }
     
  export const isUserAuthenticated= ()=> {

@@ -13,27 +13,34 @@ router.route('/')
         displayName : req.body.displayName.trim()
     }
     const errors = {}
-    const duplicateError = {    errors:true,
+    const errorMessage = {    errors:true,
                                 signUpForm:{
-                                    message: 'Check the form for errors',
-                                    email:'Sorry this email address is already being used'}}
+                                    message: 'Check the form for errors'
+                                    }}
     const userDbObj = new User(newUser)
     let payload = {userId:''}
 
+    //validate input
     let promise = authValidation(newUser, 'signUpForm')
+    //thrown an error if validation failed
     .then((errorMessage)=>{ if(errorMessage.errors)
                                 throw errorMessage
                             else return newUser})
+    //save the new user
     .then(()=>{return userDbObj.save()})
-    .then((user)=>{return jwt.sign({    userId:user._id,
+    .then((user)=>{ newUser.role = user.role
+                    return jwt.sign({    userId:user._id,
                                         role:user.role}, process.env.JWT_SECRET)})
     .then((token)=>res.json({   'token':token,
+                                'role': newUser.role,
                                 'displayName':newUser.displayName}
                             ))
     .catch((error)=>{
+        console.log('signup error '+error)
         if(error.name === 'MongoError' && error.code === 11000)
-            {error = duplicateError}
-        res.status(401).json(error)})
+            {errorMessage.signUpForm.email = 'Sorry this email address is already being used'}
+        else{errorMessage.signUpForm.message = 'Server Error'}
+        res.status(401).json(errorMessage)})
 })
 
 module.exports = router
