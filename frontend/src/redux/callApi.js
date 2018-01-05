@@ -1,7 +1,7 @@
 const callApi = (action) =>{
   // console.log('callAPI got ' + JSON.stringify(action))
 
-    console.log('gonna send this.. ' + localStorage.token)
+    // console.log('gonna send this.. ' + localStorage.token)
 
     const errorMessage = {errors: true,
                             server:{

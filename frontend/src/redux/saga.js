@@ -7,7 +7,7 @@ import callAPI from './callApi'
 export function* callApiSaga(action){
     try{
         const response = yield call(callAPI, action)
-        // console.log("saga got " + JSON.stringify(response))
+        console.log("saga got " + JSON.stringify(response))
         yield (!response.errors)?
         put({type:action.returnAction, data: response}):
         put({type:'SERVICE_MESSAGE', message:response})
@@ -30,7 +30,8 @@ const apiActions = ['GET_WORD',
                     'DELETE_ASSESSMENT',
                     'CREATE_USER',
                     'LOGIN',
-                    'ENV_TEST']
+                    'ENV_TEST',
+                    'GET_USERS_LIST']
 
 export function* watchForApiActions(){
     yield takeEvery(apiActions, callApiSaga)

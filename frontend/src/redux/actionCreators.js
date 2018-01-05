@@ -45,9 +45,15 @@ const CREATE_USER = 'CREATE_USER'
 const CREATED_USER = 'CREATED_USER'
 const LOGIN = 'LOGIN'
 const LOGGEDIN = 'LOGGEDIN'
-const REMOVE_TOKEN = 'REMOVE_TOKEN'
 const SYNCH_USER = 'SYNCH_USER'
 const LOG_OUT = 'LOG_OUT'
+
+//User Admin
+
+const GET_USERS_LIST = 'GET_USERS_LIST'
+const EDIT_USER = 'EDIT_USER'
+const UPDATE_USER = 'UPDATE_USER'
+const DELETE_USER = 'DELETE_USER'
 
 // USER EXPERIENCE
 
@@ -280,13 +286,6 @@ export const login=(user)=>{
     }
 }
 
-export const removeToken= ()=>{
-    // console.log('REMOVE_TOKEN called')
-    return{
-        type: REMOVE_TOKEN
-    }
-}
-
 export const serviceMessage=(message)=>{
     // console.log('service message - client side')
     return{
@@ -324,5 +323,16 @@ export function synchUser(user){
 export function logOut(){
     return{
         type: LOG_OUT
+    }
+}
+
+//USER ADMIN
+
+export function getUsersList(page, limit){
+    return{
+        type: GET_USERS_LIST,
+        path: '../api/users/page/'+page+'/limit/'+limit,
+        method: 'GET',
+        returnAction: 'GOT_USERS_LIST'
     }
 }

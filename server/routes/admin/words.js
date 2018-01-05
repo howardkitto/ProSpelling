@@ -2,7 +2,7 @@ const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
 
-var words
+// var words
 
 router.route('/page/:page/limit/:limit')
 
@@ -19,7 +19,7 @@ router.route('/page/:page/limit/:limit')
      }
  
      counter()
-         .then((count)=>{wordCount = count})
+         .then((count)=>{wordCount = count}) 
 
     let promise = Words.find().exec()
         .then((words)=>words.sort((a, b) => {

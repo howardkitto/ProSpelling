@@ -11,6 +11,7 @@ import QuickQuiz from './containers/QuickQuiz'
 import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
+import Users from './containers/admin/Users'
 import SpellingTest from './containers/admin/SpellingTest'
 import Assessments from './containers/admin/Assessments'
 import SignupContainer from './containers/user/SignupContainer'
@@ -47,10 +48,11 @@ class App extends Component {
               <Route path="/lessontwo" component={LessonTwoContainer}/>
               <Route path="/signup" component={SignupContainer}/>
               <Route path="/login" component={LoginContainer}/>
-              <Route path="/admin/words" component={Words}/>
-              <Route path="/admin/spellingtests" component={SpellingTest}/>
-              <Route path='/admin/assessments' component={Assessments}/>
-              <PrivateRoute path="/admin/envtest" component={EnvTest} permissions={['monkey', 'user']}/>
+              <Route path="/admin/words" component={Words} permissions={['admin']}/>
+              <Route path="/admin/users" component={Users} permissions={['admin']}/>
+              <Route path="/admin/spellingtests" component={SpellingTest} permissions={['admin']}/>
+              <Route path='/admin/assessments' component={Assessments} permissions={['admin']}/>
+              <PrivateRoute path="/admin/envtest" component={EnvTest} permissions={['admin']}/>
               <Route component={NoMatch}/>
             </Switch>
         </Container>  

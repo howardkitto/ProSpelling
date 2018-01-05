@@ -122,7 +122,7 @@ const mapStateToProps = state => {
     return {
       word: state.wordsAdmin.word,
       allAssessments: state.assessmentAdmin.assessmentList,
-      apiMessage:state.apiMessage.message 
+      apiMessage:state.serviceMessage.message 
       
     }
   }

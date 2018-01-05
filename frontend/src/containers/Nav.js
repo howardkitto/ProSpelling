@@ -59,6 +59,7 @@ class MainNav extends Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem tag={Link} to='/admin/words'>Words</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/users'>Users</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/envtest'>Env Test</DropdownItem>

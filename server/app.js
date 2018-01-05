@@ -9,6 +9,7 @@ const jwtVerify = require('./routes/jwtVerify')
 //Routes
 const envTest = require('./routes/admin/envTest')
 const adminWords = require('./routes/admin/words')
+const adminUsers = require('./routes/admin/users')
 const getWord = require('./routes/assess/wordRoute')
 const adminSpellingTests = require('./routes/admin/spellingTests')
 const adminAssessments = require('./routes/admin/assessments')
@@ -28,9 +29,11 @@ app.use(express.static('frontend/build'))
 //this is my middleware that checks if the user has a valid token and the right access priviledges
 
   app.use('/api/envtest', jwtVerify(['admin']));
+  app.use('/api/users', jwtVerify(['admin']));
 
   app.use('/api/envtest', envTest) 
   app.use('/api/words', adminWords)
+  app.use('/api/users', adminUsers)
   app.use('/api/spellingtests', adminSpellingTests)
   app.use('/api/getword', getWord)
   app.use('/api/assessments', adminAssessments)
