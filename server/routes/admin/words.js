@@ -67,7 +67,7 @@ router.route('/')
     })
 
 .put((req, res)=>{
-        console.log('put route activated ' + JSON.stringify(req.body))
+        // console.log('put route activated ' + JSON.stringify(req.body))
 
         const word = {  'word':req.body.word,
                         'level':req.body.level,

@@ -336,3 +336,35 @@ export function getUsersList(page, limit){
         returnAction: 'GOT_USERS_LIST'
     }
 }
+
+export function editUser(user){
+    // console.log('EDIT_USER' + JSON.stringify(user))
+    return {
+        type: EDIT_USER,
+        user
+    }
+}
+
+export function updateUser(user){
+    // console.log('UPDATE_WORD ' +JSON.stringify(user))
+    return {
+        type: UPDATE_USER,
+        path:'../api/users',
+        method:'PUT',
+        payload: user,
+        returnAction: 'UPDATED_USER'
+    }
+}
+
+
+export function deleteUser(user){
+    // console.log('DELETE_USER action '+JSON.stringify(user))
+    return {
+        type: DELETE_USER,
+        path:'../api/users',
+        method:'DELETE',
+        payload: user,
+        returnAction: 'DELETED_USER'
+    }
+}
+

@@ -13,7 +13,7 @@ router.route('/')
                       userId:'',
                       displayName:''}
 
-    console.log('got this logger'+ loggerIn.email)
+    // console.log('got this logger'+ loggerIn.email)
 
     const errors = {errors:true,
                     loginform:{
@@ -29,7 +29,7 @@ router.route('/')
     .then((errorMessage)=>{if(errorMessage.errors)throw errorMessage})
     .then(_=>User.findOne({'email':loggerIn.email}).exec())
     .then((user)=>{ if(user){
-                        console.log("found user " +user) 
+                        // console.log("found user " +user) 
                         payload.userId = user._id
                         payload.role = user.role
                         loggerIn.userId = user._id

@@ -13,8 +13,9 @@ const authValidation = (user, context)=>{
             {   errorMessage.errors = true
                 errorMessage[context].email = 'Please provide a correct email address'
             }           
+        
 
-        if (!user.password==='' || typeof user.password !== 'string' || user.password.trim().length < 8) 
+        if (user.password && (user.password==='' || typeof user.password !== 'string' || user.password.trim().length < 8)) 
             {   errorMessage.errors = true
                 errorMessage[context].password = 'Password must have at least 8 characters.';
             }

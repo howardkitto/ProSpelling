@@ -31,7 +31,9 @@ const apiActions = ['GET_WORD',
                     'CREATE_USER',
                     'LOGIN',
                     'ENV_TEST',
-                    'GET_USERS_LIST']
+                    'GET_USERS_LIST',
+                    'UPDATE_USER',
+                    'DELETE_USER']
 
 export function* watchForApiActions(){
     yield takeEvery(apiActions, callApiSaga)

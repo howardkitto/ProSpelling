@@ -1,4 +1,3 @@
-
 import {synchUser} from '../redux/actionCreators'
 
 
@@ -23,7 +22,7 @@ export const authenticateUser= (user, store) => {
       }
     
  export const isUserAuthenticated= ()=> {
-     console.log('authenticating')
+    //  console.log('authenticating')
         return localStorage.getItem('token') !== null;
       }
 

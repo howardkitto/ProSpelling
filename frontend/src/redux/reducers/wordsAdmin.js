@@ -18,19 +18,17 @@ const wordsAdmin = (state=[], action)=>{
         case 'UPDATED_WORD':
         // console.log('UPDATED_WORD Reducer got ' +JSON.stringify(action))
             return{
-                success:true,
-                wordList:[]
+                success:true
             }
         case 'CREATED_WORD':
         // console.log('Reducer got ' +JSON.stringify(action.word))
             return{
-                success:true,
-                wordList:[]
+                success:true
             }
         case 'DELETED_WORD':
         // console.log('Reducer got ' +JSON.stringify(action))
             return{
-                wordList:[]
+                success:true
             }
         case 'FORM_ERROR':
         // console.log('Reducer got ' +JSON.stringify(action))

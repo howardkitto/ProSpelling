@@ -22,7 +22,7 @@ class WordForm extends Component{
   
   }
   onChange(e){
-    console.log(e.target.name +' '+ e.target.value)
+    // console.log(e.target.name +' '+ e.target.value)
 
     const key = e.target.name
     const value = e.target.value
@@ -113,8 +113,6 @@ class WordForm extends Component{
         </Form>
     )
     }
-    
-    
 }
 
 

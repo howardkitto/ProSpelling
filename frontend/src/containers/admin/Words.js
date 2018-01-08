@@ -39,70 +39,71 @@ class Words extends Component{
         this.setState({modal:!this.state.modal})
        }
 
-edit(word){
-        // make sure none of the fields are null
-    if(!word.word)word.word=''
-    if(!word.level)word.level=''
-    if(!word.linkedAssessments)word.linkedAssessments=[]
-    if(!word.characteristics)word.characteristics=''
-    if(!word.audioFileName)word.audioFileName=''
+    edit(word){
+            // make sure none of the fields are null
+        if(!word.word)word.word=''
+        if(!word.level)word.level=''
+        if(!word.linkedAssessments)word.linkedAssessments=[]
+        if(!word.characteristics)word.characteristics=''
+        if(!word.audioFileName)word.audioFileName=''
 
-    this.props.editWord(word)
-    this.setState({modal : !this.state.modal})
+        this.props.editWord(word)
+        this.setState({modal : !this.state.modal})
+        }
+
+    saveClicked(){
+        if( !this.props.formWord._id){
+        this.props.createWord(this.props.formWord)}
+        else
+            this.props.updateWord(this.props.formWord)
     }
 
-saveClicked(){
-    if( !this.props.formWord._id){
-    this.props.createWord(this.props.formWord)}
-    else
-        this.props.updateWord(this.props.formWord)
-}
+    deleteClicked(){
+        this.props.deleteWord(this.props.formWord)
+        this.setState({modal : !this.state.modal})
+        }
 
-deleteClicked(){
-    this.props.deleteWord(this.props.formWord)
-    this.setState({modal : !this.state.modal})
+    toggle() {
+        this.setState({modal : !this.state.modal})
+        }
+
+    componentWillReceiveProps(nextProps)
+    {   
+        if(!nextProps.wordsList){this.props.getWordsList(this.state.page, this.state.limit)}
+        if(nextProps.success){this.setState({modal : !this.state.modal})}
     }
 
-toggle() {
-    this.setState({modal : !this.state.modal})
-      }
-
-componentWillReceiveProps(nextProps)
-{   
-    if(!nextProps.wordsList){this.props.getWordsList(this.state.page, this.state.limit)}
-    if(nextProps.success){this.setState({modal : !this.state.modal})}
-}
-
-componentDidMount(){
-    this.props.getWordsList(this.state.page, this.state.limit)
-  }
+    componentDidMount(){
+        this.props.getWordsList(this.state.page, this.state.limit)
+    }
 
   render(){
+      const{wordsList, count}=this.props
       return(
           <div className="adminContainer"><h1>Words</h1>
-        {(!this.props.wordsList)?<div>Loading Words</div>:
+        {(!wordsList)?<div>Loading Words</div>:
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
-                        <td>Word</td>
-                        <td>Level</td>
-                        <td>Date Updated</td>
-                        <td><Button color="success" onClick={this.createWord}>Create New Word</Button></td>
+                        <th>Word</th>
+                        <th>Level</th>
+                        <th>Date Updated</th>
+                        <th><Button color="success" onClick={this.createWord}>Create New Word</Button></th>
                     </tr>
                 </thead>
                 <tbody>
-                {this.props.wordsList.map((word, index)=>
+                {wordsList.map((word, index)=>
                     <tr key={word._id}>
                     <td>{word.word}</td>
                     <td>{word.level}</td>
                     <td><DateTime utc={word.updatedAt}/></td>
-                    <td><Button color ="warning" onClick={()=>this.edit(this.props.wordsList[index])}>Edit</Button></td>
+                    <td><Button color ="warning" onClick={()=>this.edit(wordsList[index])}>Edit</Button></td>
                 </tr>)}
                 </tbody>                
             </Table>
             
             }
-        <Paginator  count={this.props.count}
+        <Paginator  count={count}
                     limit={this.state.limit}
                     page={this.state.page}
                     onClick={(page, limit)=>this.props.getWordsList(page, limit)}/>
