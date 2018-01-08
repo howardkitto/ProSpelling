@@ -14,12 +14,12 @@ class DateTime extends Component{
     formatDateTime(dateTime){
         
             let dateTimeObj = new Date(dateTime)
-            let hours = String(dateTimeObj.getHours())
+            let hours = Number(dateTimeObj.getHours())
             let rawMinutes = String(dateTimeObj.getMinutes())
             let minutes = (rawMinutes.length > 1)?rawMinutes:'0'+rawMinutes
-            let date = String(dateTimeObj.getDate())
-            let month = String(dateTimeObj.getMonth())
-            let fullYear = String(dateTimeObj.getFullYear())
+            let date = Number(dateTimeObj.getDate())
+            let month = Number(dateTimeObj.getMonth() + 1)
+            let fullYear = Number(dateTimeObj.getFullYear())
 
             let dateTimeString = hours+':' + minutes+'  '+date + '/' + month +'/' + fullYear
 

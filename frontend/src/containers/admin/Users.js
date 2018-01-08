@@ -38,7 +38,6 @@ class Users extends Component {
 
     deleteClicked(){
         this.props.deleteUser(this.props.formUser)
-        this.toggle()
     }
 
     componentWillReceiveProps(nextProps)
