@@ -36,7 +36,7 @@ router.route('/')
                                 'displayName':newUser.displayName}
                             ))
     .catch((error)=>{
-        console.log('signup error '+error)
+        // console.log('signup error '+error)
         if(error.name === 'MongoError' && error.code === 11000)
             {errorMessage.signUpForm.email = 'Sorry this email address is already being used'}
         else{errorMessage.signUpForm.message = 'Server Error'}

@@ -49,7 +49,9 @@ class UserForm extends Component{
                         <Input name="email"
                                 value={user.email}
                                 onChange={(e)=>this.onChange(e)}
+                                valid={serviceMessage&&serviceMessage.email&&false}
                                 />
+                        <FormFeedback>{(serviceMessage)&&serviceMessage.email }</FormFeedback>
                     </Col>
 
                 </FormGroup>
