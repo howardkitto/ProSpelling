@@ -3,7 +3,10 @@
 function spellingTest(state=[], action){
     // console.log('spellingTest Reducer running' + JSON.stringify(action))
     switch(action.type){
-        
+        case 'GOT_ASSESSMENT_ID':
+            return{
+                assessment:action.data.foundAssessment
+            }
         case 'START_SPELLING_TEST':
             return{
                 // ...state,
@@ -25,7 +28,7 @@ function spellingTest(state=[], action){
                 spellingTestState:'waitingToContinue'
             }
         case 'SAVE_PROGRESS':
-        console.log('reducer got ' + JSON.stringify(action))
+        // console.log('reducer got ' + JSON.stringify(action))
             return{
                 ...state,
                 questions: [...state.questions, action.question],

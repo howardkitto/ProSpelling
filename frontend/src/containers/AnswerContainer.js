@@ -39,7 +39,8 @@ answerWithConfidence(){
                 style={{color:'organge'}}>{this.props.answer}</div>
     else 
         return<div className = "transcript" 
-                    style={{color:'red'}}>{this.props.answer}</div>
+                    style={{color:'red'}}>{this.props.answer}
+                    <p>I'm not sure that I heard that properly, try again</p></div>
     }
 
 setUpSpeechRecog(reset){
@@ -99,7 +100,7 @@ checkAnswer(){
 
 transcriptFeedback(){
     if(this.state.listening)
-        return <div className="listeningText">Listening</div>
+        return <div className="listeningText">Spell the word out loud now</div>
     else if(!this.state.listening && !this.props.answer)
         return<div className="listeningText">I didn't hear anything = click restart</div>
     else if(this.state.resultIsFinal)

@@ -1,0 +1,28 @@
+.DescriptionBox{
+    background: rgba(129, 130, 134, 0.5);
+    padding: 20px;
+    z-index: 1;
+}
+
+@media screen and (min-width: 550px) {
+    .DescriptionBox {
+      border-radius: 15px;
+      margin: auto;
+      width:500px;
+      display: inline-block;
+    }
+    .AssessmentContainer{
+        margin:15px;
+    }
+
+    .SpellingTestContainer{
+        margin: auto;
+        width:500px; 
+        text-align: center;       
+    }
+
+  }
+
+
+
+  

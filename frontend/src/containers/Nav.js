@@ -38,7 +38,7 @@ class MainNav extends Component {
     )}
 
   componentWillReceiveProps(nextProps){
-    console.log('nextProps.user.tokenTimeStamp ' + nextProps.user.tokenTimeStamp)
+    // console.log('nextProps.user.tokenTimeStamp ' + nextProps.user.tokenTimeStamp)
   }
 
 
@@ -99,6 +99,11 @@ class MainNav extends Component {
             </Nav>
           </Collapse>
         </Navbar>
+
+
+      <div className="stateDisplay">  <div>spellingTest: {this.props.spellingTestState}</div>
+                                      <div>question: {this.props.questionState}</div>
+      </div>
       </div>
     );
   }
@@ -107,7 +112,9 @@ class MainNav extends Component {
 const mapStateToProps = state => {
   return {
       user: state.user,
-      errors: state.serviceMessage.loginform
+      errors: state.serviceMessage.loginform,
+      spellingTestState :state.spellingTest.spellingTestState,
+      questionState: state.question.questionState
   }
 }
 

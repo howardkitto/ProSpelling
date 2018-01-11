@@ -10,17 +10,25 @@ import {getWord,
 
 class SpellingTestContainer extends Component{
 
+    componentWillReceiveProps(nextProps){
 
-    spellingTest(){
+        const{criteria, value, spellingTest} = nextProps
 
-        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, serviceMessage} = this.props
+        if(nextProps.spellingTestState==="startSpellingTest"){
+            
+            this.props.getWord(criteria, value, spellingTest)
+        }
+    }
+
+
+    render(){
+        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, serviceMessage, assessment} = this.props
 
         if(serviceMessage ==='end of assessment')
             return<h1>end of assessment</h1>
         else{
         switch(spellingTestState){
             case "startSpellingTest":
-                this.props.getWord(criteria, value, spellingTest)
                 return <div>Getting first word</div>
             case "inProgress":
                 return <div><QuestionContainer/></div>
@@ -35,24 +43,17 @@ class SpellingTestContainer extends Component{
                 return <div>SpellingTest Complete</div>
             default:
                 return <div>
+                        
                         {!spellingTestId?<LevelSelector />:null}
                     </div>
         }}
-    }
 
-    render(){
-
-        return(
-            <div>
-                {this.spellingTest()}
-                
-            </div>          
-        )
     }
 }
 
   const mapStateToProps = state => {
     return {
+        assessment:state.spellingTest.assessment,
         spellingTest:state.spellingTest,
         criteria:state.spellingTest.criteria,
         value:state.spellingTest.value,

@@ -7,6 +7,8 @@ import{
     changeQuestionState} from '../redux/actionCreators'
 
 import AnswerContainer from '../containers/AnswerContainer'
+import Rocket from '../images/rocket.png'
+import Ear from '../images/ear.png'
 
 class QuestionContainer extends Component{
 
@@ -28,16 +30,17 @@ class QuestionContainer extends Component{
 question(){
     switch(this.props.questionState){
         case 'playing':
-            return<Button   color='warning'
+            return<Button 
                             onClick={()=>this.playSound(this.props.audioFileName)}>
-                            Play the Sound Again</Button>
+                            <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button>
         case 'loadingAudio':
             return<div>Loading...</div>
         case 'waitForAnswer':
             return <div>
-                        <Button   color='warning'
+                        
+                        <Button
                         onClick={()=>this.playSound(this.props.audioFileName)}>
-                        Play the Sound Again</Button> 
+                        <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button> 
                         <AnswerContainer />
                     </div>
         case 'tryAgain':
@@ -45,10 +48,12 @@ question(){
                         <Button color="info" onClick={()=>{this.tryAgain(this.props.audioFileName)}}>Wanna Try Again?</Button>
                     </div>
         default:
-            return <Button color='success'
+            return  <Button
                         onClick={()=>this.playSound(this.props.audioFileName)}>
-                        Click to start!
+                        
+                        <img src={Rocket} alt='Click Here To Start'/> Click Here To Start!
                     </Button>
+
         }
     }
     

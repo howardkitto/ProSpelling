@@ -25,6 +25,10 @@ render(){
         <LetsStartButton />
         </div>
       </div>
+      <div className="explanationText"><p>
+      ProSpelling will help you to learn to spelling by using a unique teaching method and the latest technology.</p>
+      <p>Make sure that your speakers and microphone are switched on!</p>
+      </div>
       <video autoPlay muted loop playsInline id="myVideo">
         <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/Homepage1/playlist.m3u8' type="application/x-mpegurl"/>
         <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/test4.mp4' type="video/mp4"/>
@@ -44,7 +48,3 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(HomeContainer)
 
-//put this in to show the states
-//<div className="stateDisplay">  <div>spellingTest: {this.props.spellingTestState}</div>
-//                                                <div>question: {this.props.questionState}</div>
-//                </div>

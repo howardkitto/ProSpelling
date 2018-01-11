@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {startSpellingTest,
         getAssessmentbyTitle} from '../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
+import  '../css/Assessment.css'
 
 class PhaseOneAssessment extends Component{
 
@@ -18,7 +19,7 @@ class PhaseOneAssessment extends Component{
     }
     render(){
         return(
-            <div>
+            <div className='DescriptionBox'>
                 <h1>First Assessment</h1>
                 <h3>This is a test of 20 questions to see what level you are at</h3>
             <SpellingTestContainer/></div>

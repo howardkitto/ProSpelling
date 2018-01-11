@@ -58,7 +58,7 @@ const DELETE_USER = 'DELETE_USER'
 // USER EXPERIENCE
 
 export function startSpellingTest(selection){
-    console.log(selection.criteria + ' ' + selection.value)
+    // console.log(selection.criteria + ' ' + selection.value)
     let timestamp = new Date()
     let spellingTestId = uuid()
     return {
@@ -201,7 +201,7 @@ export function getAssessmentsList(page, limit){
 }
 
 export function getAssessmentbyTitle(assessmentTitle){
-console.log('GET_ASSESSMENT_BY_TITLE' + assessmentTitle)
+// console.log('GET_ASSESSMENT_BY_TITLE' + assessmentTitle)
     return{
         type:GET_ASSESSMENT_BY_TITLE,
         path:'../api/assessments/assessmentTitle/'+assessmentTitle,
