@@ -4,7 +4,8 @@ import {Button} from 'reactstrap'
 
 import{
     tryAgain,
-    changeQuestionState} from '../redux/actionCreators'
+    changeQuestionState,
+    showIntroTextbox} from '../redux/actionCreators'
 
 import AnswerContainer from '../containers/AnswerContainer'
 import Rocket from '../images/rocket.png'
@@ -13,6 +14,8 @@ import Ear from '../images/ear.png'
 class QuestionContainer extends Component{
 
     playSound(theSrc){
+        //hide the introtext
+
         // console.log('playsound ' + theSrc)
         this.audioPlayer.src = theSrc
         let playPromise = this.audioPlayer.play()
@@ -31,13 +34,12 @@ question(){
     switch(this.props.questionState){
         case 'playing':
             return<Button 
-                            onClick={()=>this.playSound(this.props.audioFileName)}>
-                            <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button>
+                        onClick={()=>   this.playSound(this.props.audioFileName)}>
+                        <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button>
         case 'loadingAudio':
             return<div>Loading...</div>
         case 'waitForAnswer':
-            return <div>
-                        
+            return <div>                        
                         <Button
                         onClick={()=>this.playSound(this.props.audioFileName)}>
                         <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button> 
@@ -49,11 +51,11 @@ question(){
                     </div>
         default:
             return  <Button
-                        onClick={()=>this.playSound(this.props.audioFileName)}>
-                        
-                        <img src={Rocket} alt='Click Here To Start'/> Click Here To Start!
+                        onClick={()=>{  
+                                        this.playSound(this.props.audioFileName)                                        
+                                    }}>                        
+                        <img src={Rocket} alt='Click Here To Start'/> Click Here To Start foo!
                     </Button>
-
         }
     }
     
@@ -86,8 +88,9 @@ const mapStateToProps = state => {
 
   const mapDispatchToProps = dispatch => {
     return {
-            tryAgain : () =>dispatch(tryAgain()),
-            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
+            showIntroTextbox : (display)=>dispatch(showIntroTextbox(display)),
+            tryAgain : ()=>dispatch(tryAgain()),
+            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
           }
   }
 

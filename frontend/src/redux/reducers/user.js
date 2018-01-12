@@ -14,7 +14,10 @@ function user(state=[], action){
             return Object.assign(action.data,
                 {logInSuccess:true})
 
+
+        //To Do: this logic is not correct at all        
         case 'SYNCH_USER':
+        // console.log('SYNCH_USER' + JSON.stringify(action))
             return Object.assign(action.user)
         case 'LOG_OUT':
             return{

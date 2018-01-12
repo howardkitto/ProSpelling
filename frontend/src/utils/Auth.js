@@ -3,10 +3,12 @@ import {synchUser} from '../redux/actionCreators'
 
 //store the jwt and a time stamp in localstorage
 export const authenticateUser= (user, store) => {
+        
         //if the user has just signedUp or logged the local storage
         
         if((user.signUpSuccess || user.logInSuccess))
             {   
+                // console.log('updating timestamp for some reason')
                 Object.keys(user).map((key, value)=>localStorage.setItem(key, user[key]))
                 localStorage.setItem('tokenTimeStamp', new Date())
                 

@@ -5,17 +5,28 @@ function spellingTest(state=[], action){
     switch(action.type){
         case 'GOT_ASSESSMENT_ID':
             return{
+                displayDescription:true,
                 assessment:action.data.foundAssessment
             }
-        case 'START_SPELLING_TEST':
+
+        case 'SHOW_INTRO_TEXTBOX':
+        // console.log('SHOW_INTRO_TEXTBOX ' + JSON.stringify(action))
             return{
-                // ...state,
+                ...state,
+                displayDescription:action.display
+            }
+            
+        case 'START_SPELLING_TEST':
+        // console.log('START_SPELLING_TEST ' + JSON.stringify(action))
+            return{
+                ...state,
                 spellingTestId: action.spellingTestId,
                 createdAt:action.createdAt,
                 criteria: action.criteria,
                 value: action.value,
                 questions: [],
-                spellingTestState:'startSpellingTest'
+                spellingTestState:'startSpellingTest',
+                showIntro: true
             }
         case 'GOT_WORD':
             return {

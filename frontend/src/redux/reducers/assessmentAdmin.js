@@ -38,10 +38,12 @@ const assessmentAdmin = (state=[], action)=>{
                     ...state,
                     formError:action.message
                 }
-            case 'GOT_ASSESSMENT_ID':
-            return{
-                foundAssessment:action.data.foundAssessment
-            }
+
+            //To Do: this actions is duplicated in spelling tests and needs fixing
+            // case 'GOT_ASSESSMENT_ID':
+            // return{
+            //     foundAssessment:action.data.foundAssessment
+            // }
             default:
             return state
     }}

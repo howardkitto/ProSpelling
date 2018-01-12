@@ -8,20 +8,33 @@ import  '../css/Assessment.css'
 class PhaseOneAssessment extends Component{
 
     componentDidMount(){
+
         this.props.getAssessmentbyTitle('Phase One')
+        
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.foundAss._id)
-        this.props.startSpellingTest({criteria:'assessment',
-                                    value:nextProps.foundAss._id})
+        //If we have the ID and the spelling test state is null start the test
+        if(nextProps.spellingTest.assessment && !nextProps.spellingTest.spellingTestState){
+            this.props.startSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id})
+        }
 
     }
+
     render(){
+        const{spellingTest, question}=this.props
+        //complicated decision to decide if to show a text box!
         return(
+            <div>
+            {(  (spellingTest.spellingTestState ||
+                spellingTest.spellingTestState ==="inProgress")&&
+                (!question.questionState||
+                question.questionState=="wordLoaded")&&
+                (spellingTest.questions.length === 0))&&
             <div className='DescriptionBox'>
-                <h1>First Assessment</h1>
-                <h3>This is a test of 20 questions to see what level you are at</h3>
+                <h1>{(spellingTest.assessment)&&spellingTest.assessment.title}</h1>
+                <h3>{(spellingTest.assessment)&&spellingTest.assessment.description}</h3>
+            </div>}
             <SpellingTestContainer/></div>
         )
     }
@@ -29,13 +42,14 @@ class PhaseOneAssessment extends Component{
 
 const mapStateToProps = state => {
     return {
-        foundAss: state.assessmentAdmin.foundAssessment
+        spellingTest: state.spellingTest,
+        question: state.question
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-        // startSpellingTest : (level) => dispatch(startSpellingTest({level:2}))
+    
         startSpellingTest : (selection) => dispatch(startSpellingTest(selection)),
         getAssessmentbyTitle:(assessmentTitle)=>dispatch(getAssessmentbyTitle(assessmentTitle))
           }

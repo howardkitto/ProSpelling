@@ -16,6 +16,7 @@ const SUBMIT_ANSWER = 'SUBMIT_ANSWER'
 const SAVE_PROGRESS = 'SAVE_PROGRESS'
 const TRY_AGAIN = 'TRY_AGAIN'
 const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
+const SHOW_INTRO_TEXTBOX = 'SHOW_INTRO_TEXTBOX'
 
 
 // const CHANGE_SPELLING_TEST_STATE = 'CHANGE_SPELLING_TEST_STATE'
@@ -108,6 +109,13 @@ export function changeQuestionState(questionState){
         questionState
     }
 }
+
+export function showIntroTextbox(display){
+    // console.log('showIntroTextbox action ' +display)
+    return{
+        type: SHOW_INTRO_TEXTBOX,
+        display
+    }}
 
 export function saveAnswer(answer){
     return {
