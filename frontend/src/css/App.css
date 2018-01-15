@@ -27,14 +27,6 @@ h1{
   background-color: #212121 !important;
 }
 
-.listeningText {
-  color: red;
-}
-
-.answerTextBox{
-  width: fit-content;
-}
-
 .envCheck{
   padding:8px;
   color:lightgray;
@@ -43,10 +35,6 @@ h1{
 .stateDisplay{
   position:fixed;bottom:0;
   color:lightgrey;
-}
-
-.transcript{
-  font-size: 36px;
 }
 
 .letsStart{
@@ -62,6 +50,7 @@ h1{
 }
 
 .btn-secondary{
+  margin: 10px;
   background-color: #FA135F  !important;
   border-color: #AA1946!important;
 }

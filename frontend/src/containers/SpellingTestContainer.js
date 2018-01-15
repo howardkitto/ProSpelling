@@ -8,6 +8,8 @@ import LevelSelector from './LevelSelector'
 import {getWord,
         changeQuestionState} from '../redux/actionCreators'
 
+import Rocket from '../images/rocket.png'
+
 class SpellingTestContainer extends Component{
 
     componentWillReceiveProps(nextProps){
@@ -22,7 +24,7 @@ class SpellingTestContainer extends Component{
 
 
     render(){
-        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, serviceMessage, assessment} = this.props
+        const{spellingTestState, criteria, value, spellingTest, spellingTestId, getWord, serviceMessage} = this.props
 
         if(serviceMessage ==='end of assessment')
             return<h1>end of assessment</h1>
@@ -33,10 +35,10 @@ class SpellingTestContainer extends Component{
             case "inProgress":
                 return <div><QuestionContainer/></div>
             case "waitingToContinue":
-                return <div>Awesome!
+                return <div><h1>Awesome!</h1>
                     <div>
-                    <Button color="info" onClick={()=>getWord(criteria, value, spellingTest)}>
-                    Click for Next Word</Button>
+                    <Button onClick={()=>getWord(criteria, value, spellingTest)}>
+                    <img src={Rocket} alt='Continue'/>Click for Next Word</Button>
                     </div>
                 </div>
             case "complete":

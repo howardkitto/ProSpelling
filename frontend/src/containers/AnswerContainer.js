@@ -4,11 +4,18 @@ import {saveAnswer,
         gotAnswer,
         tryAgain,
         changeQuestionState,
-        // changeSpellingTestState,
         saveProgress
         } from '../redux/actionCreators'
 
+import {Button} from 'reactstrap'
+
 import prepareResult from '../utils/prepareResult'
+import speak from '../images/speak.png'
+import sad from '../images/sad.png'
+import happy from '../images/happy.png'
+import keyboard from '../images/keyboard.png'
+import repeat from '../images/repeat.png'
+import rocket from '../images/rocket.png'
 
 const speechSupported = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -31,16 +38,24 @@ class AnswerContainer extends Component  {
     }
 
 answerWithConfidence(){
+    console.log('confidence score = ' + this.state.speechConfidence)
     if (this.state.speechConfidence > 0.9)
         return<div className = "transcript" 
                     style={{color:'green'}} >{this.props.answer}</div>
-    else if (this.state.speechConfidence > 0.8)
-        return<div className = "transcript" 
-                style={{color:'organge'}}>{this.props.answer}</div>
     else 
-        return<div className = "transcript" 
+        return<div><div className = "transcript" 
                     style={{color:'red'}}>{this.props.answer}
-                    <p>I'm not sure that I heard that properly, try again</p></div>
+                    </div>
+                    {(!this.state.listening)&&
+                    <div className="transcriptLowConfidence">
+                        <p><img src={sad} alt='Retstart'/>I didn't hear you very well.</p>
+                            <Button
+                                onClick={_=>this.setUpSpeechRecog('reset')}>
+                            <img src={repeat} alt='try again'/>
+                            Click here if I got it wrong</Button>
+                    </div>
+                    }
+                </div>
     }
 
 setUpSpeechRecog(reset){
@@ -100,12 +115,13 @@ checkAnswer(){
 
 transcriptFeedback(){
     if(this.state.listening)
-        return <div className="listeningText">Spell the word out loud now</div>
+        return <div className="listeningText"><img src={speak} alt="Speak Now"/>Speak Now!</div>
     else if(!this.state.listening && !this.props.answer)
-        return<div className="listeningText">I didn't hear anything = click restart</div>
+        return<div className="listeningText">I'm sorry I didn't hear anything. 
+        <Button onClick={_=>this.setUpSpeechRecog('reset')}><img src ={repeat} alt='try again'/>Try Again</Button></div>
     else if(this.state.resultIsFinal)
-        return <button className='btn btn-success'
-        onClick={()=>this.checkAnswer()}>Check your answer</button>
+        return <Button
+        onClick={()=>this.checkAnswer()}><img src={rocket} alt='Next'/>Next</Button>
     else
         return <div className="listeningText">Wait</div>
 }
@@ -122,14 +138,11 @@ render(){
         case (true) : 
             return (
                 <div>
-                <div>{this.answerWithConfidence()}</div>
-               
-                {this.transcriptFeedback()}
 
-                <button className='btn btn-info'
-                        onClick={_=>this.toggleTextOrSpeech()}>Switch to Text</button>
-                <button className='btn btn-primary'
-                        onClick={_=>this.setUpSpeechRecog('reset')}>Restart</button>
+                <div>{this.answerWithConfidence()}</div>
+                {this.transcriptFeedback()}
+                <Button onClick={_=>this.toggleTextOrSpeech()}><img src={keyboard} alt='Switch to Typing'/>Switch to Typing</Button>
+                <Button onClick={_=>this.setUpSpeechRecog('reset')}><img src ={repeat} alt='try again'/>Try Again</Button>
                 </div>
             )
         default :
@@ -142,19 +155,19 @@ render(){
                                 onChange={(e)=>{this.handleTypedAnswer(e)}}
                         />
                     
-                    {(recognition) ?
-                    <div>
-                    <button className='btn btn-info'
-                            onClick={_=>this.toggleTextOrSpeech()}>Switch to Speech</button>
-                    </div>
-                    : null}
+                    {(recognition) &&
+                   
+                    <Button className='btn btn-info'
+                            onClick={_=>this.toggleTextOrSpeech()}>
+                            <img src={speak} alt='switch to speech recognition'/>Switch to Speech</Button>
+                    }
 
-                    {(this.props.answer)?
-                    <div>
-                <button className='btn btn-success'
-                        onClick={()=>this.checkAnswer()}>Click here when you think you've got it</button>
-                    </div>:
-                    null}
+                    {(this.props.answer)&&
+                    
+                <Button
+                        onClick={()=>this.checkAnswer()}>
+                        <img src={rocket} alt='next'/>Next</Button>
+                    }
                     
                 </div>
             )}
@@ -175,7 +188,6 @@ const mapDispatchToProps = dispatch => {
             gotAnswer: (answer) => dispatch(gotAnswer(answer)),
             tryAgain : (answer) => dispatch(tryAgain(answer)),
             saveProgress : (question, nextState) => dispatch(saveProgress(question, nextState))
-            // changeSpellingTestState : (spellingTestState)=>dispatch(changeSpellingTestState(spellingTestState))
           }
   }
 

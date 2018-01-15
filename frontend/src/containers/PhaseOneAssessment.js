@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {startSpellingTest,
         getAssessmentbyTitle} from '../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
+import {Container, Row} from 'reactstrap'
 import  '../css/Assessment.css'
 
 class PhaseOneAssessment extends Component{
@@ -25,17 +26,23 @@ class PhaseOneAssessment extends Component{
         const{spellingTest, question}=this.props
         //complicated decision to decide if to show a text box!
         return(
-            <div>
+            <Container>
             {(  (spellingTest.spellingTestState ||
                 spellingTest.spellingTestState ==="inProgress")&&
                 (!question.questionState||
-                question.questionState=="wordLoaded")&&
+                question.questionState==="wordLoaded")&&
                 (spellingTest.questions.length === 0))&&
+            <Row>
             <div className='DescriptionBox'>
                 <h1>{(spellingTest.assessment)&&spellingTest.assessment.title}</h1>
                 <h3>{(spellingTest.assessment)&&spellingTest.assessment.description}</h3>
-            </div>}
-            <SpellingTestContainer/></div>
+            </div>
+            </Row>}
+            <Row>
+            <div className='SpellingTestContainer'>
+            <SpellingTestContainer/>
+            </div>
+            </Row></Container>
         )
     }
 }

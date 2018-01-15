@@ -1,28 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
+
 .DescriptionBox{
     background: rgba(129, 130, 134, 0.5);
     padding: 20px;
     z-index: 1;
 }
 
+.listeningText {
+    margin: 40px;
+    color: red;
+    font-size: 40px;
+  }
+
+  .transcript{
+    font-family: 'Caveat Brush';
+    font-size: 100px;
+  }
+
+  .answerTextBox{
+    font-family: 'Caveat Brush';
+    color: green;
+    font-size: 100px;
+    width: fit-content;
+    text-align: center;
+  }
+
 @media screen and (min-width: 550px) {
     .DescriptionBox {
       border-radius: 15px;
       margin: auto;
       width:500px;
+      margin-top: 15px;
+      margin-bottom: 15px;
       display: inline-block;
-    }
-    .AssessmentContainer{
-        margin:15px;
     }
 
     .SpellingTestContainer{
         margin: auto;
-        width:500px; 
+        width:700px; 
+        margin-top: 15px;
+        margin-bottom: 15px;
         text-align: center;       
     }
 
+    .transcriptLowConfidence{
+        position: absolute;
+        top:100px;
+        left:100px;
+        background:rgba(129, 130, 134, 0.5);
+        padding:20px;
+        border-radius: 15px;
+    }
+
   }
-
-
 
   

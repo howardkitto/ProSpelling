@@ -10,6 +10,8 @@ import{
 import AnswerContainer from '../containers/AnswerContainer'
 import Rocket from '../images/rocket.png'
 import Ear from '../images/ear.png'
+import Repeat from '../images/repeat.png'
+import Sad from '../images/sad.png'
 
 class QuestionContainer extends Component{
 
@@ -35,26 +37,29 @@ question(){
         case 'playing':
             return<Button 
                         onClick={()=>   this.playSound(this.props.audioFileName)}>
-                        <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button>
+                        <img src={Ear} alt='Play the Sound Again'/>Listen!</Button>
         case 'loadingAudio':
             return<div>Loading...</div>
         case 'waitForAnswer':
-            return <div>                        
-                        <Button
+            return <div>
+                 <Button
                         onClick={()=>this.playSound(this.props.audioFileName)}>
                         <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button> 
-                        <AnswerContainer />
+                <AnswerContainer />                        
+                       
+                        
                     </div>
         case 'tryAgain':
-            return  <div><h1>Doh!</h1>
-                        <Button color="info" onClick={()=>{this.tryAgain(this.props.audioFileName)}}>Wanna Try Again?</Button>
+            return  <div><img src={Sad} alt='Wrong Answer'/><h1>Oh Noes - that's not right</h1>
+                        <Button onClick={()=>{this.tryAgain(this.props.audioFileName)}}>
+                        <img src={Repeat} alt='Try Again'/>Wanna Try Again?</Button>
                     </div>
         default:
             return  <Button
                         onClick={()=>{  
                                         this.playSound(this.props.audioFileName)                                        
                                     }}>                        
-                        <img src={Rocket} alt='Click Here To Start'/> Click Here To Start foo!
+                        <img src={Rocket} alt='Click Here To Start'/> Click Here For Question 1
                     </Button>
         }
     }

@@ -26,7 +26,7 @@ render(){
         </div>
       </div>
       <div className="explanationText"><p>
-      ProSpelling will help you to learn to spelling by using a unique teaching method and the latest technology.</p>
+      ProSpelling will help you to learn to spell by using a unique teaching method and the latest technology.</p>
       <p>Make sure that your speakers and microphone are switched on!</p>
       </div>
       <video autoPlay muted loop playsInline id="myVideo">
