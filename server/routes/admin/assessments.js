@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const Assessments = require('../../models/Assessments')
+const Words = require('../../models/Words')
 
 router.route('/')
 
@@ -94,8 +95,17 @@ let promise = Assessments.find().exec()
 router.route('/assessmentTitle/:assessmentTitle')
 .get((req,res)=>{
     console.log(req.params.assessmentTitle)
+    var tempAssesment={}
+
     var promise = Assessments.findOne({'title':req.params.assessmentTitle}).exec()
-    .then((assessment)=>{res.json({'foundAssessment':assessment})})
+    .then((assessment)=>{tempAssesment=assessment})
+    //find out how many words are in the assessment
+    .then(()=> {return Words.find({'linkedAssessments.assessmentId':tempAssesment._id}).count().exec()} )
+    .then((count)=>{   let wordCount = {wordCount:count}
+                        //use object assign to merge objects ._doc is where mongo put the data
+                        let assessmentToReturn = Object.assign({},tempAssesment._doc, wordCount)
+                        res.setHeader('Content-Type', 'application/json')
+                        res.json(assessmentToReturn)})
 })
 
 

@@ -11,6 +11,7 @@ import Rocket from '../images/rocket.png'
 import Ear from '../images/ear.png'
 import Repeat from '../images/repeat.png'
 import Sad from '../images/sad.png'
+import spellingTest from '../redux/reducers/spellingTest';
 
 class QuestionContainer extends Component{
 
@@ -54,11 +55,15 @@ question(){
                         <img src={Repeat} alt='Try Again'/>Wanna Try Again?</Button>
                     </div>
         default:
+            var questionCount =this.props.progress.filter(attempt => attempt.result==='correct')
             return  <Button
                         onClick={()=>{  
                                         this.playSound(this.props.audioFileName)                                        
                                     }}>                        
-                        <img src={Rocket} alt='Click Here To Start'/> Click Here For Question 1
+                        <img src={Rocket} alt='Click Here To Start'/> Click Here For Question &nbsp; 
+                        {(this.props.progress.length===0)?1:questionCount.length + 1
+                        }&nbsp; of&nbsp;
+                        {this.props.wordsInAssessment}
                     </Button>
         }
     }
@@ -80,13 +85,14 @@ question(){
 
 const mapStateToProps = state => {
     return {
-        level: state.spellingTest.level,
         answer: state.question.answer,
         word: state.question.word,
         audioFileName: state.question.audioFileName,
         result:state.question.result,
         questionState:state.question.questionState,
-        spellingTestState:state.spellingTest.spellingTestState
+        spellingTestState:state.spellingTest.spellingTestState,
+        progress:state.spellingTest.questions,
+        wordsInAssessment:state.spellingTest.assessment.wordCount
     }
   }
 

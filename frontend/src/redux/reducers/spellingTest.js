@@ -5,7 +5,7 @@ function spellingTest(state=[], action){
     switch(action.type){
         case 'GOT_ASSESSMENT_ID':
             return{
-                assessment:action.data.foundAssessment
+                assessment:action.data
             }
             
         case 'START_SPELLING_TEST':

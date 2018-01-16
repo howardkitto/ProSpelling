@@ -13,7 +13,7 @@ const errorMessage = {    errors:true,
 router.route('/criteria/:criteria/value/:value')
 
 .post((req, res)=>{
-    console.log('got post ' + JSON.stringify(req.params.value))
+    // console.log('got post ' + JSON.stringify(req.params.value))
 
    
 

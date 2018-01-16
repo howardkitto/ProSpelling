@@ -7,7 +7,7 @@ const getWord = (allWords) => {
                     timeStamp:timeStamp}})
         
         if(allWords.length==0){
-            console.log('end of assessment')
+            // console.log('end of assessment')
             reject({message:'spellingTestComplete'})
         }
         else{
