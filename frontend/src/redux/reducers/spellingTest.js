@@ -5,15 +5,7 @@ function spellingTest(state=[], action){
     switch(action.type){
         case 'GOT_ASSESSMENT_ID':
             return{
-                displayDescription:true,
                 assessment:action.data.foundAssessment
-            }
-
-        case 'SHOW_INTRO_TEXTBOX':
-        // console.log('SHOW_INTRO_TEXTBOX ' + JSON.stringify(action))
-            return{
-                ...state,
-                displayDescription:action.display
             }
             
         case 'START_SPELLING_TEST':
@@ -25,18 +17,29 @@ function spellingTest(state=[], action){
                 criteria: action.criteria,
                 value: action.value,
                 questions: [],
-                spellingTestState:'startSpellingTest',
-                showIntro: true
+                spellingTestState:'startSpellingTest'
+            }
+        case 'GET_WORD':
+        // console.log('Reducer GET_WORD ' + JSON.stringify(action))
+            return{
+                ...state,
+                spellingTestState:'gettingWord'
             }
         case 'GOT_WORD':
+        // console.log('Reducer GOT_WORD ' + JSON.stringify(action))
             return {
                 ...state,
                 spellingTestState:'inProgress'
             }
-        case 'CHANGE_SPELLING_TEST_STATE':
+        // case 'CHANGE_SPELLING_TEST_STATE':
+        //     return{
+        //         ...state,
+        //         spellingTestState:'waitingToContinue'
+        //     }
+        case 'SPELLING_TEST_COMPLETE':
             return{
                 ...state,
-                spellingTestState:'waitingToContinue'
+                spellingTestState:'spellingTestComplete'
             }
         case 'SAVE_PROGRESS':
         // console.log('reducer got ' + JSON.stringify(action))
@@ -45,10 +48,7 @@ function spellingTest(state=[], action){
                 questions: [...state.questions, action.question],
                 spellingTestState: action.nextState
             }
-        case 'SPELLING_TEST_COMPLETE':
-            return{
-                spellingTestState: 'complete'
-            }
+        
         default:
         return state
         }

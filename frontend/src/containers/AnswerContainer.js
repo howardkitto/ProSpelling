@@ -38,7 +38,7 @@ class AnswerContainer extends Component  {
     }
 
 answerWithConfidence(){
-    console.log('confidence score = ' + this.state.speechConfidence)
+    // console.log('confidence score = ' + this.state.speechConfidence)
     if (this.state.speechConfidence > 0.9)
         return<div className = "transcript" 
                     style={{color:'green'}} >{this.props.answer}</div>

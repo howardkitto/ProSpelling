@@ -8,7 +8,7 @@ const getWord = (allWords) => {
         
         if(allWords.length==0){
             console.log('end of assessment')
-            resolve({message:'end of assessment'})
+            reject({message:'spellingTestComplete'})
         }
         else{
             // console.log('got these words ' + JSON.stringify(allWordsArray))

@@ -13,10 +13,19 @@ function serviceMessage(state=[], action){
 
         case 'CLEAR_SERVICE_MESSAGE':
         console.log('CLEAR_SERVICE_MESSAGE CALLED' + JSON.stringify(action))
-        return {message:'All Good'}
+        return {errors:false,
+                    systemMessage: {
+                        message:'All Good'
+                }
+            }
         
         default:
-        return {message:'No message yet'}
+        // console.log('RETURNING DEFAULT SERVICE MESSAGE')
+            return {errors:false,
+                        systemMessage: {
+                            message:'All Good'
+                        }
+                    }
         }
 }
 

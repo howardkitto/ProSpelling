@@ -4,7 +4,7 @@ var SpellingTests = require('../models/SpellingTests');
 
 const saveSpellingTest = (spellingTest)=>{
     return new Promise((resolve, reject)=>{
-
+            console.log('saving spellingTest ' + JSON.stringify(spellingTest))
             SpellingTests.findOneAndUpdate(
                 {spellingTestId:spellingTest.spellingTestId},
                 spellingTest,

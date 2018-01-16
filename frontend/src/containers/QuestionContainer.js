@@ -4,8 +4,7 @@ import {Button} from 'reactstrap'
 
 import{
     tryAgain,
-    changeQuestionState,
-    showIntroTextbox} from '../redux/actionCreators'
+    changeQuestionState} from '../redux/actionCreators'
 
 import AnswerContainer from '../containers/AnswerContainer'
 import Rocket from '../images/rocket.png'
@@ -93,7 +92,6 @@ const mapStateToProps = state => {
 
   const mapDispatchToProps = dispatch => {
     return {
-            showIntroTextbox : (display)=>dispatch(showIntroTextbox(display)),
             tryAgain : ()=>dispatch(tryAgain()),
             changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState))
           }
