@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const Words = require('../../models/Words')
+const User = require('../../models/User')
 const saveSpellingTest = require('../../utils/saveSpellingTest')
 const getWord = require('../../utils/getWord')   
 const filterPreviousWords = require('../../utils/filterPreviousWords')
@@ -13,9 +14,8 @@ const errorMessage = {    errors:true,
 router.route('/criteria/:criteria/value/:value')
 
 .post((req, res)=>{
-    // console.log('got post ' + JSON.stringify(req.params.value))
-
-   
+    console.log('got post ' + JSON.stringify(req.params.value))
+    console.log('got data ' + JSON.stringify(req.body))
 
     //To Do: massively improve error handling here
 
@@ -25,7 +25,6 @@ router.route('/criteria/:criteria/value/:value')
             throw("No Test Details Received")
         }
         else{
-        
         let savedSpellingTest = await(saveSpellingTest(req.body))
         let allWords = (req.params.criteria=='level')?
             await Words.find({"level":req.params.value}).exec()
@@ -38,8 +37,8 @@ router.route('/criteria/:criteria/value/:value')
 
        }
 
-    processWord().catch(error => { errorMessage.getWord.message = error.message
-                                    console.log('error ' + JSON.stringify(errorMessage))
+    processWord().catch(error => {  errorMessage.getWord.message = error
+                                    console.log('error json ' + JSON.stringify(errorMessage))
                                     res.status(401).json(errorMessage)
                                 
                                 });

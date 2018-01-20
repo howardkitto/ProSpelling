@@ -11,7 +11,7 @@ import Rocket from '../images/rocket.png'
 import Ear from '../images/ear.png'
 import Repeat from '../images/repeat.png'
 import Sad from '../images/sad.png'
-import spellingTest from '../redux/reducers/spellingTest';
+// import spellingTest from '../redux/reducers/spellingTest';
 
 class QuestionContainer extends Component{
 

@@ -17,13 +17,13 @@ class PhaseOneAssessment extends Component{
     componentWillReceiveProps(nextProps){
         //If we have the ID and the spelling test state is null start the test
         if(nextProps.spellingTest.assessment && !nextProps.spellingTest.spellingTestState){
-            this.props.startSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id})
+            this.props.startSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id}, this.props.user.userId)
         }
 
     }
 
     render(){
-        const{spellingTest, question}=this.props
+        const{spellingTest, question, user}=this.props
         //complicated decision to decide if to show a text box!
         return(
             <Container>
@@ -34,7 +34,8 @@ class PhaseOneAssessment extends Component{
                 (spellingTest.questions.length === 0))&&
             <Row>
             <div className='DescriptionBox'>
-                <h1>{(spellingTest.assessment)&&spellingTest.assessment.title}</h1>
+                {(user.displayName)&&<h1>Hi&nbsp;{user.displayName}</h1>}
+                <h2>{(spellingTest.assessment)&&spellingTest.assessment.title}</h2>
                 <h3>{(spellingTest.assessment)&&spellingTest.assessment.description}</h3>
             </div>
             </Row>}
@@ -50,14 +51,15 @@ class PhaseOneAssessment extends Component{
 const mapStateToProps = state => {
     return {
         spellingTest: state.spellingTest,
-        question: state.question
+        question: state.question,
+        user:state.user
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
     
-        startSpellingTest : (selection) => dispatch(startSpellingTest(selection)),
+        startSpellingTest : (selection, userId) => dispatch(startSpellingTest(selection, userId)),
         getAssessmentbyTitle:(assessmentTitle)=>dispatch(getAssessmentbyTitle(assessmentTitle))
           }
   }

@@ -101,14 +101,17 @@ handleTypedAnswer(e){
 }
 
 checkAnswer(){
-    prepareResult(this.props.word, this.props.answer)
+    const{word, answer, question, user, gotAnswer, saveProgress, changeQuestionState} = this.props
+
+    prepareResult(word, answer)
     .then((result)=>{
-        this.props.gotAnswer(result.yesOrNo, result.score)
+        gotAnswer(result.yesOrNo, result.score)
         if(result.yesOrNo === 'correct')
-            this.props.saveProgress(this.props.question, 'waitingToContinue')
+            saveProgress(question, user.userId, 'waitingToContinue')
         else{
-            this.props.saveProgress(this.props.question, 'inProgress')
-            this.props.changeQuestionState('tryAgain')}
+            //what to do if this.props.user.userId is null?
+            saveProgress(question, user.userId, 'inProgress')
+            changeQuestionState('tryAgain')}
     })
 }
 
@@ -176,7 +179,8 @@ const mapStateToProps = state => {
     return {
       answer: state.question.answer,
       word: state.question.word,
-      question: state.question
+      question: state.question,
+      user: state.user
     }
   }
 
@@ -186,7 +190,7 @@ const mapDispatchToProps = dispatch => {
             changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
             gotAnswer: (answer) => dispatch(gotAnswer(answer)),
             tryAgain : (answer) => dispatch(tryAgain(answer)),
-            saveProgress : (question, nextState) => dispatch(saveProgress(question, nextState))
+            saveProgress : (question, userId, nextState) => dispatch(saveProgress(question, userId, nextState))
           }
   }
 

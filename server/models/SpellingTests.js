@@ -14,6 +14,7 @@ const Questions = new mongoose.Schema({
 const  SpellingTests = new mongoose.Schema({
   spellingTestId: {type: String, required:true},
   level: {type: Number, required:true},
+  userId: {type:String, default:"Anonymous"},
   questions: [Questions]
 }, {timestamps:{}} ); 
 

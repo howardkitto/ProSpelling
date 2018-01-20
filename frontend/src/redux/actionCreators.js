@@ -58,7 +58,7 @@ const DELETE_USER = 'DELETE_USER'
 
 // USER EXPERIENCE
 
-export function startSpellingTest(selection){
+export function startSpellingTest(selection, userId){
     // console.log(selection.criteria + ' ' + selection.value)
     let timestamp = new Date()
     let spellingTestId = uuid()
@@ -68,12 +68,13 @@ export function startSpellingTest(selection){
         criteria: selection.criteria,
         value: selection.value,
         assessment: selection.assessment,
-        createdAt: timestamp
+        createdAt: timestamp,
+        userId
     }
 }
 
 export function getWord(criteria, value, spellingTest){
-    // console.log('GET_WORD action '+JSON.stringify(spellingTest))
+    console.log('GET_WORD action '+JSON.stringify(spellingTest))
     return{
         type: GET_WORD,
         path: '../api/getword/criteria/'+criteria+'/value/'+value,
@@ -95,11 +96,13 @@ export function submitAnswer(){
     }
 }
 
-export function saveProgress(question, nextState){
+export function saveProgress(question, userId, nextState){
+    // console.log('saveProgress action got '+ JSON.stringify(question) +' '+user+' '+nextState)
     return{
         type: SAVE_PROGRESS,
         question,
-        nextState
+        nextState,
+        userId 
     }}
 
 export function changeQuestionState(questionState){
