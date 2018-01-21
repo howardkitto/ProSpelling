@@ -33,17 +33,17 @@ render(){
     <Table striped bordered hover responsive>
         <thead>
             <tr>
-                <td>User</td>
-                <td>Questions</td>
-                <td>Date Updated</td>
-                <td></td>
+                <th>User</th>
+                <th>Attempts</th>
+                <th>Date Updated</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {this.props.spellingTests.map((a)=>
         
             <tr key={a.spellingTestId}>
-            <td>Anonymous</td>
+            <td>{(a.userDisplayName)&&a.userDisplayName}</td>
             <td>{a.questions.length}</td>
             <td><DateTime utc={a.createdAt}/></td>
             <td><Button color ="danger">Delete</Button></td>

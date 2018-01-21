@@ -5,7 +5,7 @@ function spellingTestAdmin(state=[], action){
             // console.log('spellingTestAdmin Reducer running' + JSON.stringify(action))
             return{
                 count: action.data.count,
-                spellingTests:action.data.questions
+                spellingTests:action.data.List
             }
         default:
             return state
