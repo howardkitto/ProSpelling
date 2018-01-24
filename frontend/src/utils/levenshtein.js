@@ -51,7 +51,7 @@
      }
  
      dist = column[len2];
-     console.log('calculated lev distance ' + dist)
+    //  console.log('calculated lev distance ' + dist)
      resolve(dist);
  })}
  

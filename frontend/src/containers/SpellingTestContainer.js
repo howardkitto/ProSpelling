@@ -23,14 +23,13 @@ class SpellingTestContainer extends Component{
             this.props.getWord(criteria, value, spellingTest)
         }
 
-
-            if(serviceMessage.hasOwnProperty('getWord')){
-                if(serviceMessage.getWord.message === 'spellingTestComplete'){
-                    console.log('spellingTestComplete')
-                    this.props.spellingTestComplete()
-                }
+        if(serviceMessage.hasOwnProperty('getWord')){
+            // console.log('can see getWord SM ' + JSON.stringify(serviceMessage.getWord.message) )
+            if(serviceMessage.getWord.message === 'spellingTestComplete'){
+                // console.log('spellingTestComplete')
+                this.props.spellingTestComplete()
             }
-        
+        }        
     }
 
     render(){
@@ -54,9 +53,9 @@ class SpellingTestContainer extends Component{
         spellingTest:state.spellingTest,
         criteria:state.spellingTest.criteria,
         value:state.spellingTest.value,
-        question:state.question,
+        question:state.currentQuestion,
         spellingTestState:state.spellingTest.spellingTestState,
-        questionState:state.question.questionState,
+        questionState:state.currentQuestion.questionState,
         progress:state.spellingTest.progress,
         serviceMessage:state.serviceMessage
     }

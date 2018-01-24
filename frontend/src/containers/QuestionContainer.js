@@ -56,6 +56,7 @@ question(){
                     </div>
         default:
             var questionCount =this.props.progress.filter(attempt => attempt.result==='correct')
+            console.log()
             return  <Button
                         onClick={()=>{  
                                         this.playSound(this.props.audioFileName)                                        
@@ -85,11 +86,11 @@ question(){
 
 const mapStateToProps = state => {
     return {
-        answer: state.question.answer,
-        word: state.question.word,
-        audioFileName: state.question.audioFileName,
-        result:state.question.result,
-        questionState:state.question.questionState,
+        answer: state.currentQuestion.answer,
+        word: state.currentQuestion.word,
+        audioFileName: state.currentQuestion.audioFileName,
+        result:state.currentQuestion.result,
+        questionState:state.currentQuestion.questionState,
         spellingTestState:state.spellingTest.spellingTestState,
         progress:state.spellingTest.questions,
         wordsInAssessment:state.spellingTest.assessment.wordCount

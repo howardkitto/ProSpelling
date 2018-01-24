@@ -114,7 +114,7 @@ const mapStateToProps = state => {
       user: state.user,
       errors: state.serviceMessage.loginform,
       spellingTestState :state.spellingTest.spellingTestState,
-      questionState: state.question.questionState
+      questionState: state.currentQuestion.questionState
   }
 }
 

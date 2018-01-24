@@ -38,7 +38,7 @@ function spellingTest(state=[], action){
                 spellingTestState:'spellingTestComplete'
             }
         case 'SAVE_PROGRESS':
-        console.log('reducer got ' + JSON.stringify(action))
+        // console.log('reducer got ' + JSON.stringify(action))
             return{
                 ...state,
                 questions: [...state.questions, action.question],

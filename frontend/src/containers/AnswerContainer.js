@@ -101,17 +101,12 @@ handleTypedAnswer(e){
 }
 
 checkAnswer(){
-    const{word, answer, question, user, gotAnswer, saveProgress, changeQuestionState} = this.props
+    const{word, answer, gotAnswer} = this.props
 
     prepareResult(word, answer)
     .then((result)=>{
-        gotAnswer(result.yesOrNo, result.score)
-        if(result.yesOrNo === 'correct')
-            saveProgress(question, user.userId, 'waitingToContinue')
-        else{
-            //what to do if this.props.user.userId is null?
-            saveProgress(question, user.userId, 'inProgress')
-            changeQuestionState('tryAgain')}
+        //The result of this action is read in componentWillReceiveProps 
+        gotAnswer(result.yesOrNo, result.score)       
     })
 }
 
@@ -126,6 +121,19 @@ transcriptFeedback(){
         onClick={()=>this.checkAnswer()}><img src={rocket} alt='Next'/>Next</Button>
     else
         return <div className="listeningText">Wait</div>
+}
+
+componentWillReceiveProps(nextProps){
+    
+    if(nextProps.question.result==='correct'){
+        // console.log('got result ' + nextProps.question.result)
+        this.props.saveProgress(nextProps.question, this.props.user.userId, 'waitingToContinue')
+    }
+
+    if(nextProps.question.result==='incorrect'){
+        this.props.saveProgress(nextProps.question, this.props.user.userId, 'inProgress')
+        this.props.changeQuestionState('tryAgain')
+    }
 }
 
 componentDidMount(){
@@ -177,9 +185,9 @@ render(){
 
 const mapStateToProps = state => {
     return {
-      answer: state.question.answer,
-      word: state.question.word,
-      question: state.question,
+      answer: state.currentQuestion.answer,
+      word: state.currentQuestion.word,
+      question: state.currentQuestion,
       user: state.user
     }
   }

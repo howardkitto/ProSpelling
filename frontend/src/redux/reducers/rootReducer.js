@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import user from './user'
-import question from './question'
+import currentQuestion from './currentQuestion'
 import wordsAdmin from './wordsAdmin'
 import usersAdmin from './usersAdmin'
 import spellingTest from './spellingTest'
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({   serviceMessage,
                                         usersAdmin,
                                         spellingTestAdmin,
                                         assessmentAdmin,
-                                        question,
+                                        currentQuestion,
                                         router:routerReducer})
 
 export default rootReducer;

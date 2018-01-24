@@ -51,7 +51,7 @@ class PhaseOneAssessment extends Component{
 const mapStateToProps = state => {
     return {
         spellingTest: state.spellingTest,
-        question: state.question,
+        question: state.currentQuestion,
         user:state.user
     }
   }

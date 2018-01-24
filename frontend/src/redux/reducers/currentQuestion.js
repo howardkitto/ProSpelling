@@ -23,7 +23,7 @@ function question(state=[], action){
             questionState: 'wordLoaded'
             }
         case 'GOT_ANSWER':
-        // console.log('reducer got ' + JSON.stringify(action))
+        // console.log('GOT_ANSWER reducer got ' + JSON.stringify(action))
             return{
                 ...state,
                 answerTimeStamp: action.answerTimestamp,

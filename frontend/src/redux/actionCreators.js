@@ -74,7 +74,7 @@ export function startSpellingTest(selection, userId){
 }
 
 export function getWord(criteria, value, spellingTest){
-    console.log('GET_WORD action '+JSON.stringify(spellingTest))
+    // console.log('GET_WORD action '+JSON.stringify(spellingTest))
     return{
         type: GET_WORD,
         path: '../api/getword/criteria/'+criteria+'/value/'+value,
@@ -97,7 +97,7 @@ export function submitAnswer(){
 }
 
 export function saveProgress(question, userId, nextState){
-    // console.log('saveProgress action got '+ JSON.stringify(question) +' '+user+' '+nextState)
+    // console.log('saveProgress action got '+ JSON.stringify(question) +' '+userId+' '+nextState)
     return{
         type: SAVE_PROGRESS,
         question,
