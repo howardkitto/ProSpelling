@@ -1,8 +1,10 @@
  //https://stackoverflow.com/questions/22308014/damerau-levenshtein-distance-implementation
  
  
- function levenshtein (seq1,seq2)
- {return new Promise(function(resolve, reject){
+ function levenshtein (seq1,seq2){  
+    //  console.log("levenshtein got "+seq1 +" "+seq2)
+     
+    return new Promise(function(resolve, reject){
      var len1=seq1.length;
      var len2=seq2.length;
      var i, j;

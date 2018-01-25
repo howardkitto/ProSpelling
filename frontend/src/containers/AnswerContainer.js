@@ -105,8 +105,9 @@ checkAnswer(){
 
     prepareResult(word, answer)
     .then((result)=>{
-        //The result of this action is read in componentWillReceiveProps 
-        gotAnswer(result.yesOrNo, result.score)       
+        //The result of this action is read in componentWillReceiveProps
+        // console.log("prepareResult returned "+JSON.stringify(result)) 
+        gotAnswer(result)       
     })
 }
 

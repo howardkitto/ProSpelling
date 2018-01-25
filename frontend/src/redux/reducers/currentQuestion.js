@@ -27,7 +27,7 @@ function question(state=[], action){
             return{
                 ...state,
                 answerTimeStamp: action.answerTimestamp,
-                result: action.result,
+                result: action.outcome,
                 score: action.score
             }
         case 'TRY_AGAIN':

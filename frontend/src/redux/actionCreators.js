@@ -130,13 +130,13 @@ export function saveAnswer(answer){
     }
 }
 
-export function gotAnswer(result, score){
+export function gotAnswer(result){
+    // console.log('gotAnswer got '+ JSON.stringify(result))
     const timestamp = new Date()
     return{
         type: GOT_ANSWER,
         answerTimestamp: timestamp,
-        result,
-        score
+        ...result
     }
 }
 
