@@ -14,8 +14,14 @@ import {  Collapse,
          } from 'reactstrap';
 import logo from '../images/logo.png'
 
-import {logOut} from '../redux/actionCreators'
+import {logOut,
+        speechSupported} from '../redux/actionCreators'
 
+const webSpeech = window.SpeechRecognition ||
+                        window.webkitSpeechRecognition || 
+                        window.mozSpeechRecognition || 
+                        window.msSpeechRecognition ||
+                        window.oSpeechRecognition
 
 class MainNav extends Component {
   constructor(props) {
@@ -37,8 +43,13 @@ class MainNav extends Component {
       {'backgroundColor':'#212121'}
     )}
 
-  componentWillReceiveProps(nextProps){
-    // console.log('nextProps.user.tokenTimeStamp ' + nextProps.user.tokenTimeStamp)
+  componentWillMount(){
+    if(webSpeech){
+      this.props.speechSupported(true)
+    }else{
+      this.props.speechSupported(false)
+
+    }
   }
 
 
@@ -121,6 +132,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
       logOut: ()=>dispatch(logOut()),
+      speechSupported : (value) => dispatch(speechSupported(value)),
     
         }
 }

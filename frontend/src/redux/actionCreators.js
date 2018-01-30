@@ -9,6 +9,7 @@ const ENV_TEST = 'ENV_TEST'
 //USER EXPERIENCE ACTIONS
 
 const START_SPELLING_TEST = 'START_SPELLING_TEST'
+const SPEECH_SUPPORTED = 'SPEECH_SUPPORTED'
 const GET_WORD = 'GET_WORD'
 const GET_ANSWER = 'GET_ANSWER'
 const GOT_ANSWER = 'GOT_ANSWER'
@@ -17,6 +18,7 @@ const SAVE_PROGRESS = 'SAVE_PROGRESS'
 const TRY_AGAIN = 'TRY_AGAIN'
 const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 const SPELLING_TEST_COMPLETE = 'SPELLING_TEST_COMPLETE'
+
 
 
 // const CHANGE_SPELLING_TEST_STATE = 'CHANGE_SPELLING_TEST_STATE'
@@ -57,6 +59,12 @@ const UPDATE_USER = 'UPDATE_USER'
 const DELETE_USER = 'DELETE_USER'
 
 // USER EXPERIENCE
+
+export function speechSupported(value){
+    return{
+    type: SPEECH_SUPPORTED,
+    speechSupported: value
+}}
 
 export function startSpellingTest(selection, userId){
     // console.log(selection.criteria + ' ' + selection.value)

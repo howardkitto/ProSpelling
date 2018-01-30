@@ -8,6 +8,7 @@ import spellingTest from './spellingTest'
 import spellingTestAdmin from './spellingTestAdmin'
 import assessmentAdmin from './assessmentAdmin'
 import serviceMessage from './serviceMessage'
+import envProperties from './envProperties'
 
 import { routerReducer} from 'react-router-redux'
 
@@ -18,7 +19,9 @@ const rootReducer = combineReducers({   serviceMessage,
                                         usersAdmin,
                                         spellingTestAdmin,
                                         assessmentAdmin,
+                                        envProperties,
                                         currentQuestion,
+
                                         router:routerReducer})
 
 export default rootReducer;

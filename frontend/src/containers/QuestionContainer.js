@@ -42,13 +42,11 @@ question(){
             return<div>Loading...</div>
         case 'waitForAnswer':
             return <div>
-                 <Button
-                        onClick={()=>this.playSound(this.props.audioFileName)}>
-                        <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again</Button> 
-                <AnswerContainer />                        
-                       
-                        
-                    </div>
+                <Button onClick={()=>this.playSound(this.props.audioFileName)}>
+                <img src={Ear} alt='Play the Sound Again'/>Play the Sound Again
+                </Button> 
+                <AnswerContainer />                
+                </div>
         case 'tryAgain':
             return  <div><img src={Sad} alt='Wrong Answer'/><h1>Oh Noes - that's not right</h1>
                         <Button onClick={()=>{this.tryAgain(this.props.audioFileName)}}>

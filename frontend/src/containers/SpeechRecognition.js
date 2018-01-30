@@ -1,28 +1,26 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container, Row, Button} from 'reactstrap'
+import {saveAnswer} from '../redux/actionCreators'
 
-
-const speechSupported = window.SpeechRecognition ||
+const webSpeech = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
                         window.mozSpeechRecognition || 
                         window.msSpeechRecognition ||
                         window.oSpeechRecognition
 
-const recognition = speechSupported && new speechSupported()
+const recognition = webSpeech && new webSpeech()
 
-class QuickQuiz extends Component{
+class SpeechRecognition extends Component{
 
     constructor(props){
         super(props)
             this.state = {
                 listening: false,
                 transcript: '',
-                finalAnswer: false,
                 transcriptConfidence:1,
                 answer:'',
                 feedback:''
-            }        
+            }
     }
 
     setUpSpeechRecog(reset){
@@ -42,14 +40,18 @@ class QuickQuiz extends Component{
         }
     
 recognition.onstart=event=>this.setState({  listening:true,
+                                            feedback:'Say A Letter',
                                             transcript:''})
             
 recognition.onresult=event=>{this.setState({transcript:event.results[0][0].transcript,
                                             transcriptConfidence:event.results[0][0].confidence})}
 
-recognition.onend=_=>{  this.setState({listening:false})
-                        this.handleTranscript();}
-}
+recognition.onend=_=>{  if(this._isMounted){
+                            this.setState({ feedback:'Wait',
+                                            listening:false})
+                            this.handleTranscript()}
+                        }
+}   
 
     handleTranscript(){
         const {transcript, answer}= this.state
@@ -59,7 +61,8 @@ recognition.onend=_=>{  this.setState({listening:false})
 
         switch(upperCaseTranscript){
             case('STOP'):
-                this.setState({finalAnswer:true})
+                this.setState({feedback:'Let\'s Check your answer',
+                                finalAnswer:true})
                 break
             case('DELETE'):
                 this.setState({ transcript: '',
@@ -89,13 +92,24 @@ recognition.onend=_=>{  this.setState({listening:false})
                 let fixHi = answer.concat('I')
                 this.setState({ answer: fixHi})
                 break
+            case('KEY'):
+                let fixKey = answer.concat('T')
+                this.setState({ answer: fixKey})
+                break
+            case('IN'):
+                let fixIn = answer.concat('N')
+                this.setState({ answer: fixIn})
+                break
+            case('ASS'):
+                let fixAss = answer.concat('S')
+                this.setState({ answer: fixAss})
+                break    
             case(''):
                 this.setState({feedback:'I didn\'t hear you... Speak up!'})
                 break
             default:
                 let incrementAnswer = answer.concat(transcript.charAt(0).toUpperCase())
-                this.setState({ feedback:'',
-                                answer: incrementAnswer})
+                this.setState({ answer: incrementAnswer})
         }
 
         if(!this.state.finalAnswer){                
@@ -109,57 +123,49 @@ recognition.onend=_=>{  this.setState({listening:false})
     }}
 
     componentWillMount(){
+        this.props.answer&&this.setState({answer:this.props.answer})
         this.setUpSpeechRecog()
-        
+        this._isMounted = true
     }
+
+    componentWillUpdate(){
+        this.props.saveAnswer(this.state.answer)
+    }
+
+    componentWillUnmount(){
+        recognition.stop()
+        // prevent setting state when the component is unmounted
+        this._isMounted = false       
+    }
+
 
     render(){
     
-    const {answer, transcript, listening, finalAnswer, transcriptConfidence, feedback} = this.state
+    const {answer, transcript, listening, transcriptConfidence, feedback} = this.state
 
-    console.log(    
-                    // "Listening = " + listening+
-                    // " finalAnswer = " + finalAnswer+
-                    " Confidence = " + transcriptConfidence+
-                    " Transcript = " +transcript)
+        console.log(    " Confidence = " + transcriptConfidence+
+                        " Transcript = " + transcript)
         return(
-            <Container>
-            <Row><div>
-                <h1>Say A Letter</h1>
-                <p>Say "STOP" when you are done</p>
-                <p>Say "DELETE" or "BACK" if there is a mistake</p>
-                <h1>{answer}</h1>
-                {finalAnswer?
-                    <Button onClick={()=>recognition.start()}>
-                        Start Listening
-                    </Button>:
-                    
-                (listening)?                
-                    <div className="loader"></div>:
-                        <h1>Wait</h1>}
-                <h2>{feedback}</h2>
+                <div>
+                    <div className="answerTextBox">{answer}</div>
+                    <h2>{feedback}</h2>
+                    {(listening)&&              
+                        <div className="loader"></div>}              
                 </div>
-            </Row>
-            </Container>        
-
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
+        answer: state.currentQuestion.answer
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-    
+        saveAnswer : (answer) => dispatch(saveAnswer(answer)),
           }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuickQuiz) 
-
-
-
-{/* <h2>{this.transcriptConfidenceStyle()}</h2>
-<h4>listening</h4> */}
+export default connect(mapStateToProps, mapDispatchToProps)(SpeechRecognition) 

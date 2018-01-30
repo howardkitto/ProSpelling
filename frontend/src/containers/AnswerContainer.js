@@ -1,205 +1,119 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {saveAnswer,
-        gotAnswer,
-        tryAgain,
-        changeQuestionState,
-        saveProgress
-        } from '../redux/actionCreators'
+import {    gotAnswer,
+            saveAnswer,
+            saveProgress,
+            changeQuestionState} from '../redux/actionCreators'
+
+import SpeechRecognition from './SpeechRecognition'            
+import prepareResult from '../utils/prepareResult'
 
 import {Button} from 'reactstrap'
 
-import prepareResult from '../utils/prepareResult'
-import speak from '../images/speak.png'
-import sad from '../images/sad.png'
-import keyboard from '../images/keyboard.png'
-import repeat from '../images/repeat.png'
-import rocket from '../images/rocket.png'
-
-const speechSupported = window.SpeechRecognition ||
-                        window.webkitSpeechRecognition || 
-                        window.mozSpeechRecognition || 
-                        window.msSpeechRecognition ||
-                        window.oSpeechRecognition
-
-const recognition = speechSupported && new speechSupported()
+import Rocket from '../images/rocket.png'
+import Keyboard from '../images/keyboard.png'
+import Speak from '../images/speak.png'
 
 class AnswerContainer extends Component  {
 
     constructor(){
         super()
         this.state = {
-            listening : false,
-            useSpeech : false,
-            speechConfidence: 0,
-            resultIsFinal:false
-        }
-    }
-
-answerWithConfidence(){
-    // console.log('confidence score = ' + this.state.speechConfidence)
-    if (this.state.speechConfidence > 0.9)
-        return<div className = "transcript" 
-                    style={{color:'green'}} >{this.props.answer}</div>
-    else 
-        return<div><div className = "transcript" 
-                    style={{color:'red'}}>{this.props.answer}
-                    </div>
-                    {(!this.state.listening)&&
-                    <div className="transcriptLowConfidence">
-                        <p><img src={sad} alt='Retstart'/>I didn't hear you very well.</p>
-                            <Button
-                                onClick={_=>this.setUpSpeechRecog('reset')}>
-                            <img src={repeat} alt='try again'/>
-                            Click here if I got it wrong</Button>
-                    </div>
-                    }
-                </div>
-    }
-
-setUpSpeechRecog(reset){
-    if(reset){
-        this.props.saveAnswer(null)
-    }
-    recognition.lang = 'en-US'
-    recognition.interimResults = true
-    recognition.maxAlternatives = 5
+            useSpeech:true
     
-    if(!this.state.listening){
-        try{
-            recognition.start()}
-        catch(err){
-            console.log('Started too soon')
-            recognition.stop()
         }
     }
 
-    recognition.onstart=event=>this.setState({ listening:true,
-                                                speechConfidence:1})
-    recognition.onresult=event=>{this.props.saveAnswer(event.results[0][0].transcript)
-                                this.setState({resultIsFinal:event.results[0].isFinal})
-
-                                 this.setState({speechConfidence : event.results[0][0].confidence})}
-    recognition.onspeechend=event=>this.setState({listening:false});
-}
-
-toggleTextOrSpeech(){
-    this.setState({useSpeech:!this.state.useSpeech},
-            ()=>{if(!this.state.useSpeech){
-                recognition.stop()
-                this.textInput.value=(this.props.answer)?this.props.answer:''
-                }
-                else{
-                this.setUpSpeechRecog()    
-                }
-
+    toggleTextOrSpeech(){
+        const {answer} = this.props.question
+        //use a callback to pass the answer between text and speech
+        this.setState({useSpeech:!this.state.useSpeech},
+        ()=>{if(!this.state.useSpeech){
+                this.textInput.value=(answer)?answer:''
+            }
         })
-}
+    }
 
-handleTypedAnswer(e){
-    this.props.saveAnswer(e.target.value)
-}
+    handleTypedAnswer(e){
+        this.props.saveAnswer(e.target.value)
+    }
 
-checkAnswer(){
-    const{word, answer, gotAnswer} = this.props
-
-    prepareResult(word, answer)
-    .then((result)=>{
-        //The result of this action is read in componentWillReceiveProps
-        // console.log("prepareResult returned "+JSON.stringify(result)) 
-        gotAnswer(result)       
-    })
-}
-
-transcriptFeedback(){
-    if(this.state.listening)
-        return <div className="listeningText"><img src={speak} alt="Speak Now"/>Speak Now!</div>
-    else if(!this.state.listening && !this.props.answer)
-        return<div className="listeningText">I'm sorry I didn't hear anything. 
-        <Button onClick={_=>this.setUpSpeechRecog('reset')}><img src ={repeat} alt='try again'/>Try Again</Button></div>
-    else if(this.state.resultIsFinal)
-        return <Button
-        onClick={()=>this.checkAnswer()}><img src={rocket} alt='Next'/>Next</Button>
-    else
-        return <div className="listeningText">Wait</div>
-}
-
-componentWillReceiveProps(nextProps){
+    checkAnswer(e){
+        e.preventDefault()
+        const{word, answer} = this.props.question
     
-    if(nextProps.question.result==='correct'){
-        // console.log('got result ' + nextProps.question.result)
-        this.props.saveProgress(nextProps.question, this.props.user.userId, 'waitingToContinue')
+        prepareResult(word, answer)
+        .then((result)=>{
+            //The result of this action is read in componentWillReceiveProps
+            // console.log("prepareResult returned "+JSON.stringify(result)) 
+            this.props.gotAnswer(result)       
+        })
     }
 
-    if(nextProps.question.result==='incorrect'){
-        this.props.saveProgress(nextProps.question, this.props.user.userId, 'inProgress')
-        this.props.changeQuestionState('tryAgain')
-    }
-}
-
-componentDidMount(){
-
-    if(recognition) {
-        this.setState({useSpeech:true})
-        this.setUpSpeechRecog()
+    componentWillReceiveProps(nextProps){
+        //processing the result of async kicked off in checkAnswer()
+        if(nextProps.question.result==='correct'){
+            // console.log('got result ' + nextProps.question.result)
+            this.props.saveProgress(nextProps.question, this.props.user.userId, 'waitingToContinue')
         }
+    
+        if(nextProps.question.result==='incorrect'){
+            this.props.saveProgress(nextProps.question, this.props.user.userId, 'inProgress')
+            this.props.changeQuestionState('tryAgain')
+        }
+    }
+
+    render(){
+        //speechSupported Prop is set in the nav bar
+        const {speechSupported} = this.props
+        const {useSpeech} = this.state
+
+        return  <div>
+                    {speechSupported && !useSpeech &&
+                        <span>
+                            <Button onClick={_=>this.toggleTextOrSpeech()}>
+                            <img src={Speak} alt="Switch to Voice"/>
+                            Switch to Voice
+                            </Button>
+                        </span>}
+                    {speechSupported && useSpeech
+                    ?
+                        <span>
+                            <Button onClick={_=>this.toggleTextOrSpeech()}>
+                            <img src={Keyboard} alt='Switch to Typing'/>
+                            Switch to Typing</Button>
+                            <SpeechRecognition/>                                            
+                        </span>
+                    :
+                    <input type='text'
+                    ref={(input)=>{this.textInput=input}}
+                    autoFocus
+                    autoComplete='off'
+                    className="answerTextBox"
+                    onChange={(e)=>{this.handleTypedAnswer(e)}}/>}
+                    <div>
+                        <Button type="submit" onClick={(e)=>this.checkAnswer(e)}>
+                        <img src={Rocket} alt='next'/>Submit Answer</Button>
+                    </div>
+                </div>
+    }
 }
-render(){
-    switch(this.state.useSpeech){
-        case (true) : 
-            return (
-                <div>
-
-                <div>{this.answerWithConfidence()}</div>
-                {this.transcriptFeedback()}
-                <Button onClick={_=>this.toggleTextOrSpeech()}><img src={keyboard} alt='Switch to Typing'/>Switch to Typing</Button>
-                <Button onClick={_=>this.setUpSpeechRecog('reset')}><img src ={repeat} alt='try again'/>Try Again</Button>
-                </div>
-            )
-        default :
-            return (
-                <div>
-                        <input  type='text'
-                                ref={(input)=>{this.textInput=input}}
-                                autoFocus
-                                className="answerTextBox"
-                                onChange={(e)=>{this.handleTypedAnswer(e)}}
-                        />
-                    
-                    {(recognition) &&
-                   
-                    <Button className='btn btn-info'
-                            onClick={_=>this.toggleTextOrSpeech()}>
-                            <img src={speak} alt='switch to speech recognition'/>Switch to Speech</Button>
-                    }
-
-                    {(this.props.answer)&&
-                    
-                <Button
-                        onClick={()=>this.checkAnswer()}>
-                        <img src={rocket} alt='next'/>Next</Button>
-                    }
-                    
-                </div>
-            )}
-        }}
 
 const mapStateToProps = state => {
-    return {
-      answer: state.currentQuestion.answer,
-      word: state.currentQuestion.word,
-      question: state.currentQuestion,
-      user: state.user
+    return {        
+        question: state.currentQuestion,
+        user: state.user,
+        //this prop is being set in the nav container
+        speechSupported : state.envProperties.speechSupported
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-            saveAnswer : (answer) => dispatch(saveAnswer(answer)),
-            changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
-            gotAnswer: (answer) => dispatch(gotAnswer(answer)),
-            tryAgain : (answer) => dispatch(tryAgain(answer)),
-            saveProgress : (question, userId, nextState) => dispatch(saveProgress(question, userId, nextState))
+        saveAnswer : (answer) => dispatch(saveAnswer(answer)),
+        gotAnswer: (answer) => dispatch(gotAnswer(answer)),
+        saveProgress : (question, userId, nextState) => dispatch(saveProgress(question, userId, nextState)),
+        changeQuestionState: (questionState) => dispatch(changeQuestionState(questionState)),
           }
   }
 
