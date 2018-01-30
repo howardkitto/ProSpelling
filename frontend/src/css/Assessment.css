@@ -6,32 +6,35 @@
     z-index: 1;
 }
 
-.listeningText {
-    margin: 40px;
-    color: red;
-    font-size: 40px;
-  }
+.SpellingTestContainer{
+  margin: auto;
+}
 
-  .transcript{
-    font-family: 'Caveat Brush';
-    font-size: 100px;
-  }
+.questionContainer{
+  text-align: center;
+}
 
   .answerTextBox{
     font-family: 'Caveat Brush';
-    color: green;
+    color: #AA1946;
     font-size: 100px;
     width: fit-content;
     text-align: center;
+    border-style: none;
+  }
+
+  .answerTextBox:focus{
+    outline: none
   }
 
   .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 16px solid #AA1946; 
+    border-top: 16px solid #FA135F; 
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     animation: spin 7s linear infinite;
+    margin: auto;
 }
 
 @keyframes spin {
@@ -50,20 +53,8 @@
     }
 
     .SpellingTestContainer{
-        margin: auto;
-        width:700px; 
         margin-top: 15px;
-        margin-bottom: 15px;
-        text-align: center;       
-    }
-
-    .transcriptLowConfidence{
-        position: absolute;
-        top:100px;
-        left:100px;
-        background:rgba(129, 130, 134, 0.5);
-        padding:20px;
-        border-radius: 15px;
+        margin-bottom: 15px;       
     }
 
   }

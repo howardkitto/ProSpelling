@@ -38,13 +38,11 @@ class SpellingTestContainer extends Component{
 
         switch(spellingTestState){
             case "inProgress":
-                return <div><QuestionContainer/></div>
+                return <QuestionContainer/>
             case "spellingTestComplete":
-                return <div><TestResult/></div>
+                return <TestResult/>
             default:
-                return <div>
-                        {!spellingTestId?<LevelSelector />:null}
-                    </div>
+                return <div>{!spellingTestId?<LevelSelector />:null}</div>
         }}
 }
 
