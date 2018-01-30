@@ -35,7 +35,8 @@ class AnswerContainer extends Component  {
     }
 
     handleTypedAnswer(e){
-        this.props.saveAnswer(e.target.value)
+        const upperAnswer = e.target.value.toUpperCase()
+        this.props.saveAnswer(upperAnswer)
     }
 
     checkAnswer(e){
@@ -68,7 +69,7 @@ class AnswerContainer extends Component  {
         const {speechSupported} = this.props
         const {useSpeech} = this.state
 
-        return  <div>
+        return  <span>
                     {speechSupported && !useSpeech &&
                         <span>
                             <Button onClick={_=>this.toggleTextOrSpeech()}>
@@ -86,16 +87,16 @@ class AnswerContainer extends Component  {
                         </span>
                     :
                     <input type='text'
+                    className="answerTextBox"
                     ref={(input)=>{this.textInput=input}}
                     autoFocus
                     autoComplete='off'
-                    className="answerTextBox"
                     onChange={(e)=>{this.handleTypedAnswer(e)}}/>}
                     <div>
                         <Button type="submit" onClick={(e)=>this.checkAnswer(e)}>
                         <img src={Rocket} alt='next'/>Submit Answer</Button>
                     </div>
-                </div>
+                </span>
     }
 }
 

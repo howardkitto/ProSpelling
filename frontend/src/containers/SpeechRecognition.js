@@ -19,15 +19,16 @@ class SpeechRecognition extends Component{
                 transcript: '',
                 transcriptConfidence:1,
                 answer:'',
-                feedback:''
+                feedback:'',
+                feedback2:'',
             }
     }
 
     setUpSpeechRecog(reset){
         
-        recognition.lang = 'en-US'
+        recognition.lang = 'en-GB'
         recognition.interimResults = true
-        recognition.maxAlternatives = 5
+        recognition.maxAlternatives = 1
         recognition.continous = false
         
         if(!this.state.listening){
@@ -39,16 +40,18 @@ class SpeechRecognition extends Component{
             }
         }
     
-recognition.onstart=event=>this.setState({  listening:true,
-                                            feedback:'Say A Letter',
-                                            transcript:''})
+recognition.onstart=event=>{if(this._isMounted)
+                                {this.setState({  listening:true,
+                                    feedback:'Say A Letter, or Say "BACK" or "DELETE"',
+                                    transcript:''})}}
             
-recognition.onresult=event=>{this.setState({transcript:event.results[0][0].transcript,
+recognition.onresult=event=>{this.setState({feedback:'Wait',
+                                            listening:false,
+                                            transcript:event.results[0][0].transcript,
                                             transcriptConfidence:event.results[0][0].confidence})}
 
 recognition.onend=_=>{  if(this._isMounted){
-                            this.setState({ feedback:'Wait',
-                                            listening:false})
+                            this.setState({ feedback2:''})
                             this.handleTranscript()}
                         }
 }   
@@ -60,16 +63,14 @@ recognition.onend=_=>{  if(this._isMounted){
         let deleteLastCharacter = answer.slice(0, -1);
 
         switch(upperCaseTranscript){
-            case('STOP'):
-                this.setState({feedback:'Let\'s Check your answer',
-                                finalAnswer:true})
-                break
             case('DELETE'):
                 this.setState({ transcript: '',
+                                feedback2: 'You can also say a word that starts with the letter',
                                 answer: deleteLastCharacter})
                 break
             case('BACK'):
                 this.setState({ transcript: '',
+                                feedback2: 'You can also say a word that starts with the letter',
                                 answer: deleteLastCharacter})
                 break
             case('SEE'):
@@ -103,7 +104,19 @@ recognition.onend=_=>{  if(this._isMounted){
             case('ASS'):
                 let fixAss = answer.concat('S')
                 this.setState({ answer: fixAss})
-                break    
+                break
+            case('END'):
+                let fixEnd = answer.concat('N')
+                this.setState({ answer: fixEnd})
+                break
+            case('EDGE'):
+                let fixEdge = answer.concat('H')
+                this.setState({ answer: fixEdge})
+                break
+            case('YES'):
+                let fixYes = answer.concat('S')
+                this.setState({ answer: fixYes})
+                break   
             case(''):
                 this.setState({feedback:'I didn\'t hear you... Speak up!'})
                 break
@@ -138,20 +151,23 @@ recognition.onend=_=>{  if(this._isMounted){
         this._isMounted = false       
     }
 
-
     render(){
     
-    const {answer, transcript, listening, transcriptConfidence, feedback} = this.state
+    const {answer, transcript, listening, transcriptConfidence, feedback, feedback2} = this.state
 
         console.log(    " Confidence = " + transcriptConfidence+
                         " Transcript = " + transcript)
         return(
-                <div>
-                    <div className="answerTextBox">{answer}</div>
-                    <h2>{feedback}</h2>
+                <span>
+                    <h3>{feedback}</h3>
+                    <input type='text'
+                    className="answerTextBox"
+                    readOnly
+                    value={answer}/>
                     {(listening)&&              
-                        <div className="loader"></div>}              
-                </div>
+                        <div className="loader"></div>}  
+                    <h4>{feedback2}</h4>
+                </span>
         )
     }
 }

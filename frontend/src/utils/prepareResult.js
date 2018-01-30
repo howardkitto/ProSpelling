@@ -1,11 +1,11 @@
 import levenshtein from './levenshtein'
 
 
-const outcome = (question, answer)=>{
+const outcome = (answer, question)=>{
     // console.log("prepareResult got " +question +" " +answer)
     return new Promise((resolve, reject)=>{
         let result = {}
-            result.cleanedAnswer=answer.replace(/ /g, '').trim().toLowerCase()
+            result.cleanedAnswer=answer.replace(/ /g, '').trim()
             result.outcome=(result.cleanedAnswer===question)?'correct':'incorrect'
     
         resolve(result)
@@ -15,8 +15,11 @@ const outcome = (question, answer)=>{
 
 const prepareResult = async (question, answer)=>{
 
-    var result = await outcome(question, answer)
-    result.score= await levenshtein(answer, question)
+    const upperQuestion = question.toUpperCase()
+    const upperAnswer = answer.toUpperCase()
+
+    var result = await outcome(upperAnswer, upperQuestion)
+    result.score= await levenshtein(upperAnswer, upperQuestion)
 
     return result
 }
