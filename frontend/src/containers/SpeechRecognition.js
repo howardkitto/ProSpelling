@@ -48,7 +48,7 @@ class SpeechRecognition extends Component{
 recognition.onstart=event=>{if(this._isMounted)
                                 {this.setState({  listening:true,
                                     wait:false,
-                                    feedback:'Say A Letter, or Say "BACK" to delete',
+                                    feedback:'Say A Letter, Say "BACK" to delete or "CLEAR" to start again',
                                     transcript:''})}}
             
 recognition.onresult=event=>{this.setState({feedback: "Wait... I'm Thinking...",
@@ -84,11 +84,14 @@ recognition.onend=_=>{  if(this._isMounted){
         else if(upperCaseTranscript==='BACK'){
             this.setState({ answer: answer.slice(0, -1),
                             feedback2:'Try a word that starts with the letter'})}
+        else if(upperCaseTranscript==='CLEAR'){
+            this.setState({ answer: '',
+                            feedback2:'Try switching to typing'})}
         else {
             this.setState({ answer: answer.concat(transcript.charAt(0).toUpperCase())})}
 
-    recognition.start()
-        
+    if(this._isMounted){
+        recognition.start()}        
 }
 
     componentWillMount(){
@@ -120,10 +123,9 @@ recognition.onend=_=>{  if(this._isMounted){
                     className="answerTextBox"
                     readOnly
                     value={answer}/>
-                    {(listening)&&              
-                        <div className="loader"></div>}  
                     <h4>{feedback2}</h4>
-
+                    {(listening)&&              
+                        <div className="loader"></div>}                      
                     <Modal isOpen={this.state.wait}>
                         <ModalBody>
                     <div className="waitModal">
