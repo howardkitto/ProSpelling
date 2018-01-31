@@ -116,7 +116,11 @@ recognition.onend=_=>{  if(this._isMounted){
             case('YES'):
                 let fixYes = answer.concat('S')
                 this.setState({ answer: fixYes})
-                break   
+                break
+            case('HE'):
+                let fixHe = answer.concat('E')
+                this.setState({ answer: fixHe})
+                break      
             case(''):
                 this.setState({feedback:'I didn\'t hear you... Speak up!'})
                 break

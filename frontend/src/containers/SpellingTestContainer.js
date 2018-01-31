@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import QuestionContainer from './QuestionContainer'
-import LevelSelector from './LevelSelector'
 import TestResult from './TestResults'
 
 import {getWord,
@@ -34,7 +33,7 @@ class SpellingTestContainer extends Component{
     }
 
     render(){
-        const{spellingTestState, spellingTestId} = this.props
+        const{spellingTestState} = this.props
 
         switch(spellingTestState){
             case "inProgress":
@@ -42,7 +41,7 @@ class SpellingTestContainer extends Component{
             case "spellingTestComplete":
                 return <TestResult/>
             default:
-                return <div>{!spellingTestId?<LevelSelector />:null}</div>
+                return <div>Loading...</div>
         }}
 }
 
