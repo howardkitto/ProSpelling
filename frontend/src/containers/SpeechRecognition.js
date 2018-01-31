@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {saveAnswer} from '../redux/actionCreators'
 import transcriptFilter from '../utils/transcriptFilter'
+import {Modal, ModalBody} from 'reactstrap'
+
+import Bunny from '../images/bunny.png'
 
 const webSpeech = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -20,6 +23,7 @@ class SpeechRecognition extends Component{
                 transcript: '',
                 transcriptConfidence:1,
                 answer:'',
+                wait: false,
                 feedback:'',
                 feedback2:'',
             }
@@ -43,10 +47,12 @@ class SpeechRecognition extends Component{
     
 recognition.onstart=event=>{if(this._isMounted)
                                 {this.setState({  listening:true,
-                                    feedback:'Say A Letter, or Say "BACK" or "DELETE"',
+                                    wait:false,
+                                    feedback:'Say A Letter, or Say "BACK" to delete',
                                     transcript:''})}}
             
-recognition.onresult=event=>{this.setState({feedback:'Wait',
+recognition.onresult=event=>{this.setState({feedback: "Wait... I'm Thinking...",
+                                            wait:true,
                                             listening:false,
                                             transcript:event.results[0][0].transcript,
                                             transcriptConfidence:event.results[0][0].confidence})}
@@ -117,6 +123,17 @@ recognition.onend=_=>{  if(this._isMounted){
                     {(listening)&&              
                         <div className="loader"></div>}  
                     <h4>{feedback2}</h4>
+
+                    <Modal isOpen={this.state.wait}>
+                        <ModalBody>
+                    <div className="waitModal">
+                    <img src={Bunny} alt="I'm Thinking"/>
+                    <p>
+                    {feedback}
+                    </p></div>
+                    </ModalBody>
+                    </Modal>
+
                 </span>
         )
     }

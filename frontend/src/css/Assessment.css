@@ -42,4 +42,12 @@
         margin-bottom: 15px;       
     }
 
+    .waitModal{
+      padding:50px;
+      background-color: #AA1946;
+      font-size: 30px;
+      color: whitesmoke;
+      text-align: center;
+    }
+
   
