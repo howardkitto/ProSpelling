@@ -76,7 +76,7 @@ class MainNav extends Component {
                     <DropdownItem tag={Link} to='/admin/envtest'>Env Test</DropdownItem>
               </DropdownMenu>
             </UncontrolledNavDropdown>}
-                <NavLink tag={Link} 
+                {/* <NavLink tag={Link} 
                   to="/lessonone" 
                   activeclassname="activeNavLink">
                 Lesson One
@@ -86,7 +86,7 @@ class MainNav extends Component {
                 </NavLink>
                 <NavLink tag={Link} to="/quickquiz" activeclassname="activeNavLink">
                 QuickQuiz
-                </NavLink>
+                </NavLink> */}
                 {!this.props.user.token&&
                  <NavLink tag={Link} 
                  to="/signup" 

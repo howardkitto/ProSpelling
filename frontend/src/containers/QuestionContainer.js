@@ -39,7 +39,7 @@ question(){
                         onClick={()=>   this.playSound(this.props.audioFileName)}>
                         <img src={Ear} alt='Play the Sound Again'/>Listen!</Button>
         case 'loadingAudio':
-            return<div>Loading...</div>
+            return<div className="loader"></div>
         case 'waitForAnswer':
             return <div className="questionContainer">
                 <Button onClick={()=>this.playSound(this.props.audioFileName)}>

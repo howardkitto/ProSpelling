@@ -41,7 +41,7 @@ class SpellingTestContainer extends Component{
             case "spellingTestComplete":
                 return <TestResult/>
             default:
-                return <div>Loading...</div>
+                return <div className="loader"></div>
         }}
 }
 

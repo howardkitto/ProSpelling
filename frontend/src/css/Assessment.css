@@ -37,26 +37,9 @@
     margin: auto;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@media screen and (min-width: 550px) {
-    .DescriptionBox {
-      border-radius: 15px;
-      margin: auto;
-      width:500px;
-      margin-top: 15px;
-      margin-bottom: 15px;
-      display: inline-block;
-    }
-
     .SpellingTestContainer{
         margin-top: 15px;
         margin-bottom: 15px;       
     }
-
-  }
 
   

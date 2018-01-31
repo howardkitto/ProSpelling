@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {saveAnswer} from '../redux/actionCreators'
+import transcriptFilter from '../utils/transcriptFilter'
 
 const webSpeech = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -60,84 +61,29 @@ recognition.onend=_=>{  if(this._isMounted){
         const {transcript, answer}= this.state
 
         const upperCaseTranscript = transcript.toLocaleUpperCase()
-        let deleteLastCharacter = answer.slice(0, -1);
 
-        switch(upperCaseTranscript){
-            case('DELETE'):
-                this.setState({ transcript: '',
-                                feedback2: 'You can also say a word that starts with the letter',
-                                answer: deleteLastCharacter})
-                break
-            case('BACK'):
-                this.setState({ transcript: '',
-                                feedback2: 'You can also say a word that starts with the letter',
-                                answer: deleteLastCharacter})
-                break
-            case('SEE'):
-                let fixSee = answer.concat('C')
-                this.setState({ answer: fixSee})
-                break
-            case('ARE'):
-                let fixAre = answer.concat('R')
-                this.setState({ answer: fixAre})
-                break
-            case('YOU'):
-                let fixYou = answer.concat('U')
-                this.setState({ answer: fixYou})
-                break
-            case('WHY'):
-                let fixWhy = answer.concat('Y')
-                this.setState({ answer: fixWhy})
-                break
-            case('HI'):
-                let fixHi = answer.concat('I')
-                this.setState({ answer: fixHi})
-                break
-            case('KEY'):
-                let fixKey = answer.concat('T')
-                this.setState({ answer: fixKey})
-                break
-            case('IN'):
-                let fixIn = answer.concat('N')
-                this.setState({ answer: fixIn})
-                break
-            case('ASS'):
-                let fixAss = answer.concat('S')
-                this.setState({ answer: fixAss})
-                break
-            case('END'):
-                let fixEnd = answer.concat('N')
-                this.setState({ answer: fixEnd})
-                break
-            case('EDGE'):
-                let fixEdge = answer.concat('H')
-                this.setState({ answer: fixEdge})
-                break
-            case('YES'):
-                let fixYes = answer.concat('S')
-                this.setState({ answer: fixYes})
-                break
-            case('HE'):
-                let fixHe = answer.concat('E')
-                this.setState({ answer: fixHe})
-                break      
-            case(''):
-                this.setState({feedback:'I didn\'t hear you... Speak up!'})
-                break
-            default:
-                let incrementAnswer = answer.concat(transcript.charAt(0).toUpperCase())
-                this.setState({ answer: incrementAnswer})
+        //Use trascriptFilter.js to fix common transcript errors
+        const fixTranscript = (filterObject)=>{
+
+            for(var word in filterObject){
+                return word === upperCaseTranscript
+            }
         }
 
-        if(!this.state.finalAnswer){                
-        try{
-            setTimeout(()=>{ recognition.start() }, 1000)}
-        catch(error){
-            console.log(error)
-            recognition.stop()
-            setTimeout(()=>{ recognition.start() }, 1000)
-            }
-    }}
+        let transcriptFilterMatch = transcriptFilter.find(fixTranscript)
+
+        if(transcriptFilterMatch){
+            this.setState({ answer: answer.concat(Object.values(transcriptFilterMatch)[0])})}
+        //Delete the last character
+        else if(upperCaseTranscript==='BACK'){
+            this.setState({ answer: answer.slice(0, -1),
+                            feedback2:'Try a word that starts with the letter'})}
+        else {
+            this.setState({ answer: answer.concat(transcript.charAt(0).toUpperCase())})}
+
+    recognition.start()
+        
+}
 
     componentWillMount(){
         this.props.answer&&this.setState({answer:this.props.answer})
