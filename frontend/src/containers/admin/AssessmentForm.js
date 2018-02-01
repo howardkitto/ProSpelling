@@ -14,15 +14,28 @@ class AssessmentForm extends Component{
   }
 
   onChange(e){
+    // console.log('key ' +e.target.name+' Value '+e.target.value)
     const key = e.target.name
-    const value = e.target.value
+    let value = e.target.value
+
     var assessment = this.props.assessment
+
+    //Can't pass boolean in JSON so skipMistakes is a string
+    if(key==="skipMistakes"){
+      value = (assessment.skipMistakes!=="true")?"true":"false"
+    }
+
     assessment[key]=value
-    this.setState({assessment})
-    this.props.editAssessment(assessment)
+
+    this.setState({assessment}, ()=>{
+      this.props.editAssessment(assessment)
+    })
+    
+    
   }
     
     render(){
+      const{skipMistakes, words}=this.state.assessment
         return(
         <Form>
           {this.props.error}
@@ -41,6 +54,26 @@ class AssessmentForm extends Component{
                     name="description"
                     value={this.state.assessment.description}
                     onChange={(e)=>this.onChange(e)}/>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
+         <Label for="skipMistakes" sm={3}>Skip Mistakes</Label>
+         <Col sm={9}>
+          <Input  type="checkbox"
+                  name="skipMistakes"
+                  checked={skipMistakes==="true"?true:false}
+                  onChange={(e)=>this.onChange(e)}
+                  />
+         </Col>
+        </FormGroup>
+        <FormGroup row>
+          <Label for="words" sm={3}>Words</Label>
+          <Col sm={9}>
+          {words?
+            words.map((word, index)=>{
+            return <p key={index}>{word}</p>
+          }):
+          <p>No Words Added Yet</p>}
           </Col>
         </FormGroup>
         </Form>

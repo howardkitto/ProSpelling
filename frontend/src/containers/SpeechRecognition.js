@@ -112,10 +112,10 @@ recognition.onend=_=>{  if(this._isMounted){
 
     render(){
     
-    const {answer, transcript, listening, transcriptConfidence, feedback, feedback2} = this.state
+    const {answer, listening, feedback, feedback2} = this.state
 
-        console.log(    " Confidence = " + transcriptConfidence+
-                        " Transcript = " + transcript)
+        // console.log(    " Confidence = " + this.state.transcriptConfidence+
+        //                 " Transcript = " + this.state.transcript)
         return(
                 <span>
                     <h3>{feedback}</h3>

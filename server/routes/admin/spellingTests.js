@@ -19,6 +19,7 @@ let counter = ()=>{
         SpellingTests.find()
         .skip(skip)
         .limit(limit)
+        .sort({'updatedAt':'descending'})
         .lean()
         .exec()
     .then((spellingTests)=>{
@@ -41,7 +42,7 @@ let addUserNames = (spellingTests) => {
            .then((user)=>{return Object.assign({}, eachTest, 
                 {'userDisplayName':user.displayName})})}
            else{
-               //need to handle tests when not logged in
+               //handle tests when not logged in
                return Object.assign({}, eachTest,{'userDisplayName':"Anonymous"} )
            }           
            }
