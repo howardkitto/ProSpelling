@@ -13,34 +13,17 @@ class AssessmentForm extends Component{
     }
   }
 
-  // skipMistakes(e){
-
-  //   var assessment = this.state.assessment
-
-  //   console.log('key ' +e.target.name+' Value '+e.target.value)
-
-  //   if (!assessment.skipMistakes){
-  //         assessment.skipMistakes = true
-  //   }else{
-  //         assessment.skipMistakes = false
-  //   }
-
-  //   this.setState({assessment}, 
-  //     ()=>this.props.editAssessment(assessment))
-  //   }
-
   onChange(e){
-    console.log('key ' +e.target.name+' Value '+e.target.value)
+    // console.log('key ' +e.target.name+' Value '+e.target.value)
     const key = e.target.name
     let value = e.target.value
 
     var assessment = this.props.assessment
 
-    //Hate to do this with strings but booleans didn't work
-    if(key === "skipMistakes"&&assessment.skipMistakes==="true"){
-      value = "false"}
-    if(key === "skipMistakes"&&assessment.skipMistakes!=="true"){
-      value = "true"}
+    //Can't pass boolean in JSON so skipMistakes is a string
+    if(key==="skipMistakes"){
+      value = (assessment.skipMistakes!=="true")?"true":"false"
+    }
 
     assessment[key]=value
 
