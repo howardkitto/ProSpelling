@@ -52,13 +52,17 @@ class AnswerContainer extends Component  {
     }
 
     componentWillReceiveProps(nextProps){
+        if(this.props.skipMistakes==='true'&&nextProps.question.result){
+            this.props.saveProgress(nextProps.question, this.props.user.userId, 'waitingToContinue')
+        }
+
         //processing the result of async kicked off in checkAnswer()
-        if(nextProps.question.result==='correct'){
+        else if(nextProps.question.result==='correct'){
             // console.log('got result ' + nextProps.question.result)
             this.props.saveProgress(nextProps.question, this.props.user.userId, 'waitingToContinue')
         }
     
-        if(nextProps.question.result==='incorrect'){
+        else if(nextProps.question.result==='incorrect'){
             this.props.saveProgress(nextProps.question, this.props.user.userId, 'inProgress')
             this.props.changeQuestionState('tryAgain')
         }
@@ -104,6 +108,7 @@ const mapStateToProps = state => {
     return {        
         question: state.currentQuestion,
         user: state.user,
+        skipMistakes: state.spellingTest.assessment.skipMistakes,
         //this prop is being set in the nav container
         speechSupported : state.envProperties.speechSupported
     }
