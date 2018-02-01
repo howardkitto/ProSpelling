@@ -56,12 +56,12 @@ const mapWordsToAssessment = async (assessments)=>{
     return new Promise((resolve, reject)=>{
 
     var a = assessments.map((assessment)=> {
-        return Words.find({"linkedAssessments.assessmentId":assessment._id}).exec()
+        return Words.find({"linkedAssessments.assessmentId":assessment._id})
+                    .sort({'word':'ascending'}).exec()
         .then ((arrayOfWordObjects) => {return arrayOfWordObjects.map((word)=>{return word.word})})
         //Wasted an hour: got to use ._doc to get data out of mongoose object
         .then ((arrayOfWords)=>{return Object.assign({},assessment._doc, {'words':arrayOfWords})})
         .then ((assessmentWithWords)=>{return assessmentWithWords})
-        
     })
 
     Promise.all(a)
@@ -84,14 +84,9 @@ router.route('/page/:page/limit/:limit')
                                             .limit(limit)
                                             .sort({'updatedAt':'descending'})
                                             .exec()
-            // assessment = await  assessments.sort((a, b) => {
-            //                     a = new Date(a.updatedAt);
-            //                     b = new Date(b.updatedAt);
-            //                     return a>b ? -1 : a<b ? 1 : 0;})
             returnObject.assessments = await mapWordsToAssessment(assessments)
                     
         return returnObject
-        
     }
 
    generateAssessmentList()

@@ -43,6 +43,14 @@ class AssessmentForm extends Component{
                     onChange={(e)=>this.onChange(e)}/>
           </Col>
         </FormGroup>
+        <FormGroup row>
+          <Label for="words" sm={3}>Words</Label>
+          <Col sm={9}>
+          {this.state.assessment.words.map((word, index)=>{
+            return <p key={index}>{word}</p>
+          })}
+          </Col>
+        </FormGroup>
         </Form>
     )
     }   
