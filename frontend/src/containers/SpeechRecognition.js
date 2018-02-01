@@ -51,11 +51,11 @@ recognition.onstart=event=>{if(this._isMounted)
                                     feedback:'Say A Letter, Say "BACK" to delete or "CLEAR" to start again',
                                     transcript:''})}}
             
-recognition.onresult=event=>{this.setState({feedback: "Wait... I'm Thinking...",
-                                            wait:true,
-                                            listening:false,
-                                            transcript:event.results[0][0].transcript,
-                                            transcriptConfidence:event.results[0][0].confidence})}
+recognition.onresult=event=>{if(this._isMounted){this.setState({feedback: "Wait... I'm Thinking...",
+                                                wait:true,
+                                                listening:false,
+                                                transcript:event.results[0][0].transcript,
+                                                transcriptConfidence:event.results[0][0].confidence})}}
 
 recognition.onend=_=>{  if(this._isMounted){
                             this.setState({ feedback2:''})
@@ -114,8 +114,8 @@ recognition.onend=_=>{  if(this._isMounted){
     
     const {answer, listening, feedback, feedback2} = this.state
 
-        // console.log(    " Confidence = " + this.state.transcriptConfidence+
-        //                 " Transcript = " + this.state.transcript)
+        console.log(    " Confidence = " + this.state.transcriptConfidence+
+                        " Transcript = " + this.state.transcript)
         return(
                 <span>
                     <h3>{feedback}</h3>
@@ -125,7 +125,7 @@ recognition.onend=_=>{  if(this._isMounted){
                     value={answer}/>
                     <h4>{feedback2}</h4>
                     {(listening)&&              
-                        <div className="loader"></div>}                      
+                        <div className="listeningLoader"></div>}                      
                     <Modal isOpen={this.state.wait}>
                         <ModalBody>
                     <div className="waitModal">

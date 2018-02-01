@@ -13,7 +13,8 @@ const transcriptFilter = [
     {"EDGE":"H"},
     {"HE":"E"},
     {"YES":"S"},
-    {"AND":"N"}
+    {"AND":"N"},
+    {"HEY":"A"}
 ]
 
 export default transcriptFilter

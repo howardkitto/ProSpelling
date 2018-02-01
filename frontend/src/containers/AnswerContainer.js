@@ -14,15 +14,18 @@ import Rocket from '../images/rocket.png'
 import Keyboard from '../images/keyboard.png'
 import Speak from '../images/speak.png'
 
+
+
 class AnswerContainer extends Component  {
 
     constructor(){
         super()
         this.state = {
             useSpeech:true
-    
         }
     }
+
+    
 
     toggleTextOrSpeech(){
         const {answer} = this.props.question
@@ -96,10 +99,10 @@ class AnswerContainer extends Component  {
                     autoFocus
                     autoComplete='off'
                     onChange={(e)=>{this.handleTypedAnswer(e)}}/>}
-                    <div>
+                    <div>                    
                         <Button type="submit" onClick={(e)=>this.checkAnswer(e)}>
                         <img src={Rocket} alt='next'/>Submit Answer</Button>
-                    </div>
+                        </div>
                 </span>
     }
 }

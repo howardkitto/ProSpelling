@@ -32,15 +32,26 @@ class QuestionContainer extends Component{
         this.playSound(audioSrc)
       }
 
+componentWillReceiveProps(nextProps){
+    if(this.props.questionState){
+        console.log("questionState " +nextProps.questionState)
+    }
+}
+
+componentDidMount(){
+    this.playSound(this.props.audioFileName) 
+}
+
 question(){
 
-    const{progress, skipMistakes, wordsInAssessment}=this.props
 
     switch(this.props.questionState){
         case 'playing':
-            return<Button 
+            return<span>
+                        <Button 
                         onClick={()=>   this.playSound(this.props.audioFileName)}>
                         <img src={Ear} alt='Play the Sound Again'/>Listen!</Button>
+                    </span>
         case 'loadingAudio':
             return<div className="loader"></div>
         case 'waitForAnswer':
@@ -55,25 +66,28 @@ question(){
                         <Button onClick={()=>{this.tryAgain(this.props.audioFileName)}}>
                         <img src={Repeat} alt='Try Again'/>Wanna Try Again?</Button>
                     </div>
-        default:
-            var questionCount =(skipMistakes==='true')
-            ?progress.length
-            :progress.filter(attempt => attempt.result==='correct').length
+        default:            
             return  <Button
-                        onClick={()=>{  
-                                        this.playSound(this.props.audioFileName)                                        
-                                    }}>                        
-                        <img src={Rocket} alt='Click Here To Start'/> Click Here For Question &nbsp; 
-                        {(this.props.progress.length===0)?1:questionCount
-                        }&nbsp; of&nbsp;
-                        {wordsInAssessment}
+                        onClick={()=>{this.playSound(this.props.audioFileName)}}>                        
+                        <img src={Rocket} alt='Click Here To Start'/> 
+                        Click here to start
                     </Button>
         }
     }
     
     render(){
+        const{progress, skipMistakes, wordsInAssessment}=this.props
+        var questionCount=(skipMistakes==='true')
+            ?progress.length
+            :progress.filter(attempt => attempt.result==='correct').length
+
         return(
             <div>
+                <h1>Question &nbsp; 
+                        {(this.props.progress.length===0)?1:questionCount
+                        }&nbsp; of&nbsp;
+                        {wordsInAssessment}
+                </h1>
             <div>{this.question()}</div>
             
             <audio type="audio/mpeg" 
