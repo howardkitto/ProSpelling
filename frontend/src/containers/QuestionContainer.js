@@ -33,6 +33,9 @@ class QuestionContainer extends Component{
       }
 
 question(){
+
+    const{progress, skipMistakes, wordsInAssessment}=this.props
+
     switch(this.props.questionState){
         case 'playing':
             return<Button 
@@ -53,16 +56,17 @@ question(){
                         <img src={Repeat} alt='Try Again'/>Wanna Try Again?</Button>
                     </div>
         default:
-            var questionCount =this.props.progress.filter(attempt => attempt.result==='correct')
-            console.log()
+            var questionCount =(skipMistakes==='true')
+            ?progress.length
+            :progress.filter(attempt => attempt.result==='correct').length
             return  <Button
                         onClick={()=>{  
                                         this.playSound(this.props.audioFileName)                                        
                                     }}>                        
                         <img src={Rocket} alt='Click Here To Start'/> Click Here For Question &nbsp; 
-                        {(this.props.progress.length===0)?1:questionCount.length + 1
+                        {(this.props.progress.length===0)?1:questionCount
                         }&nbsp; of&nbsp;
-                        {this.props.wordsInAssessment}
+                        {wordsInAssessment}
                     </Button>
         }
     }
@@ -91,7 +95,8 @@ const mapStateToProps = state => {
         questionState:state.currentQuestion.questionState,
         spellingTestState:state.spellingTest.spellingTestState,
         progress:state.spellingTest.questions,
-        wordsInAssessment:state.spellingTest.assessment.wordCount
+        wordsInAssessment:state.spellingTest.assessment.wordCount,
+        skipMistakes:state.spellingTest.assessment.skipMistakes
     }
   }
 
