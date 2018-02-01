@@ -23,10 +23,13 @@ router.route('/')
             
         })
 .put((req, res)=>{
-    // console.log('put route activated ' + JSON.stringify(req.body))
+    console.log('put route activated ' + JSON.stringify(req.body))
     
-    const assessment = {  'title':req.body.title,
-                        'description':req.body.description}
+    const assessment = {'title':req.body.title,
+                        'description':req.body.description,
+                        //Hate to do skipMistakes with strings but booleans didn't work
+                        'skipMistakes':req.body.skipMistakes
+                        }
                         
     var promise = Assessments.findByIdAndUpdate(req.body._id, assessment).exec()
         .then((assessment)=>{

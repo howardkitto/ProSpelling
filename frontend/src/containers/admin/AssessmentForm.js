@@ -13,16 +13,46 @@ class AssessmentForm extends Component{
     }
   }
 
+  // skipMistakes(e){
+
+  //   var assessment = this.state.assessment
+
+  //   console.log('key ' +e.target.name+' Value '+e.target.value)
+
+  //   if (!assessment.skipMistakes){
+  //         assessment.skipMistakes = true
+  //   }else{
+  //         assessment.skipMistakes = false
+  //   }
+
+  //   this.setState({assessment}, 
+  //     ()=>this.props.editAssessment(assessment))
+  //   }
+
   onChange(e){
+    console.log('key ' +e.target.name+' Value '+e.target.value)
     const key = e.target.name
-    const value = e.target.value
+    let value = e.target.value
+
     var assessment = this.props.assessment
+
+    //Hate to do this with strings but booleans didn't work
+    if(key === "skipMistakes"&&assessment.skipMistakes==="true"){
+      value = "false"}
+    if(key === "skipMistakes"&&assessment.skipMistakes!=="true"){
+      value = "true"}
+
     assessment[key]=value
-    this.setState({assessment})
-    this.props.editAssessment(assessment)
+
+    this.setState({assessment}, ()=>{
+      this.props.editAssessment(assessment)
+    })
+    
+    
   }
     
     render(){
+      const{skipMistakes, words}=this.state.assessment
         return(
         <Form>
           {this.props.error}
@@ -44,11 +74,23 @@ class AssessmentForm extends Component{
           </Col>
         </FormGroup>
         <FormGroup row>
+         <Label for="skipMistakes" sm={3}>Skip Mistakes</Label>
+         <Col sm={9}>
+          <Input  type="checkbox"
+                  name="skipMistakes"
+                  checked={skipMistakes==="true"?true:false}
+                  onChange={(e)=>this.onChange(e)}
+                  />
+         </Col>
+        </FormGroup>
+        <FormGroup row>
           <Label for="words" sm={3}>Words</Label>
           <Col sm={9}>
-          {this.state.assessment.words.map((word, index)=>{
+          {words?
+            words.map((word, index)=>{
             return <p key={index}>{word}</p>
-          })}
+          }):
+          <p>No Words Added Yet</p>}
           </Col>
         </FormGroup>
         </Form>
