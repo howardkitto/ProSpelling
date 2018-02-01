@@ -51,46 +51,55 @@ router.route('/')
         
     })
 
+//This function lets the admin see words linked to an assessment
+const mapWordsToAssessment = async (assessments)=>{
+    return new Promise((resolve, reject)=>{
+
+    var a = assessments.map((assessment)=> {
+        return Words.find({"linkedAssessments.assessmentId":assessment._id}).exec()
+        .then ((arrayOfWordObjects) => {return arrayOfWordObjects.map((word)=>{return word.word})})
+        //Wasted an hour: got to use ._doc to get data out of mongoose object
+        .then ((arrayOfWords)=>{return Object.assign({},assessment._doc, {'words':arrayOfWords})})
+        .then ((assessmentWithWords)=>{return assessmentWithWords})
+        
+    })
+
+    Promise.all(a)
+        .then((result)=>resolve(result))
+        .catch((error)=>{console.log(error)})
+    })
+}
+
 router.route('/page/:page/limit/:limit')
 .get((req, res)=>{
 
-    let assessmentCount = 0
     let limit = Number(req.params.limit)
     let skip = Number(req.params.page) * limit
 
-
-let counter = ()=>{
-    return Assessments.count().exec()
-    .then((c)=>{return c})
-    .catch((err)=>console.log(err))
- }
-
- counter()
-     .then((count)=>{assessmentCount = count})
-
-let promise = Assessments.find().exec()
-     .then((assessments)=>assessments.sort((a, b) => {
-         a = new Date(a.updatedAt);
-         b = new Date(b.updatedAt);
-         return a>b ? -1 : a<b ? 1 : 0;
-     }))
-     .then((assessments)=>{
-        let sliced = assessments.slice(skip, skip+limit)
-        return sliced
-    })
-    .then((assessments)=>{
-        let assessmentList = {}
-        assessmentList.count = assessmentCount
-        assessmentList.assessments = assessments
-        res.setHeader('Content-Type', 'application/json')
-        res.json(assessmentList)
-        })
-    .catch((err)=>{
-        console.log('error ' + err)
-        })
-
+    const generateAssessmentList = async()=>{
+        let returnObject = {}
+            returnObject.count = await Assessments.count().exec()
+            assessments = await  Assessments.find()
+                                            .skip(skip)
+                                            .limit(limit)
+                                            .sort({'updatedAt':'descending'})
+                                            .exec()
+            // assessment = await  assessments.sort((a, b) => {
+            //                     a = new Date(a.updatedAt);
+            //                     b = new Date(b.updatedAt);
+            //                     return a>b ? -1 : a<b ? 1 : 0;})
+            returnObject.assessments = await mapWordsToAssessment(assessments)
+                    
+        return returnObject
+        
     }
-)
+
+   generateAssessmentList()
+    .then((list)=>{res.json(list)})
+    .catch((err)=>{
+                console.log('error ' + err)
+                })
+})
 
 router.route('/assessmentTitle/:assessmentTitle')
 .get((req,res)=>{
