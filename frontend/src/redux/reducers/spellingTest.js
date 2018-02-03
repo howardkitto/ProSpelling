@@ -8,8 +8,8 @@ function spellingTest(state=[], action){
                 assessment:action.data
             }
             
-        case 'START_SPELLING_TEST':
-        // console.log('START_SPELLING_TEST ' + JSON.stringify(action))
+        case 'SET_UP_SPELLING_TEST':
+        // console.log('SET_UP_SPELLING_TEST ' + JSON.stringify(action))
             return{
                 ...state,
                 spellingTestId: action.spellingTestId,
@@ -17,8 +17,14 @@ function spellingTest(state=[], action){
                 criteria: action.criteria,
                 value: action.value,
                 questions: [],
-                spellingTestState:'startSpellingTest',
+                spellingTestState:'showIntroScreen',
                 userId: action.userId
+            }
+        
+        case 'START_SPELLING_TEST':
+            return{
+                ...state,
+                spellingTestState:'startSpellingTest'
             }
         case 'GET_WORD':
         // console.log('Reducer GET_WORD ' + JSON.stringify(action))

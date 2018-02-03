@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {startSpellingTest,
+import {setUpSpellingTest,
         getAssessmentbyTitle} from '../../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
 import {Container, Row} from 'reactstrap'
@@ -17,7 +17,7 @@ class PhaseOneAssessment extends Component{
     componentWillReceiveProps(nextProps){
         //If we have the ID and the spelling test state is null start the test
         if(nextProps.spellingTest.assessment && !nextProps.spellingTest.spellingTestState){
-            this.props.startSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id}, this.props.user.userId)
+            this.props.setUpSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id}, this.props.user.userId)
         }
 
     }
@@ -27,11 +27,7 @@ class PhaseOneAssessment extends Component{
         //complicated decision to decide if to show a text box!
         return(
             <Container>
-            {(  (spellingTest.spellingTestState ||
-                spellingTest.spellingTestState ==="inProgress")&&
-                (!question.questionState||
-                question.questionState==="wordLoaded")&&
-                (spellingTest.questions.length === 0))&&
+            {(spellingTest.spellingTestState==="showIntroScreen")&&
             <Row>
             <div className='DescriptionBox'>
                 {(user.displayName)&&<h1>Hi&nbsp;{user.displayName}</h1>}
@@ -41,7 +37,7 @@ class PhaseOneAssessment extends Component{
             </Row>}
             <Row>
             <div className='SpellingTestContainer'>
-            {/* <SpellingTestContainer/> */}
+            <SpellingTestContainer/>
             </div>
             </Row></Container>
         )
@@ -59,7 +55,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
     
-        startSpellingTest : (selection, userId) => dispatch(startSpellingTest(selection, userId)),
+        setUpSpellingTest : (selection, userId) => dispatch(setUpSpellingTest(selection, userId)),
         getAssessmentbyTitle:(assessmentTitle)=>dispatch(getAssessmentbyTitle(assessmentTitle))
           }
   }

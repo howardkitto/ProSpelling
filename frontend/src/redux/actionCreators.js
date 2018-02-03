@@ -8,6 +8,7 @@ const ENV_TEST = 'ENV_TEST'
 
 //USER EXPERIENCE ACTIONS
 
+const SET_UP_SPELLING_TEST = 'SET_UP_SPELLING_TEST'
 const START_SPELLING_TEST = 'START_SPELLING_TEST'
 const SPEECH_SUPPORTED = 'SPEECH_SUPPORTED'
 const GET_WORD = 'GET_WORD'
@@ -66,12 +67,12 @@ export function speechSupported(value){
     speechSupported: value
 }}
 
-export function startSpellingTest(selection, userId){
+export function setUpSpellingTest(selection, userId){
     // console.log(selection.criteria + ' ' + selection.value)
     let timestamp = new Date()
     let spellingTestId = uuid()
     return {
-        type: START_SPELLING_TEST,
+        type: SET_UP_SPELLING_TEST,
         spellingTestId,
         criteria: selection.criteria,
         value: selection.value,
@@ -80,6 +81,11 @@ export function startSpellingTest(selection, userId){
         userId
     }
 }
+
+export function startSpellingTest(){
+    return{
+    type: START_SPELLING_TEST
+}}
 
 export function getWord(criteria, value, spellingTest){
     // console.log('GET_WORD action '+JSON.stringify(spellingTest))

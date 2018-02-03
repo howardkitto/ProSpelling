@@ -6,7 +6,12 @@ import TestResult from './TestResults'
 
 import {getWord,
         changeQuestionState,
+        startSpellingTest,
         spellingTestComplete} from '../../redux/actionCreators'
+
+import {Button} from 'reactstrap'
+
+import Rocket from '../../images/rocket.png'
 
 class SpellingTestContainer extends Component{
 
@@ -36,6 +41,10 @@ class SpellingTestContainer extends Component{
         const{spellingTestState} = this.props
 
         switch(spellingTestState){
+            case "showIntroScreen":
+                return <Button onClick={()=>this.props.startSpellingTest()}>
+                        <img src = {Rocket} alt="start"/>
+                        Start Test</Button>
             case "inProgress":
                 return <QuestionContainer/>
             case "spellingTestComplete":
@@ -62,6 +71,7 @@ class SpellingTestContainer extends Component{
   const mapDispatchToProps = dispatch => {
     return {
         getWord : (criteria, value, spellingTest) => dispatch(getWord(criteria, value, spellingTest)),
+        startSpellingTest : ()=>dispatch(startSpellingTest()),
         changeQuestionState : (questionState) => dispatch(changeQuestionState(questionState)),
         spellingTestComplete : ()=>dispatch(spellingTestComplete())
           }
