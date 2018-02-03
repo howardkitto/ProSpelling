@@ -4,13 +4,13 @@ import {Button} from 'reactstrap'
 
 import{
     tryAgain,
-    changeQuestionState} from '../redux/actionCreators'
+    changeQuestionState} from '../../redux/actionCreators'
 
-import AnswerContainer from '../containers/AnswerContainer'
-import Rocket from '../images/rocket.png'
-import Ear from '../images/ear.png'
-import Repeat from '../images/repeat.png'
-import Sad from '../images/sad.png'
+import AnswerContainer from './AnswerContainer'
+import Rocket from '../../images/rocket.png'
+import Ear from '../../images/ear.png'
+import Repeat from '../../images/repeat.png'
+import Sad from '../../images/sad.png'
 // import spellingTest from '../redux/reducers/spellingTest';
 
 class QuestionContainer extends Component{
@@ -32,11 +32,11 @@ class QuestionContainer extends Component{
         this.playSound(audioSrc)
       }
 
-componentWillReceiveProps(nextProps){
-    if(this.props.questionState){
-        console.log("questionState " +nextProps.questionState)
-    }
-}
+// componentWillReceiveProps(nextProps){
+//     if(this.props.questionState){
+//         console.log("questionState " +nextProps.questionState)
+//     }
+// }
 
 componentDidMount(){
     this.playSound(this.props.audioFileName) 

@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {startSpellingTest,
-        getAssessmentbyTitle} from '../redux/actionCreators'
+        getAssessmentbyTitle} from '../../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
 import {Container, Row} from 'reactstrap'
-import  '../css/Assessment.css'
+import  '../../css/Assessment.css'
 
 class PhaseOneAssessment extends Component{
 
@@ -41,7 +41,7 @@ class PhaseOneAssessment extends Component{
             </Row>}
             <Row>
             <div className='SpellingTestContainer'>
-            <SpellingTestContainer/>
+            {/* <SpellingTestContainer/> */}
             </div>
             </Row></Container>
         )

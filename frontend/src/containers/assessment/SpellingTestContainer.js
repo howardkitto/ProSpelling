@@ -6,7 +6,7 @@ import TestResult from './TestResults'
 
 import {getWord,
         changeQuestionState,
-        spellingTestComplete} from '../redux/actionCreators'
+        spellingTestComplete} from '../../redux/actionCreators'
 
 class SpellingTestContainer extends Component{
 

@@ -3,16 +3,16 @@ import {connect} from 'react-redux'
 import {    gotAnswer,
             saveAnswer,
             saveProgress,
-            changeQuestionState} from '../redux/actionCreators'
+            changeQuestionState} from '../../redux/actionCreators'
 
 import SpeechRecognition from './SpeechRecognition'            
-import prepareResult from '../utils/prepareResult'
+import prepareResult from '../../utils/prepareResult'
 
 import {Button} from 'reactstrap'
 
-import Rocket from '../images/rocket.png'
-import Keyboard from '../images/keyboard.png'
-import Speak from '../images/speak.png'
+import Rocket from '../../images/rocket.png'
+import Keyboard from '../../images/keyboard.png'
+import Speak from '../../images/speak.png'
 
 
 
@@ -38,8 +38,8 @@ class AnswerContainer extends Component  {
     }
 
     handleTypedAnswer(e){
-        const upperAnswer = e.target.value.toUpperCase()
-        this.props.saveAnswer(upperAnswer)
+        const lowerAnswer = e.target.value.toLowerCase()
+        this.props.saveAnswer(lowerAnswer)
     }
 
     checkAnswer(e){

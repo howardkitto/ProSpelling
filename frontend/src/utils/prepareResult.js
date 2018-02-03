@@ -15,11 +15,11 @@ const outcome = (answer, question)=>{
 
 const prepareResult = async (question, answer)=>{
 
-    const upperQuestion = question.toUpperCase()
-    const upperAnswer = answer.toUpperCase()
+    const lowerQuestion = question.toLowerCase()
+    const lowerAnswer = answer.toLowerCase()
 
-    var result = await outcome(upperAnswer, upperQuestion)
-    result.score= await levenshtein(upperAnswer, upperQuestion)
+    var result = await outcome(lowerAnswer, lowerQuestion)
+    result.score= await levenshtein(lowerAnswer, lowerQuestion)
 
     return result
 }

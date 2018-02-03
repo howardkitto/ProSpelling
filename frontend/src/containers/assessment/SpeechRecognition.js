@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {saveAnswer} from '../redux/actionCreators'
-import transcriptFilter from '../utils/transcriptFilter'
+import {saveAnswer} from '../../redux/actionCreators'
+import transcriptFilter from '../../utils/transcriptFilter'
 import {Modal, ModalBody} from 'reactstrap'
 
-import Bunny from '../images/bunny.png'
+import Bunny from '../../images/bunny.png'
 
 const webSpeech = window.SpeechRecognition ||
                         window.webkitSpeechRecognition || 
@@ -66,13 +66,13 @@ recognition.onend=_=>{  if(this._isMounted){
     handleTranscript(){
         const {transcript, answer}= this.state
 
-        const upperCaseTranscript = transcript.toLocaleUpperCase()
+        const lowerCaseTranscript = transcript.toLocaleLowerCase()
 
         //Use trascriptFilter.js to fix common transcript errors
         const fixTranscript = (filterObject)=>{
 
             for(var word in filterObject){
-                return word === upperCaseTranscript
+                return word === lowerCaseTranscript
             }
         }
 
@@ -81,14 +81,14 @@ recognition.onend=_=>{  if(this._isMounted){
         if(transcriptFilterMatch){
             this.setState({ answer: answer.concat(Object.values(transcriptFilterMatch)[0])})}
         //Delete the last character
-        else if(upperCaseTranscript==='BACK'){
+        else if(lowerCaseTranscript==='BACK'){
             this.setState({ answer: answer.slice(0, -1),
                             feedback2:'Try a word that starts with the letter'})}
-        else if(upperCaseTranscript==='CLEAR'){
+        else if(lowerCaseTranscript==='CLEAR'){
             this.setState({ answer: '',
                             feedback2:'Try switching to typing'})}
         else {
-            this.setState({ answer: answer.concat(transcript.charAt(0).toUpperCase())})}
+            this.setState({ answer: answer.concat(transcript.charAt(0).toLowerCase())})}
 
     if(this._isMounted){
         recognition.start()}        
@@ -114,8 +114,8 @@ recognition.onend=_=>{  if(this._isMounted){
     
     const {answer, listening, feedback, feedback2} = this.state
 
-        console.log(    " Confidence = " + this.state.transcriptConfidence+
-                        " Transcript = " + this.state.transcript)
+        // console.log(    " Confidence = " + this.state.transcriptConfidence+
+        //                 " Transcript = " + this.state.transcript)
         return(
                 <span>
                     <h3>{feedback}</h3>

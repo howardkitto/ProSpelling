@@ -123,7 +123,7 @@ export function changeQuestionState(questionState){
 
 
 export function spellingTestComplete(){
-    // console.log('changeQuestionState got '+ questionState)
+    // console.log('spellingTestComplete')
     return {
         type: SPELLING_TEST_COMPLETE
     }

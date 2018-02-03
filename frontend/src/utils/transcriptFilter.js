@@ -1,20 +1,20 @@
 //Common trascription mistakes
 
 const transcriptFilter = [
-    {"SEE":"C"},
-    {"ARE":"R"},
-    {"YOU":"U"},
-    {"WHY":"Y"},
-    {"HI":"I"},
-    {"KEY":"T"},
-    {"IN":"N"},
-    {"ASS":"S"},
-    {"END":"N"},
-    {"EDGE":"H"},
-    {"HE":"E"},
-    {"YES":"S"},
-    {"AND":"N"},
-    {"HEY":"A"}
+    {"see":"c"},
+    {"are":"r"},
+    {"you":"u"},
+    {"why":"y"},
+    {"hi":"i"},
+    {"key":"k"},
+    {"in":"n"},
+    {"ass":"s"},
+    {"end":"n"},
+    {"edge":"h"},
+    {"he":"e"},
+    {"yes":"s"},
+    {"and":"n"},
+    {"hey":"a"}
 ]
 
 export default transcriptFilter
