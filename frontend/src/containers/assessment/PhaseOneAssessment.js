@@ -24,22 +24,20 @@ class PhaseOneAssessment extends Component{
 
     render(){
         const{spellingTest, question, user}=this.props
-        //complicated decision to decide if to show a text box!
         return(
-            <Container>
+            <div className='assessmentContainer'>
             {(spellingTest.spellingTestState==="showIntroScreen")&&
-            <Row>
-            <div className='DescriptionBox'>
+            <div className='informationBox'>
                 {(user.displayName)&&<h1>Hi&nbsp;{user.displayName}</h1>}
                 <h2>{(spellingTest.assessment)&&spellingTest.assessment.title}</h2>
                 <h3>{(spellingTest.assessment)&&spellingTest.assessment.description}</h3>
             </div>
-            </Row>}
-            <Row>
+            }
+            
             <div className='SpellingTestContainer'>
             <SpellingTestContainer/>
             </div>
-            </Row></Container>
+            </div>
         )
     }
 }

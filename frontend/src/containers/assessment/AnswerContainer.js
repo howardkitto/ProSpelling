@@ -93,12 +93,14 @@ class AnswerContainer extends Component  {
                             <SpeechRecognition/>                                            
                         </span>
                     :
-                    <input type='text'
-                    className="answerTextBox"
-                    ref={(input)=>{this.textInput=input}}
-                    autoFocus
-                    autoComplete='off'
-                    onChange={(e)=>{this.handleTypedAnswer(e)}}/>}
+                    <div>
+                        <input type='text'
+                        className="answerTextBox"
+                        ref={(input)=>{this.textInput=input}}
+                        autoFocus
+                        autoComplete='off'
+                        onChange={(e)=>{this.handleTypedAnswer(e)}}/>
+                    </div>}
                     <div>                    
                         <Button type="submit" onClick={(e)=>this.checkAnswer(e)}>
                         <img src={Rocket} alt='next'/>Submit Answer</Button>

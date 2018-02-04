@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
 
-.DescriptionBox{
-    background: rgba(129, 130, 134, 0.5);
-    padding: 20px;
-    z-index: 1;
+.informationBox{
+  background: rgba(129, 130, 134, 0.5);
+  padding: 20px;
+ 
 }
 
 .SpellingTestContainer{
@@ -17,10 +17,9 @@
   .answerTextBox{
     font-family: 'Caveat Brush';
     color: #AA1946;
-    font-size: 100px;
-    width: fit-content;
     text-align: center;
     border-style: none;
+    font-size: 30px;
   }
 
   .answerTextBox:focus{
@@ -38,8 +37,8 @@
 }
 
     .SpellingTestContainer{
-        margin-top: 15px;
-        margin-bottom: 15px;       
+        margin-bottom: 15px;
+        text-align: center;       
     }
 
     .waitModal{
@@ -77,4 +76,21 @@
         to {left: 100%;}
     }
 
-  
+    @media screen and (min-width: 550px) {
+      .informationBox{
+        border-radius: 15px;
+        width: 550px;
+        margin:auto;
+    }
+
+    .assessmentContainer{
+      text-align: center;
+      padding:20px;
+    }
+
+    .answerTextBox{
+      font-size: 100px;
+      width: fit-content;
+    }
+
+    }

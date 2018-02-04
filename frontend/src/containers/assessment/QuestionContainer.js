@@ -32,19 +32,11 @@ class QuestionContainer extends Component{
         this.playSound(audioSrc)
       }
 
-// componentWillReceiveProps(nextProps){
-//     if(this.props.questionState){
-//         console.log("questionState " +nextProps.questionState)
-//     }
-// }
-
 componentDidMount(){
     this.playSound(this.props.audioFileName) 
 }
 
 question(){
-
-
     switch(this.props.questionState){
         case 'playing':
             return<span>
@@ -83,11 +75,13 @@ question(){
 
         return(
             <div>
+                <div className='informationBox'>
                 <h1>Question &nbsp; 
                         {(this.props.progress.length===0)?1:questionCount
                         }&nbsp; of&nbsp;
                         {wordsInAssessment}
                 </h1>
+                </div>
             <div>{this.question()}</div>
             
             <audio type="audio/mpeg" 
