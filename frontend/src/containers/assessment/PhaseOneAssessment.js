@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {setUpSpellingTest,
         getAssessmentbyTitle} from '../../redux/actionCreators'
 import SpellingTestContainer from './SpellingTestContainer'
-import {Container, Row} from 'reactstrap'
 import  '../../css/Assessment.css'
 
 class PhaseOneAssessment extends Component{
@@ -19,11 +18,10 @@ class PhaseOneAssessment extends Component{
         if(nextProps.spellingTest.assessment && !nextProps.spellingTest.spellingTestState){
             this.props.setUpSpellingTest({criteria:'assessment', value:nextProps.spellingTest.assessment._id}, this.props.user.userId)
         }
-
     }
 
     render(){
-        const{spellingTest, question, user}=this.props
+        const{spellingTest, user}=this.props
         return(
             <div className='assessmentContainer'>
             {(spellingTest.spellingTestState==="showIntroScreen")&&

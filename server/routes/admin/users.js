@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 
 const router = new express.Router();
 const User = require('../../models/User')
+const SpellingTests = require('../../models/SpellingTests')
 const authValidation = require('../../utils/authValidation')
 
 let errorMessage = {    errors:true,
@@ -10,52 +11,82 @@ let errorMessage = {    errors:true,
         message: 'some error'
         }}
 
+const userCount = ()=>{
+    return new Promise((resolve, reject)=>{
+        let count = User.count().exec()
+        .then((result)=>resolve(result))
+        .catch((error)=>{console.log('err ' +error)
+                            reject("Error While Counting")})
+    })
+    }
+
+const findUsers = (skip, limit) => {
+
+    return new Promise((resolve, reject)=>{
+        User.find()
+        .skip(skip)
+        .limit(limit)
+        .sort({'updatedAt':'descending'})
+        .lean()
+        .exec()
+    .then((users)=>{
+        resolve(users)
+    })
+    .catch((error)=>{console.log('err ' +error)
+        reject("Error While Getting Tests")})
+    })
+    }
+
+const testsPerUser = (userList)=>{
+
+    return new Promise((resolve, reject)=>{
+
+        var testCount =  userList.map((user)=>{
+            return SpellingTests.find({'userId':user._id})
+                .count()
+                .exec()
+                .then((c)=>{{return Object.assign({}, user, 
+                    {'testCount':c})}})
+        })
+        Promise.all(testCount)
+            .then((results)=>{resolve(results)})
+            .catch((error)=>{errorMessage.usersAdmin.message = error.message})
+    })
+}
+
 router.route('/page/:page/limit/:limit')
 
 .get((req, res)=>{
 
-    let userCount = 0
     let limit = Number(req.params.limit)
     let skip = Number(req.params.page) * limit
 
-    let counter = ()=>{
-        return User.count().exec()
-        .then((c)=>{return c})
-        .catch((err)=>console.log(err))
-     }
 
-     counter()
-     .then((c)=>userCount = c)
+const userList = async()=>{
 
-     let promise = User.find().exec()
-        .then((users)=>users.sort((a, b) => {
-            a = new Date(a.updatedAt);
-            b = new Date(b.updatedAt);
-            return a>b ? -1 : a<b ? 1 : 0;
-        }))
-        .then((users)=>{
-            let sliced = users.slice(skip, skip+limit)
-            return sliced
-        })
-        .then((users)=>{
-            return users.map((user)=>
-                {   user.password = undefined
-                    return user}
-            )
-        })
-        .then((users)=>{
-            let userList = {}
-            userList.count = userCount
-            userList.users = users
-            res.setHeader('Content-Type', 'application/json')
-            res.json(userList)
-            })
-        .catch((err)=>{
-            console.log('error ' + err)
-            res.status(500).json(errorMessage)
-            })
+    var userListObj = {}
+    userListObj.count = await userCount()
+    var userList = await findUsers(skip, limit)
+    userListObj.users = await testsPerUser(userList)
+
+    return userListObj
+
+}
+
+userList()
+    .then((userListObj)=>{
+        res.setHeader('Content-Type', 'application/json')
+        res.json(userListObj)
+    })
+    .catch(error => {  errorMessage.usersAdmin.message = error.message
+                                console.log('error' + error)
+                                console.log('error json ' + JSON.stringify(errorMessage))
+                                res.status(401).json(errorMessage)
+    })
 
 })
+
+
 
 router.route('/')
 .put((req, res)=>{

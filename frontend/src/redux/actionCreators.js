@@ -58,6 +58,7 @@ const GET_USERS_LIST = 'GET_USERS_LIST'
 const EDIT_USER = 'EDIT_USER'
 const UPDATE_USER = 'UPDATE_USER'
 const DELETE_USER = 'DELETE_USER'
+const GET_USER_TESTS = 'GET_USER_TESTS'
 
 // USER EXPERIENCE
 
@@ -389,10 +390,20 @@ export function deleteUser(user){
     // console.log('DELETE_USER action '+JSON.stringify(user))
     return {
         type: DELETE_USER,
-        path:'../api/users',
+        path:'../api/user',
         method:'DELETE',
         payload: user,
         returnAction: 'DELETED_USER'
+    }
+}
+
+export const getUserTests = (userId, page, limit)=>{
+    // console.log('GET_USER_TESTS ' +userId)
+    return {
+        type: GET_USER_TESTS,
+        path:'../../api/spellingTests/user/'+userId+'/page/'+page+'/limit/'+limit,
+        method:'GET',
+        returnAction: 'GOT_USER_TESTS'
     }
 }
 

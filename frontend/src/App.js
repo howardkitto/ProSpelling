@@ -11,6 +11,7 @@ import EnvTest from './containers/admin/EnvTest'
 import NoMatch from './containers/NoMatch'
 import Words from './containers/admin/Words'
 import Users from './containers/admin/Users'
+import UserTests from './containers/admin/UserTests'
 import SpellingTest from './containers/admin/SpellingTest'
 import Assessments from './containers/admin/Assessments'
 import SignupContainer from './containers/user/SignupContainer'
@@ -48,6 +49,7 @@ class App extends Component {
               <Route path="/login" component={LoginContainer}/>
               <Route path="/admin/words" component={Words} permissions={['admin']}/>
               <Route path="/admin/users" component={Users} permissions={['admin']}/>
+              <Route path="/admin/usertests/:userId" component={UserTests} permissions={['admin']}/>
               <Route path="/admin/spellingtests" component={SpellingTest} permissions={['admin']}/>
               <Route path='/admin/assessments' component={Assessments} permissions={['admin']}/>
               <PrivateRoute path="/admin/envtest" component={EnvTest} permissions={['admin']}/>

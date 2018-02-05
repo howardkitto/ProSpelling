@@ -28,6 +28,13 @@ switch(action.type){
         return{
             success:true
         }
+
+    case 'GOT_USER_TESTS':
+    console.log('Reducer got GOT_USER_TESTS' +JSON.stringify(action))
+        return{
+        ...state,
+        userTests: action.data
+        }
     default:
     return state
 }

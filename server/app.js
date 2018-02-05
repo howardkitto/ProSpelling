@@ -18,6 +18,16 @@ const login = require('./routes/user/login')
 
 const app = express()
 
+//redirect to https
+app.use(function(req, res, next) {
+  if(!req.secure && process.env.NODE_ENV === 'production') {
+    var secureUrl = "https://" + req.headers['host'] + req.url; 
+    res.writeHead(301, { "Location":  secureUrl });
+    res.end();
+  }
+  next();
+});
+
 // configure body parser
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
@@ -40,7 +50,8 @@ app.use(express.static('frontend/build'))
   app.use('/signup', signup)
   app.use('/login', login)
 
-//if you dont have this and the use static above then Safari doesn't work
+
+//if you dont have this and use static above then Safari doesn't work
   app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
   });

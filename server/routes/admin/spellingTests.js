@@ -4,7 +4,7 @@ const SpellingTests = require('../../models/SpellingTests')
 const User = require('../../models/User')
 
 
-let counter = ()=>{
+const spellingTestCounter = ()=>{
     return new Promise((resolve, reject)=>{
         let count = SpellingTests.count().exec()
         .then((result)=>resolve(result))
@@ -13,7 +13,7 @@ let counter = ()=>{
     })
  }
 
- let findSpellingTests = (skip, limit) => {
+const findSpellingTests = (skip, limit) => {
    
     return new Promise((resolve, reject)=>{
         SpellingTests.find()
@@ -31,11 +31,12 @@ let counter = ()=>{
  }
 
 //wasted hours on this - had to use Promise.all for the first time
+//link users to spelling tests
 let addUserNames = (spellingTests) => {
 
     return new Promise((resolve, reject)=>{
 
-   var promises = spellingTests.map(
+   var testList = spellingTests.map(
        (eachTest)=>{
            if(eachTest.userId){
            return User.findById(eachTest.userId)
@@ -48,9 +49,9 @@ let addUserNames = (spellingTests) => {
            }
    )
    
-   Promise.all(promises)
+   Promise.all(testList)
     .then((results)=>{resolve(results)})
-            })}
+ })}
       
 router.route('/page/:page/limit/:limit')
 
@@ -68,24 +69,41 @@ const getSpellingTests = async () => {
 
     let spellingTests = {}
 
-    spellingTests.count = await counter()
+    spellingTests.count = await spellingTestCounter()
     let rawList = await findSpellingTests(skip, limit)
     spellingTests.List = await addUserNames(rawList)
 
-    // console.log(spellingTests)
-
-    res.setHeader('Content-Type', 'application/json')
-    res.json(spellingTests)
-
+    return spellingTests
 }
 
-getSpellingTests().catch(error => {  errorMessage.spellingTestAdmin.message = error.message
+getSpellingTests()
+    .then((spellingTests)=>{
+            res.setHeader('Content-Type', 'application/json')
+            res.json(spellingTests)
+    })
+    .catch(error => {  errorMessage.spellingTestAdmin.message = error.message
                                     console.log(error)
                                     console.log('error json ' + JSON.stringify(errorMessage))
                                     res.status(401).json(errorMessage)
-
-});
+    })
 })
 
+router.route('/user/:userId/page/:page/limit/:limit')
+
+.get((req, res)=>{
+
+    let userId = req.params.userId
+    let limit = Number(req.params.limit)
+    let skip = Number(req.params.page) * limit
+
+    SpellingTests.find({'userId':userId})
+        .skip(skip)
+        .limit(limit)
+        .sort({'updatedAt':'descending'})
+        .exec()
+        .then((userTests)=>{
+                res.setHeader('Content-Type', 'application/json')
+                res.json(userTests)})
+})
 
 module.exports = router

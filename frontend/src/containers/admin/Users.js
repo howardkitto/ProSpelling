@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import {Table,
         Button,
         Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
@@ -35,6 +37,7 @@ class Users extends Component {
         this.props.editUser(user)
         this.toggle()
     }
+    
 
     deleteClicked(){
         this.props.deleteUser(this.props.formUser)
@@ -52,6 +55,7 @@ class Users extends Component {
 
     render() {
         const {usersList, count, formUser, updateUser, serviceMessage}=this.props
+
         return (
             <div className="adminContainer"><h1>Users</h1>
                 
@@ -62,6 +66,7 @@ class Users extends Component {
                     <tr>
                         <th>Email</th>
                         <th>Display Name</th>
+                        <th>Tests</th>
                         <th>Date Updated</th>
                         <th>Edit</th>
                     </tr>
@@ -71,6 +76,9 @@ class Users extends Component {
                         <tr key={user._id}>
                     <td>{user.email}</td>
                     <td>{user.displayName}</td>
+                    <td> <Link to={'usertests/'+user._id}>
+                            {user.testCount}
+                        </Link></td>
                     <td><DateTime utc={user.updatedAt}/></td>
                     
                     <td><Button color ="warning" onClick={()=>this.edit(usersList[index])}>Edit</Button></td>
