@@ -18,15 +18,15 @@ const login = require('./routes/user/login')
 
 const app = express()
 
-//redirect to https
-app.use(function(req, res, next) {
-  if(!req.secure && process.env.NODE_ENV === 'production') {
-    var secureUrl = "https://" + req.headers['host'] + req.url; 
-    res.writeHead(301, { "Location":  secureUrl });
-    res.end();
-  }
-  next();
-});
+// //redirect to https
+// app.use(function(req, res, next) {
+//   if(!req.secure && process.env.NODE_ENV === 'production') {
+//     var secureUrl = "https://" + req.headers['host'] + req.url; 
+//     res.writeHead(301, { "Location":  secureUrl });
+//     res.end();
+//   }
+//   next();
+// });
 
 // configure body parser
 app.use(bodyParser.urlencoded({ extended: false })); 
