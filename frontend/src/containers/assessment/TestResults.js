@@ -33,6 +33,7 @@ class TestResults extends Component{
                     <tbody>
                 {this.props.spellingTest.questions.map((question, index)=>
                     <tr key={index}>
+                    {/* don't show the word if it was on teh previous line  */}
                     <td>{(index===0 ||
                         question.word !== this.props.spellingTest.questions[index-1].word)&&
                         question.word                        

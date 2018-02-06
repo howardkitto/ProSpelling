@@ -6,7 +6,11 @@ var User = require('../models/User')
 const saveSpellingTest = (spellingTest)=>{
 
     return new Promise((resolve, reject)=>{
-            // console.log('saving spellingTest ' + JSON.stringify(spellingTest))
+            console.log('saving spellingTest ' + JSON.stringify(spellingTest))
+
+            spellingTest.assessmentId = spellingTest.criteria==='assessment'?
+                spellingTest.value:null
+
             let user = SpellingTests.findOneAndUpdate(
                 {spellingTestId:spellingTest.spellingTestId},
                 spellingTest,

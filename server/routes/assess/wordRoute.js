@@ -30,13 +30,16 @@ router.route('/criteria/:criteria/value/:value')
             :await Words.find({'linkedAssessments.assessmentId':req.params.value})
         let remainingWords = await filterPreviousWords(savedSpellingTest, allWords)
         let word = await getWord(remainingWords)
-    
-        res.json(word)
-        }
 
+        return word
+        }
        }
 
-    processWord().catch(error => {  errorMessage.getWord.message = error
+    processWord()
+    .then((word)=>{
+        res.setHeader('Content-Type', 'application/json')
+        res.json(word)})
+    .catch(error => {  errorMessage.getWord.message = error
                                     console.log('error json ' + JSON.stringify(errorMessage))
                                     res.status(401).json(errorMessage)
                                 

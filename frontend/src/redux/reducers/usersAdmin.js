@@ -30,7 +30,7 @@ switch(action.type){
         }
 
     case 'GOT_USER_TESTS':
-    console.log('Reducer got GOT_USER_TESTS' +JSON.stringify(action))
+    // console.log('Reducer got GOT_USER_TESTS' +JSON.stringify(action))
         return{
         ...state,
         userTests: action.data

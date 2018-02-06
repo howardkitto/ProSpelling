@@ -34,9 +34,9 @@ class DateTime extends Component{
     render(){
 
         return(
-            <div>
+            <span>
                 {this.state.dateTime}
-            </div>
+            </span>
         )
     }
 }
