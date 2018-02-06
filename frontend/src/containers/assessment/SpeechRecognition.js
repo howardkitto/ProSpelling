@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {saveAnswer} from '../../redux/actionCreators'
+import {saveAnswer,
+        startSpellingTest} from '../../redux/actionCreators'
 import transcriptFilter from '../../utils/transcriptFilter'
 import {Modal, ModalBody} from 'reactstrap'
 
@@ -48,17 +49,18 @@ class SpeechRecognition extends Component{
 recognition.onstart=event=>{if(this._isMounted)
                                 {this.setState({  listening:true,
                                     wait:false,
-                                    feedback:'Say A Letter, Say "BACK" to delete or "CLEAR" to start again',
+                                    feedback2:'Say "BACK" to delete or "CLEAR" to start again',
                                     transcript:''})}}
             
-recognition.onresult=event=>{if(this._isMounted){this.setState({feedback: "Wait... I'm Thinking...",
+recognition.onresult=event=>{if(this._isMounted){this.setState({
+                                                feedback: "Wait... I'm Thinking...",
                                                 wait:true,
                                                 listening:false,
                                                 transcript:event.results[0][0].transcript,
                                                 transcriptConfidence:event.results[0][0].confidence})}}
 
 recognition.onend=_=>{  if(this._isMounted){
-                            this.setState({ feedback2:''})
+                            this.setState({ feedback:''})
                             this.handleTranscript()}
                         }
 }   
@@ -78,13 +80,17 @@ recognition.onend=_=>{  if(this._isMounted){
 
         let transcriptFilterMatch = transcriptFilter.find(fixTranscript)
 
-        if(transcriptFilterMatch){
+        if(this.props.introScreen&&lowerCaseTranscript==="let's spell"){
+            this.props.startSpellingTest()}
+        //filter for common errors
+        else if(transcriptFilterMatch){
             this.setState({ answer: answer.concat(Object.values(transcriptFilterMatch)[0])})}
         //Delete the last character
-        else if(lowerCaseTranscript==='BACK'){
+        else if(lowerCaseTranscript==='back'){
             this.setState({ answer: answer.slice(0, -1),
                             feedback2:'Try a word that starts with the letter'})}
-        else if(lowerCaseTranscript==='CLEAR'){
+        //clear the current answer
+        else if(lowerCaseTranscript==='clear'){
             this.setState({ answer: '',
                             feedback2:'Try switching to typing'})}
         else {
@@ -98,6 +104,10 @@ recognition.onend=_=>{  if(this._isMounted){
         this.props.answer&&this.setState({answer:this.props.answer})
         this.setUpSpeechRecog()
         this._isMounted = true
+
+        if(this.props.introScreen)
+            {this.setState({feedback:'Say "Let\'s Spell" to start'})}
+        
     }
 
     componentWillUpdate(){
@@ -114,8 +124,8 @@ recognition.onend=_=>{  if(this._isMounted){
     
     const {answer, listening, feedback, feedback2} = this.state
 
-        // console.log(    " Confidence = " + this.state.transcriptConfidence+
-        //                 " Transcript = " + this.state.transcript)
+        console.log(    " Confidence = " + this.state.transcriptConfidence+
+                        " Transcript = " + this.state.transcript)
         return(
                 <span>
                     <h3>{feedback}</h3>
@@ -123,16 +133,18 @@ recognition.onend=_=>{  if(this._isMounted){
                     className="answerTextBox"
                     readOnly
                     value={answer}/>
-                    <h4>{feedback2}</h4>
                     {(listening)&&              
-                        <div className="listeningLoader"></div>}                      
+                        <div className="listeningLoader"></div>}
+                    <h4>{feedback2}</h4>  
                     <Modal isOpen={this.state.wait}>
                         <ModalBody>
                     <div className="waitModal">
                     <img src={Bunny} alt="I'm Thinking"/>
                     <p>
                     {feedback}
-                    </p></div>
+                    </p>
+                    <p style={  {color:'lightgrey',
+                                'font-size': '10px'}}>{this.state.transcript}</p></div>
                     </ModalBody>
                     </Modal>
 
@@ -150,6 +162,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         saveAnswer : (answer) => dispatch(saveAnswer(answer)),
+        startSpellingTest : ()=>dispatch(startSpellingTest())
           }
   }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import QuestionContainer from './QuestionContainer'
+import SpeechRecognition from './SpeechRecognition'
 import TestResult from './TestResults'
 
 import {getWord,
@@ -38,13 +39,18 @@ class SpellingTestContainer extends Component{
     }
 
     render(){
-        const{spellingTestState} = this.props
+        const{spellingTestState, speechSupported} = this.props
 
         switch(spellingTestState){
             case "showIntroScreen":
-                return <Button onClick={()=>this.props.startSpellingTest()}>
-                        <img src = {Rocket} alt="start"/>
-                        Start Test</Button>
+                return <div>
+                            <Button onClick={()=>this.props.startSpellingTest()}>
+                            <img src = {Rocket} alt="start"/>
+                            Start Test</Button>
+                            {speechSupported&&
+                            <SpeechRecognition  introScreen={true}/>}
+                        </div>
+
             case "inProgress":
                 return <QuestionContainer/>
             case "spellingTestComplete":
@@ -64,7 +70,8 @@ class SpellingTestContainer extends Component{
         spellingTestState:state.spellingTest.spellingTestState,
         questionState:state.currentQuestion.questionState,
         progress:state.spellingTest.progress,
-        serviceMessage:state.serviceMessage
+        serviceMessage:state.serviceMessage,
+        speechSupported: state.envProperties.speechSupported
     }
   }
 
