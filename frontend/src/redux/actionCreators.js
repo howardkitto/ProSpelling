@@ -7,7 +7,9 @@ const CLEAR_SERVICE_MESSAGE = 'CLEAR_SERVICE_MESSAGE'
 const ENV_TEST = 'ENV_TEST'
 
 //USER EXPERIENCE ACTIONS
-
+const RESET_SPELLING_TEST = 'RESET_SPELLING_TEST'
+const GET_ASSESSMENT = 'GET_ASSESSMENT'
+const GOT_ASSESSMENT = 'GOT_ASSESSMENT'
 const SET_UP_SPELLING_TEST = 'SET_UP_SPELLING_TEST'
 const START_SPELLING_TEST = 'START_SPELLING_TEST'
 const SPEECH_SUPPORTED = 'SPEECH_SUPPORTED'
@@ -19,6 +21,7 @@ const SAVE_PROGRESS = 'SAVE_PROGRESS'
 const TRY_AGAIN = 'TRY_AGAIN'
 const CHANGE_QUESTION_STATE = 'CHANGE_QUESTION_STATE'
 const SPELLING_TEST_COMPLETE = 'SPELLING_TEST_COMPLETE'
+const TOGGLE_SPEECH_TEXT = 'TOGGLE_SPEECH_TEXT'
 
 
 
@@ -33,8 +36,6 @@ const DELETE_WORD = 'DELETE_WORD'
 
 //ASSESSMENT ADMIN ACTIONS
 const GET_ASSESSMENTS = 'GET_ASSESSMENTS'
-const GET_ASSESSMENT_BY_TITLE = 'GET_ASSESSMENT_BY_TITLE'
-const GOT_ASSESSMENT_ID = 'GOT_ASSESSMENT_ID'
 const CREATE_ASSESSMENT = 'CREATE_ASSESSMENT'
 const EDIT_ASSESSMENT = 'EDIT_ASSESSMENT'
 const UPDATE_ASSESSMENT = 'UPDATE_ASSESSMENT'
@@ -67,6 +68,12 @@ export function speechSupported(value){
     type: SPEECH_SUPPORTED,
     speechSupported: value
 }}
+
+export const resetSpellingTest= ()=>{
+    return{
+        type: RESET_SPELLING_TEST
+    }
+}
 
 export function setUpSpellingTest(selection, userId){
     // console.log(selection.criteria + ' ' + selection.value)
@@ -133,6 +140,13 @@ export function spellingTestComplete(){
     // console.log('spellingTestComplete')
     return {
         type: SPELLING_TEST_COMPLETE
+    }
+}
+
+export const toggleSpeechText = (value)=>{
+    return {
+        type: TOGGLE_SPEECH_TEXT,
+        useSpeech: value
     }
 }
 
@@ -229,14 +243,25 @@ export function getAssessmentsList(page, limit){
     }
 }
 
-export function getAssessmentbyTitle(assessmentTitle){
+export const getAssessmentbyTitle = (assessmentTitle) =>{
 // console.log('GET_ASSESSMENT_BY_TITLE' + assessmentTitle)
     return{
-        type:GET_ASSESSMENT_BY_TITLE,
+        type:GET_ASSESSMENT,
         path:'../api/assessments/assessmentTitle/'+assessmentTitle,
         method:'GET',
-        returnAction: GOT_ASSESSMENT_ID
+        returnAction: GOT_ASSESSMENT
+    }
 }
+
+export const getAssessmentbyId = (assessmentId) =>{
+    // console.log('GET_ASSESSMENT_BY_TITLE' + assessmentTitle)
+        return{
+            type:GET_ASSESSMENT,
+            path:'../api/assessments/assessmentId/'+assessmentId,
+            method:'GET',
+            returnAction: GOT_ASSESSMENT
+    }
+
 }
 export function createAssessment(assessment){
     // console.log('CREATE_ASSESSMENT' +JSON.stringify(assessment))

@@ -3,7 +3,11 @@
 function spellingTest(state=[], action){
     // console.log('spellingTest Reducer running' + JSON.stringify(action))
     switch(action.type){
-        case 'GOT_ASSESSMENT_ID':
+        case 'RESET_SPELLING_TEST':
+         return{
+            '':''
+         }
+        case 'GOT_ASSESSMENT':
             return{
                 assessment:action.data
             }

@@ -26,16 +26,6 @@
     outline: none
   }
 
-  .loader {
-    border: 16px solid #AA1946; 
-    border-top: 16px solid #FA135F; 
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    animation: spin 7s linear infinite;
-    margin: auto;
-}
-
     .SpellingTestContainer{
         margin-bottom: 15px;
         text-align: center;       
@@ -66,7 +56,19 @@
       background-color: #AA1946;
       animation: loading 2s linear infinite;
     }
+
+    .ageSelectionWrapper{
     
+    }
+
+    .ageSelection{
+      background-color: #AA1946;
+      color:whitesmoke;
+      padding:20px;
+      margin: 15px;
+      text-align: center;
+    }
+
     @keyframes loading {
         from {left: -200px; width: 30%;}
         50% {width: 30%;}
@@ -90,7 +92,16 @@
 
     .answerTextBox{
       font-size: 100px;
+      margin:15px;
       width: fit-content;
+    }
+
+    .ageSelection{
+      height: 200px;
+      width: 300px;
+      border-radius: 15px;
+      display: inline-block; 
+      vertical-align: top;
     }
 
     }

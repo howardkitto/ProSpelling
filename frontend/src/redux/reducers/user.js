@@ -23,6 +23,12 @@ function user(state=[], action){
             return{
                 logOut:true
             }
+        case 'TOGGLE_SPEECH_TEXT':
+        // console.log('TOGGLE_SPEECH_TEXT reducer got' + JSON.stringify(action))
+            return{
+                ...state,
+                useSpeech: action.useSpeech
+            }
         
             default:
             return state

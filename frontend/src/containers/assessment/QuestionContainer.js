@@ -77,8 +77,7 @@ question(){
             <div>
                 <div className='informationBox'>
                 <h1>Question &nbsp; 
-                        {(this.props.progress.length===0)?1:questionCount
-                        }&nbsp; of&nbsp;
+                        {questionCount+1}&nbsp; of&nbsp;
                         {wordsInAssessment}
                 </h1>
                 </div>

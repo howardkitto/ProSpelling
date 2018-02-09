@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import {Table, 
         ListGroup, 
         ListGroupItemHeading, 
-        ListGroupItem, 
-        Collapse,
-        Progress} from 'reactstrap'
+        Collapse} from 'reactstrap'
 
 import {getUserTests} from '../../redux/actionCreators'
 

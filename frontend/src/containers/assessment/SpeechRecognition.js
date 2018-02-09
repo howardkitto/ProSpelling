@@ -124,8 +124,8 @@ recognition.onend=_=>{  if(this._isMounted){
     
     const {answer, listening, feedback, feedback2} = this.state
 
-        console.log(    " Confidence = " + this.state.transcriptConfidence+
-                        " Transcript = " + this.state.transcript)
+        // console.log(    " Confidence = " + this.state.transcriptConfidence+
+        //                 " Transcript = " + this.state.transcript)
         return(
                 <span>
                     <h3>{feedback}</h3>
@@ -143,8 +143,8 @@ recognition.onend=_=>{  if(this._isMounted){
                     <p>
                     {feedback}
                     </p>
-                    <p style={  {color:'lightgrey',
-                                'font-size': '10px'}}>{this.state.transcript}</p></div>
+                    <p style={  {color:'thistle',
+                                fontSize: '12px'}}>{this.state.transcript}</p></div>
                     </ModalBody>
                     </Modal>
 

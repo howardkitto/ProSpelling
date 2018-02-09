@@ -23,6 +23,10 @@ componentDidMount(){
 
 }
 
+componentWillUnmount(){
+    console.log('unmount')
+}
+
 render(){
     return(
         <div className="adminContainer">

@@ -99,20 +99,57 @@ router.route('/page/:page/limit/:limit')
                 })
 })
 
+
 router.route('/assessmentTitle/:assessmentTitle')
 .get((req,res)=>{
     console.log(req.params.assessmentTitle)
-    var tempAssesment={}
 
-    var promise = Assessments.findOne({'title':req.params.assessmentTitle}).exec()
-    .then((assessment)=>{tempAssesment=assessment})
-    //find out how many words are in the assessment
-    .then(()=> {return Words.find({'linkedAssessments.assessmentId':tempAssesment._id}).count().exec()} )
-    .then((count)=>{   let wordCount = {wordCount:count}
-                        //use object assign to merge objects ._doc is where mongo put the data
-                        let assessmentToReturn = Object.assign({},tempAssesment._doc, wordCount)
-                        res.setHeader('Content-Type', 'application/json')
-                        res.json(assessmentToReturn)})
+    const getAssessment = async (assessmentTitle)=>{
+         
+        const assessment = await Assessments.findOne({'title':req.params.assessmentTitle}).exec()
+        const assessmentCount = await Words.find({'linkedAssessments.assessmentId':assessment._id})
+                                        .count()
+                                        .exec()
+        
+        const assessmentObj = Object.assign({}, assessment._doc,{'wordCount':assessmentCount})        
+
+        return assessmentObj
+    }
+
+    getAssessment(req.params.assessmentTitle)
+        .then((assesmentObj)=>{
+            console.log(assesmentObj)
+            res.setHeader('Content-Type', 'application/json')
+            res.json(assesmentObj)
+        })
+        .catch((error)=>console.log(error))
+})
+
+
+
+router.route('/assessmentId/:assessmentId')
+.get((req,res)=>{
+    console.log(req.params.assessmentId)
+
+    const getAssessment = async (assessmentId)=>{
+         
+        const assessment = await Assessments.findById(assessmentId).exec()
+        const assessmentCount = await Words.find({'linkedAssessments.assessmentId':assessmentId})
+                                        .count()
+                                        .exec()
+        
+        const assessmentObj = Object.assign({}, assessment._doc,{'wordCount':assessmentCount})        
+
+        return assessmentObj
+    }
+
+    getAssessment(req.params.assessmentId)
+        .then((assesmentObj)=>{
+            console.log(assesmentObj)
+            res.setHeader('Content-Type', 'application/json')
+            res.json(assesmentObj)
+        })
+        .catch((error)=>console.log(error))
 })
 
 

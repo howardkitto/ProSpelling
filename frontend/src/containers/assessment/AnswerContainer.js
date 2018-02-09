@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {    gotAnswer,
             saveAnswer,
             saveProgress,
-            changeQuestionState} from '../../redux/actionCreators'
+            changeQuestionState,
+            toggleSpeechText} from '../../redux/actionCreators'
 
 import SpeechRecognition from './SpeechRecognition'            
 import prepareResult from '../../utils/prepareResult'
@@ -15,26 +16,13 @@ import Keyboard from '../../images/keyboard.png'
 import Speak from '../../images/speak.png'
 
 
-
 class AnswerContainer extends Component  {
 
     constructor(){
         super()
         this.state = {
-            useSpeech:true
+            // useSpeech:true
         }
-    }
-
-    
-
-    toggleTextOrSpeech(){
-        const {answer} = this.props.question
-        //use a callback to pass the answer between text and speech
-        this.setState({useSpeech:!this.state.useSpeech},
-        ()=>{if(!this.state.useSpeech){
-                this.textInput.value=(answer)?answer:''
-            }
-        })
     }
 
     handleTypedAnswer(e){
@@ -71,15 +59,22 @@ class AnswerContainer extends Component  {
         }
     }
 
+    componentDidUpdate(){
+        if(this.textInput&&!this.props.useSpeech){            
+            this.textInput.value=(this.props.question.answer)?this.props.question.answer:''
+            }
+        }
+    
+
     render(){
         //speechSupported Prop is set in the nav bar
-        const {speechSupported} = this.props
-        const {useSpeech} = this.state
+        const {speechSupported, useSpeech} = this.props
+        // const {useSpeech} = this.state
 
         return  <span>
                     {speechSupported && !useSpeech &&
                         <span>
-                            <Button onClick={_=>this.toggleTextOrSpeech()}>
+                            <Button onClick={()=>this.props.toggleSpeechText(true)}>
                             <img src={Speak} alt="Switch to Voice"/>
                             Switch to Voice
                             </Button>
@@ -87,7 +82,7 @@ class AnswerContainer extends Component  {
                     {speechSupported && useSpeech
                     ?
                         <span>
-                            <Button onClick={_=>this.toggleTextOrSpeech()}>
+                            <Button onClick={()=>this.props.toggleSpeechText(false)}>
                             <img src={Keyboard} alt='Switch to Typing'/>
                             Switch to Typing</Button>
                             <SpeechRecognition/>                                            
@@ -111,6 +106,7 @@ class AnswerContainer extends Component  {
 
 const mapStateToProps = state => {
     return {        
+        useSpeech: state.user.useSpeech,
         question: state.currentQuestion,
         user: state.user,
         skipMistakes: state.spellingTest.assessment.skipMistakes,
@@ -121,6 +117,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        toggleSpeechText: (value)=>dispatch(toggleSpeechText(value)),
         saveAnswer : (answer) => dispatch(saveAnswer(answer)),
         gotAnswer: (answer) => dispatch(gotAnswer(answer)),
         saveProgress : (question, userId, nextState) => dispatch(saveProgress(question, userId, nextState)),

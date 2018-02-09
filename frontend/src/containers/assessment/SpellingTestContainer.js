@@ -8,13 +8,25 @@ import TestResult from './TestResults'
 import {getWord,
         changeQuestionState,
         startSpellingTest,
-        spellingTestComplete} from '../../redux/actionCreators'
+        spellingTestComplete,
+        toggleSpeechText} from '../../redux/actionCreators'
 
-import {Button} from 'reactstrap'
+import {Button,
+        Modal,
+        ModalBody} from 'reactstrap'
 
 import Rocket from '../../images/rocket.png'
+import Voice from '../../images/voice.png'
+import KeyBoard from '../../images/keyboard.png'
 
 class SpellingTestContainer extends Component{
+
+    constructor(){
+        super()
+        this.state = {
+            modal:false
+        }
+    }
 
     componentWillReceiveProps(nextProps){
 
@@ -38,17 +50,49 @@ class SpellingTestContainer extends Component{
         }        
     }
 
+    componentDidMount(){
+        const{speechSupported, useSpeech} = this.props
+
+        if(speechSupported&&!useSpeech){
+            this.setState({modal:true})
+        }
+        
+    }
+
     render(){
-        const{spellingTestState, speechSupported} = this.props
+        const{spellingTestState, speechSupported, useSpeech} = this.props
 
         switch(spellingTestState){
             case "showIntroScreen":
                 return <div>
+                            
+                            {speechSupported&&useSpeech?
+                            <div>
+                                <Button onClick={()=>this.props.toggleSpeechText(false)}>
+                                <img src ={KeyBoard} alt="use keyboard"/>
+                                Use Keyboard</Button>
+                                <SpeechRecognition  introScreen={true}/>
+                            </div>:
                             <Button onClick={()=>this.props.startSpellingTest()}>
                             <img src = {Rocket} alt="start"/>
                             Start Test</Button>
-                            {speechSupported&&
-                            <SpeechRecognition  introScreen={true}/>}
+                            }
+
+                             <Modal isOpen={this.state.modal}>
+                                <ModalBody>                                
+                                <div className="waitModal">                            
+                                <h2>If you want to use your voice to spell</h2>                    
+                                <Button onClick={()=>{this.setState({modal:false})
+                                                    this.props.toggleSpeechText(true)}}> 
+                                <img src={Voice} alt="Use Your Voice"/>
+                                Click Here</Button>
+                                <h2>If you prefer to type</h2>
+                                <Button onClick={()=>this.setState({modal:false})}>
+                                <img src ={KeyBoard} alt="use keyboard"/>
+                                Click Here</Button></div>
+                    </ModalBody>
+                    </Modal>
+
                         </div>
 
             case "inProgress":
@@ -71,12 +115,14 @@ class SpellingTestContainer extends Component{
         questionState:state.currentQuestion.questionState,
         progress:state.spellingTest.progress,
         serviceMessage:state.serviceMessage,
-        speechSupported: state.envProperties.speechSupported
+        speechSupported: state.envProperties.speechSupported,
+        useSpeech: state.user.useSpeech
     }
   }
 
   const mapDispatchToProps = dispatch => {
     return {
+        toggleSpeechText:(value)=>dispatch(toggleSpeechText(value)),
         getWord : (criteria, value, spellingTest) => dispatch(getWord(criteria, value, spellingTest)),
         startSpellingTest : ()=>dispatch(startSpellingTest()),
         changeQuestionState : (questionState) => dispatch(changeQuestionState(questionState)),
