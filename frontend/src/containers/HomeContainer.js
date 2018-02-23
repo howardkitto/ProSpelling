@@ -16,8 +16,6 @@ componentDidMount(){
 
 render(){
 
-  
-
   const LetsStartButton = withRouter(({ history}) => (
     <Button
       className="startButton"
@@ -39,11 +37,6 @@ render(){
       ProSpelling will help you to learn to spell by using a unique teaching method and the latest technology.</p>
       <p>Make sure that your speakers and microphone are switched on!</p>
       </div>
-      {/* <video autoPlay muted loop playsInline id="myVideo">
-        <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/Homepage1/playlist.m3u8' type="application/x-mpegurl"/>
-        <source src= 'https://s3-us-west-2.amazonaws.com/prospelling/video/test4.mp4' type="video/mp4"/>
-      Browser doesn't support html5 video
-      </video> */}
 
       <video  ref={(p)=>this.p=p}
               autoPlay muted loop playsInline id="myVideo">
