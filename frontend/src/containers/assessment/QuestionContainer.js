@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'reactstrap'
 
+import dashPlayer from 'dashjs'
+
 import{
     tryAgain,
     changeQuestionState} from '../../redux/actionCreators'
@@ -33,6 +35,9 @@ class QuestionContainer extends Component{
       }
 
 componentDidMount(){
+    var player = dashPlayer.MediaPlayer().create();
+    player.initialize(this.audioPlayer, this.props.audioFileName)
+
     this.playSound(this.props.audioFileName) 
 }
 
@@ -83,7 +88,7 @@ question(){
                 </div>
             <div>{this.question()}</div>
             
-            <audio type="audio/mpeg" 
+            <audio
             ref={(audio) => this.audioPlayer=audio}
             onLoadStart={()=>this.props.changeQuestionState('loadingAudio')}
             onPlaying={()=>this.props.changeQuestionState('playing')}
