@@ -8,36 +8,26 @@ router.route('/page/:page/limit/:limit')
 
 .get((req, res)=>{
 
-    let wordCount = 0
+    
     let limit = Number(req.params.limit)
     let skip = Number(req.params.page) * limit
 
-    let counter = ()=>{
-        return Words.count().exec()
-        .then((c)=>{return c})
-        .catch((err)=>console.log(err))
-     }
- 
-     counter()
-         .then((count)=>{wordCount = count}) 
+    const getWordList = async()=>{
+        let wordListObject = {'test':'ok2'}
+            wordListObject.count = await Words.count().exec()
+            wordListObject.words = await Words.find()
+                                            .skip(skip)
+                                            .limit(limit)
+                                            .sort({'updatedAt':'descending'})
+                                            .exec()
+        return wordListObject
 
-    let promise = Words.find().exec()
-        .then((words)=>words.sort((a, b) => {
-            a = new Date(a.updatedAt);
-            b = new Date(b.updatedAt);
-            return a>b ? -1 : a<b ? 1 : 0;
-        }))
-        .then((words)=>{
-            let sliced = words.slice(skip, skip+limit)
-            return sliced
+    }
+
+    getWordList()
+        .then((list)=>{
+            res.json(list)
         })
-        .then((words)=>{
-            let wordsList = {}
-            wordsList.count = wordCount
-            wordsList.words = words
-            res.setHeader('Content-Type', 'application/json')
-            res.json(wordsList)
-            })
         .catch((err)=>{
             console.log('error ' + err)
             })
