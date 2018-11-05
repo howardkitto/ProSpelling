@@ -316,7 +316,7 @@ export function getPatternsList(page, limit){
     // console.log('GET_PATTERNS')
     return{
         type: GET_PATTERNS,
-        path: '../api/patterns/page/'+page+'/limit/'+limit,
+        path: '../api/families/page/'+page+'/limit/'+limit,
         method: 'GET',
         returnAction: 'GOT_PATTERNS'
     }
@@ -326,7 +326,7 @@ export function createPattern(pattern){
     console.log('CREATE_PATTERN' +JSON.stringify(pattern))
     return {
         type: CREATE_PATTERN,
-        path: '../api/patterns',
+        path: '../api/families',
         method: 'POST',
         payload: pattern,
         returnAction: 'CREATED_PATTERN'
