@@ -24,7 +24,7 @@ class Assessments extends Component{
             limit:5
         }
         this.toggle = this.toggle.bind(this);
-    this.createAssessment=this.createAssessment.bind(this)
+        this.createAssessment=this.createAssessment.bind(this)
     }
 
     toggle() {

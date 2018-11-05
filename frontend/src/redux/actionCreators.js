@@ -41,6 +41,13 @@ const EDIT_ASSESSMENT = 'EDIT_ASSESSMENT'
 const UPDATE_ASSESSMENT = 'UPDATE_ASSESSMENT'
 const DELETE_ASSESSMENT = 'DELETE_ASSESSMENT'
 
+//PATTERN ADMIN ACTIONS
+const GET_PATTERNS = 'GET_PATTERNS'
+const CREATE_PATTERN = 'CREATE_PATTERN'
+const EDIT_PATTERN = 'EDIT_PATTERN'
+const UPDATE_PATTERN = 'UPDATE_PATTERN'
+const DELETE_PATTERN = 'DELETE_PATTERN'
+
 //spelling test admin
 const GET_SPELLING_TESTS = 'GET_SPELLING_TESTS'
 
@@ -303,6 +310,38 @@ export function deleteAssessment(assessment){
         returnAction: 'DELETED_ASSESSMENT'
     }
 }
+
+//PATTERN ACTIONS
+export function getPatternsList(page, limit){
+    // console.log('GET_PATTERNS')
+    return{
+        type: GET_PATTERNS,
+        path: '../api/patterns/page/'+page+'/limit/'+limit,
+        method: 'GET',
+        returnAction: 'GOT_PATTERNS'
+    }
+}
+
+export function createPattern(pattern){
+    console.log('CREATE_PATTERN' +JSON.stringify(pattern))
+    return {
+        type: CREATE_PATTERN,
+        path: '../api/patterns',
+        method: 'POST',
+        payload: pattern,
+        returnAction: 'CREATED_PATTERN'
+    }
+}
+
+export function editPattern(pattern){
+    // console.log('EDIT_PATTERN ACTION' + JSON.stringify(pattern))
+    return {
+        type: EDIT_PATTERN,
+        pattern
+    }
+}
+
+
 
 //SPELLING TEST ADMIN
 
