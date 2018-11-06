@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_HOST, { useMongoClient: true },
     if (err) {
       Raven.captureException(err);
     } else {
-        console.log('Connected to Server successfully!');
+        console.log('Connected to Database successfully!');
     }
 });
 
