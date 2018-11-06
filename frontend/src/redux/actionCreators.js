@@ -41,12 +41,12 @@ const EDIT_ASSESSMENT = 'EDIT_ASSESSMENT'
 const UPDATE_ASSESSMENT = 'UPDATE_ASSESSMENT'
 const DELETE_ASSESSMENT = 'DELETE_ASSESSMENT'
 
-//PATTERN ADMIN ACTIONS
-const GET_PATTERNS = 'GET_PATTERNS'
-const CREATE_PATTERN = 'CREATE_PATTERN'
-const EDIT_PATTERN = 'EDIT_PATTERN'
-const UPDATE_PATTERN = 'UPDATE_PATTERN'
-const DELETE_PATTERN = 'DELETE_PATTERN'
+//WORD FAMILY ADMIN ACTIONS
+const GET_FAMILIES = 'GET_FAMILIES'
+const CREATE_FAMILY = 'CREATE_FAMILY'
+const EDIT_FAMILY = 'EDIT_FAMILY'
+const UPDATE_FAMILY = 'UPDATE_FAMILY'
+const DELETE_FAMILY = 'DELETE_FAMILY'
 
 //spelling test admin
 const GET_SPELLING_TESTS = 'GET_SPELLING_TESTS'
@@ -197,6 +197,14 @@ export function getWordsList(page, limit){
 }
 
 export function createWord(word){
+
+    //test data
+    // word.linkedFamilies =[
+    //     {familyId:'5be07b1a97167231ecd89d90',
+    //     title:'long e'},
+    //     {familyId:'5be07b4897167231ecd89d91',
+    //     title:'double c'}]
+
     // console.log('CREATE_WORD ' +JSON.stringify(word))
     return {
         type: CREATE_WORD,
@@ -216,7 +224,8 @@ export function editWord(word){
 }
 
 export function updateWord(word){
-    // console.log('UPDATE_WORD ' +JSON.stringify(word))
+
+    console.log('UPDATE_WORD ' +JSON.stringify(word))
     return {
         type: UPDATE_WORD,
         path:'../api/words',
@@ -311,37 +320,46 @@ export function deleteAssessment(assessment){
     }
 }
 
-//PATTERN ACTIONS
-export function getPatternsList(page, limit){
-    // console.log('GET_PATTERNS')
+//WORD FAMILY ACTIONS
+export function getFamiliesList(page, limit){
+    // console.log('GET_FAMILIES')
     return{
-        type: GET_PATTERNS,
+        type: GET_FAMILIES,
         path: '../api/families/page/'+page+'/limit/'+limit,
         method: 'GET',
-        returnAction: 'GOT_PATTERNS'
+        returnAction: 'GOT_FAMILIES'
     }
 }
 
-export function createPattern(pattern){
-    console.log('CREATE_PATTERN' +JSON.stringify(pattern))
+export function createFamily(family){
+    console.log('CREATE_FAMILY' +JSON.stringify(family))
     return {
-        type: CREATE_PATTERN,
+        type: CREATE_FAMILY,
         path: '../api/families',
         method: 'POST',
-        payload: pattern,
-        returnAction: 'CREATED_PATTERN'
+        payload: family,
+        returnAction: 'CREATED_FAMILY'
     }
 }
 
-export function editPattern(pattern){
-    // console.log('EDIT_PATTERN ACTION' + JSON.stringify(pattern))
+export function editFamily(family){
+    console.log('EDIT_FAMILY ACTION' + JSON.stringify(family))
     return {
-        type: EDIT_PATTERN,
-        pattern
+        type: EDIT_FAMILY,
+        family
     }
 }
 
-
+export function deleteFamily(family){
+    console.log('DELETE_FAMILY action '+JSON.stringify(family))
+    return {
+        type: DELETE_FAMILY,
+        path: '../api/families',
+        method:'DELETE',
+        payload: family,
+        returnAction: 'DELETED_FAMILY'
+    }
+}
 
 //SPELLING TEST ADMIN
 

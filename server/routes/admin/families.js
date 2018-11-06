@@ -21,6 +21,19 @@ router.route('/')
         res.json(data)})
 })
 
+.delete((req, res)=>{
+    // console.log('Gonna delete ' + JSON.stringify(req.body))
+    var promise = Families.findByIdAndRemove(req.body._id).exec()
+    .then(()=>{
+        res.setHeader('Content-Type', 'application/json')
+        res.json({deleted:'ok'})
+        })
+    .catch((err)=>{
+        console.log('error ' + err)
+        })
+        
+    })
+
 router.route('/page/:page/limit/:limit')
 
 .get((req, res)=>{
@@ -31,7 +44,7 @@ router.route('/page/:page/limit/:limit')
     const getFamilyList = async()=>{
         let familyListObject = {}
         familyListObject.count = await Families.count().exec()
-        familyListObject.patterns = await Families.find()
+        familyListObject.families = await Families.find()
                                             .skip(skip)
                                             .limit(limit)
                                             .sort({'updatedAt':'descending'})

@@ -36,8 +36,9 @@ const apiActions = ['GET_WORD',
                     'UPDATE_USER',
                     'DELETE_USER',
                     'GET_USER_TESTS',
-                    'CREATE_PATTERN',
-                    'GET_PATTERNS']
+                    'CREATE_FAMILY',
+                    'GET_FAMILIES',
+                    'DELETE_FAMILY']
 
 export function* watchForApiActions(){
     yield takeEvery(apiActions, callApiSaga)

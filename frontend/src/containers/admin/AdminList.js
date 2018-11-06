@@ -23,9 +23,9 @@ class AdminList extends Component{
 
     createNew(){
 
-        var newItem = { "Title":"",
-                        "Description":""
-    }
+        var newItem = { 
+                        "Title":"",
+                        "Description":""}
         this.props.editFunc(newItem)
         this.setState({modal:!this.state.modal})
     }
@@ -33,11 +33,21 @@ class AdminList extends Component{
     saveClicked(){
 
         const {itemBeingEdited} = this.props
-
         if( !itemBeingEdited.id){
             this.props.createFunc(itemBeingEdited)}
         else
             this.props.updateItem(itemBeingEdited)
+    }
+
+    edit(item){
+        
+        this.props.editFunc(item)
+        this.setState({modal:!this.state.modal})
+    }
+
+    deleteClicked(){
+        if(this.props.itemBeingEdited._id){this.props.deleteFunc(this.props.itemBeingEdited)}
+        this.setState({modal : !this.state.modal})
     }
 
     componentDidMount(){
@@ -59,8 +69,8 @@ class AdminList extends Component{
         return(
 
             <div className="adminContainer">
-            <h1>{name}s</h1>
-{(!itemList)?<div>Loading Assessments</div>:
+            <h1>{name}</h1>
+{(!itemList)?<div>Loading...</div>:
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
@@ -94,9 +104,9 @@ class AdminList extends Component{
                 
             </ModalBody>
             <ModalFooter>
-                {<Button color="success" onClick={()=>this.saveClicked()}>Save</Button>}
-                {/*<Button color="danger" onClick={()=>this.deleteClicked()}>Delete</Button>
-                <Button color="info" onClick={this.toggle}>Cancel</Button> */}
+                <Button color="success" onClick={()=>this.saveClicked()}>Save</Button>
+                <Button color="danger" onClick={()=>this.deleteClicked()}>Delete</Button>
+                <Button color="info" onClick={()=>this.setState({modal:!this.state.modal})}>Cancel</Button>
             </ModalFooter>
             </Modal> 
             </div>
@@ -118,10 +128,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 
     return {
-
         getListFunc: (page, limit)=>dispatch(ownProps.objectProperties.getListFunc(page, limit)),
         editFunc : (itemObject)=>dispatch(ownProps.objectProperties.editFunc(itemObject)),
-        createFunc : (itemObject)=>dispatch(ownProps.objectProperties.createFunc(itemObject))
+        createFunc : (itemObject)=>dispatch(ownProps.objectProperties.createFunc(itemObject)),
+        deleteFunc : (itemObject)=>dispatch(ownProps.objectProperties.deleteFunc(itemObject))
           }
   }
 

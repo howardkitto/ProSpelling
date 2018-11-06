@@ -73,7 +73,7 @@ class MainNav extends Component {
                     <DropdownItem tag={Link} to='/admin/users'>Users</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/spellingtests'>Spelling Tests</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/assessments'>Assessments</DropdownItem>
-                    <DropdownItem tag={Link} to='/admin/patterns'>Patterns</DropdownItem>
+                    <DropdownItem tag={Link} to='/admin/families'>Word Families</DropdownItem>
                     <DropdownItem tag={Link} to='/admin/envtest'>Env Test</DropdownItem>
               </DropdownMenu>
             </UncontrolledNavDropdown>}

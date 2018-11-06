@@ -9,7 +9,7 @@ import spellingTestAdmin from './spellingTestAdmin'
 import assessmentAdmin from './assessmentAdmin'
 import serviceMessage from './serviceMessage'
 import envProperties from './envProperties'
-import patternAdmin from './patternAdmin'
+import familyAdmin from './familyAdmin'
 
 import { routerReducer} from 'react-router-redux'
 
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({   serviceMessage,
                                         assessmentAdmin,
                                         envProperties,
                                         currentQuestion,
-                                        patternAdmin,
+                                        familyAdmin,
 
                                         router:routerReducer})
 

@@ -37,12 +37,12 @@ router.route('/page/:page/limit/:limit')
 router.route('/')
 .post(function(req, res){
 
-    console.log('make a word ' + JSON.stringify(req.body))
+    console.log('Make a word \n' + JSON.stringify(req.body, null, 4))
 
     const word = {    'word':req.body.word,
                         'level':req.body.level,
                         'linkedAssessments':req.body.linkedAssessments,
-                        'characteristics': req.body.characteristics,
+                        'linkedFamilies':req.body.linkedFamilies,
                         'audioFileName': req.body.audioFileName
                         }
 
@@ -57,12 +57,12 @@ router.route('/')
     })
 
 .put((req, res)=>{
-        // console.log('put route activated ' + JSON.stringify(req.body))
+        console.log('put route activated \n' + JSON.stringify(req.body, null, 4))
 
         const word = {  'word':req.body.word,
                         'level':req.body.level,
                         'linkedAssessments':req.body.linkedAssessments,
-                        'characteristics': req.body.characteristics,
+                        'linkedFamilies':req.body.linkedFamilies,
                         'audioFileName': req.body.audioFileName}
                         
         var promise = Words.findByIdAndUpdate(req.body._id, word).exec()

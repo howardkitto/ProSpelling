@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Form, FormGroup, Label, Col, Input} from 'reactstrap'
 
-import {editWord, getAssessmentsList} from '../../redux/actionCreators'
+import {editWord, 
+        getAssessmentsList,
+        getFamiliesList} from '../../redux/actionCreators'
 
 class WordForm extends Component{
  
@@ -19,6 +21,7 @@ class WordForm extends Component{
     if(!this.props.assessments)
     //need to fix this hardcoded stuff
       this.props.getAssessmentsList(0,10)
+      this.props.getFamiliesList(0,100)
   
   }
   onChange(e){
@@ -35,30 +38,64 @@ class WordForm extends Component{
     this.props.editWord(word)
   }
 
- addToAssessment(e){
+//  addToAssessment(e){
     
-    let word = this.state.word
+//     let word = this.state.word
 
-    //find out if we're removing or adding assessments
-    let deleteThisOne = word.linkedAssessments.findIndex(w=>w.assessmentId===e.target.id)
+//     //find out if we're removing or adding assessments
+//     let deleteThisOne = word.linkedAssessments.findIndex(w=>w.assessmentId===e.target.id)
 
-    if(deleteThisOne!== -1){
-      word.linkedAssessments.splice(deleteThisOne, 1)
-      this.setState({word})
-      this.props.editWord(word)   
-    }
-    else{
-      let assessment = {}
-      assessment.assessmentId = e.target.id
-      assessment.title = this.props.allAssessments.find(t => t._id === e.target.id).title
-      word.linkedAssessments.push(assessment)
-      this.setState({word})
-      this.props.editWord(word)
-  }}
+//     if(deleteThisOne!== -1){
+//       word.linkedAssessments.splice(deleteThisOne, 1)
+//       this.setState({word})
+//       this.props.editWord(word)   
+//     }
+//     else{
+//       let assessment = {}
+//       assessment.assessmentId = e.target.id
+//       assessment.title = this.props.allAssessments.find(t => t._id === e.target.id).title
+//       word.linkedAssessments.push(assessment)
+//       this.setState({word})
+//       this.props.editWord(word)
+//   }}
 
+addToAssessment(item, e){
+    
+  let word = this.state.word
+
+  console.log("ass or fam? " + item)
+
+  if(item==="assessment"){
+  var objectName = "linkedAssessments"
+  var itemName = "assessmentId"
+  var objectList = "allAssessments"
+}
+if(item==="family"){
+  var objectName = "linkedFamilies"
+  var itemName = "familyId"
+  var objectList = "familyList"
+}
+
+  // //find out if we're removing or adding assessments
+  let deleteThisOne = word[objectName].findIndex(w=>w[itemName]===e.target.id)
+
+  if(deleteThisOne!== -1){
+    word[objectName].splice(deleteThisOne, 1)
+    this.setState({word})
+    this.props.editWord(word)   
+  }
+  else{
+    let newLink = {}
+    newLink[itemName] = e.target.id
+    newLink.title = this.props[objectList].find(t => t._id === e.target.id).title
+    word[objectName].push(newLink)
+    this.setState({word})
+    this.props.editWord(word)
+}
+}
     
     render(){
-      const{allAssessments, apiMessage}=this.props
+      const{allAssessments, apiMessage, familyList}=this.props
         return(
         <Form>
           {apiMessage}
@@ -87,7 +124,7 @@ class WordForm extends Component{
           <div key={a._id}>
             <span><Input type="checkbox"
                       id={a._id}
-                      onChange={(e)=>this.addToAssessment(e)}
+                      onChange={(e)=>this.addToAssessment("assessment", e)}
                       checked={(this.state.word.linkedAssessments.find(w=>w.assessmentId===a._id)?true:false)}/>
               </span>
             <span>{a.title}</span></div>)}</div>}
@@ -95,12 +132,24 @@ class WordForm extends Component{
       </Col>
     </FormGroup>
         <FormGroup row>
-          <Label for="level" sm={3}>Characteristics</Label>
-          <Col sm={9}>
-            <Input  name="characteristics"
-                    value={this.state.word.characteristics}
-                    onChange={(e)=>this.onChange(e)} />
-          </Col>
+          <Label for="level" sm={3}>Word Families</Label>
+         {(!familyList)?<span>Loading</span>:
+         <div className="familyDiv">
+           {familyList.map(family=>
+            <div >
+            <Input  key={family._id} 
+                    type="checkbox" 
+                    id={family._id}
+                    item="family"
+                    onChange={(e)=>this.addToAssessment("family", e)}
+                    checked={(this.state.word.linkedFamilies.find(f=>f.familyId===family._id)?true:false)}
+                    />
+            
+            {family.Title}
+              
+            </div>)}
+         </div>
+         }
         </FormGroup>
         <FormGroup row>
           <Label for="level" sm={3}>Audio File</Label>
@@ -120,6 +169,7 @@ const mapStateToProps = state => {
     return {
       word: state.wordsAdmin.word,
       allAssessments: state.assessmentAdmin.assessmentList,
+      familyList: state.familyAdmin.familyList,
       apiMessage:state.serviceMessage.message 
       
     }
@@ -128,7 +178,8 @@ const mapStateToProps = state => {
   const mapDispatchToProps = dispatch => {
     return {
       editWord : (word) => dispatch(editWord(word)),
-      getAssessmentsList: (page, limit)=>dispatch(getAssessmentsList(page, limit))
+      getAssessmentsList: (page, limit)=>dispatch(getAssessmentsList(page, limit)),
+      getFamiliesList: (page, limit)=>dispatch(getFamiliesList(page, limit))
           }
   }
 

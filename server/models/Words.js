@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 // const Assessments = require('./Assessments')
 
-const LinkedPatterns = new mongoose.Schema({
-    patternId: {type: String},
-    note: {type: String}
+const LinkedFamilies = new mongoose.Schema({
+    familyId: {type: String},
+    title: {type: String}
 })
 
 const LinkedAssessments = new mongoose.Schema({
@@ -14,8 +14,8 @@ const LinkedAssessments = new mongoose.Schema({
 const Words = new mongoose.Schema({
     word: {type: String, required:true},
     level:  {type: Number, required:true},
+    linkedFamilies: [LinkedFamilies],
     linkedAssessments: [LinkedAssessments],
-    patterns:[LinkedPatterns],
     audioFileName:{type: String}
 }, {timestamps:{}})
 
