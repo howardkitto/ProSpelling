@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGO_HOST, { useMongoClient: true },
 });
 
 
-app.app.listen(process.env.PORT || 8080, () => {
+// app.app.listen(process.env.PORT || 5000, () => {
+  app.app.listen(5000, () => {
     console.log('Server is running on http://localhost:8080 or http://127.0.0.1:8080 ');
   });
