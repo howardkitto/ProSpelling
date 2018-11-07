@@ -10,4 +10,4 @@ CMD npm install
 
 # CMD npm run server
 
-EXPOSE 8080
+EXPOSE 5000ß
