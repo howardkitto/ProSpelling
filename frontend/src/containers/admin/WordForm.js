@@ -65,15 +65,19 @@ addToAssessment(item, e){
 
   console.log("ass or fam? " + item)
 
+  var objectName = ""
+  var itemName = ""
+  var objectList = ""
+
   if(item==="assessment"){
-  var objectName = "linkedAssessments"
-  var itemName = "assessmentId"
-  var objectList = "allAssessments"
+  objectName = "linkedAssessments"
+  itemName = "assessmentId"
+  objectList = "allAssessments"
 }
 if(item==="family"){
-  var objectName = "linkedFamilies"
-  var itemName = "familyId"
-  var objectList = "familyList"
+  objectName = "linkedFamilies"
+  itemName = "familyId"
+  objectList = "familyList"
 }
 
   // //find out if we're removing or adding assessments

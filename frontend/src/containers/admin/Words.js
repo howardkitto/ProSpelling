@@ -32,6 +32,7 @@ class Words extends Component{
         var newWord = { word:'',
                         level:'',
                         linkedAssessments:[],
+                        linkedFamilies:[],
                         characteristics:'',
                         audioFileName:''}
         
