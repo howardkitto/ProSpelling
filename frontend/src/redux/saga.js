@@ -38,6 +38,7 @@ const apiActions = ['GET_WORD',
                     'GET_USER_TESTS',
                     'CREATE_FAMILY',
                     'GET_FAMILIES',
+                    'UPDATE_FAMILY',
                     'DELETE_FAMILY']
 
 export function* watchForApiActions(){

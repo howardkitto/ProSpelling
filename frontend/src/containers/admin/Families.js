@@ -6,7 +6,8 @@ import AdminList from './AdminList'
 import {    getFamiliesList,
             createFamily,
             editFamily,
-            deleteFamily
+            deleteFamily,
+            updateFamily,
         } from '../../redux/actionCreators'
 
 
@@ -21,14 +22,13 @@ class Families extends Component{
             objectType: "family",
             listObject: "familyList",
             formFields:[{label: 'Title',
-                        type: "text",
-                        value :""},
+                        type: "text"},
                         {label: 'Description',
-                        type: "textarea",
-                        value: ""}],
+                        type: "textarea"}],
             getListFunc: getFamiliesList,
             createFunc: createFamily,
             editFunc: editFamily,
+            updateFunc: updateFamily,
             deleteFunc: deleteFamily
             }
 

@@ -21,6 +21,27 @@ router.route('/')
         res.json(data)})
 })
 
+.put((req, res)=>{
+
+    const family = {
+        'Title': req.body.Title,
+        'Description' : req.body.Description
+    }
+
+    // console.log("put route activated " + JSON.stringify(family, "", 4))
+
+    var promise = Families.findByIdAndUpdate(req.body._id, family).exec()
+        .then((family)=>{
+            res.setHeader('Content-Type', 'application/json')
+            res.json(family)
+            })
+        .catch((err)=>{
+            res.send(err)
+            })
+
+    
+})
+
 .delete((req, res)=>{
     // console.log('Gonna delete ' + JSON.stringify(req.body))
     var promise = Families.findByIdAndRemove(req.body._id).exec()

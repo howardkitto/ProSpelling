@@ -113,9 +113,9 @@ class MainNav extends Component {
         </Navbar>
 
 
-      <div className="stateDisplay">  <div>spellingTest: {this.props.spellingTestState}</div>
+      {/* <div className="stateDisplay">  <div>spellingTest: {this.props.spellingTestState}</div>
                                       <div>question: {this.props.questionState}</div>
-      </div>
+      </div> */}
       </div>
     );
   }

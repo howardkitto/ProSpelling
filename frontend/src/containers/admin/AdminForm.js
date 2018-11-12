@@ -9,7 +9,7 @@ const formField = (field, value, onChange)=>{
     <Col sm={9}>
     <Input  name={field.label}
                 type={field.type}
-                value={value[field.label]}
+                value={value}
                 onChange={(e) => onChange(e)}/>
         </Col>
         </FormGroup>
@@ -24,14 +24,20 @@ class AdminForm extends Component{
         this.onChange=this.onChange.bind(this)
         }
 
-        onChange(e){
+    onChange(e){
 
         const key = e.target.name
         let value = e.target.value
 
-        var editItem=this.props.values
+        var editItem = {}
 
-        editItem[key]=value
+        editItem._id = this.props.values._id
+
+        //wasted hours here - no idea why I can't just copy this.props.values
+        this.props.objectProperties.formFields.map(field=>{
+            
+            return editItem[field.label]=(field.label===key)?value:this.props.values[field.label]
+        })
 
         this.props.editFunc(editItem)
         }
@@ -44,7 +50,8 @@ class AdminForm extends Component{
         return(
             <Form>
                 {this.props.error}
-                {formFields.map((field)=>{return formField(field, values[field.label], this.onChange)})}
+            {/* only create form fields if values is true */}
+                {values && formFields.map((field)=>{return formField(field, values[field.label], this.onChange)})}
                 
             </Form>
     )}

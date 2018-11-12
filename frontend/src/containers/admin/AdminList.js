@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-
-
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader, Table} from 'reactstrap'
 import DateTime from '../../components/DateTime'
 import Paginator from '../../components/Paginator'
@@ -23,8 +21,7 @@ class AdminList extends Component{
 
     createNew(){
 
-        var newItem = { 
-                        "Title":"",
+        var newItem = { "Title":"",
                         "Description":""}
         this.props.editFunc(newItem)
         this.setState({modal:!this.state.modal})
@@ -33,10 +30,10 @@ class AdminList extends Component{
     saveClicked(){
 
         const {itemBeingEdited} = this.props
-        if( !itemBeingEdited.id){
+        if( !itemBeingEdited._id){
             this.props.createFunc(itemBeingEdited)}
         else
-            this.props.updateItem(itemBeingEdited)
+            this.props.updateFunc(itemBeingEdited)
     }
 
     edit(item){
@@ -47,7 +44,7 @@ class AdminList extends Component{
 
     deleteClicked(){
         if(this.props.itemBeingEdited._id){this.props.deleteFunc(this.props.itemBeingEdited)}
-        this.setState({modal : !this.state.modal})
+
     }
 
     componentDidMount(){
@@ -96,6 +93,10 @@ class AdminList extends Component{
                 </tbody>
             </Table>
 }
+<Paginator  count={this.props.count}
+                    limit={this.state.limit}
+                    page={this.state.page}
+                    onClick={(page, limit)=>this.props.getListFunc(page, limit)}/>
 
             <Modal isOpen={this.state.modal} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Edit {name}</ModalHeader>
@@ -121,7 +122,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         success: state[reducer].success,
         itemList: state[reducer][listObject],
-        itemBeingEdited: state[reducer][objectType]
+        itemBeingEdited: state[reducer][objectType],
+        count: state[reducer].count
     }
   }
 
@@ -131,6 +133,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         getListFunc: (page, limit)=>dispatch(ownProps.objectProperties.getListFunc(page, limit)),
         editFunc : (itemObject)=>dispatch(ownProps.objectProperties.editFunc(itemObject)),
         createFunc : (itemObject)=>dispatch(ownProps.objectProperties.createFunc(itemObject)),
+        updateFunc : (itemObject)=>dispatch(ownProps.objectProperties.updateFunc(itemObject)),
         deleteFunc : (itemObject)=>dispatch(ownProps.objectProperties.deleteFunc(itemObject))
           }
   }

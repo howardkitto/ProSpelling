@@ -10,7 +10,7 @@ const familyAdmin = (state=[], action)=>{
             familyList:action.data.families
         }
         case 'EDIT_FAMILY':
-        console.log('familyAdmin Reducer got ' +JSON.stringify(action.family))
+        // console.log('familyAdmin Reducer got ' +JSON.stringify(action.family))
             return{
                 ...state,
                 family:action.family
@@ -22,9 +22,16 @@ const familyAdmin = (state=[], action)=>{
                 success:true,
                 familyList:[]
                 }
+        case 'UPDATED_FAMILY':
+        // console.log('UPDATED_FAMILY Reducer got ' +JSON.stringify(FAMILY))
+            return{
+                success:true,
+                familyList:[]
+            }
         case 'DELETED_FAMILY':
         // console.log('Reducer got ' +JSON.stringify(action))
             return{
+                success:true,
                 familyList:[]
                 }
         default:

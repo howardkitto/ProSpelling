@@ -332,7 +332,7 @@ export function getFamiliesList(page, limit){
 }
 
 export function createFamily(family){
-    console.log('CREATE_FAMILY' +JSON.stringify(family))
+    // console.log('CREATE_FAMILY' +JSON.stringify(family))
     return {
         type: CREATE_FAMILY,
         path: '../api/families',
@@ -343,15 +343,26 @@ export function createFamily(family){
 }
 
 export function editFamily(family){
-    console.log('EDIT_FAMILY ACTION' + JSON.stringify(family))
+    // console.log('EDIT_FAMILY ACTION' + JSON.stringify(family))
     return {
         type: EDIT_FAMILY,
         family
     }
 }
 
+export function updateFamily(family){
+    // console.log('UPDATE_FAMILY ' +JSON.stringify(word))
+    return {
+        type: UPDATE_FAMILY ,
+        path: '../api/families',
+        method: 'PUT',
+        payload: family,
+        returnAction: 'UPDATED_FAMILY'
+    }
+}
+
 export function deleteFamily(family){
-    console.log('DELETE_FAMILY action '+JSON.stringify(family))
+    // console.log('DELETE_FAMILY action '+JSON.stringify(family))
     return {
         type: DELETE_FAMILY,
         path: '../api/families',
